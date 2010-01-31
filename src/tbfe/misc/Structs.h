@@ -37,6 +37,11 @@ struct CollidedTile
   int Passability;
   Position position;
 };
+struct Property
+{
+  string Name;
+  string Value;
+};
 struct ActorType
 {
   std::string Name;

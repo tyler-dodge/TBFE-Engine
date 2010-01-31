@@ -2509,19 +2509,20 @@ SWIG_Python_MustGetPtr(PyObject *obj, swig_type_info *ty, int argnum, int flags)
 #define SWIGTYPE_p_EventType swig_types[5]
 #define SWIGTYPE_p_Position swig_types[6]
 #define SWIGTYPE_p_PositionF swig_types[7]
-#define SWIGTYPE_p_SDL_Rect swig_types[8]
-#define SWIGTYPE_p_SDL_Surface swig_types[9]
-#define SWIGTYPE_p_Tile swig_types[10]
-#define SWIGTYPE_p_Timer swig_types[11]
-#define SWIGTYPE_p_Uint32 swig_types[12]
-#define SWIGTYPE_p_Window swig_types[13]
-#define SWIGTYPE_p_WindowType swig_types[14]
-#define SWIGTYPE_p_char swig_types[15]
-#define SWIGTYPE_p_ifstream swig_types[16]
-#define SWIGTYPE_p_std__string swig_types[17]
-#define SWIGTYPE_p_vectorT_ElementList_t swig_types[18]
-static swig_type_info *swig_types[20];
-static swig_module_info swig_module = {swig_types, 19, 0, 0, 0, 0};
+#define SWIGTYPE_p_Property swig_types[8]
+#define SWIGTYPE_p_SDL_Rect swig_types[9]
+#define SWIGTYPE_p_SDL_Surface swig_types[10]
+#define SWIGTYPE_p_Tile swig_types[11]
+#define SWIGTYPE_p_Timer swig_types[12]
+#define SWIGTYPE_p_Uint32 swig_types[13]
+#define SWIGTYPE_p_Window swig_types[14]
+#define SWIGTYPE_p_WindowType swig_types[15]
+#define SWIGTYPE_p_char swig_types[16]
+#define SWIGTYPE_p_ifstream swig_types[17]
+#define SWIGTYPE_p_std__string swig_types[18]
+#define SWIGTYPE_p_vectorT_ElementList_t swig_types[19]
+static swig_type_info *swig_types[21];
+static swig_module_info swig_module = {swig_types, 20, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -4430,6 +4431,171 @@ SWIGINTERN PyObject *CollidedTile_swigregister(PyObject *SWIGUNUSEDPARM(self), P
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *_wrap_Property_Name_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Property *arg1 = (Property *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Property_Name_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Property, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Property_Name_set" "', argument " "1"" of type '" "Property *""'"); 
+  }
+  arg1 = reinterpret_cast< Property * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Property_Name_set" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Property_Name_set" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  if (arg1) (arg1)->Name = *arg2;
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Property_Name_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Property *arg1 = (Property *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::string *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Property_Name_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Property, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Property_Name_get" "', argument " "1"" of type '" "Property *""'"); 
+  }
+  arg1 = reinterpret_cast< Property * >(argp1);
+  {
+    std::string const &_result_ref =  ((arg1)->Name);
+    result = (std::string *) &_result_ref;
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Property_Value_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Property *arg1 = (Property *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Property_Value_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Property, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Property_Value_set" "', argument " "1"" of type '" "Property *""'"); 
+  }
+  arg1 = reinterpret_cast< Property * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Property_Value_set" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Property_Value_set" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  if (arg1) (arg1)->Value = *arg2;
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Property_Value_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Property *arg1 = (Property *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::string *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Property_Value_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Property, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Property_Value_get" "', argument " "1"" of type '" "Property *""'"); 
+  }
+  arg1 = reinterpret_cast< Property * >(argp1);
+  {
+    std::string const &_result_ref =  ((arg1)->Value);
+    result = (std::string *) &_result_ref;
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_Property(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Property *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":new_Property")) SWIG_fail;
+  result = (Property *)new Property();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Property, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_Property(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Property *arg1 = (Property *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_Property",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Property, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Property" "', argument " "1"" of type '" "Property *""'"); 
+  }
+  arg1 = reinterpret_cast< Property * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *Property_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_Property, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
 SWIGINTERN PyObject *_wrap_ActorType_Name_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ActorType *arg1 = (ActorType *) 0 ;
@@ -5799,6 +5965,13 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_CollidedTile", _wrap_new_CollidedTile, METH_VARARGS, NULL},
 	 { (char *)"delete_CollidedTile", _wrap_delete_CollidedTile, METH_VARARGS, NULL},
 	 { (char *)"CollidedTile_swigregister", CollidedTile_swigregister, METH_VARARGS, NULL},
+	 { (char *)"Property_Name_set", _wrap_Property_Name_set, METH_VARARGS, NULL},
+	 { (char *)"Property_Name_get", _wrap_Property_Name_get, METH_VARARGS, NULL},
+	 { (char *)"Property_Value_set", _wrap_Property_Value_set, METH_VARARGS, NULL},
+	 { (char *)"Property_Value_get", _wrap_Property_Value_get, METH_VARARGS, NULL},
+	 { (char *)"new_Property", _wrap_new_Property, METH_VARARGS, NULL},
+	 { (char *)"delete_Property", _wrap_delete_Property, METH_VARARGS, NULL},
+	 { (char *)"Property_swigregister", Property_swigregister, METH_VARARGS, NULL},
 	 { (char *)"ActorType_Name_set", _wrap_ActorType_Name_set, METH_VARARGS, NULL},
 	 { (char *)"ActorType_Name_get", _wrap_ActorType_Name_get, METH_VARARGS, NULL},
 	 { (char *)"ActorType_Source_set", _wrap_ActorType_Source_set, METH_VARARGS, NULL},
@@ -5865,6 +6038,7 @@ static swig_type_info _swigt__p_ElementList = {"_p_ElementList", "ElementList *"
 static swig_type_info _swigt__p_EventType = {"_p_EventType", "EventType *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Position = {"_p_Position", "Position *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_PositionF = {"_p_PositionF", "PositionF *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_Property = {"_p_Property", "Property *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_SDL_Rect = {"_p_SDL_Rect", "SDL_Rect *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_SDL_Surface = {"_p_SDL_Surface", "SDL_Surface *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Tile = {"_p_Tile", "Tile *", 0, 0, (void*)0, 0};
@@ -5886,6 +6060,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_EventType,
   &_swigt__p_Position,
   &_swigt__p_PositionF,
+  &_swigt__p_Property,
   &_swigt__p_SDL_Rect,
   &_swigt__p_SDL_Surface,
   &_swigt__p_Tile,
@@ -5907,6 +6082,7 @@ static swig_cast_info _swigc__p_ElementList[] = {  {&_swigt__p_ElementList, 0, 0
 static swig_cast_info _swigc__p_EventType[] = {  {&_swigt__p_EventType, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Position[] = {  {&_swigt__p_Position, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_PositionF[] = {  {&_swigt__p_PositionF, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Property[] = {  {&_swigt__p_Property, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_SDL_Rect[] = {  {&_swigt__p_SDL_Rect, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_SDL_Surface[] = {  {&_swigt__p_SDL_Surface, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Tile[] = {  {&_swigt__p_Tile, 0, 0, 0},{0, 0, 0, 0}};
@@ -5928,6 +6104,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_EventType,
   _swigc__p_Position,
   _swigc__p_PositionF,
+  _swigc__p_Property,
   _swigc__p_SDL_Rect,
   _swigc__p_SDL_Surface,
   _swigc__p_Tile,

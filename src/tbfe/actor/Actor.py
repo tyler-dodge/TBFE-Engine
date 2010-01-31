@@ -68,6 +68,8 @@ class Actor(_object):
     def runAction(*args): return _Actor.Actor_runAction(*args)
     def addAction(*args): return _Actor.Actor_addAction(*args)
     def getCurrentAction(*args): return _Actor.Actor_getCurrentAction(*args)
+    def getProperty(*args): return _Actor.Actor_getProperty(*args)
+    def setProperty(*args): return _Actor.Actor_setProperty(*args)
     def changePosition(*args): return _Actor.Actor_changePosition(*args)
     def changeScreen(*args): return _Actor.Actor_changeScreen(*args)
     def getCollisionRect(*args): return _Actor.Actor_getCollisionRect(*args)

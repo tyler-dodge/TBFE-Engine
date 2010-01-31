@@ -20,6 +20,7 @@ class Actor
 {
  protected:
   vector<Action> actionList_;
+  vector<Property> propertyList_;
   string collisionSource_;
   Action * getAction(string);
   std::string conversation_;
@@ -46,6 +47,8 @@ class Actor
   Action getCurrentAction();
   
   //Changes actorPosition relatively using direction
+  string getProperty(string);
+  void setProperty(string,string);
   int changePosition(Direction,bool);
   void changeScreen(int,int);
 

@@ -2891,22 +2891,6 @@ SWIGINTERNINLINE PyObject*
 }
 
 
-SWIGINTERN int
-SWIG_AsVal_float (PyObject * obj, float *val)
-{
-  double v;
-  int res = SWIG_AsVal_double (obj, &v);
-  if (SWIG_IsOK(res)) {
-    if ((v < -FLT_MAX || v > FLT_MAX)) {
-      return SWIG_OverflowError;
-    } else {
-      if (val) *val = static_cast< float >(v);
-    }
-  }  
-  return res;
-}
-
-
 SWIGINTERNINLINE PyObject *
 SWIG_FromCharPtrAndSize(const char* carray, size_t size)
 {
@@ -2932,6 +2916,22 @@ SWIG_From_std_string  (const std::string& s)
   } else {
     return SWIG_FromCharPtrAndSize(s.c_str(), 0);
   }
+}
+
+
+SWIGINTERN int
+SWIG_AsVal_float (PyObject * obj, float *val)
+{
+  double v;
+  int res = SWIG_AsVal_double (obj, &v);
+  if (SWIG_IsOK(res)) {
+    if ((v < -FLT_MAX || v > FLT_MAX)) {
+      return SWIG_OverflowError;
+    } else {
+      if (val) *val = static_cast< float >(v);
+    }
+  }  
+  return res;
 }
 
 
@@ -3564,6 +3564,82 @@ SWIGINTERN PyObject *_wrap_Actor_getCurrentAction(PyObject *SWIGUNUSEDPARM(self)
   arg1 = reinterpret_cast< Actor * >(argp1);
   result = (arg1)->getCurrentAction();
   resultobj = SWIG_NewPointerObj((new Action(static_cast< const Action& >(result))), SWIGTYPE_p_Action, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Actor_getProperty(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Actor *arg1 = (Actor *) 0 ;
+  std::string arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  std::string result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Actor_getProperty",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_getProperty" "', argument " "1"" of type '" "Actor *""'"); 
+  }
+  arg1 = reinterpret_cast< Actor * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    int res = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "Actor_getProperty" "', argument " "2"" of type '" "std::string""'"); 
+    }
+    arg2 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  result = (arg1)->getProperty(arg2);
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Actor_setProperty(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Actor *arg1 = (Actor *) 0 ;
+  std::string arg2 ;
+  std::string arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:Actor_setProperty",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_setProperty" "', argument " "1"" of type '" "Actor *""'"); 
+  }
+  arg1 = reinterpret_cast< Actor * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    int res = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "Actor_setProperty" "', argument " "2"" of type '" "std::string""'"); 
+    }
+    arg2 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    int res = SWIG_AsPtr_std_string(obj2, &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "Actor_setProperty" "', argument " "3"" of type '" "std::string""'"); 
+    }
+    arg3 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  (arg1)->setProperty(arg2,arg3);
+  resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
   return NULL;
@@ -8477,6 +8553,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Actor_runAction", _wrap_Actor_runAction, METH_VARARGS, NULL},
 	 { (char *)"Actor_addAction", _wrap_Actor_addAction, METH_VARARGS, NULL},
 	 { (char *)"Actor_getCurrentAction", _wrap_Actor_getCurrentAction, METH_VARARGS, NULL},
+	 { (char *)"Actor_getProperty", _wrap_Actor_getProperty, METH_VARARGS, NULL},
+	 { (char *)"Actor_setProperty", _wrap_Actor_setProperty, METH_VARARGS, NULL},
 	 { (char *)"Actor_changePosition", _wrap_Actor_changePosition, METH_VARARGS, NULL},
 	 { (char *)"Actor_changeScreen", _wrap_Actor_changeScreen, METH_VARARGS, NULL},
 	 { (char *)"Actor_getCollisionRect", _wrap_Actor_getCollisionRect, METH_VARARGS, NULL},

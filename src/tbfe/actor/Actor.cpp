@@ -30,6 +30,32 @@ Actor::Actor (int PositionX,int PositionY)
       Walk.setMainAnimation(1);
       addAction(Walk);
     };
+string Actor::getProperty(string propertyName)
+{
+  for (int i=0;i<propertyList_.size();i++)
+    {
+      if (propertyList_.at(i).Name==propertyName)
+	{
+	  return propertyList_.at(i).Value;
+	};
+    };
+  return "";
+};
+void Actor::setProperty(string propertyName,string newValue)
+{
+  for (int i=0;i<propertyList_.size();i++)
+    {
+      if (propertyList_.at(i).Name==propertyName)
+	{
+	  propertyList_.at(i).Value=newValue;
+	  return;
+	};
+    };
+  Property newProperty;
+  newProperty.Name=propertyName;
+  newProperty.Value=newValue;
+  propertyList_.push_back(newProperty);
+};
 Action Actor::getCurrentAction()
 {
   if (currentAction_==NULL)

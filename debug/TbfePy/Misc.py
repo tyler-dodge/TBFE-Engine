@@ -230,6 +230,27 @@ class CollidedTile(_object):
 CollidedTile_swigregister = _Misc.CollidedTile_swigregister
 CollidedTile_swigregister(CollidedTile)
 
+class Property(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, Property, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, Property, name)
+    __repr__ = _swig_repr
+    __swig_setmethods__["Name"] = _Misc.Property_Name_set
+    __swig_getmethods__["Name"] = _Misc.Property_Name_get
+    if _newclass:Name = _swig_property(_Misc.Property_Name_get, _Misc.Property_Name_set)
+    __swig_setmethods__["Value"] = _Misc.Property_Value_set
+    __swig_getmethods__["Value"] = _Misc.Property_Value_get
+    if _newclass:Value = _swig_property(_Misc.Property_Value_get, _Misc.Property_Value_set)
+    def __init__(self, *args): 
+        this = _Misc.new_Property(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    __swig_destroy__ = _Misc.delete_Property
+    __del__ = lambda self : None;
+Property_swigregister = _Misc.Property_swigregister
+Property_swigregister(Property)
+
 class ActorType(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, ActorType, name, value)
