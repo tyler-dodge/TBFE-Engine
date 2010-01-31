@@ -12,6 +12,7 @@ class Element
   std::string name_;
   std::string special_;
   bool isVisible_;
+  vector<Property> propertyList_;
  public:
   SDL_Surface * getBackground();
   void setBackground(string);
@@ -25,9 +26,8 @@ class Element
   string getName();
   void setName(string);
 
-  string getSpecial();
-  void setSpecial(string);
-
+  string getProperty(string);
+  void setProperty(string,string);
   bool getVisibility();
   void setVisibility(bool);
   virtual void renderElement(SDL_Surface *, Position)=0;

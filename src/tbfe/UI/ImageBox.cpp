@@ -1,12 +1,48 @@
 #include "ImageBox.h"
 ImageBox::ImageBox(int x,int y,string Source):Element(x,y)
 {
-  setSpecial(Source);
+  string Special=Source;
   string ImageSource=Source;
   if (ImageSource.find('(')<ImageSource.size())
     {
       ImageSource=ImageSource.substr(0,ImageSource.find('('));
     };
+  if (Special.find('(')<Special.length())
+    {
+      string Box;
+      string Data;
+      int StringPos;
+      int w;
+      int h;
+      Box=Special.substr(Special.find('(')+1);
+      
+      StringPos=(int)Box.find(';');
+      Data=Box.substr(0,StringPos);
+      setProperty("clipX",Data);
+      
+      StringPos=Box.find(';')+1;
+      Box=Box.substr(StringPos);
+      
+      StringPos=Box.find(';');
+      Data=Box.substr(0,StringPos);
+      setProperty("clipY",Data);
+
+      StringPos=Box.find(';')+1;
+      Box=Box.substr(StringPos);
+      
+      StringPos=Box.find(';');
+      Data=Box.substr(0,StringPos).c_str();
+      w=atoi(Data.c_str());
+
+      StringPos=Box.find(';')+1;
+      Box=Box.substr(StringPos);
+
+      StringPos=Box.find(')');
+      Data=Box.substr(0,StringPos);
+      h=atoi(Data.c_str());
+      setDimensions(w,h);
+    }
+  setProperty("imageSource",ImageSource);
   image_=loadImage(ImageSource.c_str());
   if (image_!=NULL)
     {
@@ -23,54 +59,27 @@ ImageBox::~ImageBox()
 };
 void ImageBox::reload()
 {
-  string ImageSource=getSpecial();
-  if (ImageSource.find('(')<ImageSource.size())
-    {
-      ImageSource=ImageSource.substr(0,ImageSource.find('('));
-    }
   SDL_FreeSurface(image_);
-  image_=TBFE_Base::CheckSheets(ImageSource.c_str());
+  image_=TBFE_Base::CheckSheets(getProperty("imageSource").c_str());
 };
 void ImageBox::renderElement(SDL_Surface * screen, Position ScreenPosition)
 {
-  string Box;
   SDL_Rect Clip;
-  string Special=getSpecial();
-  if (Special.find('(')<Special.length())
+  Position dimensions=getDimensions();
+  if (getProperty("clipX")!="")
     {
-      string Data;
-      int StringPos;
-      Box=Special.substr(Special.find('(')+1);
-      
-      StringPos=(int)Box.find(';');
-      Data=Box.substr(0,StringPos);
-      Clip.x=atoi(Data.c_str());
-      
-      StringPos=Box.find(';')+1;
-      Box=Box.substr(StringPos);
-      
-      StringPos=Box.find(';');
-      Data=Box.substr(0,StringPos);
-      Clip.y=atoi(Data.c_str());
-
-      StringPos=Box.find(';')+1;
-      Box=Box.substr(StringPos);
-      
-      StringPos=Box.find(';');
-      Data=Box.substr(0,StringPos).c_str();
-      Clip.w=atoi(Data.c_str());
-
-      StringPos=Box.find(';')+1;
-      Box=Box.substr(StringPos);
-
-      StringPos=Box.find(')');
-      Data=Box.substr(0,StringPos);
-      Clip.h=atoi(Data.c_str());
+      Clip.x=atoi(getProperty("clipX").c_str());
     }
   else
     {
       Clip.x=0;
-      Clip.y=0;
+    };
+  if (getProperty("clipY")!="")
+    {
+      Clip.y=atoi(getProperty("clipY").c_str());
+    };
+  if (dimensions.X>image_->w || dimensions.Y>image_->h || dimensions.X<0 || dimensions.Y<0)
+    {
       if (image_!=NULL)
 	{
 	  Clip.w=image_->w;
@@ -81,8 +90,8 @@ void ImageBox::renderElement(SDL_Surface * screen, Position ScreenPosition)
 	  Clip.w=0;
 	  Clip.h=0;
 	};
+      setDimensions(Clip.w,Clip.h);
     };
-  setDimensions(Clip.w,Clip.h);
   Position CurrentPosition=getPosition();
   applyImage(ScreenPosition.X+CurrentPosition.X,ScreenPosition.Y+CurrentPosition.Y,image_,screen,&Clip);
 };

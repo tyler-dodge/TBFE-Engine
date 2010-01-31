@@ -8,7 +8,6 @@ class StatBar:public Element
   SDL_Surface * statBarBack_;
   SDL_Rect bar_;
   SDL_Rect barDimensions_;
-  float percentage_;
  public:
   void renderElement(SDL_Surface *, Position);
   void reload();

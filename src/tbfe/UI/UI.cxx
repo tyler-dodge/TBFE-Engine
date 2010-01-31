@@ -3680,29 +3680,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Element_getSpecial(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Element *arg1 = (Element *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  std::string result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Element_getSpecial",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Element, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Element_getSpecial" "', argument " "1"" of type '" "Element *""'"); 
-  }
-  arg1 = reinterpret_cast< Element * >(argp1);
-  result = (arg1)->getSpecial();
-  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Element_setSpecial(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Element_getProperty(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Element *arg1 = (Element *) 0 ;
   std::string arg2 ;
@@ -3710,23 +3688,67 @@ SWIGINTERN PyObject *_wrap_Element_setSpecial(PyObject *SWIGUNUSEDPARM(self), Py
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
+  std::string result;
   
-  if (!PyArg_ParseTuple(args,(char *)"OO:Element_setSpecial",&obj0,&obj1)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OO:Element_getProperty",&obj0,&obj1)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Element, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Element_setSpecial" "', argument " "1"" of type '" "Element *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Element_getProperty" "', argument " "1"" of type '" "Element *""'"); 
   }
   arg1 = reinterpret_cast< Element * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     int res = SWIG_AsPtr_std_string(obj1, &ptr);
     if (!SWIG_IsOK(res) || !ptr) {
-      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "Element_setSpecial" "', argument " "2"" of type '" "std::string""'"); 
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "Element_getProperty" "', argument " "2"" of type '" "std::string""'"); 
     }
     arg2 = *ptr;
     if (SWIG_IsNewObj(res)) delete ptr;
   }
-  (arg1)->setSpecial(arg2);
+  result = (arg1)->getProperty(arg2);
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Element_setProperty(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Element *arg1 = (Element *) 0 ;
+  std::string arg2 ;
+  std::string arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:Element_setProperty",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Element, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Element_setProperty" "', argument " "1"" of type '" "Element *""'"); 
+  }
+  arg1 = reinterpret_cast< Element * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    int res = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "Element_setProperty" "', argument " "2"" of type '" "std::string""'"); 
+    }
+    arg2 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    int res = SWIG_AsPtr_std_string(obj2, &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "Element_setProperty" "', argument " "3"" of type '" "std::string""'"); 
+    }
+    arg3 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  (arg1)->setProperty(arg2,arg3);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -4503,8 +4525,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Element_setDimensions", _wrap_Element_setDimensions, METH_VARARGS, NULL},
 	 { (char *)"Element_getName", _wrap_Element_getName, METH_VARARGS, NULL},
 	 { (char *)"Element_setName", _wrap_Element_setName, METH_VARARGS, NULL},
-	 { (char *)"Element_getSpecial", _wrap_Element_getSpecial, METH_VARARGS, NULL},
-	 { (char *)"Element_setSpecial", _wrap_Element_setSpecial, METH_VARARGS, NULL},
+	 { (char *)"Element_getProperty", _wrap_Element_getProperty, METH_VARARGS, NULL},
+	 { (char *)"Element_setProperty", _wrap_Element_setProperty, METH_VARARGS, NULL},
 	 { (char *)"Element_getVisibility", _wrap_Element_getVisibility, METH_VARARGS, NULL},
 	 { (char *)"Element_setVisibility", _wrap_Element_setVisibility, METH_VARARGS, NULL},
 	 { (char *)"Element_renderElement", _wrap_Element_renderElement, METH_VARARGS, NULL},

@@ -228,7 +228,7 @@ Direction TBFE::runEngine()
 	    {
 	      char Letter=logic_.textInput(currentSdlEvent.key.keysym.sym,
 					   logic_.checkKeyDown(SDLK_LSHIFT));
-	      string text=TBFE_Base::KeyTarget->getSpecial();
+	      string text=TBFE_Base::KeyTarget->getProperty("text");
 	      if (Letter==1)
 		{
 		  int Size=text.size();
@@ -246,7 +246,7 @@ Direction TBFE::runEngine()
 		{
 		  text+=(int)Letter;
 		};
-	      TBFE_Base::KeyTarget->setSpecial(text);
+	      TBFE_Base::KeyTarget->setProperty("text",text);
 	      TBFE_Base::KeyTarget->reload();  
 	    };
 	  if (currentSdlEvent.key.keysym.sym<315 && currentSdlEvent.key.keysym.sym>=0)

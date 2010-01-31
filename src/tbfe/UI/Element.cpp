@@ -42,14 +42,6 @@ void Element::setName(string newName)
 {
   name_=newName;
 };
-string Element::getSpecial()
-{
-  return special_;
-};
-void Element::setSpecial(string newSpecial)
-{
-  special_=newSpecial;
-};
 bool Element::getVisibility()
 {
   return isVisible_;
@@ -57,4 +49,30 @@ bool Element::getVisibility()
 void Element::setVisibility(bool newVisibility)
 {
   isVisible_=newVisibility;
+};
+string Element::getProperty(string propertyName)
+{
+  for (int i=0;i<propertyList_.size();i++)
+    {
+      if (propertyList_.at(i).Name==propertyName)
+	{
+	  return propertyList_.at(i).Value;
+	};
+    };
+  return "";
+};
+void Element::setProperty(string propertyName,string newValue)
+{
+  for (int i=0;i<propertyList_.size();i++)
+    {
+      if (propertyList_.at(i).Name==propertyName)
+	{
+	  propertyList_.at(i).Value=newValue;
+	  return;
+	};
+    };
+  Property newProperty;
+  newProperty.Name=propertyName;
+  newProperty.Value=newValue;
+  propertyList_.push_back(newProperty);
 };

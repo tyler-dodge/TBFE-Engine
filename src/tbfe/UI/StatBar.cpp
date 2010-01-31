@@ -1,7 +1,6 @@
 #include "StatBar.h"
 StatBar::StatBar(int x,int y,string newSpecial):Element(x,y)
 {
-  setSpecial(newSpecial);
   statBarSurface_=TBFE_Base::CheckSheets("Images/UI/StatBar.png");
   statBarBack_=TBFE_Base::CheckSheets("Images/UI/StatBarBack.png");
   if (statBarSurface_!=NULL)
@@ -12,15 +11,16 @@ StatBar::StatBar(int x,int y,string newSpecial):Element(x,y)
     {
       setDimensions(0,0);
     };
-  string checkSpecial=getSpecial();
-  if (checkSpecial!="")
+  if (newSpecial!="")
     {
-      if (checkSpecial.find('(')!=string::npos)
+      if (newSpecial.find('(')!=string::npos)
 	{
-	  nextSet(&checkSpecial,'(');
-	  setDimensions(atoi(nextSet(&checkSpecial,')').c_str()),statBarSurface_->h);
+	  nextSet(&newSpecial,'(');
+
+	  setDimensions(atoi(nextSet(&newSpecial,')').c_str()),statBarSurface_->h);
 	};
     };
+  setProperty("percentage","100");
   Position Dimensions=getDimensions();
   barDimensions_.x=0;
   barDimensions_.y=0;
@@ -37,12 +37,12 @@ StatBar::~StatBar()
 };
 void StatBar::renderElement(SDL_Surface * screen, Position ScreenPosition)
 {
-  percentage_=(float)atoi(getSpecial().c_str());
+  float percentage=(float)atoi(getProperty("percentage").c_str());
   Position CurrentPosition=getPosition();
   applyImage(ScreenPosition.X+CurrentPosition.X,ScreenPosition.Y+CurrentPosition.Y,statBarBack_,screen,&barDimensions_);
   bar_.x=0;
   bar_.y=0;
-  bar_.w=percentage_/100*barDimensions_.w;
+  bar_.w=percentage/100*barDimensions_.w;
   bar_.h=15;
   applyImage(ScreenPosition.X+CurrentPosition.X,ScreenPosition.Y+CurrentPosition.Y+1,statBarSurface_,screen,&bar_);
 };
