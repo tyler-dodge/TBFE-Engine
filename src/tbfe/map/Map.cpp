@@ -132,10 +132,22 @@ void Map::addTileSet(string newTileSet)
 };
 Position Map::getDimensions()
 {
-  return layers_.at(0).getDimensions();
+  if (layers_.size()>0)
+    {
+      return layers_.at(0).getDimensions();
+    };
+  Position newDimensions;
+  newDimensions.X=0;
+  newDimensions.Y=0;
+  return newDimensions;
 };
 Tile Map::getTile(int x,int y, int Layer)
 {
+  if (layers_.size()<Layer)
+    {
+      Tile blankTile;
+      return blankTile;
+    };
   return layers_.at(Layer).getTile(x,y);
 };
 void Map::addLayer(TileLayer newLayer)
@@ -144,10 +156,18 @@ void Map::addLayer(TileLayer newLayer)
 };
 bool Map::getLayerVisibility(int layer)
 {
+  if (layers_.size()<layer)
+    {
+      return false;
+    };
   return layers_.at(layer).getVisibility();
 };
 void Map::setLayerVisibility(int layer,bool newVisibility)
 {
+  if (layer>layers_.size())
+    {
+      return;
+    };
   layers_.at(layer).setVisibility(newVisibility);
 };
 int Map::getNumberOfLayers()

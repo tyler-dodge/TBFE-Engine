@@ -4,10 +4,7 @@
 #include <string>
 #include <iostream>
 #include <stdlib.h>
-#include <boost/thread.hpp>
-#include <boost/thread/thread.hpp>
 #include <Python.h>
-#include <signal.h>
 using namespace std;
 extern "C"
 {
@@ -19,7 +16,6 @@ extern "C"
 };
 int main(int argc,char* args[])
 {
-  using namespace boost;
   Py_Initialize();
   init_TBFE();
   init_Actor();

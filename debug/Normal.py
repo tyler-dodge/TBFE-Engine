@@ -1,8 +1,8 @@
 import sys
 sys.path.append("TbfePy/")
 import Tbfe
-import Actor
-import UI
 test=Tbfe.TBFE()
-Actor.loadActors("Data/Types/Actor.cfg")
-UI.loadWindows("Data/Types/Window.cfg")
+print("test")
+for i in range(0,5000):
+    test.runEngine()
+

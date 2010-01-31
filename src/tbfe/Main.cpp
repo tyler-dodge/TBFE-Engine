@@ -259,6 +259,7 @@ Direction TBFE::runEngine()
 	  logic_.setKeyDown(currentSdlEvent.key.keysym.sym,false);
 	};
     };
+      cout << "KeyControl\n";
   Position mapDimensions=TBFE_Base::CurrentMap.getDimensions();
   if (TBFE_Base::KeyControl==true)
     {
