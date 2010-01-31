@@ -9,10 +9,6 @@ enum TileType
     DIRT_TILLED,
     DIRT_TILLED_WATERED
   };
-enum PlantType
-  {
-    NO_PLANT
-  };
 enum Direction
   {
     DOWN,

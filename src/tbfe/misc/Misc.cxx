@@ -6473,7 +6473,6 @@ SWIGEXPORT void SWIG_init(void) {
   SWIG_Python_SetConstant(d, "DIRT",SWIG_From_int(static_cast< int >(DIRT)));
   SWIG_Python_SetConstant(d, "DIRT_TILLED",SWIG_From_int(static_cast< int >(DIRT_TILLED)));
   SWIG_Python_SetConstant(d, "DIRT_TILLED_WATERED",SWIG_From_int(static_cast< int >(DIRT_TILLED_WATERED)));
-  SWIG_Python_SetConstant(d, "NO_PLANT",SWIG_From_int(static_cast< int >(NO_PLANT)));
   SWIG_Python_SetConstant(d, "DOWN",SWIG_From_int(static_cast< int >(DOWN)));
   SWIG_Python_SetConstant(d, "UP",SWIG_From_int(static_cast< int >(UP)));
   SWIG_Python_SetConstant(d, "LEFT",SWIG_From_int(static_cast< int >(LEFT)));
