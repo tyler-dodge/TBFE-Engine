@@ -1,0 +1,16 @@
+#ifndef TextBox_L
+#define TextBox_L
+#include "Element.h"
+class TextBox:public Element_Base
+{
+ private:
+  SDL_Surface * Text;
+  SDL_Color textColor;
+ public:
+  bool isSelected;
+  void RenderElement(SDL_Surface *, Position);
+  Label(int,int,string);
+  ~Label();
+  void Reload();
+};
+#endif

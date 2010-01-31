@@ -1,0 +1,25 @@
+#ifndef Screen_Base_L
+#define Screen_Base_L
+#include "SDL/SDL.h"
+#include "SDL/SDL_ttf.h"
+#include "../misc/SdlFunctions.h"
+#include "../misc/Structs.h"
+#include "Element_Base.h"
+#include "ImageBox.h"
+class Screen_Base
+{
+ private:
+  Position Dimensions;
+ public:
+  vector<Element_Base *> Elements;
+  Position ScreenPosition;
+  Screen_Base(int,int,int,int,std::string ImageSource="");
+  ~Screen_Base();
+  void RenderElements(SDL_Surface *);
+  void AddElement(Element_Base *);
+  Element_Base * SelectElement(std::string);
+  Position GetDimensions();
+  SDL_Surface * Background;
+  bool Visible;
+};
+#endif

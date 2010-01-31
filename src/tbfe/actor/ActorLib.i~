@@ -1,0 +1,17 @@
+%include <std_string.i>
+%module Actor
+%import "../misc/MiscLib.i"
+%{
+#include "ActorCreate.cpp"
+#include "Actor.cpp"
+#include "Npc.cpp"
+#include "Player.cpp"
+#include "NonLiving.cpp"
+#include "Inventory.cpp"
+%}
+%include "ActorCreate.h"
+%include "Actor.h"
+%include "Npc.h"
+%include "Player.h"
+%include "NonLiving.h"
+%include "Inventory.h"

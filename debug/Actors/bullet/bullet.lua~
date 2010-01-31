@@ -1,0 +1,10 @@
+function StartAction()
+   Caller:AddAction(Caller:CreateAction("Walk","Actors/bullet/bullet.png,1,1,(8,8;0,-8)0,-1|0:"))
+   local callerPosition=Caller:GetPosition()
+   Caller:SetPosition(callerPosition.X,callerPosition.Y,120)
+   Caller.CollisionDimensions.Z=3
+   Caller.CollisionDimensions.X=8
+   Caller.CollisionDimensions.Y=8
+end
+function TalkAction()
+end

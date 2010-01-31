@@ -1,0 +1,13 @@
+StoreOwner=Actor.CreateActor(880,1550,"Welcome to my store!","Npc")
+StoreOwner.CurrentAI=Misc.STANDING
+StoreCounter=Actor.CreateActor(880,1600,"StoreCounter","storeCounter")
+Door2=Actor.CreateActor(1300,700,"door","door")
+engine:AddActor(Door2)
+engine:AddActor(StoreOwner)
+engine:AddActor(StoreCounter)
+engine:AddActor(Random1)
+engine:AddActor(Random2)
+engine:AddActor(Random3)
+dofile("Buildings/GeneralStore.lua")
+store=Actor.Building(hMap,fMap,cMap,500,1200)
+engine:AddBuilding(store)

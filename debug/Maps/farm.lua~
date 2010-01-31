@@ -1,0 +1,2 @@
+Silo=Actor.CreateActor(100,100,"Npc","Npc")
+engine:AddActor(Silo)

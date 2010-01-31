@@ -1,0 +1,68 @@
+#include "Console.h"
+Console::Console()
+{
+  lines_.resize(0);
+};
+Console::~Console()
+{
+};
+void Console::errorMessage(int ErrorNumber,string Item)
+{
+  stringstream Message;
+  Message << "      Error " << ErrorNumber << ": ";
+  switch (ErrorNumber)
+    {
+    case 0:
+      Message << Item.c_str() << " failed to load";
+      write(Message.str());
+      break;
+    case 1:
+      Message << "File ended while loading " << Item.c_str();
+      write(Message.str());
+      break;      
+    };
+};
+int Console::write(string text)
+{
+  lines_.push_back(text);
+};
+void Console::runLine(string Line)
+{
+  if (TBFE_Base::ConsoleLua!=NULL)
+    {
+      if (Line!="")
+	{
+	  if (luaL_dostring(TBFE_Base::ConsoleLua,Line.c_str()))
+	    {
+	      stringstream ErrorString;
+	      ErrorString << "   Error:";      
+	      ErrorString << lua_tostring(TBFE_Base::ConsoleLua,-1);
+	      write(ErrorString.str());
+	    };
+	};
+    };
+};
+void Console::execute(string filename)
+{  
+  if (TBFE_Base::ConsoleLua!=NULL)
+    {
+      if (luaL_dofile(TBFE_Base::ConsoleLua, filename.c_str())==1)
+	{
+	  stringstream ErrorString;
+	  ErrorString << "  " << lua_tostring(TBFE_Base::ConsoleLua,-1);
+	  write(ErrorString.str());   
+	};
+    };
+};
+string Console::getLine(int lineNum)
+{
+  if (lineNum<lines_.size())
+    {
+      return lines_.at(lineNum);
+    };
+  return "";
+};
+int Console::getNumberOfLines()
+{
+  return lines_.size();
+};

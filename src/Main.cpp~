@@ -1,0 +1,23 @@
+#ifndef LUA_L
+#define LUA_L
+#endif
+#include <string>
+#include <iostream>
+#include <stdlib.h>
+#include <boost/thread.hpp>
+#include <boost/thread/thread.hpp>
+#include "Interpreter.cxx"
+#include <Python.h>
+#include <signal.h>
+using namespace std;
+extern "C"
+{
+};
+int main(int argc,char* args[])
+{
+  using namespace boost;
+  Py_Initialize();
+  FILE * newFile=fopen(args[1],"r");
+  PyRun_SimpleFile(newFile,args[1]);
+  return 0;
+};

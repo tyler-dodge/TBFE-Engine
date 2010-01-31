@@ -1,0 +1,19 @@
+#include "NonLiving.h"
+NonLiving::NonLiving(int x, int y, ActorType NewType):Actor(x,y)
+{  
+  SetDirection(UP);
+  conversation=NewType.Conversation;
+  CollisionSource=NewType.Collision;
+  ScriptSource=NewType.Script;
+};
+NonLiving::~NonLiving()
+{
+};
+string NonLiving::GetConversation(bool PlayerCheck)
+{
+  
+  if (!PlayerCheck)
+    {
+    };
+  return conversation;
+};

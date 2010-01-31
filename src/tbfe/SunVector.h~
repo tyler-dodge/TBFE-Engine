@@ -1,0 +1,28 @@
+#ifndef SunVector_L
+#define SunVector_L
+#include <math.h>
+#include "actor/Actor.h"
+class SunVector
+{
+ public:
+  double CurrentPositionX;
+  double CurrentPositionY;
+  double Angle;
+  int Speed;
+  SunVector(int,int,int);
+  SunVector();
+  void Calculate(int);
+};
+SunVector::SunVector(int x,int y,int angle)
+{
+  Speed=5;
+  Angle=angle;
+  CurrentPositionX=x;
+  CurrentPositionY=y;
+};
+void SunVector::Calculate(int Multiplier)
+{
+  CurrentPositionX+=cos(Angle* M_PI / 180)*Speed*Multiplier; //
+  CurrentPositionY+=sin(Angle* M_PI / 180)*Speed*Multiplier;
+};
+#endif

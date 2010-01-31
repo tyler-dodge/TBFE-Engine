@@ -1,0 +1,198 @@
+#include "Logic.h"
+TBFE_Logic::TBFE_Logic()
+{
+  for (int i=0;i<311;i++)
+    {
+      keysDown_[i]=false;
+    };
+};
+TBFE_Logic::~TBFE_Logic()
+{
+};
+
+int TBFE_Logic::checkTalker()
+{
+  int NPC_Exists=-1;  
+  int PlayerNumber=GetActorNum(TBFE_Base::MainPlayer);
+  switch(TBFE_Base::MainPlayer->getDirection())
+    {
+    case UP:
+      NPC_Exists=TBFE_Base::MainPlayer->checkActorCollision(true,0,-50);
+      break;
+    case RIGHT:
+      NPC_Exists=TBFE_Base::MainPlayer->checkActorCollision(true,50,0);
+      break;
+    case DOWN:
+      NPC_Exists=TBFE_Base::MainPlayer->checkActorCollision(true,0,50);
+      break;
+    case LEFT:
+      NPC_Exists=TBFE_Base::MainPlayer->checkActorCollision(true,-50,0);
+      break;
+    };
+  return NPC_Exists;
+};
+void TBFE_Logic::playerMovement()
+{
+  //PlayerMovement
+  bool PlayerMoved=true;  
+  int PlayerNumber=GetActorNum(TBFE_Base::MainPlayer);
+  if (TBFE_Base::MainPlayer->getCurrentAction().getName()=="Walk" ||
+      TBFE_Base::MainPlayer->getCurrentAction().getName()=="None")
+    {
+      if (keysDown_[SDLK_UP])
+	{
+	  TBFE_Base::MainPlayer->changePosition(UP,true);
+	}
+      else if (keysDown_[SDLK_DOWN])
+	{
+	  TBFE_Base::MainPlayer->changePosition(DOWN,true);
+	}
+      else if (keysDown_[SDLK_RIGHT])
+	{
+	  TBFE_Base::MainPlayer->changePosition(RIGHT,true);
+	}
+      else if (keysDown_[SDLK_LEFT])
+	{
+	  TBFE_Base::MainPlayer->changePosition(LEFT,true);
+	};
+    };
+};
+int TBFE_Logic::contextAction()
+{
+  int NPC_Exists=checkTalker();
+  Tile HarvestTile;
+  Position playerPosition;
+  playerPosition.X=(TBFE_Base::MainPlayer->getPosition().X+TBFE_Base::TileSize/2)/TBFE_Base::TileSize+TBFE_Base::MainPlayer->getDirOffset().X;
+  playerPosition.Y=(TBFE_Base::MainPlayer->getPosition().Y+TBFE_Base::TileSize/2)/TBFE_Base::TileSize+TBFE_Base::MainPlayer->getDirOffset().Y;
+  HarvestTile=TBFE_Base::CurrentMap.getTile(playerPosition.X,playerPosition.Y,0);  
+  
+  if (HarvestTile.PlantInfo.Type!=NO_PLANT && 
+      HarvestTile.PlantInfo.FinalLevel>=HarvestTile.PlantInfo.Level)
+    {
+      bool Harvested;
+      int PlayerX;
+      int PlayerY;
+      Harvested=TBFE_Base::MainPlayer->harvest(HarvestTile);
+      if (Harvested)
+	{
+	  HarvestTile.Passability=0;
+	  HarvestTile.PlantInfo.Type=NO_PLANT;
+	  TBFE_Base::CurrentMap.changeTile(PlayerX,PlayerY,HarvestTile,0);
+	};
+      //Harvest item
+      return 0;
+    };
+  if (NPC_Exists!=-1)
+    {
+      TBFE_Base::Talker=TBFE_Base::ActorList[NPC_Exists];
+      if (TBFE_Base::Talker->getMobile())
+	{
+	  switch(TBFE_Base::MainPlayer->getDirection())
+	    {
+	    case LEFT:
+	      TBFE_Base::Talker->setDirection(RIGHT);
+	      break;
+	    case UP:
+	      TBFE_Base::Talker->setDirection(DOWN);
+	      break;
+	    case RIGHT:
+	      TBFE_Base::Talker->setDirection(LEFT);
+	      break;
+	    case DOWN:
+	      TBFE_Base::Talker->setDirection(UP);
+	      break;
+	    };
+	};
+      TBFE_Base::Talker->getConversation(false);
+      stringstream ActorSelf;
+      ActorSelf << "Caller=" << "engine.Logic:GetActor(" << NPC_Exists << ")";
+      TBFE_Base::MainConsole.runLine(ActorSelf.str());
+      //Talk to Actor
+      return 1;
+    }
+  else
+    {
+      //Use Tool
+      return 2;
+    };
+};
+
+char TBFE_Logic::textInput(int KeyPress,bool ShiftDown)
+{
+  char Letter=0;
+  //Text check
+  if (
+      (KeyPress>=(char)97 && KeyPress<=(char)122 ||
+       KeyPress==SDLK_PERIOD) ||
+      (KeyPress>=(char)40 && KeyPress<=(char)63) ||
+      KeyPress==32 || KeyPress==39
+      )
+    {
+      if (ShiftDown==true && 
+	  KeyPress>=(char)97 && KeyPress<=(char)122)
+	{
+	  Letter=(char)(KeyPress-32);
+	}
+      else if (ShiftDown==true && 
+	       KeyPress>=(char)39 && KeyPress<=(char)61)
+	{
+	  switch(KeyPress)
+	    {
+	    case 39:
+	      Letter='"';
+	      break;
+	    case 45:
+	      Letter='_';
+	      break;
+	    case 48:
+	      Letter=')';
+	      break;
+	    case 49:
+	      Letter='!';
+	      break;
+	    case 50:
+	      Letter='@';
+	      break;
+	    case 51:
+	      Letter='#';
+	      break;
+	    case 52:
+	      Letter='$';
+	      break;
+	    case 53:
+	      Letter='%';
+	      break;
+	    case 54:
+	      Letter='^';
+	      break;
+	    case 55:
+	      Letter='&';
+	      break;
+	    case 56:
+	      Letter='*';
+	      break;
+	    case 57:
+	      Letter='(';
+	      break;
+	    case 59:
+	      Letter=':';
+	      break;
+	    case 61:
+	      Letter='+';
+	      break;
+	    default:
+	      Letter=KeyPress;
+	      break;
+	    };
+	}		       
+      else
+	{
+	  Letter=(char)KeyPress;
+	};
+    };
+  if (KeyPress==8)
+    {
+      Letter=(char)1;
+    };
+  return Letter;
+};

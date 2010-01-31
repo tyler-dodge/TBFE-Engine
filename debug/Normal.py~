@@ -1,0 +1,6 @@
+test="bob"
+print(test)
+if test=="bob":
+    print("mwhaha")
+
+
