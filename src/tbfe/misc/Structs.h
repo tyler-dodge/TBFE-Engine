@@ -14,21 +14,11 @@ struct AnimationSheet
   std::string Source;
   bool isLoaded;
 };
-struct Plant
-{
-  //Amount it increases per day
-  double Increase;
-  double Level;
-  int FinalLevel;
-  PlantType Type;
-  int Number;
-};
 struct Tile
 {
   TileType Type;
   int TileSet;
   int Passability;
-  Plant PlantInfo;
 };
 struct PositionF
 {

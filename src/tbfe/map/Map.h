@@ -15,12 +15,9 @@ class Map
 {
  private:
   vector<TileLayer> layers_;
-  vector<Plant> plantTypes_;
   vector<string> tileSetNames_;
   string scriptFile_;
  public:
-  void loadPlants(std::string);
-  void addPlantType(string,int,int,int);
 
   //Constructor, Creates pointer to the console
   Map();
@@ -40,8 +37,6 @@ class Map
   void setLayerVisibility(int,bool);
   int getNumberOfLayers();
   Position getDimensions();
-
-  Plant setPlantData(PlantType);
 
   void changeTile(int,int,Tile,int);
   Tile getTile(int,int,int);

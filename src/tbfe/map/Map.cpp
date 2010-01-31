@@ -2,60 +2,9 @@
 Map::Map()
 {
   layers_.resize(0);
-  plantTypes_.resize(0);
 };
 Map::~Map()
 {
-};
-void Map::loadPlants(std::string FileName)
-{ 
-  ifstream PlantData(FileName.c_str(),ifstream::binary);
-  if (PlantData==NULL)
-    {
-      TBFE_Base::MainConsole.errorMessage(0,FileName);
-      return;
-    };
-  
-  bool EndLoop=false;
-  int i=0;
-  while (i<100)
-    {
-      i++;
-      std::string PlantName=loadString(&PlantData,':');
-      if (PlantName=="")
-	{
-	  return;
-	};
-      int PlantStates=atoi(loadString(&PlantData,',').c_str());
-      if (PlantStates==0)
-	{
-	  TBFE_Base::MainConsole.write("Plant Type "+PlantName+" ended prematurely in States");
-	  return;
-	};
-      int PlantStateLength=atoi(loadString(&PlantData,',').c_str());
-      if (PlantStateLength==0)
-	{
-	  TBFE_Base::MainConsole.write("Plant Type "+PlantName+" ended prematurely in Duration");
-	  return;
-	};
-      int PlantItem=atoi(loadString(&PlantData,';').c_str());
-      if (PlantItem==0)
-	{
-	  TBFE_Base::MainConsole.write("Plant Type "+PlantName+" ended prematurely in Item");
-	  return;
-	};
-      loadString(&PlantData,'\n');
-      addPlantType(PlantName,PlantStates,PlantStateLength,PlantItem);
-    };
-};
-void Map::addPlantType(string Name, int NumberOfStates, int StateDuration,int PlantItem)
-{
-  Plant newType;
-  newType.Increase=1/(double)StateDuration;
-  newType.Level=0;
-  newType.FinalLevel=NumberOfStates;
-  newType.Type=(PlantType)PlantItem;
-  plantTypes_.push_back(newType);
 };
 void Map::generateMap(int x,int y)
 {
@@ -66,7 +15,6 @@ void Map::generateMap(int x,int y)
   newTile.Type=DIRT;
   newTile.TileSet=0;
   newTile.Passability=0;
-  newTile.PlantInfo.Type=(PlantType)-1;
   newLayer.generateMap(x,y,newTile);
   addLayer(newLayer);
 };
@@ -95,8 +43,6 @@ bool Map::loadMap(string filename)
 	  Tile newTile;
 	  newTile.TileSet=(int)nextChar(&LayerString);
 	  newTile.Type=(TileType)nextChar(&LayerString);
-	  newTile.PlantInfo=setPlantData((PlantType)nextChar(&LayerString));
-	  newTile.PlantInfo.Level=(double)nextChar(&LayerString)/100;
 	  newTile.Passability=(int)nextChar(&LayerString);
 	  newLayer.changeTile(FillMap-FillMap/dimensions.X*dimensions.X,FillMap/dimensions.X,newTile);
 	};
@@ -131,8 +77,6 @@ bool Map::dumpMap(string filename)
 	  Tile saveTile=getTile(i-i/dimensions.X*dimensions.X,i/dimensions.X,Layer);
 	  NewMapData.put((char)saveTile.TileSet);
 	  NewMapData.put((char)saveTile.Type);
-	  NewMapData.put((char)saveTile.PlantInfo.Number);
-	  NewMapData.put((char)((saveTile.PlantInfo.Level)*100));
 	  NewMapData.put((char)saveTile.Passability);
 	};
       NewMapData.put('|');
@@ -173,23 +117,6 @@ vector<CollidedTile> Map::collisionTest(int x,int y)
       tiles.push_back(newTile);
     };
    return tiles;
-};
-Plant Map::setPlantData(PlantType Type)
-{
-  Plant TempPlant;
-  if (Type>plantTypes_.size() || Type==NO_PLANT)
-    {
-      if (Type!=NO_PLANT)
-	{;
-	  TBFE_Base::MainConsole.write("  Plant Data exceeds size of Plant Types");
-	};
-      TempPlant.Type=Type;
-      TempPlant.Number=NO_PLANT;
-      return TempPlant;
-    };
-  TempPlant=plantTypes_.at(Type-1);
-  TempPlant.Number=Type;
-  return TempPlant;
 };
 void Map::changeTile(int x,int y, Tile newTile,int Layer)
 {

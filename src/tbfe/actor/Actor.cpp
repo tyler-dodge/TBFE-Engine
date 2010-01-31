@@ -480,15 +480,6 @@ void Actor::setMobile(bool newMobility)
   isMobile_=newMobility;
 };
 
-bool Actor::harvest(Tile HarvestTile)
-{
-  if (HarvestTile.PlantInfo.Type>0 && 
-      HarvestTile.PlantInfo.Level>=HarvestTile.PlantInfo.FinalLevel)
-    {
-      return true;
-    };
-  return false;
-};
 Position Actor::getDirOffset()
 {
   Position offset;

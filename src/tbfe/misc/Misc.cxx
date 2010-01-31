@@ -2507,22 +2507,21 @@ SWIG_Python_MustGetPtr(PyObject *obj, swig_type_info *ty, int argnum, int flags)
 #define SWIGTYPE_p_Element swig_types[3]
 #define SWIGTYPE_p_ElementList swig_types[4]
 #define SWIGTYPE_p_EventType swig_types[5]
-#define SWIGTYPE_p_Plant swig_types[6]
-#define SWIGTYPE_p_Position swig_types[7]
-#define SWIGTYPE_p_PositionF swig_types[8]
-#define SWIGTYPE_p_SDL_Rect swig_types[9]
-#define SWIGTYPE_p_SDL_Surface swig_types[10]
-#define SWIGTYPE_p_Tile swig_types[11]
-#define SWIGTYPE_p_Timer swig_types[12]
-#define SWIGTYPE_p_Uint32 swig_types[13]
-#define SWIGTYPE_p_Window swig_types[14]
-#define SWIGTYPE_p_WindowType swig_types[15]
-#define SWIGTYPE_p_char swig_types[16]
-#define SWIGTYPE_p_ifstream swig_types[17]
-#define SWIGTYPE_p_std__string swig_types[18]
-#define SWIGTYPE_p_vectorT_ElementList_t swig_types[19]
-static swig_type_info *swig_types[21];
-static swig_module_info swig_module = {swig_types, 20, 0, 0, 0, 0};
+#define SWIGTYPE_p_Position swig_types[6]
+#define SWIGTYPE_p_PositionF swig_types[7]
+#define SWIGTYPE_p_SDL_Rect swig_types[8]
+#define SWIGTYPE_p_SDL_Surface swig_types[9]
+#define SWIGTYPE_p_Tile swig_types[10]
+#define SWIGTYPE_p_Timer swig_types[11]
+#define SWIGTYPE_p_Uint32 swig_types[12]
+#define SWIGTYPE_p_Window swig_types[13]
+#define SWIGTYPE_p_WindowType swig_types[14]
+#define SWIGTYPE_p_char swig_types[15]
+#define SWIGTYPE_p_ifstream swig_types[16]
+#define SWIGTYPE_p_std__string swig_types[17]
+#define SWIGTYPE_p_vectorT_ElementList_t swig_types[18]
+static swig_type_info *swig_types[20];
+static swig_module_info swig_module = {swig_types, 19, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -2971,9 +2970,6 @@ SWIGINTERNINLINE PyObject*
 }
 
 
-  #define SWIG_From_double   PyFloat_FromDouble 
-
-
 SWIGINTERN int
 SWIG_AsVal_float (PyObject * obj, float *val)
 {
@@ -2988,6 +2984,9 @@ SWIG_AsVal_float (PyObject * obj, float *val)
   }  
   return res;
 }
+
+
+  #define SWIG_From_double   PyFloat_FromDouble 
 
 
 SWIGINTERNINLINE PyObject *
@@ -3695,307 +3694,6 @@ SWIGINTERN PyObject *AnimationSheet_swigregister(PyObject *SWIGUNUSEDPARM(self),
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_Plant_Increase_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Plant *arg1 = (Plant *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  double val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Plant_Increase_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Plant, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Plant_Increase_set" "', argument " "1"" of type '" "Plant *""'"); 
-  }
-  arg1 = reinterpret_cast< Plant * >(argp1);
-  ecode2 = SWIG_AsVal_double(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Plant_Increase_set" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
-  if (arg1) (arg1)->Increase = arg2;
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Plant_Increase_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Plant *arg1 = (Plant *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  double result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Plant_Increase_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Plant, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Plant_Increase_get" "', argument " "1"" of type '" "Plant *""'"); 
-  }
-  arg1 = reinterpret_cast< Plant * >(argp1);
-  result = (double) ((arg1)->Increase);
-  resultobj = SWIG_From_double(static_cast< double >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Plant_Level_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Plant *arg1 = (Plant *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  double val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Plant_Level_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Plant, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Plant_Level_set" "', argument " "1"" of type '" "Plant *""'"); 
-  }
-  arg1 = reinterpret_cast< Plant * >(argp1);
-  ecode2 = SWIG_AsVal_double(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Plant_Level_set" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
-  if (arg1) (arg1)->Level = arg2;
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Plant_Level_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Plant *arg1 = (Plant *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  double result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Plant_Level_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Plant, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Plant_Level_get" "', argument " "1"" of type '" "Plant *""'"); 
-  }
-  arg1 = reinterpret_cast< Plant * >(argp1);
-  result = (double) ((arg1)->Level);
-  resultobj = SWIG_From_double(static_cast< double >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Plant_FinalLevel_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Plant *arg1 = (Plant *) 0 ;
-  int arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Plant_FinalLevel_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Plant, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Plant_FinalLevel_set" "', argument " "1"" of type '" "Plant *""'"); 
-  }
-  arg1 = reinterpret_cast< Plant * >(argp1);
-  ecode2 = SWIG_AsVal_int(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Plant_FinalLevel_set" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  if (arg1) (arg1)->FinalLevel = arg2;
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Plant_FinalLevel_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Plant *arg1 = (Plant *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  int result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Plant_FinalLevel_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Plant, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Plant_FinalLevel_get" "', argument " "1"" of type '" "Plant *""'"); 
-  }
-  arg1 = reinterpret_cast< Plant * >(argp1);
-  result = (int) ((arg1)->FinalLevel);
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Plant_Type_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Plant *arg1 = (Plant *) 0 ;
-  PlantType arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Plant_Type_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Plant, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Plant_Type_set" "', argument " "1"" of type '" "Plant *""'"); 
-  }
-  arg1 = reinterpret_cast< Plant * >(argp1);
-  ecode2 = SWIG_AsVal_int(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Plant_Type_set" "', argument " "2"" of type '" "PlantType""'");
-  } 
-  arg2 = static_cast< PlantType >(val2);
-  if (arg1) (arg1)->Type = arg2;
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Plant_Type_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Plant *arg1 = (Plant *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  PlantType result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Plant_Type_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Plant, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Plant_Type_get" "', argument " "1"" of type '" "Plant *""'"); 
-  }
-  arg1 = reinterpret_cast< Plant * >(argp1);
-  result = (PlantType) ((arg1)->Type);
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Plant_Number_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Plant *arg1 = (Plant *) 0 ;
-  int arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Plant_Number_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Plant, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Plant_Number_set" "', argument " "1"" of type '" "Plant *""'"); 
-  }
-  arg1 = reinterpret_cast< Plant * >(argp1);
-  ecode2 = SWIG_AsVal_int(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Plant_Number_set" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  if (arg1) (arg1)->Number = arg2;
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Plant_Number_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Plant *arg1 = (Plant *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  int result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Plant_Number_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Plant, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Plant_Number_get" "', argument " "1"" of type '" "Plant *""'"); 
-  }
-  arg1 = reinterpret_cast< Plant * >(argp1);
-  result = (int) ((arg1)->Number);
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_Plant(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Plant *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)":new_Plant")) SWIG_fail;
-  result = (Plant *)new Plant();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Plant, SWIG_POINTER_NEW |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_delete_Plant(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Plant *arg1 = (Plant *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:delete_Plant",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Plant, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Plant" "', argument " "1"" of type '" "Plant *""'"); 
-  }
-  arg1 = reinterpret_cast< Plant * >(argp1);
-  delete arg1;
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *Plant_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *obj;
-  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_Plant, SWIG_NewClientData(obj));
-  return SWIG_Py_Void();
-}
-
 SWIGINTERN PyObject *_wrap_Tile_Type_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Tile *arg1 = (Tile *) 0 ;
@@ -4146,58 +3844,6 @@ SWIGINTERN PyObject *_wrap_Tile_Passability_get(PyObject *SWIGUNUSEDPARM(self), 
   arg1 = reinterpret_cast< Tile * >(argp1);
   result = (int) ((arg1)->Passability);
   resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Tile_PlantInfo_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Tile *arg1 = (Tile *) 0 ;
-  Plant *arg2 = (Plant *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Tile_PlantInfo_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Tile, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Tile_PlantInfo_set" "', argument " "1"" of type '" "Tile *""'"); 
-  }
-  arg1 = reinterpret_cast< Tile * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_Plant, 0 |  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Tile_PlantInfo_set" "', argument " "2"" of type '" "Plant *""'"); 
-  }
-  arg2 = reinterpret_cast< Plant * >(argp2);
-  if (arg1) (arg1)->PlantInfo = *arg2;
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Tile_PlantInfo_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Tile *arg1 = (Tile *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  Plant *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Tile_PlantInfo_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Tile, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Tile_PlantInfo_get" "', argument " "1"" of type '" "Tile *""'"); 
-  }
-  arg1 = reinterpret_cast< Tile * >(argp1);
-  result = (Plant *)& ((arg1)->PlantInfo);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Plant, 0 |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -6119,27 +5765,12 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_AnimationSheet", _wrap_new_AnimationSheet, METH_VARARGS, NULL},
 	 { (char *)"delete_AnimationSheet", _wrap_delete_AnimationSheet, METH_VARARGS, NULL},
 	 { (char *)"AnimationSheet_swigregister", AnimationSheet_swigregister, METH_VARARGS, NULL},
-	 { (char *)"Plant_Increase_set", _wrap_Plant_Increase_set, METH_VARARGS, NULL},
-	 { (char *)"Plant_Increase_get", _wrap_Plant_Increase_get, METH_VARARGS, NULL},
-	 { (char *)"Plant_Level_set", _wrap_Plant_Level_set, METH_VARARGS, NULL},
-	 { (char *)"Plant_Level_get", _wrap_Plant_Level_get, METH_VARARGS, NULL},
-	 { (char *)"Plant_FinalLevel_set", _wrap_Plant_FinalLevel_set, METH_VARARGS, NULL},
-	 { (char *)"Plant_FinalLevel_get", _wrap_Plant_FinalLevel_get, METH_VARARGS, NULL},
-	 { (char *)"Plant_Type_set", _wrap_Plant_Type_set, METH_VARARGS, NULL},
-	 { (char *)"Plant_Type_get", _wrap_Plant_Type_get, METH_VARARGS, NULL},
-	 { (char *)"Plant_Number_set", _wrap_Plant_Number_set, METH_VARARGS, NULL},
-	 { (char *)"Plant_Number_get", _wrap_Plant_Number_get, METH_VARARGS, NULL},
-	 { (char *)"new_Plant", _wrap_new_Plant, METH_VARARGS, NULL},
-	 { (char *)"delete_Plant", _wrap_delete_Plant, METH_VARARGS, NULL},
-	 { (char *)"Plant_swigregister", Plant_swigregister, METH_VARARGS, NULL},
 	 { (char *)"Tile_Type_set", _wrap_Tile_Type_set, METH_VARARGS, NULL},
 	 { (char *)"Tile_Type_get", _wrap_Tile_Type_get, METH_VARARGS, NULL},
 	 { (char *)"Tile_TileSet_set", _wrap_Tile_TileSet_set, METH_VARARGS, NULL},
 	 { (char *)"Tile_TileSet_get", _wrap_Tile_TileSet_get, METH_VARARGS, NULL},
 	 { (char *)"Tile_Passability_set", _wrap_Tile_Passability_set, METH_VARARGS, NULL},
 	 { (char *)"Tile_Passability_get", _wrap_Tile_Passability_get, METH_VARARGS, NULL},
-	 { (char *)"Tile_PlantInfo_set", _wrap_Tile_PlantInfo_set, METH_VARARGS, NULL},
-	 { (char *)"Tile_PlantInfo_get", _wrap_Tile_PlantInfo_get, METH_VARARGS, NULL},
 	 { (char *)"new_Tile", _wrap_new_Tile, METH_VARARGS, NULL},
 	 { (char *)"delete_Tile", _wrap_delete_Tile, METH_VARARGS, NULL},
 	 { (char *)"Tile_swigregister", Tile_swigregister, METH_VARARGS, NULL},
@@ -6232,7 +5863,6 @@ static swig_type_info _swigt__p_CollidedTile = {"_p_CollidedTile", "CollidedTile
 static swig_type_info _swigt__p_Element = {"_p_Element", "Element *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_ElementList = {"_p_ElementList", "ElementList *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_EventType = {"_p_EventType", "EventType *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_Plant = {"_p_Plant", "Plant *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Position = {"_p_Position", "Position *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_PositionF = {"_p_PositionF", "PositionF *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_SDL_Rect = {"_p_SDL_Rect", "SDL_Rect *", 0, 0, (void*)0, 0};
@@ -6254,7 +5884,6 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_Element,
   &_swigt__p_ElementList,
   &_swigt__p_EventType,
-  &_swigt__p_Plant,
   &_swigt__p_Position,
   &_swigt__p_PositionF,
   &_swigt__p_SDL_Rect,
@@ -6276,7 +5905,6 @@ static swig_cast_info _swigc__p_CollidedTile[] = {  {&_swigt__p_CollidedTile, 0,
 static swig_cast_info _swigc__p_Element[] = {  {&_swigt__p_Element, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_ElementList[] = {  {&_swigt__p_ElementList, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_EventType[] = {  {&_swigt__p_EventType, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_Plant[] = {  {&_swigt__p_Plant, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Position[] = {  {&_swigt__p_Position, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_PositionF[] = {  {&_swigt__p_PositionF, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_SDL_Rect[] = {  {&_swigt__p_SDL_Rect, 0, 0, 0},{0, 0, 0, 0}};
@@ -6298,7 +5926,6 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_Element,
   _swigc__p_ElementList,
   _swigc__p_EventType,
-  _swigc__p_Plant,
   _swigc__p_Position,
   _swigc__p_PositionF,
   _swigc__p_SDL_Rect,

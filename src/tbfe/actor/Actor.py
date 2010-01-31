@@ -98,7 +98,6 @@ class Actor(_object):
     def setWalking(*args): return _Actor.Actor_setWalking(*args)
     def getMobile(*args): return _Actor.Actor_getMobile(*args)
     def setMobile(*args): return _Actor.Actor_setMobile(*args)
-    def harvest(*args): return _Actor.Actor_harvest(*args)
     def getDirOffset(*args): return _Actor.Actor_getDirOffset(*args)
 Actor_swigregister = _Actor.Actor_swigregister
 Actor_swigregister(Actor)

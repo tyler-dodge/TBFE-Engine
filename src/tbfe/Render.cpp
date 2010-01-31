@@ -13,7 +13,6 @@ TBFE_Render::TBFE_Render()
   darkness_=TBFE_Base::CheckSheets("Images/Darkness.png");
   changeLighting(10);
   window_=TBFE_Base::CheckSheets("Images/UI/Window.png");
-  plants_=TBFE_Base::CheckSheets("Images/Plants/Turnip.png");
   TBFE_Base::CollisionTile=TBFE_Base::CheckSheets("Tile.png");
 };
 void TBFE_Render::init()
@@ -34,10 +33,6 @@ TBFE_Render::~TBFE_Render()
   if (collision_!=NULL)
     {
       SDL_FreeSurface(collision_);
-    };
-  if (plants_!=NULL)
-    {
-      SDL_FreeSurface(plants_);
     };
   //Text_Console is freed whenever used so it does not appear here
   if (screen_!=NULL)
@@ -159,19 +154,12 @@ int TBFE_Render::renderMapLayer(int x,int y, int Layer)
 {
     SDL_Rect TileRect;
     int TileNumber;
-    //Holds value for if the current row has plants in it
-    bool Plants;
     for (int mapY=y/TBFE_Base::TileSize;mapY<y/TBFE_Base::TileSize+TBFE_Base::ScreenDimensions.Y/TBFE_Base::TileSize+1;mapY++)
       {
-	Plants=false;
 	for(int mapX=x/TBFE_Base::TileSize;mapX<x/TBFE_Base::TileSize+TBFE_Base::ScreenDimensions.X/TBFE_Base::TileSize+1;mapX++)
 	  {
 	    Tile tile=TBFE_Base::CurrentMap.getTile(mapX,mapY,Layer);
 	    TileNumber=(int)tile.Type;
-	    if (tile.PlantInfo.Type>NO_PLANT)
-	      {
-		Plants=true;
-	      };
 	    TileRect.x=(TileNumber-(int)(TileNumber/2)*2)*TBFE_Base::TileSize;
 	    TileRect.y=(int)(TileNumber/2)*TBFE_Base::TileSize;
 	    TileRect.w=TBFE_Base::TileSize;
@@ -182,10 +170,6 @@ int TBFE_Render::renderMapLayer(int x,int y, int Layer)
 			   tileSet_.at(tile.TileSet),screen_,&TileRect);
 	      };
 	  };	 
-	if (Plants==true)
-	  {
-	    renderPlants((mapY*TBFE_Base::TileSize)/TBFE_Base::TileSize,x,y);
-	  };
       };
 };
 void TBFE_Render::renderActors()
@@ -225,23 +209,6 @@ void TBFE_Render::renderActors()
 	{
 	  currentActor->endCurrentAction();
 	};
-    };
-};
-void TBFE_Render::renderPlants(int mapY, int x,int y)
-{
-  for(int mapX=x/TBFE_Base::TileSize;mapX<x/TBFE_Base::TileSize+TBFE_Base::ScreenDimensions.X/TBFE_Base::TileSize+2;mapX++)
-    {
-      Tile tile=TBFE_Base::CurrentMap.getTile(mapX,mapY,0);
-      if (tile.PlantInfo.Type>NO_PLANT)
-	{
-	  SDL_Rect tileRect;
-	  tileRect.w=100;
-	  tileRect.h=200;
-	  tileRect.x=(int)(tile.PlantInfo.Level)*100;
-	  tileRect.y=(tile.PlantInfo.Number-1)*200;
-	  applyImage(mapX*TBFE_Base::TileSize-x,mapY*TBFE_Base::TileSize-y-TBFE_Base::TileSize,
-		     plants_,screen_,&tileRect);
-	};	  
     };
 };
 void TBFE_Render::renderWindowList()

@@ -4776,45 +4776,6 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Actor_harvest(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Actor *arg1 = (Actor *) 0 ;
-  Tile arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  bool result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Actor_harvest",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_harvest" "', argument " "1"" of type '" "Actor *""'"); 
-  }
-  arg1 = reinterpret_cast< Actor * >(argp1);
-  {
-    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Tile,  0  | 0);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Actor_harvest" "', argument " "2"" of type '" "Tile""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Actor_harvest" "', argument " "2"" of type '" "Tile""'");
-    } else {
-      Tile * temp = reinterpret_cast< Tile * >(argp2);
-      arg2 = *temp;
-      if (SWIG_IsNewObj(res2)) delete temp;
-    }
-  }
-  result = (bool)(arg1)->harvest(arg2);
-  resultobj = SWIG_From_bool(static_cast< bool >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_Actor_getDirOffset(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Actor *arg1 = (Actor *) 0 ;
@@ -8546,7 +8507,6 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Actor_setWalking", _wrap_Actor_setWalking, METH_VARARGS, NULL},
 	 { (char *)"Actor_getMobile", _wrap_Actor_getMobile, METH_VARARGS, NULL},
 	 { (char *)"Actor_setMobile", _wrap_Actor_setMobile, METH_VARARGS, NULL},
-	 { (char *)"Actor_harvest", _wrap_Actor_harvest, METH_VARARGS, NULL},
 	 { (char *)"Actor_getDirOffset", _wrap_Actor_getDirOffset, METH_VARARGS, NULL},
 	 { (char *)"Actor_swigregister", Actor_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_Npc", _wrap_new_Npc, METH_VARARGS, NULL},

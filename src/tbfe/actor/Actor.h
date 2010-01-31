@@ -89,7 +89,6 @@ class Actor
   bool getMobile();
   void setMobile(bool);
 
-  bool harvest(Tile);
   Position getDirOffset();
 
 };

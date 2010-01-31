@@ -55,8 +55,6 @@ class Map(_object):
     __swig_getmethods__ = {}
     __getattr__ = lambda self, name: _swig_getattr(self, Map, name)
     __repr__ = _swig_repr
-    def loadPlants(*args): return _Map.Map_loadPlants(*args)
-    def addPlantType(*args): return _Map.Map_addPlantType(*args)
     def __init__(self, *args): 
         this = _Map.new_Map(*args)
         try: self.this.append(this)
@@ -72,7 +70,6 @@ class Map(_object):
     def setLayerVisibility(*args): return _Map.Map_setLayerVisibility(*args)
     def getNumberOfLayers(*args): return _Map.Map_getNumberOfLayers(*args)
     def getDimensions(*args): return _Map.Map_getDimensions(*args)
-    def setPlantData(*args): return _Map.Map_setPlantData(*args)
     def changeTile(*args): return _Map.Map_changeTile(*args)
     def getTile(*args): return _Map.Map_getTile(*args)
     def addTileSet(*args): return _Map.Map_addTileSet(*args)

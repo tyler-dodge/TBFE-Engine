@@ -25,7 +25,6 @@ Tile TileLayer::getTile(int x,int y)
       BlankTile.Passability=0;
       BlankTile.TileSet=0;
       BlankTile.Type=NONE;
-      BlankTile.PlantInfo.Type=NO_PLANT;
       return BlankTile;
     };
   Tile tile=data_.at(x+y*Dimensions.X);

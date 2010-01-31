@@ -15,7 +15,6 @@ class TBFE_Render
 {
  private: 
   SDL_Surface *collision_;
-  SDL_Surface *plants_;
   SDL_Surface *window_;
   int lightingPercentage_;
   SDL_Surface *darkness_;
@@ -24,7 +23,6 @@ class TBFE_Render
   SDL_Surface * screen_;
   vector<SDL_Surface *> tileSet_;
   void renderActors();
-  void renderPlants(int,int,int);
   void arrangeActors();
   void renderWindowList();
   int renderMapLayer(int,int,int);

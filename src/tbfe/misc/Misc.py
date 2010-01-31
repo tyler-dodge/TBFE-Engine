@@ -138,36 +138,6 @@ class AnimationSheet(_object):
 AnimationSheet_swigregister = _Misc.AnimationSheet_swigregister
 AnimationSheet_swigregister(AnimationSheet)
 
-class Plant(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Plant, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Plant, name)
-    __repr__ = _swig_repr
-    __swig_setmethods__["Increase"] = _Misc.Plant_Increase_set
-    __swig_getmethods__["Increase"] = _Misc.Plant_Increase_get
-    if _newclass:Increase = _swig_property(_Misc.Plant_Increase_get, _Misc.Plant_Increase_set)
-    __swig_setmethods__["Level"] = _Misc.Plant_Level_set
-    __swig_getmethods__["Level"] = _Misc.Plant_Level_get
-    if _newclass:Level = _swig_property(_Misc.Plant_Level_get, _Misc.Plant_Level_set)
-    __swig_setmethods__["FinalLevel"] = _Misc.Plant_FinalLevel_set
-    __swig_getmethods__["FinalLevel"] = _Misc.Plant_FinalLevel_get
-    if _newclass:FinalLevel = _swig_property(_Misc.Plant_FinalLevel_get, _Misc.Plant_FinalLevel_set)
-    __swig_setmethods__["Type"] = _Misc.Plant_Type_set
-    __swig_getmethods__["Type"] = _Misc.Plant_Type_get
-    if _newclass:Type = _swig_property(_Misc.Plant_Type_get, _Misc.Plant_Type_set)
-    __swig_setmethods__["Number"] = _Misc.Plant_Number_set
-    __swig_getmethods__["Number"] = _Misc.Plant_Number_get
-    if _newclass:Number = _swig_property(_Misc.Plant_Number_get, _Misc.Plant_Number_set)
-    def __init__(self, *args): 
-        this = _Misc.new_Plant(*args)
-        try: self.this.append(this)
-        except: self.this = this
-    __swig_destroy__ = _Misc.delete_Plant
-    __del__ = lambda self : None;
-Plant_swigregister = _Misc.Plant_swigregister
-Plant_swigregister(Plant)
-
 class Tile(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, Tile, name, value)
@@ -183,9 +153,6 @@ class Tile(_object):
     __swig_setmethods__["Passability"] = _Misc.Tile_Passability_set
     __swig_getmethods__["Passability"] = _Misc.Tile_Passability_get
     if _newclass:Passability = _swig_property(_Misc.Tile_Passability_get, _Misc.Tile_Passability_set)
-    __swig_setmethods__["PlantInfo"] = _Misc.Tile_PlantInfo_set
-    __swig_getmethods__["PlantInfo"] = _Misc.Tile_PlantInfo_get
-    if _newclass:PlantInfo = _swig_property(_Misc.Tile_PlantInfo_get, _Misc.Tile_PlantInfo_set)
     def __init__(self, *args): 
         this = _Misc.new_Tile(*args)
         try: self.this.append(this)

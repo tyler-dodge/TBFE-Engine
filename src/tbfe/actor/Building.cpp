@@ -46,7 +46,6 @@ Building::Building(string Map,string FloorMap,string RoofMap,int x,int y)
 	  newTile.Type=(TileType)atoi(Type.c_str());
 	  newTile.TileSet=(TileType)(atoi(TileSet.c_str()));
 	  newTile.Passability=0;
-	  newTile.PlantInfo.Type=(PlantType)0;
 	  floor_.push_back(newTile);
 	  TempX++;
 	} while (Row.find(',')!=string::npos);
@@ -73,7 +72,6 @@ Building::Building(string Map,string FloorMap,string RoofMap,int x,int y)
 	  newTile.Type=(TileType)atoi(Type.c_str());
 	  newTile.TileSet=(TileType)(atoi(TileSet.c_str()));
 	  newTile.Passability=0;
-	  newTile.PlantInfo.Type=NO_PLANT;
 	  roof_.push_back(newTile);
 	  TempX++;
 	} while (Row.find(',')!=string::npos);
@@ -97,7 +95,6 @@ Tile Building::getFloorTile(int x,int y)
       BlankTile.Passability=0;
       BlankTile.TileSet=0;
       BlankTile.Type=(TileType)-1;
-      BlankTile.PlantInfo.Type=NO_PLANT;
       return BlankTile;
     };
   Tile returnTile=floor_.at(x+y*floorDimensions.X);
@@ -112,7 +109,6 @@ Tile Building::getRoofTile(int x,int y)
       BlankTile.Passability=0;
       BlankTile.TileSet=0;
       BlankTile.Type=(TileType)-1;
-      BlankTile.PlantInfo.Type=NO_PLANT;
       return BlankTile;
     };
   Tile returnTile=roof_.at(x+y*roofDimensions.X);

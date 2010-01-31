@@ -64,24 +64,7 @@ int TBFE_Logic::contextAction()
   Position playerPosition;
   playerPosition.X=(TBFE_Base::MainPlayer->getPosition().X+TBFE_Base::TileSize/2)/TBFE_Base::TileSize+TBFE_Base::MainPlayer->getDirOffset().X;
   playerPosition.Y=(TBFE_Base::MainPlayer->getPosition().Y+TBFE_Base::TileSize/2)/TBFE_Base::TileSize+TBFE_Base::MainPlayer->getDirOffset().Y;
-  HarvestTile=TBFE_Base::CurrentMap.getTile(playerPosition.X,playerPosition.Y,0);  
   
-  if (HarvestTile.PlantInfo.Type!=NO_PLANT && 
-      HarvestTile.PlantInfo.FinalLevel>=HarvestTile.PlantInfo.Level)
-    {
-      bool Harvested;
-      int PlayerX;
-      int PlayerY;
-      Harvested=TBFE_Base::MainPlayer->harvest(HarvestTile);
-      if (Harvested)
-	{
-	  HarvestTile.Passability=0;
-	  HarvestTile.PlantInfo.Type=NO_PLANT;
-	  TBFE_Base::CurrentMap.changeTile(PlayerX,PlayerY,HarvestTile,0);
-	};
-      //Harvest item
-      return 0;
-    };
   if (NPC_Exists!=-1)
     {
       TBFE_Base::Talker=TBFE_Base::ActorList[NPC_Exists];
