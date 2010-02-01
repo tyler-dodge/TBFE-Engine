@@ -22,30 +22,6 @@ void TBFE_Render::init()
 TBFE_Render::~TBFE_Render()
 {
   TTF_CloseFont(TBFE_Base::font);
-  if (darkness_!=NULL)
-    {
-      SDL_FreeSurface(darkness_);
-    };
-  if (window_!=NULL)
-    {
-      SDL_FreeSurface(window_);
-    };
-  if (collision_!=NULL)
-    {
-      SDL_FreeSurface(collision_);
-    };
-  //Text_Console is freed whenever used so it does not appear here
-  if (screen_!=NULL)
-    {
-      SDL_FreeSurface(screen_);
-    };
-  for (int i=0;i<tileSet_.size();i++)
-    {
-      if (tileSet_.at(i)!=NULL)
-	{
-	  SDL_FreeSurface(tileSet_.at(i));
-	};
-    };
   TTF_Quit();
   SDL_Quit();
 };

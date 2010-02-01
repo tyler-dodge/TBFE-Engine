@@ -51,75 +51,16 @@ del types
 import Actor
 import Misc
 import Map
-class TBFE_Base(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, TBFE_Base, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, TBFE_Base, name)
-    __repr__ = _swig_repr
-    def __init__(self, *args): 
-        this = _TBFE.new_TBFE_Base(*args)
-        try: self.this.append(this)
-        except: self.this = this
-    __swig_destroy__ = _TBFE.delete_TBFE_Base
-    __del__ = lambda self : None;
-    __swig_getmethods__["CheckSheets"] = lambda x: _TBFE.TBFE_Base_CheckSheets
-    if _newclass:CheckSheets = staticmethod(_TBFE.TBFE_Base_CheckSheets)
-    __swig_setmethods__["MainConsole"] = _TBFE.TBFE_Base_MainConsole_set
-    __swig_getmethods__["MainConsole"] = _TBFE.TBFE_Base_MainConsole_get
-    if _newclass:MainConsole = _swig_property(_TBFE.TBFE_Base_MainConsole_get, _TBFE.TBFE_Base_MainConsole_set)
-    __swig_setmethods__["MainPlayer"] = _TBFE.TBFE_Base_MainPlayer_set
-    __swig_getmethods__["MainPlayer"] = _TBFE.TBFE_Base_MainPlayer_get
-    if _newclass:MainPlayer = _swig_property(_TBFE.TBFE_Base_MainPlayer_get, _TBFE.TBFE_Base_MainPlayer_set)
-    __swig_setmethods__["ActorList"] = _TBFE.TBFE_Base_ActorList_set
-    __swig_getmethods__["ActorList"] = _TBFE.TBFE_Base_ActorList_get
-    if _newclass:ActorList = _swig_property(_TBFE.TBFE_Base_ActorList_get, _TBFE.TBFE_Base_ActorList_set)
-    __swig_setmethods__["WindowList"] = _TBFE.TBFE_Base_WindowList_set
-    __swig_getmethods__["WindowList"] = _TBFE.TBFE_Base_WindowList_get
-    if _newclass:WindowList = _swig_property(_TBFE.TBFE_Base_WindowList_get, _TBFE.TBFE_Base_WindowList_set)
-    __swig_setmethods__["TileSize"] = _TBFE.TBFE_Base_TileSize_set
-    __swig_getmethods__["TileSize"] = _TBFE.TBFE_Base_TileSize_get
-    if _newclass:TileSize = _swig_property(_TBFE.TBFE_Base_TileSize_get, _TBFE.TBFE_Base_TileSize_set)
-    __swig_setmethods__["NumberOfActors"] = _TBFE.TBFE_Base_NumberOfActors_set
-    __swig_getmethods__["NumberOfActors"] = _TBFE.TBFE_Base_NumberOfActors_get
-    if _newclass:NumberOfActors = _swig_property(_TBFE.TBFE_Base_NumberOfActors_get, _TBFE.TBFE_Base_NumberOfActors_set)
-    __swig_setmethods__["KeyControl"] = _TBFE.TBFE_Base_KeyControl_set
-    __swig_getmethods__["KeyControl"] = _TBFE.TBFE_Base_KeyControl_get
-    if _newclass:KeyControl = _swig_property(_TBFE.TBFE_Base_KeyControl_get, _TBFE.TBFE_Base_KeyControl_set)
-    __swig_setmethods__["CurrentMap"] = _TBFE.TBFE_Base_CurrentMap_set
-    __swig_getmethods__["CurrentMap"] = _TBFE.TBFE_Base_CurrentMap_get
-    if _newclass:CurrentMap = _swig_property(_TBFE.TBFE_Base_CurrentMap_get, _TBFE.TBFE_Base_CurrentMap_set)
-    __swig_setmethods__["Time"] = _TBFE.TBFE_Base_Time_set
-    __swig_getmethods__["Time"] = _TBFE.TBFE_Base_Time_get
-    if _newclass:Time = _swig_property(_TBFE.TBFE_Base_Time_get, _TBFE.TBFE_Base_Time_set)
-    __swig_setmethods__["Talker"] = _TBFE.TBFE_Base_Talker_set
-    __swig_getmethods__["Talker"] = _TBFE.TBFE_Base_Talker_get
-    if _newclass:Talker = _swig_property(_TBFE.TBFE_Base_Talker_get, _TBFE.TBFE_Base_Talker_set)
-    __swig_setmethods__["font"] = _TBFE.TBFE_Base_font_set
-    __swig_getmethods__["font"] = _TBFE.TBFE_Base_font_get
-    if _newclass:font = _swig_property(_TBFE.TBFE_Base_font_get, _TBFE.TBFE_Base_font_set)
-    __swig_setmethods__["KeyTarget"] = _TBFE.TBFE_Base_KeyTarget_set
-    __swig_getmethods__["KeyTarget"] = _TBFE.TBFE_Base_KeyTarget_get
-    if _newclass:KeyTarget = _swig_property(_TBFE.TBFE_Base_KeyTarget_get, _TBFE.TBFE_Base_KeyTarget_set)
-    __swig_setmethods__["GameSpeed"] = _TBFE.TBFE_Base_GameSpeed_set
-    __swig_getmethods__["GameSpeed"] = _TBFE.TBFE_Base_GameSpeed_get
-    if _newclass:GameSpeed = _swig_property(_TBFE.TBFE_Base_GameSpeed_get, _TBFE.TBFE_Base_GameSpeed_set)
-    __swig_getmethods__["DeleteAnimationSheets"] = lambda x: _TBFE.TBFE_Base_DeleteAnimationSheets
-    if _newclass:DeleteAnimationSheets = staticmethod(_TBFE.TBFE_Base_DeleteAnimationSheets)
-    __swig_setmethods__["CollisionTile"] = _TBFE.TBFE_Base_CollisionTile_set
-    __swig_getmethods__["CollisionTile"] = _TBFE.TBFE_Base_CollisionTile_get
-    if _newclass:CollisionTile = _swig_property(_TBFE.TBFE_Base_CollisionTile_get, _TBFE.TBFE_Base_CollisionTile_set)
-    __swig_setmethods__["ScreenDimensions"] = _TBFE.TBFE_Base_ScreenDimensions_set
-    __swig_getmethods__["ScreenDimensions"] = _TBFE.TBFE_Base_ScreenDimensions_get
-    if _newclass:ScreenDimensions = _swig_property(_TBFE.TBFE_Base_ScreenDimensions_get, _TBFE.TBFE_Base_ScreenDimensions_set)
-TBFE_Base_swigregister = _TBFE.TBFE_Base_swigregister
-TBFE_Base_swigregister(TBFE_Base)
-TBFE_Base_CheckSheets = _TBFE.TBFE_Base_CheckSheets
-cvar = _TBFE.cvar
-TBFE_Base_DeleteAnimationSheets = _TBFE.TBFE_Base_DeleteAnimationSheets
-
+DeleteAnimationSheets = _TBFE.DeleteAnimationSheets
 GetActorNum = _TBFE.GetActorNum
 GetActorByNum = _TBFE.GetActorByNum
+CheckSheets = _TBFE.CheckSheets
+GetFont = _TBFE.GetFont
+SetFont = _TBFE.SetFont
+GetCollisionTile = _TBFE.GetCollisionTile
+SetCollisionTile = _TBFE.SetCollisionTile
+GetMainPlayer = _TBFE.GetMainPlayer
+SetMainPlayer = _TBFE.SetMainPlayer
 class TBFE(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, TBFE, name, value)
@@ -145,6 +86,7 @@ class TBFE(_object):
     __del__ = lambda self : None;
 TBFE_swigregister = _TBFE.TBFE_swigregister
 TBFE_swigregister(TBFE)
+cvar = _TBFE.cvar
 
 class TBFE_Render(_object):
     __swig_setmethods__ = {}

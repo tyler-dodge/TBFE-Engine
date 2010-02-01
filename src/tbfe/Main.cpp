@@ -7,6 +7,8 @@ TBFE::TBFE()
   time_=600;
   frameRate_.Start();
   quit_=false;
+  TBFE_Base::MainPlayer=createActor(1000,1000,"Player","Npc");
+  addActor(TBFE_Base::MainPlayer);
   return;
 };
 TBFE::~TBFE()
@@ -94,7 +96,7 @@ void TBFE::addActor(Actor *NewActor)
 };
 bool TBFE::removeActor(Actor *actorPtr)
 {
-  int actor=GetActorNum(actorPtr);
+  int actor=TBFE_Base::GetActorNum(actorPtr);
   if (actor!=-1 || TBFE_Base::ActorList.size()>actor)
     {
       TBFE_Base::ActorList.erase(TBFE_Base::ActorList.begin()+actor);
@@ -259,7 +261,6 @@ Direction TBFE::runEngine()
 	  logic_.setKeyDown(currentSdlEvent.key.keysym.sym,false);
 	};
     };
-      cout << "KeyControl\n";
   Position mapDimensions=TBFE_Base::CurrentMap.getDimensions();
   if (TBFE_Base::KeyControl==true)
     {

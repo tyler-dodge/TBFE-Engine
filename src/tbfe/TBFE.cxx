@@ -2514,16 +2514,15 @@ SWIG_Python_MustGetPtr(PyObject *obj, swig_type_info *ty, int argnum, int flags)
 #define SWIGTYPE_p_SDL_Surface swig_types[10]
 #define SWIGTYPE_p_SunVector swig_types[11]
 #define SWIGTYPE_p_TBFE swig_types[12]
-#define SWIGTYPE_p_TBFE_Base swig_types[13]
-#define SWIGTYPE_p_TBFE_Logic swig_types[14]
-#define SWIGTYPE_p_TBFE_Render swig_types[15]
-#define SWIGTYPE_p_TTF_Font swig_types[16]
-#define SWIGTYPE_p_Window swig_types[17]
-#define SWIGTYPE_p_char swig_types[18]
-#define SWIGTYPE_p_vectorT_Actor_p_t swig_types[19]
-#define SWIGTYPE_p_vectorT_Window_p_t swig_types[20]
-static swig_type_info *swig_types[22];
-static swig_module_info swig_module = {swig_types, 21, 0, 0, 0, 0};
+#define SWIGTYPE_p_TBFE_Logic swig_types[13]
+#define SWIGTYPE_p_TBFE_Render swig_types[14]
+#define SWIGTYPE_p_TTF_Font swig_types[15]
+#define SWIGTYPE_p_Window swig_types[16]
+#define SWIGTYPE_p_char swig_types[17]
+#define SWIGTYPE_p_vectorT_Actor_p_t swig_types[18]
+#define SWIGTYPE_p_vectorT_Window_p_t swig_types[19]
+static swig_type_info *swig_types[21];
+static swig_module_info swig_module = {swig_types, 20, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -2624,102 +2623,6 @@ namespace swig {
 #include "Logic.cpp"
 #include "Console.cpp"
 #include "SunVector.cpp"
-
-
-SWIGINTERN swig_type_info*
-SWIG_pchar_descriptor(void)
-{
-  static int init = 0;
-  static swig_type_info* info = 0;
-  if (!init) {
-    info = SWIG_TypeQuery("_p_char");
-    init = 1;
-  }
-  return info;
-}
-
-
-SWIGINTERN int
-SWIG_AsCharPtrAndSize(PyObject *obj, char** cptr, size_t* psize, int *alloc)
-{
-  if (PyString_Check(obj)) {
-    char *cstr; Py_ssize_t len;
-    PyString_AsStringAndSize(obj, &cstr, &len);
-    if (cptr)  {
-      if (alloc) {
-	/* 
-	   In python the user should not be able to modify the inner
-	   string representation. To warranty that, if you define
-	   SWIG_PYTHON_SAFE_CSTRINGS, a new/copy of the python string
-	   buffer is always returned.
-
-	   The default behavior is just to return the pointer value,
-	   so, be careful.
-	*/ 
-#if defined(SWIG_PYTHON_SAFE_CSTRINGS)
-	if (*alloc != SWIG_OLDOBJ) 
-#else
-	if (*alloc == SWIG_NEWOBJ) 
-#endif
-	  {
-	    *cptr = reinterpret_cast< char* >(memcpy((new char[len + 1]), cstr, sizeof(char)*(len + 1)));
-	    *alloc = SWIG_NEWOBJ;
-	  }
-	else {
-	  *cptr = cstr;
-	  *alloc = SWIG_OLDOBJ;
-	}
-      } else {
-	*cptr = PyString_AsString(obj);
-      }
-    }
-    if (psize) *psize = len + 1;
-    return SWIG_OK;
-  } else {
-    swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
-    if (pchar_descriptor) {
-      void* vptr = 0;
-      if (SWIG_ConvertPtr(obj, &vptr, pchar_descriptor, 0) == SWIG_OK) {
-	if (cptr) *cptr = (char *) vptr;
-	if (psize) *psize = vptr ? (strlen((char *)vptr) + 1) : 0;
-	if (alloc) *alloc = SWIG_OLDOBJ;
-	return SWIG_OK;
-      }
-    }
-  }
-  return SWIG_TypeError;
-}
-
-
-SWIGINTERN int
-SWIG_AsPtr_std_string (PyObject * obj, std::string **val) 
-{
-  char* buf = 0 ; size_t size = 0; int alloc = SWIG_OLDOBJ;
-  if (SWIG_IsOK((SWIG_AsCharPtrAndSize(obj, &buf, &size, &alloc)))) {
-    if (buf) {
-      if (val) *val = new std::string(buf, size - 1);
-      if (alloc == SWIG_NEWOBJ) delete[] buf;
-      return SWIG_NEWOBJ;
-    } else {
-      if (val) *val = 0;
-      return SWIG_OLDOBJ;
-    }
-  } else {
-    static int init = 0;
-    static swig_type_info* descriptor = 0;
-    if (!init) {
-      descriptor = SWIG_TypeQuery("std::string" " *");
-      init = 1;
-    }
-    if (descriptor) {
-      std::string *vptr;
-      int res = SWIG_ConvertPtr(obj, (void**)&vptr, descriptor, 0);
-      if (SWIG_IsOK(res) && val) *val = vptr;
-      return res;
-    }
-  }
-  return SWIG_ERROR;
-}
 
 
 #include <limits.h>
@@ -2921,6 +2824,102 @@ SWIG_From_float  (float value)
 }
 
 
+SWIGINTERN swig_type_info*
+SWIG_pchar_descriptor(void)
+{
+  static int init = 0;
+  static swig_type_info* info = 0;
+  if (!init) {
+    info = SWIG_TypeQuery("_p_char");
+    init = 1;
+  }
+  return info;
+}
+
+
+SWIGINTERN int
+SWIG_AsCharPtrAndSize(PyObject *obj, char** cptr, size_t* psize, int *alloc)
+{
+  if (PyString_Check(obj)) {
+    char *cstr; Py_ssize_t len;
+    PyString_AsStringAndSize(obj, &cstr, &len);
+    if (cptr)  {
+      if (alloc) {
+	/* 
+	   In python the user should not be able to modify the inner
+	   string representation. To warranty that, if you define
+	   SWIG_PYTHON_SAFE_CSTRINGS, a new/copy of the python string
+	   buffer is always returned.
+
+	   The default behavior is just to return the pointer value,
+	   so, be careful.
+	*/ 
+#if defined(SWIG_PYTHON_SAFE_CSTRINGS)
+	if (*alloc != SWIG_OLDOBJ) 
+#else
+	if (*alloc == SWIG_NEWOBJ) 
+#endif
+	  {
+	    *cptr = reinterpret_cast< char* >(memcpy((new char[len + 1]), cstr, sizeof(char)*(len + 1)));
+	    *alloc = SWIG_NEWOBJ;
+	  }
+	else {
+	  *cptr = cstr;
+	  *alloc = SWIG_OLDOBJ;
+	}
+      } else {
+	*cptr = PyString_AsString(obj);
+      }
+    }
+    if (psize) *psize = len + 1;
+    return SWIG_OK;
+  } else {
+    swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
+    if (pchar_descriptor) {
+      void* vptr = 0;
+      if (SWIG_ConvertPtr(obj, &vptr, pchar_descriptor, 0) == SWIG_OK) {
+	if (cptr) *cptr = (char *) vptr;
+	if (psize) *psize = vptr ? (strlen((char *)vptr) + 1) : 0;
+	if (alloc) *alloc = SWIG_OLDOBJ;
+	return SWIG_OK;
+      }
+    }
+  }
+  return SWIG_TypeError;
+}
+
+
+SWIGINTERN int
+SWIG_AsPtr_std_string (PyObject * obj, std::string **val) 
+{
+  char* buf = 0 ; size_t size = 0; int alloc = SWIG_OLDOBJ;
+  if (SWIG_IsOK((SWIG_AsCharPtrAndSize(obj, &buf, &size, &alloc)))) {
+    if (buf) {
+      if (val) *val = new std::string(buf, size - 1);
+      if (alloc == SWIG_NEWOBJ) delete[] buf;
+      return SWIG_NEWOBJ;
+    } else {
+      if (val) *val = 0;
+      return SWIG_OLDOBJ;
+    }
+  } else {
+    static int init = 0;
+    static swig_type_info* descriptor = 0;
+    if (!init) {
+      descriptor = SWIG_TypeQuery("std::string" " *");
+      init = 1;
+    }
+    if (descriptor) {
+      std::string *vptr;
+      int res = SWIG_ConvertPtr(obj, (void**)&vptr, descriptor, 0);
+      if (SWIG_IsOK(res) && val) *val = vptr;
+      return res;
+    }
+  }
+  return SWIG_ERROR;
+}
+
+
 SWIGINTERNINLINE PyObject *
 SWIG_FromCharPtrAndSize(const char* carray, size_t size)
 {
@@ -2958,148 +2957,7 @@ SWIG_From_std_string  (const std::string& s)
 #ifdef __cplusplus
 extern "C" {
 #endif
-SWIGINTERN PyObject *_wrap_new_TBFE_Base(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  TBFE_Base *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)":new_TBFE_Base")) SWIG_fail;
-  result = (TBFE_Base *)new TBFE_Base();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_TBFE_Base, SWIG_POINTER_NEW |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_delete_TBFE_Base(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  TBFE_Base *arg1 = (TBFE_Base *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:delete_TBFE_Base",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TBFE_Base, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_TBFE_Base" "', argument " "1"" of type '" "TBFE_Base *""'"); 
-  }
-  arg1 = reinterpret_cast< TBFE_Base * >(argp1);
-  delete arg1;
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_TBFE_Base_CheckSheets(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::string arg1 ;
-  PyObject * obj0 = 0 ;
-  SDL_Surface *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:TBFE_Base_CheckSheets",&obj0)) SWIG_fail;
-  {
-    std::string *ptr = (std::string *)0;
-    int res = SWIG_AsPtr_std_string(obj0, &ptr);
-    if (!SWIG_IsOK(res) || !ptr) {
-      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "TBFE_Base_CheckSheets" "', argument " "1"" of type '" "std::string""'"); 
-    }
-    arg1 = *ptr;
-    if (SWIG_IsNewObj(res)) delete ptr;
-  }
-  result = (SDL_Surface *)TBFE_Base::CheckSheets(arg1);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_SDL_Surface, 0 |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN int Swig_var_TBFE_Base_MainConsole_set(PyObject *_val) {
-  {
-    void *argp = 0;
-    int res = SWIG_ConvertPtr(_val, &argp, SWIGTYPE_p_Console,  0  | 0);
-    if (!SWIG_IsOK(res)) {
-      SWIG_exception_fail(SWIG_ArgError(res), "in variable '""TBFE_Base::MainConsole""' of type '""Console""'");
-    }
-    if (!argp) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in variable '""TBFE_Base::MainConsole""' of type '""Console""'");
-    } else {
-      Console * temp;
-      temp  = reinterpret_cast< Console * >(argp);
-      TBFE_Base::MainConsole = *temp;
-      if (SWIG_IsNewObj(res)) delete temp;
-    }
-  }
-  return 0;
-fail:
-  return 1;
-}
-
-
-SWIGINTERN PyObject *Swig_var_TBFE_Base_MainConsole_get(void) {
-  PyObject *pyobj = 0;
-  
-  pyobj = SWIG_NewPointerObj(SWIG_as_voidptr(&TBFE_Base::MainConsole), SWIGTYPE_p_Console,  0 );
-  return pyobj;
-}
-
-
-SWIGINTERN PyObject *_wrap_TBFE_Base_MainConsole_get(PyObject *SWIGUNUSEDPARM(self), PyObject *SWIGUNUSEDPARM(args)) {
-  return Swig_var_TBFE_Base_MainConsole_get();
-}
-
-
-SWIGINTERN PyObject *_wrap_TBFE_Base_MainConsole_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *value;
-  int res;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:set",&value)) return NULL;
-  res = Swig_var_TBFE_Base_MainConsole_set(value);
-  return !res ? SWIG_Py_Void() : NULL;
-}
-
-
-SWIGINTERN int Swig_var_TBFE_Base_MainPlayer_set(PyObject *_val) {
-  {
-    void *argp = 0;
-    int res = SWIG_ConvertPtr(_val, &argp, SWIGTYPE_p_Actor,  0 );  
-    if (!SWIG_IsOK(res)) {
-      SWIG_exception_fail(SWIG_ArgError(res), "in variable '""TBFE_Base::MainPlayer""' of type '""Actor *""'");
-    }
-    TBFE_Base::MainPlayer = reinterpret_cast< Actor * >(argp);
-  }
-  return 0;
-fail:
-  return 1;
-}
-
-
-SWIGINTERN PyObject *Swig_var_TBFE_Base_MainPlayer_get(void) {
-  PyObject *pyobj = 0;
-  
-  pyobj = SWIG_NewPointerObj(SWIG_as_voidptr(TBFE_Base::MainPlayer), SWIGTYPE_p_Actor,  0 );
-  return pyobj;
-}
-
-
-SWIGINTERN PyObject *_wrap_TBFE_Base_MainPlayer_get(PyObject *SWIGUNUSEDPARM(self), PyObject *SWIGUNUSEDPARM(args)) {
-  return Swig_var_TBFE_Base_MainPlayer_get();
-}
-
-
-SWIGINTERN PyObject *_wrap_TBFE_Base_MainPlayer_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *value;
-  int res;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:set",&value)) return NULL;
-  res = Swig_var_TBFE_Base_MainPlayer_set(value);
-  return !res ? SWIG_Py_Void() : NULL;
-}
-
-
-SWIGINTERN int Swig_var_TBFE_Base_ActorList_set(PyObject *_val) {
+SWIGINTERN int Swig_var_ActorList_set(PyObject *_val) {
   {
     void *argp = 0;
     int res = SWIG_ConvertPtr(_val, &argp, SWIGTYPE_p_vectorT_Actor_p_t,  0  | 0);
@@ -3121,7 +2979,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *Swig_var_TBFE_Base_ActorList_get(void) {
+SWIGINTERN PyObject *Swig_var_ActorList_get(void) {
   PyObject *pyobj = 0;
   
   pyobj = SWIG_NewPointerObj(SWIG_as_voidptr(&TBFE_Base::ActorList), SWIGTYPE_p_vectorT_Actor_p_t,  0 );
@@ -3129,22 +2987,7 @@ SWIGINTERN PyObject *Swig_var_TBFE_Base_ActorList_get(void) {
 }
 
 
-SWIGINTERN PyObject *_wrap_TBFE_Base_ActorList_get(PyObject *SWIGUNUSEDPARM(self), PyObject *SWIGUNUSEDPARM(args)) {
-  return Swig_var_TBFE_Base_ActorList_get();
-}
-
-
-SWIGINTERN PyObject *_wrap_TBFE_Base_ActorList_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *value;
-  int res;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:set",&value)) return NULL;
-  res = Swig_var_TBFE_Base_ActorList_set(value);
-  return !res ? SWIG_Py_Void() : NULL;
-}
-
-
-SWIGINTERN int Swig_var_TBFE_Base_WindowList_set(PyObject *_val) {
+SWIGINTERN int Swig_var_WindowList_set(PyObject *_val) {
   {
     void *argp = 0;
     int res = SWIG_ConvertPtr(_val, &argp, SWIGTYPE_p_vectorT_Window_p_t,  0  | 0);
@@ -3166,7 +3009,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *Swig_var_TBFE_Base_WindowList_get(void) {
+SWIGINTERN PyObject *Swig_var_WindowList_get(void) {
   PyObject *pyobj = 0;
   
   pyobj = SWIG_NewPointerObj(SWIG_as_voidptr(&TBFE_Base::WindowList), SWIGTYPE_p_vectorT_Window_p_t,  0 );
@@ -3174,22 +3017,37 @@ SWIGINTERN PyObject *Swig_var_TBFE_Base_WindowList_get(void) {
 }
 
 
-SWIGINTERN PyObject *_wrap_TBFE_Base_WindowList_get(PyObject *SWIGUNUSEDPARM(self), PyObject *SWIGUNUSEDPARM(args)) {
-  return Swig_var_TBFE_Base_WindowList_get();
+SWIGINTERN int Swig_var_MainConsole_set(PyObject *_val) {
+  {
+    void *argp = 0;
+    int res = SWIG_ConvertPtr(_val, &argp, SWIGTYPE_p_Console,  0  | 0);
+    if (!SWIG_IsOK(res)) {
+      SWIG_exception_fail(SWIG_ArgError(res), "in variable '""TBFE_Base::MainConsole""' of type '""Console""'");
+    }
+    if (!argp) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in variable '""TBFE_Base::MainConsole""' of type '""Console""'");
+    } else {
+      Console * temp;
+      temp  = reinterpret_cast< Console * >(argp);
+      TBFE_Base::MainConsole = *temp;
+      if (SWIG_IsNewObj(res)) delete temp;
+    }
+  }
+  return 0;
+fail:
+  return 1;
 }
 
 
-SWIGINTERN PyObject *_wrap_TBFE_Base_WindowList_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *value;
-  int res;
+SWIGINTERN PyObject *Swig_var_MainConsole_get(void) {
+  PyObject *pyobj = 0;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:set",&value)) return NULL;
-  res = Swig_var_TBFE_Base_WindowList_set(value);
-  return !res ? SWIG_Py_Void() : NULL;
+  pyobj = SWIG_NewPointerObj(SWIG_as_voidptr(&TBFE_Base::MainConsole), SWIGTYPE_p_Console,  0 );
+  return pyobj;
 }
 
 
-SWIGINTERN int Swig_var_TBFE_Base_TileSize_set(PyObject *_val) {
+SWIGINTERN int Swig_var_TileSize_set(PyObject *_val) {
   {
     int val;
     int res = SWIG_AsVal_int(_val, &val);
@@ -3204,7 +3062,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *Swig_var_TBFE_Base_TileSize_get(void) {
+SWIGINTERN PyObject *Swig_var_TileSize_get(void) {
   PyObject *pyobj = 0;
   
   pyobj = SWIG_From_int(static_cast< int >(TBFE_Base::TileSize));
@@ -3212,22 +3070,7 @@ SWIGINTERN PyObject *Swig_var_TBFE_Base_TileSize_get(void) {
 }
 
 
-SWIGINTERN PyObject *_wrap_TBFE_Base_TileSize_get(PyObject *SWIGUNUSEDPARM(self), PyObject *SWIGUNUSEDPARM(args)) {
-  return Swig_var_TBFE_Base_TileSize_get();
-}
-
-
-SWIGINTERN PyObject *_wrap_TBFE_Base_TileSize_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *value;
-  int res;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:set",&value)) return NULL;
-  res = Swig_var_TBFE_Base_TileSize_set(value);
-  return !res ? SWIG_Py_Void() : NULL;
-}
-
-
-SWIGINTERN int Swig_var_TBFE_Base_NumberOfActors_set(PyObject *_val) {
+SWIGINTERN int Swig_var_NumberOfActors_set(PyObject *_val) {
   {
     int val;
     int res = SWIG_AsVal_int(_val, &val);
@@ -3242,7 +3085,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *Swig_var_TBFE_Base_NumberOfActors_get(void) {
+SWIGINTERN PyObject *Swig_var_NumberOfActors_get(void) {
   PyObject *pyobj = 0;
   
   pyobj = SWIG_From_int(static_cast< int >(TBFE_Base::NumberOfActors));
@@ -3250,22 +3093,7 @@ SWIGINTERN PyObject *Swig_var_TBFE_Base_NumberOfActors_get(void) {
 }
 
 
-SWIGINTERN PyObject *_wrap_TBFE_Base_NumberOfActors_get(PyObject *SWIGUNUSEDPARM(self), PyObject *SWIGUNUSEDPARM(args)) {
-  return Swig_var_TBFE_Base_NumberOfActors_get();
-}
-
-
-SWIGINTERN PyObject *_wrap_TBFE_Base_NumberOfActors_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *value;
-  int res;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:set",&value)) return NULL;
-  res = Swig_var_TBFE_Base_NumberOfActors_set(value);
-  return !res ? SWIG_Py_Void() : NULL;
-}
-
-
-SWIGINTERN int Swig_var_TBFE_Base_KeyControl_set(PyObject *_val) {
+SWIGINTERN int Swig_var_KeyControl_set(PyObject *_val) {
   {
     bool val;
     int res = SWIG_AsVal_bool(_val, &val);
@@ -3280,7 +3108,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *Swig_var_TBFE_Base_KeyControl_get(void) {
+SWIGINTERN PyObject *Swig_var_KeyControl_get(void) {
   PyObject *pyobj = 0;
   
   pyobj = SWIG_From_bool(static_cast< bool >(TBFE_Base::KeyControl));
@@ -3288,22 +3116,7 @@ SWIGINTERN PyObject *Swig_var_TBFE_Base_KeyControl_get(void) {
 }
 
 
-SWIGINTERN PyObject *_wrap_TBFE_Base_KeyControl_get(PyObject *SWIGUNUSEDPARM(self), PyObject *SWIGUNUSEDPARM(args)) {
-  return Swig_var_TBFE_Base_KeyControl_get();
-}
-
-
-SWIGINTERN PyObject *_wrap_TBFE_Base_KeyControl_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *value;
-  int res;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:set",&value)) return NULL;
-  res = Swig_var_TBFE_Base_KeyControl_set(value);
-  return !res ? SWIG_Py_Void() : NULL;
-}
-
-
-SWIGINTERN int Swig_var_TBFE_Base_CurrentMap_set(PyObject *_val) {
+SWIGINTERN int Swig_var_CurrentMap_set(PyObject *_val) {
   {
     void *argp = 0;
     int res = SWIG_ConvertPtr(_val, &argp, SWIGTYPE_p_Map,  0  | 0);
@@ -3325,7 +3138,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *Swig_var_TBFE_Base_CurrentMap_get(void) {
+SWIGINTERN PyObject *Swig_var_CurrentMap_get(void) {
   PyObject *pyobj = 0;
   
   pyobj = SWIG_NewPointerObj(SWIG_as_voidptr(&TBFE_Base::CurrentMap), SWIGTYPE_p_Map,  0 );
@@ -3333,22 +3146,7 @@ SWIGINTERN PyObject *Swig_var_TBFE_Base_CurrentMap_get(void) {
 }
 
 
-SWIGINTERN PyObject *_wrap_TBFE_Base_CurrentMap_get(PyObject *SWIGUNUSEDPARM(self), PyObject *SWIGUNUSEDPARM(args)) {
-  return Swig_var_TBFE_Base_CurrentMap_get();
-}
-
-
-SWIGINTERN PyObject *_wrap_TBFE_Base_CurrentMap_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *value;
-  int res;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:set",&value)) return NULL;
-  res = Swig_var_TBFE_Base_CurrentMap_set(value);
-  return !res ? SWIG_Py_Void() : NULL;
-}
-
-
-SWIGINTERN int Swig_var_TBFE_Base_Time_set(PyObject *_val) {
+SWIGINTERN int Swig_var_Time_set(PyObject *_val) {
   {
     int val;
     int res = SWIG_AsVal_int(_val, &val);
@@ -3363,7 +3161,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *Swig_var_TBFE_Base_Time_get(void) {
+SWIGINTERN PyObject *Swig_var_Time_get(void) {
   PyObject *pyobj = 0;
   
   pyobj = SWIG_From_int(static_cast< int >(TBFE_Base::Time));
@@ -3371,136 +3169,7 @@ SWIGINTERN PyObject *Swig_var_TBFE_Base_Time_get(void) {
 }
 
 
-SWIGINTERN PyObject *_wrap_TBFE_Base_Time_get(PyObject *SWIGUNUSEDPARM(self), PyObject *SWIGUNUSEDPARM(args)) {
-  return Swig_var_TBFE_Base_Time_get();
-}
-
-
-SWIGINTERN PyObject *_wrap_TBFE_Base_Time_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *value;
-  int res;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:set",&value)) return NULL;
-  res = Swig_var_TBFE_Base_Time_set(value);
-  return !res ? SWIG_Py_Void() : NULL;
-}
-
-
-SWIGINTERN int Swig_var_TBFE_Base_Talker_set(PyObject *_val) {
-  {
-    void *argp = 0;
-    int res = SWIG_ConvertPtr(_val, &argp, SWIGTYPE_p_Actor,  0 );  
-    if (!SWIG_IsOK(res)) {
-      SWIG_exception_fail(SWIG_ArgError(res), "in variable '""TBFE_Base::Talker""' of type '""Actor *""'");
-    }
-    TBFE_Base::Talker = reinterpret_cast< Actor * >(argp);
-  }
-  return 0;
-fail:
-  return 1;
-}
-
-
-SWIGINTERN PyObject *Swig_var_TBFE_Base_Talker_get(void) {
-  PyObject *pyobj = 0;
-  
-  pyobj = SWIG_NewPointerObj(SWIG_as_voidptr(TBFE_Base::Talker), SWIGTYPE_p_Actor,  0 );
-  return pyobj;
-}
-
-
-SWIGINTERN PyObject *_wrap_TBFE_Base_Talker_get(PyObject *SWIGUNUSEDPARM(self), PyObject *SWIGUNUSEDPARM(args)) {
-  return Swig_var_TBFE_Base_Talker_get();
-}
-
-
-SWIGINTERN PyObject *_wrap_TBFE_Base_Talker_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *value;
-  int res;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:set",&value)) return NULL;
-  res = Swig_var_TBFE_Base_Talker_set(value);
-  return !res ? SWIG_Py_Void() : NULL;
-}
-
-
-SWIGINTERN int Swig_var_TBFE_Base_font_set(PyObject *_val) {
-  {
-    void *argp = 0;
-    int res = SWIG_ConvertPtr(_val, &argp, SWIGTYPE_p_TTF_Font,  0 );  
-    if (!SWIG_IsOK(res)) {
-      SWIG_exception_fail(SWIG_ArgError(res), "in variable '""TBFE_Base::font""' of type '""TTF_Font *""'");
-    }
-    TBFE_Base::font = reinterpret_cast< TTF_Font * >(argp);
-  }
-  return 0;
-fail:
-  return 1;
-}
-
-
-SWIGINTERN PyObject *Swig_var_TBFE_Base_font_get(void) {
-  PyObject *pyobj = 0;
-  
-  pyobj = SWIG_NewPointerObj(SWIG_as_voidptr(TBFE_Base::font), SWIGTYPE_p_TTF_Font,  0 );
-  return pyobj;
-}
-
-
-SWIGINTERN PyObject *_wrap_TBFE_Base_font_get(PyObject *SWIGUNUSEDPARM(self), PyObject *SWIGUNUSEDPARM(args)) {
-  return Swig_var_TBFE_Base_font_get();
-}
-
-
-SWIGINTERN PyObject *_wrap_TBFE_Base_font_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *value;
-  int res;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:set",&value)) return NULL;
-  res = Swig_var_TBFE_Base_font_set(value);
-  return !res ? SWIG_Py_Void() : NULL;
-}
-
-
-SWIGINTERN int Swig_var_TBFE_Base_KeyTarget_set(PyObject *_val) {
-  {
-    void *argp = 0;
-    int res = SWIG_ConvertPtr(_val, &argp, SWIGTYPE_p_Element,  0 );  
-    if (!SWIG_IsOK(res)) {
-      SWIG_exception_fail(SWIG_ArgError(res), "in variable '""TBFE_Base::KeyTarget""' of type '""Element *""'");
-    }
-    TBFE_Base::KeyTarget = reinterpret_cast< Element * >(argp);
-  }
-  return 0;
-fail:
-  return 1;
-}
-
-
-SWIGINTERN PyObject *Swig_var_TBFE_Base_KeyTarget_get(void) {
-  PyObject *pyobj = 0;
-  
-  pyobj = SWIG_NewPointerObj(SWIG_as_voidptr(TBFE_Base::KeyTarget), SWIGTYPE_p_Element,  0 );
-  return pyobj;
-}
-
-
-SWIGINTERN PyObject *_wrap_TBFE_Base_KeyTarget_get(PyObject *SWIGUNUSEDPARM(self), PyObject *SWIGUNUSEDPARM(args)) {
-  return Swig_var_TBFE_Base_KeyTarget_get();
-}
-
-
-SWIGINTERN PyObject *_wrap_TBFE_Base_KeyTarget_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *value;
-  int res;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:set",&value)) return NULL;
-  res = Swig_var_TBFE_Base_KeyTarget_set(value);
-  return !res ? SWIG_Py_Void() : NULL;
-}
-
-
-SWIGINTERN int Swig_var_TBFE_Base_GameSpeed_set(PyObject *_val) {
+SWIGINTERN int Swig_var_GameSpeed_set(PyObject *_val) {
   {
     float val;
     int res = SWIG_AsVal_float(_val, &val);
@@ -3515,7 +3184,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *Swig_var_TBFE_Base_GameSpeed_get(void) {
+SWIGINTERN PyObject *Swig_var_GameSpeed_get(void) {
   PyObject *pyobj = 0;
   
   pyobj = SWIG_From_float(static_cast< float >(TBFE_Base::GameSpeed));
@@ -3523,72 +3192,7 @@ SWIGINTERN PyObject *Swig_var_TBFE_Base_GameSpeed_get(void) {
 }
 
 
-SWIGINTERN PyObject *_wrap_TBFE_Base_GameSpeed_get(PyObject *SWIGUNUSEDPARM(self), PyObject *SWIGUNUSEDPARM(args)) {
-  return Swig_var_TBFE_Base_GameSpeed_get();
-}
-
-
-SWIGINTERN PyObject *_wrap_TBFE_Base_GameSpeed_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *value;
-  int res;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:set",&value)) return NULL;
-  res = Swig_var_TBFE_Base_GameSpeed_set(value);
-  return !res ? SWIG_Py_Void() : NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_TBFE_Base_DeleteAnimationSheets(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  
-  if (!PyArg_ParseTuple(args,(char *)":TBFE_Base_DeleteAnimationSheets")) SWIG_fail;
-  TBFE_Base::DeleteAnimationSheets();
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN int Swig_var_TBFE_Base_CollisionTile_set(PyObject *_val) {
-  {
-    void *argp = 0;
-    int res = SWIG_ConvertPtr(_val, &argp, SWIGTYPE_p_SDL_Surface,  0 );  
-    if (!SWIG_IsOK(res)) {
-      SWIG_exception_fail(SWIG_ArgError(res), "in variable '""TBFE_Base::CollisionTile""' of type '""SDL_Surface *""'");
-    }
-    TBFE_Base::CollisionTile = reinterpret_cast< SDL_Surface * >(argp);
-  }
-  return 0;
-fail:
-  return 1;
-}
-
-
-SWIGINTERN PyObject *Swig_var_TBFE_Base_CollisionTile_get(void) {
-  PyObject *pyobj = 0;
-  
-  pyobj = SWIG_NewPointerObj(SWIG_as_voidptr(TBFE_Base::CollisionTile), SWIGTYPE_p_SDL_Surface,  0 );
-  return pyobj;
-}
-
-
-SWIGINTERN PyObject *_wrap_TBFE_Base_CollisionTile_get(PyObject *SWIGUNUSEDPARM(self), PyObject *SWIGUNUSEDPARM(args)) {
-  return Swig_var_TBFE_Base_CollisionTile_get();
-}
-
-
-SWIGINTERN PyObject *_wrap_TBFE_Base_CollisionTile_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *value;
-  int res;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:set",&value)) return NULL;
-  res = Swig_var_TBFE_Base_CollisionTile_set(value);
-  return !res ? SWIG_Py_Void() : NULL;
-}
-
-
-SWIGINTERN int Swig_var_TBFE_Base_ScreenDimensions_set(PyObject *_val) {
+SWIGINTERN int Swig_var_ScreenDimensions_set(PyObject *_val) {
   {
     void *argp = 0;
     int res = SWIG_ConvertPtr(_val, &argp, SWIGTYPE_p_Position,  0  | 0);
@@ -3610,7 +3214,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *Swig_var_TBFE_Base_ScreenDimensions_get(void) {
+SWIGINTERN PyObject *Swig_var_ScreenDimensions_get(void) {
   PyObject *pyobj = 0;
   
   pyobj = SWIG_NewPointerObj(SWIG_as_voidptr(&TBFE_Base::ScreenDimensions), SWIGTYPE_p_Position,  0 );
@@ -3618,27 +3222,17 @@ SWIGINTERN PyObject *Swig_var_TBFE_Base_ScreenDimensions_get(void) {
 }
 
 
-SWIGINTERN PyObject *_wrap_TBFE_Base_ScreenDimensions_get(PyObject *SWIGUNUSEDPARM(self), PyObject *SWIGUNUSEDPARM(args)) {
-  return Swig_var_TBFE_Base_ScreenDimensions_get();
-}
-
-
-SWIGINTERN PyObject *_wrap_TBFE_Base_ScreenDimensions_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *value;
-  int res;
+SWIGINTERN PyObject *_wrap_DeleteAnimationSheets(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:set",&value)) return NULL;
-  res = Swig_var_TBFE_Base_ScreenDimensions_set(value);
-  return !res ? SWIG_Py_Void() : NULL;
+  if (!PyArg_ParseTuple(args,(char *)":DeleteAnimationSheets")) SWIG_fail;
+  TBFE_Base::DeleteAnimationSheets();
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
 }
 
-
-SWIGINTERN PyObject *TBFE_Base_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *obj;
-  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_TBFE_Base, SWIG_NewClientData(obj));
-  return SWIG_Py_Void();
-}
 
 SWIGINTERN PyObject *_wrap_GetActorNum(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
@@ -3654,7 +3248,7 @@ SWIGINTERN PyObject *_wrap_GetActorNum(PyObject *SWIGUNUSEDPARM(self), PyObject 
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GetActorNum" "', argument " "1"" of type '" "Actor *""'"); 
   }
   arg1 = reinterpret_cast< Actor * >(argp1);
-  result = (int)GetActorNum(arg1);
+  result = (int)TBFE_Base::GetActorNum(arg1);
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -3676,8 +3270,134 @@ SWIGINTERN PyObject *_wrap_GetActorByNum(PyObject *SWIGUNUSEDPARM(self), PyObjec
     SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "GetActorByNum" "', argument " "1"" of type '" "int""'");
   } 
   arg1 = static_cast< int >(val1);
-  result = (Actor *)GetActorByNum(arg1);
+  result = (Actor *)TBFE_Base::GetActorByNum(arg1);
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Actor, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CheckSheets(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::string arg1 ;
+  PyObject * obj0 = 0 ;
+  SDL_Surface *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CheckSheets",&obj0)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    int res = SWIG_AsPtr_std_string(obj0, &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "CheckSheets" "', argument " "1"" of type '" "std::string""'"); 
+    }
+    arg1 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  result = (SDL_Surface *)TBFE_Base::CheckSheets(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_SDL_Surface, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_GetFont(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  TTF_Font *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":GetFont")) SWIG_fail;
+  result = (TTF_Font *)TBFE_Base::GetFont();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_TTF_Font, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SetFont(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  TTF_Font *arg1 = (TTF_Font *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:SetFont",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TTF_Font, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SetFont" "', argument " "1"" of type '" "TTF_Font *""'"); 
+  }
+  arg1 = reinterpret_cast< TTF_Font * >(argp1);
+  TBFE_Base::SetFont(arg1);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_GetCollisionTile(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  SDL_Surface *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":GetCollisionTile")) SWIG_fail;
+  result = (SDL_Surface *)TBFE_Base::GetCollisionTile();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_SDL_Surface, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SetCollisionTile(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  SDL_Surface *arg1 = (SDL_Surface *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:SetCollisionTile",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_SDL_Surface, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SetCollisionTile" "', argument " "1"" of type '" "SDL_Surface *""'"); 
+  }
+  arg1 = reinterpret_cast< SDL_Surface * >(argp1);
+  TBFE_Base::SetCollisionTile(arg1);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_GetMainPlayer(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Actor *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":GetMainPlayer")) SWIG_fail;
+  result = (Actor *)TBFE_Base::GetMainPlayer();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Actor, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SetMainPlayer(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Actor *arg1 = (Actor *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:SetMainPlayer",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SetMainPlayer" "', argument " "1"" of type '" "Actor *""'"); 
+  }
+  arg1 = reinterpret_cast< Actor * >(argp1);
+  TBFE_Base::SetMainPlayer(arg1);
+  resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
   return NULL;
@@ -5171,43 +4891,16 @@ SWIGINTERN PyObject *SunVector_swigregister(PyObject *SWIGUNUSEDPARM(self), PyOb
 }
 
 static PyMethodDef SwigMethods[] = {
-	 { (char *)"new_TBFE_Base", _wrap_new_TBFE_Base, METH_VARARGS, NULL},
-	 { (char *)"delete_TBFE_Base", _wrap_delete_TBFE_Base, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Base_CheckSheets", _wrap_TBFE_Base_CheckSheets, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Base_MainConsole_get", _wrap_TBFE_Base_MainConsole_get, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Base_MainConsole_set", _wrap_TBFE_Base_MainConsole_set, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Base_MainPlayer_get", _wrap_TBFE_Base_MainPlayer_get, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Base_MainPlayer_set", _wrap_TBFE_Base_MainPlayer_set, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Base_ActorList_get", _wrap_TBFE_Base_ActorList_get, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Base_ActorList_set", _wrap_TBFE_Base_ActorList_set, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Base_WindowList_get", _wrap_TBFE_Base_WindowList_get, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Base_WindowList_set", _wrap_TBFE_Base_WindowList_set, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Base_TileSize_get", _wrap_TBFE_Base_TileSize_get, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Base_TileSize_set", _wrap_TBFE_Base_TileSize_set, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Base_NumberOfActors_get", _wrap_TBFE_Base_NumberOfActors_get, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Base_NumberOfActors_set", _wrap_TBFE_Base_NumberOfActors_set, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Base_KeyControl_get", _wrap_TBFE_Base_KeyControl_get, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Base_KeyControl_set", _wrap_TBFE_Base_KeyControl_set, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Base_CurrentMap_get", _wrap_TBFE_Base_CurrentMap_get, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Base_CurrentMap_set", _wrap_TBFE_Base_CurrentMap_set, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Base_Time_get", _wrap_TBFE_Base_Time_get, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Base_Time_set", _wrap_TBFE_Base_Time_set, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Base_Talker_get", _wrap_TBFE_Base_Talker_get, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Base_Talker_set", _wrap_TBFE_Base_Talker_set, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Base_font_get", _wrap_TBFE_Base_font_get, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Base_font_set", _wrap_TBFE_Base_font_set, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Base_KeyTarget_get", _wrap_TBFE_Base_KeyTarget_get, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Base_KeyTarget_set", _wrap_TBFE_Base_KeyTarget_set, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Base_GameSpeed_get", _wrap_TBFE_Base_GameSpeed_get, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Base_GameSpeed_set", _wrap_TBFE_Base_GameSpeed_set, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Base_DeleteAnimationSheets", _wrap_TBFE_Base_DeleteAnimationSheets, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Base_CollisionTile_get", _wrap_TBFE_Base_CollisionTile_get, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Base_CollisionTile_set", _wrap_TBFE_Base_CollisionTile_set, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Base_ScreenDimensions_get", _wrap_TBFE_Base_ScreenDimensions_get, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Base_ScreenDimensions_set", _wrap_TBFE_Base_ScreenDimensions_set, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Base_swigregister", TBFE_Base_swigregister, METH_VARARGS, NULL},
+	 { (char *)"DeleteAnimationSheets", _wrap_DeleteAnimationSheets, METH_VARARGS, NULL},
 	 { (char *)"GetActorNum", _wrap_GetActorNum, METH_VARARGS, NULL},
 	 { (char *)"GetActorByNum", _wrap_GetActorByNum, METH_VARARGS, NULL},
+	 { (char *)"CheckSheets", _wrap_CheckSheets, METH_VARARGS, NULL},
+	 { (char *)"GetFont", _wrap_GetFont, METH_VARARGS, NULL},
+	 { (char *)"SetFont", _wrap_SetFont, METH_VARARGS, NULL},
+	 { (char *)"GetCollisionTile", _wrap_GetCollisionTile, METH_VARARGS, NULL},
+	 { (char *)"SetCollisionTile", _wrap_SetCollisionTile, METH_VARARGS, NULL},
+	 { (char *)"GetMainPlayer", _wrap_GetMainPlayer, METH_VARARGS, NULL},
+	 { (char *)"SetMainPlayer", _wrap_SetMainPlayer, METH_VARARGS, NULL},
 	 { (char *)"TBFE_createFile", _wrap_TBFE_createFile, METH_VARARGS, NULL},
 	 { (char *)"new_TBFE", _wrap_new_TBFE, METH_VARARGS, NULL},
 	 { (char *)"TBFE_changeMap", _wrap_TBFE_changeMap, METH_VARARGS, NULL},
@@ -5287,7 +4980,6 @@ static swig_type_info _swigt__p_SDL_Event = {"_p_SDL_Event", "SDL_Event *", 0, 0
 static swig_type_info _swigt__p_SDL_Surface = {"_p_SDL_Surface", "SDL_Surface *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_SunVector = {"_p_SunVector", "SunVector *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_TBFE = {"_p_TBFE", "TBFE *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_TBFE_Base = {"_p_TBFE_Base", "TBFE_Base *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_TBFE_Logic = {"_p_TBFE_Logic", "TBFE_Logic *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_TBFE_Render = {"_p_TBFE_Render", "TBFE_Render *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_TTF_Font = {"_p_TTF_Font", "TTF_Font *", 0, 0, (void*)0, 0};
@@ -5310,7 +5002,6 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_SDL_Surface,
   &_swigt__p_SunVector,
   &_swigt__p_TBFE,
-  &_swigt__p_TBFE_Base,
   &_swigt__p_TBFE_Logic,
   &_swigt__p_TBFE_Render,
   &_swigt__p_TTF_Font,
@@ -5333,7 +5024,6 @@ static swig_cast_info _swigc__p_SDL_Event[] = {  {&_swigt__p_SDL_Event, 0, 0, 0}
 static swig_cast_info _swigc__p_SDL_Surface[] = {  {&_swigt__p_SDL_Surface, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_SunVector[] = {  {&_swigt__p_SunVector, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_TBFE[] = {  {&_swigt__p_TBFE, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_TBFE_Base[] = {  {&_swigt__p_TBFE_Base, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_TBFE_Logic[] = {  {&_swigt__p_TBFE_Logic, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_TBFE_Render[] = {  {&_swigt__p_TBFE_Render, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_TTF_Font[] = {  {&_swigt__p_TTF_Font, 0, 0, 0},{0, 0, 0, 0}};
@@ -5356,7 +5046,6 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_SDL_Surface,
   _swigc__p_SunVector,
   _swigc__p_TBFE,
-  _swigc__p_TBFE_Base,
   _swigc__p_TBFE_Logic,
   _swigc__p_TBFE_Render,
   _swigc__p_TTF_Font,
@@ -5894,20 +5583,15 @@ SWIGEXPORT void SWIG_init(void) {
   
   
   PyDict_SetItemString(d,(char*)"cvar", SWIG_globals());
-  SWIG_addvarlink(SWIG_globals(),(char*)"TBFE_Base_MainConsole",Swig_var_TBFE_Base_MainConsole_get, Swig_var_TBFE_Base_MainConsole_set);
-  SWIG_addvarlink(SWIG_globals(),(char*)"TBFE_Base_MainPlayer",Swig_var_TBFE_Base_MainPlayer_get, Swig_var_TBFE_Base_MainPlayer_set);
-  SWIG_addvarlink(SWIG_globals(),(char*)"TBFE_Base_ActorList",Swig_var_TBFE_Base_ActorList_get, Swig_var_TBFE_Base_ActorList_set);
-  SWIG_addvarlink(SWIG_globals(),(char*)"TBFE_Base_WindowList",Swig_var_TBFE_Base_WindowList_get, Swig_var_TBFE_Base_WindowList_set);
-  SWIG_addvarlink(SWIG_globals(),(char*)"TBFE_Base_TileSize",Swig_var_TBFE_Base_TileSize_get, Swig_var_TBFE_Base_TileSize_set);
-  SWIG_addvarlink(SWIG_globals(),(char*)"TBFE_Base_NumberOfActors",Swig_var_TBFE_Base_NumberOfActors_get, Swig_var_TBFE_Base_NumberOfActors_set);
-  SWIG_addvarlink(SWIG_globals(),(char*)"TBFE_Base_KeyControl",Swig_var_TBFE_Base_KeyControl_get, Swig_var_TBFE_Base_KeyControl_set);
-  SWIG_addvarlink(SWIG_globals(),(char*)"TBFE_Base_CurrentMap",Swig_var_TBFE_Base_CurrentMap_get, Swig_var_TBFE_Base_CurrentMap_set);
-  SWIG_addvarlink(SWIG_globals(),(char*)"TBFE_Base_Time",Swig_var_TBFE_Base_Time_get, Swig_var_TBFE_Base_Time_set);
-  SWIG_addvarlink(SWIG_globals(),(char*)"TBFE_Base_Talker",Swig_var_TBFE_Base_Talker_get, Swig_var_TBFE_Base_Talker_set);
-  SWIG_addvarlink(SWIG_globals(),(char*)"TBFE_Base_font",Swig_var_TBFE_Base_font_get, Swig_var_TBFE_Base_font_set);
-  SWIG_addvarlink(SWIG_globals(),(char*)"TBFE_Base_KeyTarget",Swig_var_TBFE_Base_KeyTarget_get, Swig_var_TBFE_Base_KeyTarget_set);
-  SWIG_addvarlink(SWIG_globals(),(char*)"TBFE_Base_GameSpeed",Swig_var_TBFE_Base_GameSpeed_get, Swig_var_TBFE_Base_GameSpeed_set);
-  SWIG_addvarlink(SWIG_globals(),(char*)"TBFE_Base_CollisionTile",Swig_var_TBFE_Base_CollisionTile_get, Swig_var_TBFE_Base_CollisionTile_set);
-  SWIG_addvarlink(SWIG_globals(),(char*)"TBFE_Base_ScreenDimensions",Swig_var_TBFE_Base_ScreenDimensions_get, Swig_var_TBFE_Base_ScreenDimensions_set);
+  SWIG_addvarlink(SWIG_globals(),(char*)"ActorList",Swig_var_ActorList_get, Swig_var_ActorList_set);
+  SWIG_addvarlink(SWIG_globals(),(char*)"WindowList",Swig_var_WindowList_get, Swig_var_WindowList_set);
+  SWIG_addvarlink(SWIG_globals(),(char*)"MainConsole",Swig_var_MainConsole_get, Swig_var_MainConsole_set);
+  SWIG_addvarlink(SWIG_globals(),(char*)"TileSize",Swig_var_TileSize_get, Swig_var_TileSize_set);
+  SWIG_addvarlink(SWIG_globals(),(char*)"NumberOfActors",Swig_var_NumberOfActors_get, Swig_var_NumberOfActors_set);
+  SWIG_addvarlink(SWIG_globals(),(char*)"KeyControl",Swig_var_KeyControl_get, Swig_var_KeyControl_set);
+  SWIG_addvarlink(SWIG_globals(),(char*)"CurrentMap",Swig_var_CurrentMap_get, Swig_var_CurrentMap_set);
+  SWIG_addvarlink(SWIG_globals(),(char*)"Time",Swig_var_Time_get, Swig_var_Time_set);
+  SWIG_addvarlink(SWIG_globals(),(char*)"GameSpeed",Swig_var_GameSpeed_get, Swig_var_GameSpeed_set);
+  SWIG_addvarlink(SWIG_globals(),(char*)"ScreenDimensions",Swig_var_ScreenDimensions_get, Swig_var_ScreenDimensions_set);
 }
 

@@ -13,7 +13,7 @@ TBFE_Logic::~TBFE_Logic()
 int TBFE_Logic::checkTalker()
 {
   int NPC_Exists=-1;  
-  int PlayerNumber=GetActorNum(TBFE_Base::MainPlayer);
+  int PlayerNumber=TBFE_Base::GetActorNum(TBFE_Base::MainPlayer);
   switch(TBFE_Base::MainPlayer->getDirection())
     {
     case UP:
@@ -35,7 +35,7 @@ void TBFE_Logic::playerMovement()
 {
   //PlayerMovement
   bool PlayerMoved=true;  
-  int PlayerNumber=GetActorNum(TBFE_Base::MainPlayer);
+  int PlayerNumber=TBFE_Base::GetActorNum(TBFE_Base::MainPlayer);
   if (TBFE_Base::MainPlayer->getCurrentAction().getName()=="Walk" ||
       TBFE_Base::MainPlayer->getCurrentAction().getName()=="None")
     {

@@ -5,7 +5,7 @@ Label::Label(int x,int y,string text):Element(x,y)
   textColor_.g=255;
   textColor_.b=255;
   setProperty("text",text);
-  text_=TTF_RenderText_Solid(TBFE_Base::font,getProperty("text").c_str(),textColor_);
+  text_=TTF_RenderText_Solid(TBFE_Base::GetFont(),getProperty("text").c_str(),textColor_);
   if (text_!=NULL)
     {
       setDimensions(text_->w,text_->h);
@@ -22,7 +22,7 @@ Label::~Label()
 void Label::reload()
 {
   SDL_FreeSurface(text_);
-  text_=TTF_RenderText_Solid(TBFE_Base::font,getProperty("text").c_str(),textColor_);
+  text_=TTF_RenderText_Solid(TBFE_Base::GetFont(),getProperty("text").c_str(),textColor_);
   if (text_!=NULL)
     {
       setDimensions(text_->w,text_->h);
