@@ -7,8 +7,7 @@ Npc::Npc():Actor(0,0)
   setConversation("The programmers were too lazy to give me lines to say");
   setCollisionMap("Actors/living/Collision.png");
 };
-Npc::Npc(int PositionX,int PositionY,string PlayerConversation,int Hair, int FacialHair, 
-	 HairColor NewHairColor,int NewTorso)
+Npc::Npc(int PositionX,int PositionY,string PlayerConversation)
 :Actor(PositionX,PositionY)
 {
   setSpeed(1);

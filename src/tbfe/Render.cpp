@@ -17,6 +17,10 @@ TBFE_Render::TBFE_Render()
 };
 void TBFE_Render::init()
 {
+  if (screen_!=NULL)
+    {
+      SDL_FreeSurface(screen_);
+    };
   screen_=SDL_SetVideoMode(TBFE_Base::ScreenDimensions.X,TBFE_Base::ScreenDimensions.Y,32,SDL_HWSURFACE|SDL_FULLSCREEN|SDL_DOUBLEBUF);
  };
 TBFE_Render::~TBFE_Render()
@@ -144,7 +148,7 @@ int TBFE_Render::renderMapLayer(int x,int y, int Layer)
 	      {
 		applyImage(mapX*TBFE_Base::TileSize-x,mapY*TBFE_Base::TileSize-y,
 			   tileSet_.at(tile.TileSet),screen_,&TileRect);
-	      };
+	      }
 	  };	 
       };
 };

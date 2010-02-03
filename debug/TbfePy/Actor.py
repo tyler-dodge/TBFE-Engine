@@ -52,7 +52,6 @@ import Misc
 loadActors = _Actor.loadActors
 addActorType = _Actor.addActorType
 getActorType = _Actor.getActorType
-deleteCreatedActorList = _Actor.deleteCreatedActorList
 getActor = _Actor.getActor
 class Actor(_object):
     __swig_setmethods__ = {}
@@ -105,6 +104,7 @@ Actor_swigregister = _Actor.Actor_swigregister
 Actor_swigregister(Actor)
 cvar = _Actor.cvar
 createActor = _Actor.createActor
+deleteCreatedActorList = _Actor.deleteCreatedActorList
 
 class Npc(Actor):
     __swig_setmethods__ = {}

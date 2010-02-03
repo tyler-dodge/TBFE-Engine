@@ -10,7 +10,7 @@ class Npc:public Actor
   Npc();
   
   //Initializes NPC with position and conversation
-  Npc(int,int,string,int,int,HairColor,int);
+  Npc(int,int,string);
   
   ~Npc();
   //returns conversation

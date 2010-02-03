@@ -73,6 +73,7 @@ class TBFE(_object):
         try: self.this.append(this)
         except: self.this = this
     def changeMap(*args): return _TBFE.TBFE_changeMap(*args)
+    def initMap(*args): return _TBFE.TBFE_initMap(*args)
     def runEngine(*args): return _TBFE.TBFE_runEngine(*args)
     def addActor(*args): return _TBFE.TBFE_addActor(*args)
     def removeActor(*args): return _TBFE.TBFE_removeActor(*args)

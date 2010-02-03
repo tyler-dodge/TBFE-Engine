@@ -95,7 +95,7 @@ Actor * createActor(int PositionX,int PositionY, std::string ConversationText, s
     };
   if (ActorTypeNum==-2)
     {
-      TempActor=new Npc(PositionX,PositionY,ConversationText,0,0,(HairColor)0,0);
+      TempActor=new Npc(PositionX,PositionY,ConversationText);
     }
   else
     {
@@ -116,12 +116,17 @@ Actor * createActor(int PositionX,int PositionY, std::string ConversationText, s
   TBFE_Base::MainConsole.runLine("StartAction=nil");
   return TempActor;
 };
-void deleteCreatedActorList()
+void deleteCreatedActorList(bool deleteMainPlayer)
 {
   for (int i=0;i<CreatedActorList.size();i++)
     {
-      if (CreatedActorList.at(i)!=NULL)
+      if (CreatedActorList.at(i)!=NULL &&
+	  (deleteMainPlayer || CreatedActorList.at(i)!=TBFE_Base::GetMainPlayer()))
 	{
+	  if (deleteMainPlayer)
+	    {
+	      TBFE_Base::SetMainPlayer(NULL);
+	    };
 	  delete CreatedActorList.at(i);
 	};
     };

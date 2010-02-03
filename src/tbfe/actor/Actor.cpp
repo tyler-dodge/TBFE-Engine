@@ -202,7 +202,7 @@ int Actor::changePosition(Direction NewDirection,bool ChangeDirection)
 	  tileRect.y=0;
 	  tileRect.h=100;
 	  tileRect.w=100;
-	  bool AdvancedCollision=advancedCollision(TBFE_Base::CollisionTile,
+	  bool AdvancedCollision=advancedCollision(TBFE_Base::GetCollisionTile(),
 						   tileRect,TileOffset);
 	  if (AdvancedCollision)
 	    {

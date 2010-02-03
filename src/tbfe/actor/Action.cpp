@@ -85,6 +85,7 @@ SDL_Rect Action::getFrameRect(int Layer)
       newRect.y=0;
       newRect.w=0;
       newRect.h=0;
+      return newRect;
     };
   return animation_.at(Layer).getFrameRect(getDirection());
 };

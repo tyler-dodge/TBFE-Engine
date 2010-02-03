@@ -36,6 +36,7 @@ class TBFE
   bool createFile(string);
   TBFE();
   void changeMap(std::string);
+  void initMap();
   Direction runEngine();
   void addActor(Actor*);
   bool removeActor(Actor *);

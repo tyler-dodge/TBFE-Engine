@@ -75,11 +75,14 @@ EventType * TBFE::selectEvent(std::string Name)
 	};
     };
 };
-
+void TBFE::initMap()
+{
+  renderWindow_.initializeTileSets();
+};
 void TBFE::changeMap(std::string MapName)
 {
   TBFE_Base::ActorList.resize(0);
-  deleteCreatedActorList();
+  deleteCreatedActorList(false);
   TBFE_Base::CurrentMap.loadMap(MapName);
   addActor(TBFE_Base::MainPlayer);
 };
@@ -255,6 +258,10 @@ Direction TBFE::runEngine()
 	    {
 	      logic_.setKeyDown(currentSdlEvent.key.keysym.sym,true);
 	    };
+	  if (logic_.checkKeyDown(27))
+	    {
+	      quit_=true;
+	    };	      
 	};
       if (currentSdlEvent.type==SDL_KEYUP)
 	{

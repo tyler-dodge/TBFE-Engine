@@ -3482,6 +3482,27 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_TBFE_initMap(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  TBFE *arg1 = (TBFE *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:TBFE_initMap",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TBFE, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TBFE_initMap" "', argument " "1"" of type '" "TBFE *""'"); 
+  }
+  arg1 = reinterpret_cast< TBFE * >(argp1);
+  (arg1)->initMap();
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_TBFE_runEngine(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   TBFE *arg1 = (TBFE *) 0 ;
@@ -4904,6 +4925,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"TBFE_createFile", _wrap_TBFE_createFile, METH_VARARGS, NULL},
 	 { (char *)"new_TBFE", _wrap_new_TBFE, METH_VARARGS, NULL},
 	 { (char *)"TBFE_changeMap", _wrap_TBFE_changeMap, METH_VARARGS, NULL},
+	 { (char *)"TBFE_initMap", _wrap_TBFE_initMap, METH_VARARGS, NULL},
 	 { (char *)"TBFE_runEngine", _wrap_TBFE_runEngine, METH_VARARGS, NULL},
 	 { (char *)"TBFE_addActor", _wrap_TBFE_addActor, METH_VARARGS, NULL},
 	 { (char *)"TBFE_removeActor", _wrap_TBFE_removeActor, METH_VARARGS, NULL},

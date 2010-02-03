@@ -19,42 +19,6 @@ enum Direction
     NORMAL,
     SECOND
   };
-enum Tools
-  {
-    HOE,
-    WATERING_CAN,
-    SICKLE,
-    HAMMER,
-    AXE,
-    SEEDS
-  };
-enum PStats
-  {
-    FATIGUE,
-    ENERGY,
-    HUNGER,
-    THIRST,
-    CLEANLINESS,
-    MONEY
-  };
-enum HairColor
-  {
-    BROWN,
-    GRAY,
-    BLACK,
-    BLONDE,
-    RED
-  };
-enum BodyParts
-  {
-    BODY=-1,
-    TORSO,
-    HAIR,
-    FACIAL_HAIR,
-    LEGS,
-    TOOL,
-    HEAD
-  };
 enum AI
   {
     STANDING,

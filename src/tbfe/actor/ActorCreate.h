@@ -12,6 +12,6 @@ extern Actor * createActor(int,int, std::string, std::string,std::string ActorNa
 extern void loadActors(std::string);
 extern void addActorType(std::string,std::string,std::string,std::string);
 extern int getActorType(std::string);
-extern void deleteCreatedActorList();
+extern void deleteCreatedActorList(bool deleteMainPlayer=true);
 extern Actor * getActor(int);
 #endif

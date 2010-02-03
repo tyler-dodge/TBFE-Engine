@@ -33,9 +33,13 @@ int Animation::getFrame()
     {
       return getFinalFrame();
     }
-  else if (currentFrame>frames_.size())
+  else if (currentFrame>=frames_.size())
     {
       currentFrame=0;
+    };
+  if (frames_.size()==0)
+    {
+      return 0;
     };
   Frame=frames_.at((int)currentFrame);
   return Frame;
