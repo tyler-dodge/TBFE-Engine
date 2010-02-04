@@ -134,9 +134,9 @@ int TBFE_Render::renderMapLayer(int x,int y, int Layer)
 {
     SDL_Rect TileRect;
     int TileNumber;
-    for (int mapY=y/TBFE_Base::TileSize;mapY<y/TBFE_Base::TileSize+TBFE_Base::ScreenDimensions.Y/TBFE_Base::TileSize+1;mapY++)
+    for (int mapY=y/TBFE_Base::TileSize;mapY<y/TBFE_Base::TileSize+TBFE_Base::ScreenDimensions.Y/TBFE_Base::TileSize+3;mapY++)
       {
-	for(int mapX=x/TBFE_Base::TileSize;mapX<x/TBFE_Base::TileSize+TBFE_Base::ScreenDimensions.X/TBFE_Base::TileSize+1;mapX++)
+	for(int mapX=x/TBFE_Base::TileSize;mapX<x/TBFE_Base::TileSize+TBFE_Base::ScreenDimensions.X/TBFE_Base::TileSize+3;mapX++)
 	  {
 	    Tile tile=TBFE_Base::CurrentMap.getTile(mapX,mapY,Layer);
 	    TileNumber=(int)tile.Type;
