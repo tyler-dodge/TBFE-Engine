@@ -10,7 +10,7 @@ bool loadWindows(std::string FileName)
   if (WindowData==NULL)
     {      
       cout << FileName << " failed to load\n";
-      TBFE_Base::MainConsole.errorMessage(0,FileName); 
+      TBFE_Base::MainConsole.errorMessage(0,FileName);
       return false;
     };
   bool EndLoop=false;

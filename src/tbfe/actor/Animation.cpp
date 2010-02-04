@@ -86,7 +86,7 @@ bool Animation::currentFramePlus()
 	}
       else
 	{
-	  currentFrame=0;
+	  currentFrame_=0;
 	};
     };
   return true;
