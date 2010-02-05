@@ -1,10 +1,10 @@
 #ifndef LUA_L
 #define LUA_L
 #endif
+#include <Python.h>
 #include <string>
 #include <iostream>
 #include <stdlib.h>
-#include <Python.h>
 using namespace std;
 extern "C"
 {

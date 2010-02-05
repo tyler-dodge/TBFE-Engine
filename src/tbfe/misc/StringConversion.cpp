@@ -1,6 +1,6 @@
 #include "StringConversion.h"
 template <class T> 
-inline std::string toString (const T& variable)
+std::string toString (const T& variable)
 {
   std::stringstream tempStream;
   tempStream << variable;
@@ -42,4 +42,15 @@ char nextChar(string * source)
   char currentChar=source->at(0);
   *source=source->substr(1);
   return currentChar;
+};
+string replaceString(string source, string targetText,string replaceText)
+{
+  int targetLoc=source.find(targetText);
+  if (targetLoc==string::npos)
+    {
+      return source;
+    };
+  source.erase(targetLoc,targetText.size());
+  source.insert(targetLoc,replaceText.c_str());
+  return source;
 };

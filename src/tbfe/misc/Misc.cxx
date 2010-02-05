@@ -3404,6 +3404,52 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_replaceString(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::string arg1 ;
+  std::string arg2 ;
+  std::string arg3 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  std::string result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:replaceString",&obj0,&obj1,&obj2)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    int res = SWIG_AsPtr_std_string(obj0, &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "replaceString" "', argument " "1"" of type '" "std::string""'"); 
+    }
+    arg1 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    int res = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "replaceString" "', argument " "2"" of type '" "std::string""'"); 
+    }
+    arg2 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    int res = SWIG_AsPtr_std_string(obj2, &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "replaceString" "', argument " "3"" of type '" "std::string""'"); 
+    }
+    arg3 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  result = replaceString(arg1,arg2,arg3);
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_new_Timer(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Timer *result = 0 ;
@@ -5917,6 +5963,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"loadString", _wrap_loadString, METH_VARARGS, NULL},
 	 { (char *)"nextSet", _wrap_nextSet, METH_VARARGS, NULL},
 	 { (char *)"nextChar", _wrap_nextChar, METH_VARARGS, NULL},
+	 { (char *)"replaceString", _wrap_replaceString, METH_VARARGS, NULL},
 	 { (char *)"new_Timer", _wrap_new_Timer, METH_VARARGS, NULL},
 	 { (char *)"Timer_Start", _wrap_Timer_Start, METH_VARARGS, NULL},
 	 { (char *)"Timer_GetTicks", _wrap_Timer_GetTicks, METH_VARARGS, NULL},

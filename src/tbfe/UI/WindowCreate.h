@@ -17,3 +17,4 @@ extern int getWindowType(std::string);
 extern Window * createWindow(int X,int Y, std::string WindowTypeName);
 extern void deleteWindowList();
 extern bool debug;
+extern int pyInterface;

@@ -203,10 +203,28 @@ void TBFE_Render::renderWindowList()
 	  NewWindow.x=0;
 	  NewWindow.y=0;
 	  NewWindow.w=window->getDimensions().X;
-	  NewWindow.h=window->getDimensions().Y;	
+	  NewWindow.h=window->getDimensions().Y;
+	  int segmentX=NewWindow.w/window_->w+1;
+	  int segmentY=NewWindow.h/window_->h+1;
 	  if (window->getShowBackground())
 	    {
-	      applyImage(windowPosition.X,windowPosition.Y,window_,screen_,&NewWindow);
+	      for (int y=0;y<segmentY;y++)
+		{
+		  for (int x=0;x<segmentX;x++)
+		    {
+		      NewWindow.w=window->getDimensions().X-x*window_->w;
+		      NewWindow.h=window->getDimensions().Y-y*window_->h;
+		      if (NewWindow.w>window_->w)
+			{
+			  NewWindow.w=window_->w;
+			};
+		      if (NewWindow.h>window_->h)
+			{
+			  NewWindow.h=window_->h;
+			};
+		      applyImage(windowPosition.X+x*window_->w,windowPosition.Y+y*window_->h,window_,screen_,&NewWindow);
+		    };
+		};
 	    };
 	  window->renderElements(screen_);
 	};

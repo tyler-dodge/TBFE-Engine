@@ -2507,12 +2507,13 @@ SWIG_Python_MustGetPtr(PyObject *obj, swig_type_info *ty, int argnum, int flags)
 #define SWIGTYPE_p_Position swig_types[3]
 #define SWIGTYPE_p_SDL_Surface swig_types[4]
 #define SWIGTYPE_p_StatBar swig_types[5]
-#define SWIGTYPE_p_Window swig_types[6]
-#define SWIGTYPE_p_WindowType swig_types[7]
-#define SWIGTYPE_p_char swig_types[8]
-#define SWIGTYPE_p_vectorT_WindowType_t swig_types[9]
-static swig_type_info *swig_types[11];
-static swig_module_info swig_module = {swig_types, 10, 0, 0, 0, 0};
+#define SWIGTYPE_p_TextBox swig_types[6]
+#define SWIGTYPE_p_Window swig_types[7]
+#define SWIGTYPE_p_WindowType swig_types[8]
+#define SWIGTYPE_p_char swig_types[9]
+#define SWIGTYPE_p_vectorT_WindowType_t swig_types[10]
+static swig_type_info *swig_types[12];
+static swig_module_info swig_module = {swig_types, 11, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -2613,6 +2614,7 @@ namespace swig {
 #include "StatBar.cpp"
 #include "ImageBox.cpp"
 #include "WindowCreate.cpp"
+#include "TextBox.cpp"
 
 
 #include <limits.h>
@@ -4502,6 +4504,167 @@ SWIGINTERN PyObject *Swig_var_debug_get(void) {
 }
 
 
+SWIGINTERN int Swig_var_pyInterface_set(PyObject *_val) {
+  {
+    int val;
+    int res = SWIG_AsVal_int(_val, &val);
+    if (!SWIG_IsOK(res)) {
+      SWIG_exception_fail(SWIG_ArgError(res), "in variable '""pyInterface""' of type '""int""'");
+    }
+    pyInterface = static_cast< int >(val);
+  }
+  return 0;
+fail:
+  return 1;
+}
+
+
+SWIGINTERN PyObject *Swig_var_pyInterface_get(void) {
+  PyObject *pyobj = 0;
+  
+  pyobj = SWIG_From_int(static_cast< int >(pyInterface));
+  return pyobj;
+}
+
+
+SWIGINTERN PyObject *_wrap_TextBox_renderElement(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  TextBox *arg1 = (TextBox *) 0 ;
+  SDL_Surface *arg2 = (SDL_Surface *) 0 ;
+  Position arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:TextBox_renderElement",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TextBox, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TextBox_renderElement" "', argument " "1"" of type '" "TextBox *""'"); 
+  }
+  arg1 = reinterpret_cast< TextBox * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_SDL_Surface, 0 |  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TextBox_renderElement" "', argument " "2"" of type '" "SDL_Surface *""'"); 
+  }
+  arg2 = reinterpret_cast< SDL_Surface * >(argp2);
+  {
+    res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_Position,  0  | 0);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "TextBox_renderElement" "', argument " "3"" of type '" "Position""'"); 
+    }  
+    if (!argp3) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TextBox_renderElement" "', argument " "3"" of type '" "Position""'");
+    } else {
+      Position * temp = reinterpret_cast< Position * >(argp3);
+      arg3 = *temp;
+      if (SWIG_IsNewObj(res3)) delete temp;
+    }
+  }
+  (arg1)->renderElement(arg2,arg3);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_TextBox(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  std::string arg3 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  TextBox *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:new_TextBox",&obj0,&obj1,&obj2)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(obj0, &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_TextBox" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_TextBox" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    std::string *ptr = (std::string *)0;
+    int res = SWIG_AsPtr_std_string(obj2, &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "new_TextBox" "', argument " "3"" of type '" "std::string""'"); 
+    }
+    arg3 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  result = (TextBox *)new TextBox(arg1,arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_TextBox, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_TextBox(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  TextBox *arg1 = (TextBox *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_TextBox",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TextBox, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_TextBox" "', argument " "1"" of type '" "TextBox *""'"); 
+  }
+  arg1 = reinterpret_cast< TextBox * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TextBox_reload(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  TextBox *arg1 = (TextBox *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:TextBox_reload",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TextBox, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TextBox_reload" "', argument " "1"" of type '" "TextBox *""'"); 
+  }
+  arg1 = reinterpret_cast< TextBox * >(argp1);
+  (arg1)->reload();
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *TextBox_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_TextBox, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_Window", _wrap_new_Window, METH_VARARGS, NULL},
 	 { (char *)"delete_Window", _wrap_delete_Window, METH_VARARGS, NULL},
@@ -4553,6 +4716,11 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"getWindowType", _wrap_getWindowType, METH_VARARGS, NULL},
 	 { (char *)"createWindow", _wrap_createWindow, METH_VARARGS, NULL},
 	 { (char *)"deleteWindowList", _wrap_deleteWindowList, METH_VARARGS, NULL},
+	 { (char *)"TextBox_renderElement", _wrap_TextBox_renderElement, METH_VARARGS, NULL},
+	 { (char *)"new_TextBox", _wrap_new_TextBox, METH_VARARGS, NULL},
+	 { (char *)"delete_TextBox", _wrap_delete_TextBox, METH_VARARGS, NULL},
+	 { (char *)"TextBox_reload", _wrap_TextBox_reload, METH_VARARGS, NULL},
+	 { (char *)"TextBox_swigregister", TextBox_swigregister, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
@@ -4561,6 +4729,9 @@ static PyMethodDef SwigMethods[] = {
 
 static void *_p_ImageBoxTo_p_Element(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((Element *)  ((ImageBox *) x));
+}
+static void *_p_TextBoxTo_p_Element(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((Element *)  ((TextBox *) x));
 }
 static void *_p_StatBarTo_p_Element(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((Element *)  ((StatBar *) x));
@@ -4574,6 +4745,7 @@ static swig_type_info _swigt__p_Label = {"_p_Label", "Label *", 0, 0, (void*)0, 
 static swig_type_info _swigt__p_Position = {"_p_Position", "Position *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_SDL_Surface = {"_p_SDL_Surface", "SDL_Surface *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_StatBar = {"_p_StatBar", "StatBar *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_TextBox = {"_p_TextBox", "TextBox *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Window = {"_p_Window", "Window *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_WindowType = {"_p_WindowType", "WindowType *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
@@ -4586,18 +4758,20 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_Position,
   &_swigt__p_SDL_Surface,
   &_swigt__p_StatBar,
+  &_swigt__p_TextBox,
   &_swigt__p_Window,
   &_swigt__p_WindowType,
   &_swigt__p_char,
   &_swigt__p_vectorT_WindowType_t,
 };
 
-static swig_cast_info _swigc__p_Element[] = {  {&_swigt__p_Element, 0, 0, 0},  {&_swigt__p_ImageBox, _p_ImageBoxTo_p_Element, 0, 0},  {&_swigt__p_StatBar, _p_StatBarTo_p_Element, 0, 0},  {&_swigt__p_Label, _p_LabelTo_p_Element, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Element[] = {  {&_swigt__p_Element, 0, 0, 0},  {&_swigt__p_ImageBox, _p_ImageBoxTo_p_Element, 0, 0},  {&_swigt__p_TextBox, _p_TextBoxTo_p_Element, 0, 0},  {&_swigt__p_StatBar, _p_StatBarTo_p_Element, 0, 0},  {&_swigt__p_Label, _p_LabelTo_p_Element, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_ImageBox[] = {  {&_swigt__p_ImageBox, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Label[] = {  {&_swigt__p_Label, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Position[] = {  {&_swigt__p_Position, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_SDL_Surface[] = {  {&_swigt__p_SDL_Surface, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_StatBar[] = {  {&_swigt__p_StatBar, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_TextBox[] = {  {&_swigt__p_TextBox, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Window[] = {  {&_swigt__p_Window, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_WindowType[] = {  {&_swigt__p_WindowType, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
@@ -4610,6 +4784,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_Position,
   _swigc__p_SDL_Surface,
   _swigc__p_StatBar,
+  _swigc__p_TextBox,
   _swigc__p_Window,
   _swigc__p_WindowType,
   _swigc__p_char,
@@ -5146,5 +5321,6 @@ SWIGEXPORT void SWIG_init(void) {
   PyDict_SetItemString(d,(char*)"cvar", SWIG_globals());
   SWIG_addvarlink(SWIG_globals(),(char*)"windowTypeList",Swig_var_windowTypeList_get, Swig_var_windowTypeList_set);
   SWIG_addvarlink(SWIG_globals(),(char*)"debug",Swig_var_debug_get, Swig_var_debug_set);
+  SWIG_addvarlink(SWIG_globals(),(char*)"pyInterface",Swig_var_pyInterface_get, Swig_var_pyInterface_set);
 }
 

@@ -1,27 +1,51 @@
 #include "TextBox.h"
-TextBox::TextBox(int x,int y,string text):Element_Base(x,y)
+TextBox::TextBox(int x,int y,string text):Element(x,y)
 {
-  textColor.r=255;
-  textColor.g=255;
-  textColor.b=255;
-  Special=text;
-  Text=TTF_RenderText_Solid(TBFE_Base::font,Special.c_str(),textColor);
-  Special=text;
-  Dimensions.X=Text->w;
-  Dimensions.Y=Text->h;
+  setProperty("text",nextSet(&text,'('));
+  setProperty("width",nextSet(&text,','));
+  setProperty("height",nextSet(&text,')'));
+  textColor_.r=255;
+  textColor_.g=255;
+  textColor_.b=255;
+  text_=TTF_RenderText_Solid(TBFE_Base::GetFont(),getProperty("text").c_str(),textColor_);
+  int width=atoi(getProperty("width").c_str());
+  if (text_->w>width)
+    {
+      int textPt=0;
+      for (int i=0;i<text_->w/width;i++)
+	{
+	  SDL_Surface * wordWrap;
+	  stringstream textSegment;
+	  int textSize=0;
+	  while (textSize<width && textPt<getProperty("text").size())
+	    {
+	      int increase=0;
+	      if (TBFE_Base::GetFont()!=NULL)
+		{
+		  TTF_GlyphMetrics(TBFE_Base::GetFont(),' ',NULL,NULL,NULL,NULL,&increase);
+		};
+	      textSize+=increase;
+	      textSegment << getProperty("text")[textPt];	
+	      textPt++;
+	    };
+	  wordWrap=TTF_RenderText_Solid(TBFE_Base::GetFont(),textSegment.str().c_str(),textColor_);
+	  applyImage(0,wordWrap->h*i,wordWrap,text_);
+	  SDL_FreeSurface(wordWrap);
+	};
+    };
+  setDimensions(atoi(getProperty("width").c_str()),atoi(getProperty("height").c_str()));
 };
 TextBox::~TextBox()
 {
-  SDL_FreeSurface(Text);
+  SDL_FreeSurface(text_);
 };
-void TextBox::Reload()
+void TextBox::reload()
 {
-  SDL_FreeSurface(Text);
-  Text=TTF_RenderText_Solid(TBFE_Base::font,Special.c_str(),textColor);
-  Dimensions.X=Text->w;
-  Dimensions.Y=Text->h;
+  SDL_FreeSurface(text_);
+  text_=TTF_RenderText_Solid(TBFE_Base::GetFont(),getProperty("text").c_str(),textColor_);
 };
-void TextBox::RenderElement(SDL_Surface * screen, Position ScreenPosition)
+void TextBox::renderElement(SDL_Surface * screen, Position ScreenPosition)
 {
-  ApplyImage(ScreenPosition.X+CurrentPosition.X,ScreenPosition.Y+CurrentPosition.Y,Text,screen,NULL);
+  Position CurrentPosition=getPosition();
+  applyImage(ScreenPosition.X+CurrentPosition.X,ScreenPosition.Y+CurrentPosition.Y,text_,screen,NULL);
 };

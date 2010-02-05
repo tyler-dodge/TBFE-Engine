@@ -163,6 +163,25 @@ addWindowType = _UI.addWindowType
 getWindowType = _UI.getWindowType
 createWindow = _UI.createWindow
 deleteWindowList = _UI.deleteWindowList
-
+class TextBox(Element):
+    __swig_setmethods__ = {}
+    for _s in [Element]: __swig_setmethods__.update(getattr(_s,'__swig_setmethods__',{}))
+    __setattr__ = lambda self, name, value: _swig_setattr(self, TextBox, name, value)
+    __swig_getmethods__ = {}
+    for _s in [Element]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
+    __getattr__ = lambda self, name: _swig_getattr(self, TextBox, name)
+    __repr__ = _swig_repr
+    def renderElement(*args): return _UI.TextBox_renderElement(*args)
+    def __init__(self, *args): 
+        this = _UI.new_TextBox(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    __swig_destroy__ = _UI.delete_TextBox
+    __del__ = lambda self : None;
+    def reload(*args): return _UI.TextBox_reload(*args)
+TextBox_swigregister = _UI.TextBox_swigregister
+TextBox_swigregister(TextBox)
 cvar = _UI.cvar
+
+
 

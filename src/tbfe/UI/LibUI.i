@@ -8,6 +8,7 @@
 #include "StatBar.cpp"
 #include "ImageBox.cpp"
 #include "WindowCreate.cpp"
+#include "TextBox.cpp"
 %}
 %include "Window.h"
 %include "Element.h"
@@ -15,3 +16,4 @@
 %include "StatBar.h"
 %include "ImageBox.h"
 %include "WindowCreate.h"
+%include "TextBox.h"

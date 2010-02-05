@@ -52,6 +52,7 @@ getPixel = _Misc.getPixel
 loadString = _Misc.loadString
 nextSet = _Misc.nextSet
 nextChar = _Misc.nextChar
+replaceString = _Misc.replaceString
 class Timer(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, Timer, name, value)
