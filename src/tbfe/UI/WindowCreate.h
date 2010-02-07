@@ -10,6 +10,7 @@
 #include "StatBar.h"
 #include "Label.h"
 #include "ImageBox.h"
+#include "TextBox.h"
 extern vector<WindowType> windowTypeList;
 extern bool loadWindows(std::string);
 extern void addWindowType(WindowType);

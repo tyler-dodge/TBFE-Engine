@@ -185,6 +185,12 @@ Window * createWindow(int X,int Y, std::string WindowTypeName)
 				  windowTypeList[WindowTypeNum].Elements[i].ElementPosition.Y,
 				  windowTypeList[WindowTypeNum].Elements[i].Special);
 	};
+      if (Type=="TextBox")
+	{
+	  NewElement=new TextBox(windowTypeList[WindowTypeNum].Elements[i].ElementPosition.X,
+				  windowTypeList[WindowTypeNum].Elements[i].ElementPosition.Y,
+				  windowTypeList[WindowTypeNum].Elements[i].Special);
+	};
       if (NewElement!=NULL)
 	{
 	  NewElement->setName(windowTypeList[WindowTypeNum].Elements[i].Name);

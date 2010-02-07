@@ -4,8 +4,9 @@
 class TextBox:public Element
 {
  private:
-  SDL_Surface * text_;
+  vector<SDL_Surface *> text_;
   SDL_Color textColor_;
+  void wordWrap();
  public:
   void renderElement(SDL_Surface *, Position);
   TextBox(int,int,string);
