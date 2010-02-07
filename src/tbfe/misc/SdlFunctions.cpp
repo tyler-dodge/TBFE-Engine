@@ -31,7 +31,7 @@ void applyImage(int x,int y,SDL_Surface* source,SDL_Surface* target, SDL_Rect* c
   SDL_Rect offset;
   offset.x=x;
   offset.y=y;
-  if (clip!=NULL)
+  if (clip!=NULL && source!=NULL)
     {
       if (clip->x+clip->w > source->w || clip->y+clip->h > source->h)
 	{

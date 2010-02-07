@@ -4,6 +4,10 @@ TBFE_Render::TBFE_Render()
 {
   lightingPercentage_=20;
   TTF_Init();
+  if (SDL_WasInit(SDL_INIT_VIDEO)==0)
+    {
+      SDL_Init(SDL_INIT_VIDEO);
+    };
   TBFE_Base::font=TTF_OpenFont("Images/UI/font.ttf",12);
   textColor_.r=255;
   textColor_.g=255;
@@ -12,7 +16,7 @@ TBFE_Render::TBFE_Render()
   collision_=TBFE_Base::CheckSheets("Images/UI/Collision.png");
   darkness_=TBFE_Base::CheckSheets("Images/Darkness.png");
   changeLighting(10);
-  window_=TBFE_Base::CheckSheets("Images/UI/Window.png");
+  window_=SDL_CreateRGBSurface(SDL_HWSURFACE,100,100,32,0,0,0,100);
   TBFE_Base::CollisionTile=TBFE_Base::CheckSheets("Tile.png");
 };
 void TBFE_Render::init()
@@ -91,7 +95,7 @@ void TBFE_Render::finalRender(bool doFlip)
   Dark.w=TBFE_Base::ScreenDimensions.X;
   Dark.h=TBFE_Base::ScreenDimensions.Y;
   applyImage(0,0,darkness_,screen_,&Dark);
-  if (doFlip)
+  if (doFlip && SDL_WasInit(SDL_INIT_VIDEO)!=0)
     {
       SDL_Flip(screen_);
     };

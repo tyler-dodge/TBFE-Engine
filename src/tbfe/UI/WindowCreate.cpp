@@ -6,7 +6,7 @@ bool debug;
 int pyInterface=0;
 bool loadWindows(std::string FileName)
 { 
-
+  debug=true;
   ifstream WindowData(FileName.c_str(),ifstream::binary);
   if (WindowData==NULL)
     {      

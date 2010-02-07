@@ -4,19 +4,19 @@ import Tbfe
 import Misc
 import UI
 import Actor
-Tbfe.cvar.ScreenDimensions.X=1680
-Tbfe.cvar.ScreenDimensions.Y=1050
-test=Tbfe.TBFE()
+Tbfe.cvar.ScreenDimensions.X=1440
+Tbfe.cvar.ScreenDimensions.Y=900
+engine=Tbfe.TBFE()
 Tbfe.GetMainPlayer().setPosition(100,100)
-test.changeMap("test.fmm")
-test.initMap()
+engine.changeMap("test.fmm")
+Tbfe.cvar.CurrentMap.generateMap(25,25)
+engine.initMap()
+print("test")
 UI.loadWindows("Data/Types/Window.cfg")
-Console=UI.createWindow(0,0,"Console");
-test.addWindow(Console)
+Console=UI.createWindow(0,0,"Console")
+engine.addWindow(Console)
 action=5
 i=0
 while action!=Misc.QUIT:
-    action=test.runEngine()
+    action=engine.runEngine()
     i+=1
-    
-
