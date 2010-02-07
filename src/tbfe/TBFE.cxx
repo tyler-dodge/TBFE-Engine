@@ -4423,6 +4423,39 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_Console_evalExpression(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Console *arg1 = (Console *) 0 ;
+  std::string arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  int result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Console_evalExpression",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Console, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Console_evalExpression" "', argument " "1"" of type '" "Console *""'"); 
+  }
+  arg1 = reinterpret_cast< Console * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    int res = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "Console_evalExpression" "', argument " "2"" of type '" "std::string""'"); 
+    }
+    arg2 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  result = (int)(arg1)->evalExpression(arg2);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_Console_runLine(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Console *arg1 = (Console *) 0 ;
@@ -4534,6 +4567,27 @@ SWIGINTERN PyObject *_wrap_Console_getNumberOfLines(PyObject *SWIGUNUSEDPARM(sel
   arg1 = reinterpret_cast< Console * >(argp1);
   result = (int)(arg1)->getNumberOfLines();
   resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Console_setPyInterface(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Console_setPyInterface",&obj0)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(obj0, &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "Console_setPyInterface" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  Console::setPyInterface(arg1);
+  resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
   return NULL;
@@ -4960,10 +5014,12 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"delete_Console", _wrap_delete_Console, METH_VARARGS, NULL},
 	 { (char *)"Console_write", _wrap_Console_write, METH_VARARGS, NULL},
 	 { (char *)"Console_errorMessage", _wrap_Console_errorMessage, METH_VARARGS, NULL},
+	 { (char *)"Console_evalExpression", _wrap_Console_evalExpression, METH_VARARGS, NULL},
 	 { (char *)"Console_runLine", _wrap_Console_runLine, METH_VARARGS, NULL},
 	 { (char *)"Console_execute", _wrap_Console_execute, METH_VARARGS, NULL},
 	 { (char *)"Console_getLine", _wrap_Console_getLine, METH_VARARGS, NULL},
 	 { (char *)"Console_getNumberOfLines", _wrap_Console_getNumberOfLines, METH_VARARGS, NULL},
+	 { (char *)"Console_setPyInterface", _wrap_Console_setPyInterface, METH_VARARGS, NULL},
 	 { (char *)"Console_swigregister", Console_swigregister, METH_VARARGS, NULL},
 	 { (char *)"SunVector_CurrentPositionX_set", _wrap_SunVector_CurrentPositionX_set, METH_VARARGS, NULL},
 	 { (char *)"SunVector_CurrentPositionX_get", _wrap_SunVector_CurrentPositionX_get, METH_VARARGS, NULL},

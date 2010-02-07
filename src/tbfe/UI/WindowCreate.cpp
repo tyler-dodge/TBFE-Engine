@@ -4,13 +4,6 @@ vector<WindowType> windowTypeList;
 vector<Window *> CreatedWindowList;
 bool debug;
 int pyInterface=0;
-int evalExpression(string expression)
-{
-  stringstream newData;
-  newData << "UI.cvar.pyInterface=" << expression;
-  PyRun_SimpleString(newData.str().c_str());
-  return pyInterface;
-};
 bool loadWindows(std::string FileName)
 { 
 
@@ -55,7 +48,7 @@ bool loadWindows(std::string FileName)
 	    };
 	  return false;
 	};
-      NewWindow.Width=evalExpression(Data);
+      NewWindow.Width=TBFE_Base::MainConsole.evalExpression(Data);
       
       Data=loadString(&WindowData,')');
       if (Data=="")
@@ -67,7 +60,7 @@ bool loadWindows(std::string FileName)
 	    };
 	  return false;
 	};
-      NewWindow.Height=evalExpression(Data);
+      NewWindow.Height=TBFE_Base::MainConsole.evalExpression(Data);
 
       NewWindow.Elements.resize(ElementNumber); 
       for (int i=0;i<ElementNumber;i++)
@@ -112,7 +105,7 @@ bool loadWindows(std::string FileName)
 		};
 	      return false;
 	    };
-	  NewWindow.Elements[i].ElementPosition.X=evalExpression(ElementData);
+	  NewWindow.Elements[i].ElementPosition.X=TBFE_Base::MainConsole.evalExpression(ElementData);
 	  
 	  ElementData=loadString(&WindowData,')');
 	  if (ElementData=="")
@@ -124,7 +117,7 @@ bool loadWindows(std::string FileName)
 		};
 	      return false;
 	    };
-	  NewWindow.Elements[i].ElementPosition.Y=evalExpression(ElementData);
+	  NewWindow.Elements[i].ElementPosition.Y=TBFE_Base::MainConsole.evalExpression(ElementData);
 	  
 	  ElementData=loadString(&WindowData,',');
 	  NewWindow.Elements[i].Special=ElementData;

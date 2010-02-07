@@ -6,6 +6,7 @@ Console::Console()
 Console::~Console()
 {
 };
+int Console::pyInterface_=0;
 void Console::errorMessage(int ErrorNumber,string Item)
 {
   stringstream Message;
@@ -21,6 +22,14 @@ void Console::errorMessage(int ErrorNumber,string Item)
       write(Message.str());
       break;      
     };
+};
+int Console::evalExpression(string expression)
+{
+  //not thread safe
+  stringstream newData;
+  newData << "Tbfe.Console.setPyInterface(" << expression << ")";
+  PyRun_SimpleString(newData.str().c_str());
+  return pyInterface_;
 };
 int Console::write(string text)
 {
@@ -53,4 +62,8 @@ string Console::getLine(int lineNum)
 int Console::getNumberOfLines()
 {
   return lines_.size();
+};
+void Console::setPyInterface(int newNum)
+{
+  pyInterface_=newNum;
 };

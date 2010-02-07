@@ -146,12 +146,16 @@ class Console(_object):
     __del__ = lambda self : None;
     def write(*args): return _TBFE.Console_write(*args)
     def errorMessage(*args): return _TBFE.Console_errorMessage(*args)
+    def evalExpression(*args): return _TBFE.Console_evalExpression(*args)
     def runLine(*args): return _TBFE.Console_runLine(*args)
     def execute(*args): return _TBFE.Console_execute(*args)
     def getLine(*args): return _TBFE.Console_getLine(*args)
     def getNumberOfLines(*args): return _TBFE.Console_getNumberOfLines(*args)
+    __swig_getmethods__["setPyInterface"] = lambda x: _TBFE.Console_setPyInterface
+    if _newclass:setPyInterface = staticmethod(_TBFE.Console_setPyInterface)
 Console_swigregister = _TBFE.Console_swigregister
 Console_swigregister(Console)
+Console_setPyInterface = _TBFE.Console_setPyInterface
 
 class SunVector(_object):
     __swig_setmethods__ = {}
