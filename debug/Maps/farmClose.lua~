@@ -1,9 +1,0 @@
-Test=nil
-Door=nil
-Bed=nil
-Fridge=nil
-Counter=nil
-Sink=nil
-Silo=nil
-print("test")
-collectgarbage()
