@@ -13,7 +13,9 @@ TBFE_Render::TBFE_Render()
   textColor_.g=255;
   textColor_.b=255;
   screen_=SDL_SetVideoMode(TBFE_Base::ScreenDimensions.X,TBFE_Base::ScreenDimensions.Y,32,SDL_HWSURFACE|SDL_FULLSCREEN|SDL_DOUBLEBUF);
+  cout << "test:" << screen_ << ":" << TBFE_Base::ScreenDimensions.X << ":" << TBFE_Base::ScreenDimensions.Y << "\n";
   collision_=TBFE_Base::CheckSheets("Images/UI/Collision.png");
+  cout << "collision:" << collision_ << "\n";
   darkness_=TBFE_Base::CheckSheets("Images/Darkness.png");
   changeLighting(10);
   window_=SDL_CreateRGBSurface(SDL_HWSURFACE,100,100,32,0,0,0,100);
@@ -97,6 +99,7 @@ void TBFE_Render::finalRender(bool doFlip)
   applyImage(0,0,darkness_,screen_,&Dark);
   if (doFlip && SDL_WasInit(SDL_INIT_VIDEO)!=0)
     {
+      cout << screen_ << "\n";
       SDL_Flip(screen_);
     };
 };
