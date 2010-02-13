@@ -39,9 +39,7 @@ void Console::runLine(string Line)
 {
   if (Line!="")
     {
-      //if (PyRun_SimpleString(Line.c_str()))
-      //{
-      //};
+      PyRun_SimpleString(Line.c_str());
     };
 };
 void Console::execute(string filename)

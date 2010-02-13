@@ -10,11 +10,16 @@ Window::Window(int width, int height, int positionX, int positionY, string Image
   setDimensions(width,height);
   setScreenPosition(positionX,positionY);
   setShowBackground(true);
+  if (border_==NULL)
+    {
+      border_=TBFE_Base::CheckSheets("border.png");
+    };
 };
 Window::~Window()
 {
 };
-Element * Window::selectElement(std::string Name)
+SDL_Surface * Window::border_=NULL;
+Element * Window::getElement(std::string Name)
 {
   for (int i=0;i<elements_.size();i++)
     {
@@ -34,6 +39,56 @@ void Window::renderElements(SDL_Surface * screen)
 	  if (elements_.at(i)->getVisibility()==true)
 	    {
 	      elements_.at(i)->renderElement(screen,getScreenPosition());
+	    };
+	  if (elements_.at(i)->getProperty("border")=="1")
+	    {
+	      Position elementDimensions=elements_.at(i)->getDimensions();
+	      Position elementPosition=elements_.at(i)->getPosition();
+	      if (border_!=NULL)
+		{
+		  for (int x=-2;x<elementDimensions.X+2;x+=border_->w)
+		    {
+		      SDL_Rect rect;
+		      rect.x=0;
+		      rect.y=0;
+		      if (elementDimensions.X+2-x<border_->w)
+			{
+			  rect.w=elementDimensions.X+2-x;
+			}
+		      else
+			{
+			  rect.w=border_->w;
+			};
+		      rect.h=1;
+		      //if (elementDimensions.Y-y<border_->h)
+		      //	{
+		      //	  rect.h=elementDimensions.Y-y;
+		      //	}
+		      //else
+		      //	{
+		      //	  rect.h=border_->h;
+		      //	};
+		      applyImage(screenPosition_.X+elementPosition.X+x,screenPosition_.Y+elementPosition.Y-2,border_,screen,&rect);
+		      applyImage(screenPosition_.X+elementPosition.X+x,screenPosition_.Y+elementPosition.Y+elementDimensions.Y+2,border_,screen,&rect);
+		    };
+		  for (int y=-2;y<elementDimensions.Y+2;y+=border_->h)
+		    {
+		      SDL_Rect rect;
+		      rect.x=0;
+		      rect.y=0;
+		      if (elementDimensions.Y+2-y<border_->h)
+			{
+			  rect.h=elementDimensions.Y+2-y;
+			}
+		      else
+			{
+			  rect.h=border_->h;
+			};
+		      rect.w=1;
+		      applyImage(screenPosition_.X+elementPosition.X-2,screenPosition_.Y+elementPosition.Y+y,border_,screen,&rect);
+		      applyImage(screenPosition_.X+elementPosition.X+elementDimensions.X+2,screenPosition_.Y+elementPosition.Y+y,border_,screen,&rect);
+		    };
+		};
 	    };
 	};
     };

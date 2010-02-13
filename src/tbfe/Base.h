@@ -30,5 +30,9 @@ namespace TBFE_Base
   extern void SetCollisionTile(SDL_Surface *);
   extern Actor * GetMainPlayer();
   extern void SetMainPlayer(Actor *);
+  extern Element * GetKeyTarget();
+  extern void SetKeyTarget(Element *);
+  extern Window * getWindowByNum(int);
+  extern int getWindowNum(Window *);
 }
 #endif

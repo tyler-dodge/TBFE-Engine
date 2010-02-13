@@ -29,11 +29,20 @@ void Label::reload()
     }
   else
     {
-      setDimensions(0,0);
+      setDimensions(0,15);
     };
+  currentText_=getProperty("text");
 };
 void Label::renderElement(SDL_Surface * screen, Position ScreenPosition)
 {
+  if (currentText_!=getProperty("text"))
+    {
+      reload();
+    };
+  if (getProperty("width")!="")
+    {
+      setDimensions(atoi(getProperty("width").c_str()),getDimensions().Y);
+    };
   Position currentPosition=getPosition();
   applyImage(ScreenPosition.X+currentPosition.X,ScreenPosition.Y+currentPosition.Y,text_,screen,NULL);
 };

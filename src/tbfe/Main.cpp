@@ -178,6 +178,9 @@ void TBFE::checkEvents()
 		  && mouseState==1 && mouseDown_==false
 		  )
 		{
+		  stringstream windowString;
+		  windowString << "elementTarget=Tbfe.getWindowByNum(" << TBFE_Base::getWindowNum(currentEvent.Parent) << ")";
+		  TBFE_Base::MainConsole.runLine(windowString.str().c_str());
 		  TBFE_Base::MainConsole.runLine(currentEvent.Function.c_str());
 		};
 	      break;
@@ -318,4 +321,8 @@ Direction TBFE::runEngine()
       return QUIT;
     };
   return NORMAL;
+};
+Position TBFE::getMousePosition()
+{
+  return mousePosition_;
 };

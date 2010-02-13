@@ -61,6 +61,10 @@ GetCollisionTile = _TBFE.GetCollisionTile
 SetCollisionTile = _TBFE.SetCollisionTile
 GetMainPlayer = _TBFE.GetMainPlayer
 SetMainPlayer = _TBFE.SetMainPlayer
+GetKeyTarget = _TBFE.GetKeyTarget
+SetKeyTarget = _TBFE.SetKeyTarget
+getWindowByNum = _TBFE.getWindowByNum
+getWindowNum = _TBFE.getWindowNum
 class TBFE(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, TBFE, name, value)
@@ -82,6 +86,7 @@ class TBFE(_object):
     def addTileSet(*args): return _TBFE.TBFE_addTileSet(*args)
     def addEvent(*args): return _TBFE.TBFE_addEvent(*args)
     def selectEvent(*args): return _TBFE.TBFE_selectEvent(*args)
+    def getMousePosition(*args): return _TBFE.TBFE_getMousePosition(*args)
     def addGlobalEvent(*args): return _TBFE.TBFE_addGlobalEvent(*args)
     __swig_destroy__ = _TBFE.delete_TBFE
     __del__ = lambda self : None;

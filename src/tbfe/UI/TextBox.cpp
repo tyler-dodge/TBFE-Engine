@@ -3,6 +3,7 @@ TextBox::TextBox(int x,int y,string text):Element(x,y)
 {
   setProperty("text",nextSet(&text,'('));
   setProperty("scrollY","0");
+  setProperty("border","1");
   string xValue=nextSet(&text,';');
   setDimensions(TBFE_Base::MainConsole.evalExpression(xValue),TBFE_Base::MainConsole.evalExpression(nextSet(&text,')')));
   textColor_.r=255;
@@ -41,12 +42,20 @@ void TextBox::wordWrap()
 	      endLine=true;
 	      textPt++;
 	    }
+	  else if (getProperty("text")[textPt]=='\n')
+	    {
+	      endLine=true;
+	    }
 	  else
 	    {
 	      textSize+=increase;
 	      textSegment << getProperty("text")[textPt];
 	    };
 	  textPt++;
+	};
+      if (textSegment.str()=="")
+	{
+	  textSegment << " ";
 	};
       text_.push_back(TTF_RenderText_Solid(TBFE_Base::GetFont(),textSegment.str().c_str(),textColor_));
     };
@@ -88,15 +97,15 @@ void TextBox::renderElement(SDL_Surface * screen, Position ScreenPosition)
 	{
 	  textDimensions.y=scrollY-(scrollY/text_.at(0)->h)*text_.at(0)->h;
 	};
-      if (text_.at(i)->h*i-scrollY>getDimensions().Y)
+      if (text_.at(i)->h*(i+1)-scrollY>getDimensions().Y)
 	{
 	  lastLine=true;
-	  textDimensions.h=text_.at(i)->h*i-scrollY-getDimensions().Y;
+	  textDimensions.h+=getDimensions().Y-(text_.at(i)->h*(i+1)-scrollY);
 	  if (textDimensions.h<0)
 	    {
 	      return;
 	    };
 	};
-      applyImage(ScreenPosition.X+CurrentPosition.X,ScreenPosition.Y+CurrentPosition.Y+text_.at(i)->h*i,text_.at(i),screen,&textDimensions);
+      applyImage(ScreenPosition.X+CurrentPosition.X,ScreenPosition.Y+CurrentPosition.Y+text_.at(i)->h*i-scrollY,text_.at(i),screen,&textDimensions);
     };
 };

@@ -45,6 +45,7 @@ class TBFE
   bool addTileSet(std::string);
   void addEvent(std::string,Element *, Window *,std::string,Event);
   EventType * selectEvent(std::string);
+  Position getMousePosition();
   void addGlobalEvent(std::string,Event, int,std::string);
   ~TBFE();
 };

@@ -99,4 +99,32 @@ namespace TBFE_Base
 	MainPlayer=newMainPlayer;
       };
   };
+  Element * GetKeyTarget()
+  {
+    return KeyTarget;
+  };
+  void SetKeyTarget(Element * newTarget)
+  {
+    KeyTarget=newTarget;
+  };
+  
+  Window * getWindowByNum(int windowNum)
+  {
+    if (WindowList.size()<windowNum || windowNum<0)
+      {
+	return NULL;
+      };
+    return WindowList.at(windowNum);
+  };
+  int getWindowNum(Window * targetWindow)
+  {
+    for (int i=0;i<WindowList.size();i++)
+      {
+	if (WindowList.at(i)==targetWindow)
+	  {
+	    return i;
+	  };
+      };
+    return -1;
+  };
 };

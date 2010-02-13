@@ -3404,6 +3404,84 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_GetKeyTarget(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Element *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":GetKeyTarget")) SWIG_fail;
+  result = (Element *)TBFE_Base::GetKeyTarget();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Element, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SetKeyTarget(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Element *arg1 = (Element *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:SetKeyTarget",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Element, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SetKeyTarget" "', argument " "1"" of type '" "Element *""'"); 
+  }
+  arg1 = reinterpret_cast< Element * >(argp1);
+  TBFE_Base::SetKeyTarget(arg1);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_getWindowByNum(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  PyObject * obj0 = 0 ;
+  Window *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:getWindowByNum",&obj0)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(obj0, &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "getWindowByNum" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  result = (Window *)TBFE_Base::getWindowByNum(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Window, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_getWindowNum(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Window *arg1 = (Window *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  int result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:getWindowNum",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Window, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "getWindowNum" "', argument " "1"" of type '" "Window *""'"); 
+  }
+  arg1 = reinterpret_cast< Window * >(argp1);
+  result = (int)TBFE_Base::getWindowNum(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_TBFE_createFile(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   TBFE *arg1 = (TBFE *) 0 ;
@@ -3784,6 +3862,28 @@ SWIGINTERN PyObject *_wrap_TBFE_selectEvent(PyObject *SWIGUNUSEDPARM(self), PyOb
   }
   result = (EventType *)(arg1)->selectEvent(arg2);
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_EventType, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TBFE_getMousePosition(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  TBFE *arg1 = (TBFE *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  Position result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:TBFE_getMousePosition",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TBFE, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TBFE_getMousePosition" "', argument " "1"" of type '" "TBFE *""'"); 
+  }
+  arg1 = reinterpret_cast< TBFE * >(argp1);
+  result = (arg1)->getMousePosition();
+  resultobj = SWIG_NewPointerObj((new Position(static_cast< const Position& >(result))), SWIGTYPE_p_Position, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -4976,6 +5076,10 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SetCollisionTile", _wrap_SetCollisionTile, METH_VARARGS, NULL},
 	 { (char *)"GetMainPlayer", _wrap_GetMainPlayer, METH_VARARGS, NULL},
 	 { (char *)"SetMainPlayer", _wrap_SetMainPlayer, METH_VARARGS, NULL},
+	 { (char *)"GetKeyTarget", _wrap_GetKeyTarget, METH_VARARGS, NULL},
+	 { (char *)"SetKeyTarget", _wrap_SetKeyTarget, METH_VARARGS, NULL},
+	 { (char *)"getWindowByNum", _wrap_getWindowByNum, METH_VARARGS, NULL},
+	 { (char *)"getWindowNum", _wrap_getWindowNum, METH_VARARGS, NULL},
 	 { (char *)"TBFE_createFile", _wrap_TBFE_createFile, METH_VARARGS, NULL},
 	 { (char *)"new_TBFE", _wrap_new_TBFE, METH_VARARGS, NULL},
 	 { (char *)"TBFE_changeMap", _wrap_TBFE_changeMap, METH_VARARGS, NULL},
@@ -4988,6 +5092,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"TBFE_addTileSet", _wrap_TBFE_addTileSet, METH_VARARGS, NULL},
 	 { (char *)"TBFE_addEvent", _wrap_TBFE_addEvent, METH_VARARGS, NULL},
 	 { (char *)"TBFE_selectEvent", _wrap_TBFE_selectEvent, METH_VARARGS, NULL},
+	 { (char *)"TBFE_getMousePosition", _wrap_TBFE_getMousePosition, METH_VARARGS, NULL},
 	 { (char *)"TBFE_addGlobalEvent", _wrap_TBFE_addGlobalEvent, METH_VARARGS, NULL},
 	 { (char *)"delete_TBFE", _wrap_delete_TBFE, METH_VARARGS, NULL},
 	 { (char *)"TBFE_swigregister", TBFE_swigregister, METH_VARARGS, NULL},

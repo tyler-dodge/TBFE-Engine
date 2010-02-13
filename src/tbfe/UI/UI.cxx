@@ -3186,7 +3186,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Window_selectElement(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Window_getElement(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Window *arg1 = (Window *) 0 ;
   std::string arg2 ;
@@ -3196,22 +3196,22 @@ SWIGINTERN PyObject *_wrap_Window_selectElement(PyObject *SWIGUNUSEDPARM(self), 
   PyObject * obj1 = 0 ;
   Element *result = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OO:Window_selectElement",&obj0,&obj1)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OO:Window_getElement",&obj0,&obj1)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Window, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Window_selectElement" "', argument " "1"" of type '" "Window *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Window_getElement" "', argument " "1"" of type '" "Window *""'"); 
   }
   arg1 = reinterpret_cast< Window * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     int res = SWIG_AsPtr_std_string(obj1, &ptr);
     if (!SWIG_IsOK(res) || !ptr) {
-      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "Window_selectElement" "', argument " "2"" of type '" "std::string""'"); 
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "Window_getElement" "', argument " "2"" of type '" "std::string""'"); 
     }
     arg2 = *ptr;
     if (SWIG_IsNewObj(res)) delete ptr;
   }
-  result = (Element *)(arg1)->selectElement(arg2);
+  result = (Element *)(arg1)->getElement(arg2);
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Element, 0 |  0 );
   return resultobj;
 fail:
@@ -4670,7 +4670,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"delete_Window", _wrap_delete_Window, METH_VARARGS, NULL},
 	 { (char *)"Window_renderElements", _wrap_Window_renderElements, METH_VARARGS, NULL},
 	 { (char *)"Window_addElement", _wrap_Window_addElement, METH_VARARGS, NULL},
-	 { (char *)"Window_selectElement", _wrap_Window_selectElement, METH_VARARGS, NULL},
+	 { (char *)"Window_getElement", _wrap_Window_getElement, METH_VARARGS, NULL},
 	 { (char *)"Window_getDimensions", _wrap_Window_getDimensions, METH_VARARGS, NULL},
 	 { (char *)"Window_setDimensions", _wrap_Window_setDimensions, METH_VARARGS, NULL},
 	 { (char *)"Window_getScreenPosition", _wrap_Window_getScreenPosition, METH_VARARGS, NULL},

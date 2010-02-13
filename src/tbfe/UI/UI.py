@@ -63,7 +63,7 @@ class Window(_object):
     __del__ = lambda self : None;
     def renderElements(*args): return _UI.Window_renderElements(*args)
     def addElement(*args): return _UI.Window_addElement(*args)
-    def selectElement(*args): return _UI.Window_selectElement(*args)
+    def getElement(*args): return _UI.Window_getElement(*args)
     def getDimensions(*args): return _UI.Window_getDimensions(*args)
     def setDimensions(*args): return _UI.Window_setDimensions(*args)
     def getScreenPosition(*args): return _UI.Window_getScreenPosition(*args)
