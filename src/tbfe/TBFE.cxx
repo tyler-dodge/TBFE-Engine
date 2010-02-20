@@ -2518,11 +2518,12 @@ SWIG_Python_MustGetPtr(PyObject *obj, swig_type_info *ty, int argnum, int flags)
 #define SWIGTYPE_p_TBFE_Render swig_types[14]
 #define SWIGTYPE_p_TTF_Font swig_types[15]
 #define SWIGTYPE_p_Window swig_types[16]
-#define SWIGTYPE_p_char swig_types[17]
-#define SWIGTYPE_p_vectorT_Actor_p_t swig_types[18]
-#define SWIGTYPE_p_vectorT_Window_p_t swig_types[19]
-static swig_type_info *swig_types[21];
-static swig_module_info swig_module = {swig_types, 20, 0, 0, 0, 0};
+#define SWIGTYPE_p_aiScene swig_types[17]
+#define SWIGTYPE_p_char swig_types[18]
+#define SWIGTYPE_p_vectorT_Actor_p_t swig_types[19]
+#define SWIGTYPE_p_vectorT_Window_p_t swig_types[20]
+static swig_type_info *swig_types[22];
+static swig_module_info swig_module = {swig_types, 21, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -3272,6 +3273,30 @@ SWIGINTERN PyObject *_wrap_GetActorByNum(PyObject *SWIGUNUSEDPARM(self), PyObjec
   arg1 = static_cast< int >(val1);
   result = (Actor *)TBFE_Base::GetActorByNum(arg1);
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Actor, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CheckModels(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::string arg1 ;
+  PyObject * obj0 = 0 ;
+  aiScene *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CheckModels",&obj0)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    int res = SWIG_AsPtr_std_string(obj0, &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "CheckModels" "', argument " "1"" of type '" "std::string""'"); 
+    }
+    arg1 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  result = (aiScene *)TBFE_Base::CheckModels(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_aiScene, 0 |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -4111,6 +4136,75 @@ SWIGINTERN PyObject *_wrap_TBFE_Render_init(PyObject *SWIGUNUSEDPARM(self), PyOb
   }
   arg1 = reinterpret_cast< TBFE_Render * >(argp1);
   (arg1)->init();
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TBFE_Render_initGl(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  TBFE_Render *arg1 = (TBFE_Render *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:TBFE_Render_initGl",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TBFE_Render, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TBFE_Render_initGl" "', argument " "1"" of type '" "TBFE_Render *""'"); 
+  }
+  arg1 = reinterpret_cast< TBFE_Render * >(argp1);
+  (arg1)->initGl();
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TBFE_Render_setLightPosition(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  TBFE_Render *arg1 = (TBFE_Render *) 0 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  float val2 ;
+  int ecode2 = 0 ;
+  float val3 ;
+  int ecode3 = 0 ;
+  float val4 ;
+  int ecode4 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOOO:TBFE_Render_setLightPosition",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TBFE_Render, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TBFE_Render_setLightPosition" "', argument " "1"" of type '" "TBFE_Render *""'"); 
+  }
+  arg1 = reinterpret_cast< TBFE_Render * >(argp1);
+  ecode2 = SWIG_AsVal_float(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "TBFE_Render_setLightPosition" "', argument " "2"" of type '" "float""'");
+  } 
+  arg2 = static_cast< float >(val2);
+  ecode3 = SWIG_AsVal_float(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "TBFE_Render_setLightPosition" "', argument " "3"" of type '" "float""'");
+  } 
+  arg3 = static_cast< float >(val3);
+  ecode4 = SWIG_AsVal_float(obj3, &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "TBFE_Render_setLightPosition" "', argument " "4"" of type '" "float""'");
+  } 
+  arg4 = static_cast< float >(val4);
+  (arg1)->setLightPosition(arg2,arg3,arg4);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -5069,6 +5163,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"DeleteAnimationSheets", _wrap_DeleteAnimationSheets, METH_VARARGS, NULL},
 	 { (char *)"GetActorNum", _wrap_GetActorNum, METH_VARARGS, NULL},
 	 { (char *)"GetActorByNum", _wrap_GetActorByNum, METH_VARARGS, NULL},
+	 { (char *)"CheckModels", _wrap_CheckModels, METH_VARARGS, NULL},
 	 { (char *)"CheckSheets", _wrap_CheckSheets, METH_VARARGS, NULL},
 	 { (char *)"GetFont", _wrap_GetFont, METH_VARARGS, NULL},
 	 { (char *)"SetFont", _wrap_SetFont, METH_VARARGS, NULL},
@@ -5102,6 +5197,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"TBFE_Render_addTileSet", _wrap_TBFE_Render_addTileSet, METH_VARARGS, NULL},
 	 { (char *)"TBFE_Render_changeLighting", _wrap_TBFE_Render_changeLighting, METH_VARARGS, NULL},
 	 { (char *)"TBFE_Render_init", _wrap_TBFE_Render_init, METH_VARARGS, NULL},
+	 { (char *)"TBFE_Render_initGl", _wrap_TBFE_Render_initGl, METH_VARARGS, NULL},
+	 { (char *)"TBFE_Render_setLightPosition", _wrap_TBFE_Render_setLightPosition, METH_VARARGS, NULL},
 	 { (char *)"TBFE_Render_finalRender", _wrap_TBFE_Render_finalRender, METH_VARARGS, NULL},
 	 { (char *)"TBFE_Render_swigregister", TBFE_Render_swigregister, METH_VARARGS, NULL},
 	 { (char *)"TBFE_Logic_getEvent", _wrap_TBFE_Logic_getEvent, METH_VARARGS, NULL},
@@ -5167,6 +5264,7 @@ static swig_type_info _swigt__p_TBFE_Logic = {"_p_TBFE_Logic", "TBFE_Logic *", 0
 static swig_type_info _swigt__p_TBFE_Render = {"_p_TBFE_Render", "TBFE_Render *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_TTF_Font = {"_p_TTF_Font", "TTF_Font *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Window = {"_p_Window", "Window *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_aiScene = {"_p_aiScene", "aiScene *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_vectorT_Actor_p_t = {"_p_vectorT_Actor_p_t", "vector< Actor * > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_vectorT_Window_p_t = {"_p_vectorT_Window_p_t", "vector< Window * > *", 0, 0, (void*)0, 0};
@@ -5189,6 +5287,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_TBFE_Render,
   &_swigt__p_TTF_Font,
   &_swigt__p_Window,
+  &_swigt__p_aiScene,
   &_swigt__p_char,
   &_swigt__p_vectorT_Actor_p_t,
   &_swigt__p_vectorT_Window_p_t,
@@ -5211,6 +5310,7 @@ static swig_cast_info _swigc__p_TBFE_Logic[] = {  {&_swigt__p_TBFE_Logic, 0, 0, 
 static swig_cast_info _swigc__p_TBFE_Render[] = {  {&_swigt__p_TBFE_Render, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_TTF_Font[] = {  {&_swigt__p_TTF_Font, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Window[] = {  {&_swigt__p_Window, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_aiScene[] = {  {&_swigt__p_aiScene, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_vectorT_Actor_p_t[] = {  {&_swigt__p_vectorT_Actor_p_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_vectorT_Window_p_t[] = {  {&_swigt__p_vectorT_Window_p_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -5233,6 +5333,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_TBFE_Render,
   _swigc__p_TTF_Font,
   _swigc__p_Window,
+  _swigc__p_aiScene,
   _swigc__p_char,
   _swigc__p_vectorT_Actor_p_t,
   _swigc__p_vectorT_Window_p_t,

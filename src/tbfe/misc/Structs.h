@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "SDL/SDL.h"
+#include <aiScene.h>
 using namespace std;
 class Window;
 class Element;
@@ -11,6 +12,12 @@ class Element;
 struct AnimationSheet
 {
   SDL_Surface * Data;
+  std::string Source;
+  bool isLoaded;
+};
+struct Model
+{
+  aiScene * Data;
   std::string Source;
   bool isLoaded;
 };

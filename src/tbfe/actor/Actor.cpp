@@ -10,26 +10,31 @@ Actor::Actor (int PositionX,int PositionY)
       setPosition(PositionX,PositionY);
       setName("None");
       setSpeed(5);
-      setDirection(DOWN);
+      setAngle(0);
       string WalkAnimationBody="0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,,";
       string WalkHeads="0,";
       Action Walk("Walk","");
       Animation Body("Actors/living/body/normal/walk.png",WalkAnimationBody,
 		     100,200,-30,-140,1,true);
-      Animation Shirt("Actors/living/torso/white_tshirt/walk.png",WalkAnimationBody,
-		      100,200,-30,-140,1,true);
-      Animation Legs("Actors/living/legs/jeans/walk.png",WalkAnimationBody,
-		     100,200,-30,-140,1,true);
-      Animation Head("Actors/living/head/head.png",WalkHeads,
-		     100,200,-30,-140,1,true);
-      Walk.addAnimation(Head);
       Walk.addAnimation(Body);
-      Walk.addAnimation(Shirt);
-      Walk.addAnimation(Legs);
-      Walk.setMainAnimation(1);
+      Walk.setMainAnimation(0);
       addAction(Walk);
       setBaseAction("Walk");
     };
+int Actor::getAngle()
+{
+  return angle_;
+};
+PositionF Actor::getRotationF()
+{
+  return rotation_;
+};
+void Actor::setRotationF(float x,float y, float z)
+{
+  rotation_.X=x;
+  rotation_.Y=y;
+  rotation_.Z=z;
+};
 string Actor::getProperty(string propertyName)
 {
   for (int i=0;i<propertyList_.size();i++)
@@ -62,7 +67,6 @@ Action Actor::getCurrentAction()
     {
       Action NoAction;
       NoAction=*getAction(getBaseAction());
-      NoAction.setDirection(getDirection());
       NoAction.setName("None");
       NoAction.setScript("");
       return NoAction;
@@ -75,7 +79,7 @@ bool Actor::runAction()
     {
       return false;      
     };
-  currentAction_->setDirection(getDirection());
+  //currentAction_->setDirection(getDirection());
   if (!currentAction_->animationPlus())
     {
       endCurrentAction();
@@ -137,15 +141,15 @@ void Actor::setConversation(string text)
 {
   conversation_=text;
 };
-void Actor::setDirection(Direction NewDirection)
+void Actor::setAngle(int newAngle)
 {
-  direction_=NewDirection;
+  angle_=newAngle;
 };
-int Actor::changePosition(Direction NewDirection,bool ChangeDirection)
+int Actor::changePosition(int newAngle,bool ChangeDirection)
 {
-  if (getDirection()!=NewDirection && ChangeDirection==true)
+  if (getAngle()!=newAngle && ChangeDirection==true)
     {
-      setDirection(NewDirection);
+      setAngle(newAngle);
     };
   if (getCurrentAction().getName()!="Walk")
     {
@@ -154,33 +158,23 @@ int Actor::changePosition(Direction NewDirection,bool ChangeDirection)
   setWalking(true);
   PositionF position;
   position=getPositionF();
-  switch(NewDirection)
-    {
-    case UP:
-      position.Y-=fabs((float)getSpeed()*TBFE_Base::GameSpeed);
-      break;
-    case RIGHT:
-      position.X+=fabs((float)getSpeed()*TBFE_Base::GameSpeed);
-      break;
-    case DOWN:
-      position.Y+=fabs((float)getSpeed()*TBFE_Base::GameSpeed);
-      break;
-    case LEFT:
-      position.X-=fabs((float)getSpeed()*TBFE_Base::GameSpeed);
-      break;
-    };
-  int SizeX;
-  int SizeY;
-  if (getDirection()==DOWN || getDirection()==UP)
-    {
-      SizeX=collisionDimensions_.X;
-      SizeY=collisionDimensions_.Y;
-    }
-  else
-    {
-      SizeX=collisionDimensions_.Y;
-      SizeY=collisionDimensions_.X;
-    };
+  position.X+=(float)getSpeed()*TBFE_Base::GameSpeed*cos(newAngle*3.14/180);
+  position.Y+=(float)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*3.14/180);
+  //switch(NewDirection)
+  // {
+  //  case UP:
+  //    position.Y-=fabs((float)getSpeed()*TBFE_Base::GameSpeed);
+  //    break;
+  // case RIGHT:
+  //    position.X+=fabs((float)getSpeed()*TBFE_Base::GameSpeed);
+  //    break;
+  //  case DOWN:
+  //   position.Y+=fabs((float)getSpeed()*TBFE_Base::GameSpeed);
+  //   break;
+  //  case LEFT:
+  //    position.X-=fabs((float)getSpeed()*TBFE_Base::GameSpeed);
+  //    break;
+  //  };
   setPositionF(position.X,position.Y,position.Z);
   vector<CollidedTile> collisionTest=TBFE_Base::CurrentMap.collisionTest((int)position_.X,
 									 (int)position_.Y);
@@ -221,21 +215,8 @@ int Actor::changePosition(Direction NewDirection,bool ChangeDirection)
 		    };
 		  break;
 		case 255:
-		  switch(getDirection())
-		    {
-		    case UP:
-		      position.Y+=fabs((float)getSpeed()*TBFE_Base::GameSpeed);
-		      break;
-		    case RIGHT:
-		      position.X-=fabs((float)getSpeed()*TBFE_Base::GameSpeed);
-		      break;
-		    case DOWN:
-		      position.Y-=fabs((float)getSpeed()*TBFE_Base::GameSpeed);
-		      break;
-		    case LEFT:
-		      position.X+=fabs((float)getSpeed()*TBFE_Base::GameSpeed);
-		      break;
-		    };
+		  position.X-=(float)getSpeed()*TBFE_Base::GameSpeed*cos(newAngle*3.14/180);
+		  position.Y-=(float)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*3.14/180);
 		  break;
 		};
 	      setPositionF(position.X,position.Y,position.Z);
@@ -247,42 +228,27 @@ int Actor::changePosition(Direction NewDirection,bool ChangeDirection)
 					 (int)position.Y,true);
   if (ncollisionTest!=-1)
     {
-      Direction oppositeDirection;
-      switch (getDirection())
-	{
-	case LEFT:
-	  oppositeDirection=RIGHT;
-	  break;
-	case UP:
-	  oppositeDirection=DOWN;
-	  break;
-	case RIGHT:
-	  oppositeDirection=LEFT;
-	  break;
-	case DOWN:
-	  oppositeDirection=UP;
-	  break;
-	};
+      position.X-=(float)getSpeed()*TBFE_Base::GameSpeed*cos(newAngle*3.14/180);
+      position.Y-=(float)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*3.14/180);
       setPositionF(position.X,position.Y,position.Z);
-      changePosition(oppositeDirection,false);
       return ncollisionTest;
     };
   return -1;
 };
 void Actor::changeScreen(int MapWidth, int MapHeight)
 {
-  switch(getDirection())
+  switch(getAngle())
     {
-    case LEFT:
+    case 180:
       position_.X=MapWidth*100-50;
       break;
-    case UP:
+    case 90:
       position_.Y=MapHeight*100-100;
       break;
-    case RIGHT:
+    case 0:
       position_.X=10;
       break;
-    case DOWN:
+    case 270:
       position_.Y=10;
       break;
     };
@@ -294,10 +260,6 @@ Position Actor::getPosition()
   PlayerPosition.Y=(int)position_.Y;
   PlayerPosition.Z=(int)position_.Z;
   return PlayerPosition;
-};
-Direction Actor::getDirection()
-{
-  return direction_;
 };
 void Actor::setPosition(int x,int y,int z)
 {
@@ -415,8 +377,8 @@ SDL_Rect Actor::getCollisionRect()
   SDL_Rect collisionRect;
   Position dimensions;
   dimensions=getCollisionDimensions();
-  collisionRect.x=(getDirection()-(int)(getDirection()/2)*2)*dimensions.X;
-  collisionRect.y=(int)((int)getDirection()/2)*dimensions.Y;
+  collisionRect.x=0;
+  collisionRect.y=0;
   collisionRect.w=dimensions.X;
   collisionRect.h=dimensions.Y;
   return collisionRect;
@@ -509,21 +471,21 @@ void Actor::setMobile(bool newMobility)
 Position Actor::getDirOffset()
 {
   Position offset;
-  switch (getDirection())
+  switch (getAngle())
     {
-    case UP:
+    case 90:
       offset.X=0;
       offset.Y=-1;
       break;
-    case RIGHT:
+    case 0:
       offset.X=1;
       offset.Y=0;
       break;
-    case DOWN:
+    case 270:
       offset.X=0;
       offset.Y=1;
       break;
-    case LEFT:
+    case 180:
       offset.X=-1;
       offset.Y=0;
       break;

@@ -93,7 +93,7 @@ void Action::loadAnimation()
 {
   for (int i=0;i<animation_.size();i++)
     {
-      animation_.at(i).loadSheet();
+      animation_.at(i).loadModel();
     };
 };
 int Action::getLayerSize()

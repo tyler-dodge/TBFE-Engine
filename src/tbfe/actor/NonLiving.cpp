@@ -1,7 +1,7 @@
 #include "NonLiving.h"
 NonLiving::NonLiving(int x, int y, ActorType NewType):Actor(x,y)
 {  
-  setDirection(UP);
+  setAngle(0);
   setConversation(NewType.Conversation);
   setCollisionMap(NewType.Collision);
   setScriptSource(NewType.Script);

@@ -5,7 +5,7 @@ class Animation
 {
  private:
   vector<int> frames_;
-  AnimationSheet image_;
+  Model model_;
   Position dimensions_;
   Position offset_;
   int startX_;
@@ -20,9 +20,9 @@ class Animation
   int getFrame();
   SDL_Rect getFrameRect(Direction);
   bool currentFramePlus();
-  bool loadSheet();
-  void setSheetSource(string);
-  SDL_Surface * getSheet();
+  bool loadModel();
+  void setModelSource(string);
+  aiScene * getModel();
   void reset();
   float getCurrentFrame();
   void setCurrentFrame(float);

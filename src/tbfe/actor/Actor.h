@@ -26,7 +26,8 @@ class Actor
   std::string conversation_;
  private:
   PositionF position_;
-  Direction direction_;
+  PositionF rotation_;
+  int angle_;
   Action * currentAction_;
   SDL_Surface * collisionMap_;
   float speed_;
@@ -49,7 +50,7 @@ class Actor
   //Changes actorPosition relatively using direction
   string getProperty(string);
   void setProperty(string,string);
-  int changePosition(Direction,bool);
+  int changePosition(int,bool);
   void changeScreen(int,int);
 
   SDL_Rect getCollisionRect(); 
@@ -65,8 +66,11 @@ class Actor
   PositionF getPositionF();
   void setPositionF(float,float,float);
 
-  void setDirection(Direction);
-  Direction getDirection();
+  PositionF getRotationF();
+  void setRotationF(float,float,float);
+
+  int getAngle();
+  void setAngle(int);
 
   virtual string getConversation(bool)=0;
   void setConversation(string);

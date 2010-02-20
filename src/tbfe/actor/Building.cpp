@@ -18,7 +18,7 @@ Building::Building(string Map,string FloorMap,string RoofMap,int x,int y)
 	      if (newActor!=NULL)
 		{
 		  walls_.push_back(newActor);
-		  walls_.at(walls_.size()-1)->setDirection((Direction)direction);
+		  walls_.at(walls_.size()-1)->setAngle(0);
 		};
 	    }
 	  else

@@ -2514,10 +2514,11 @@ SWIG_Python_MustGetPtr(PyObject *obj, swig_type_info *ty, int argnum, int flags)
 #define SWIGTYPE_p_SDL_Rect swig_types[10]
 #define SWIGTYPE_p_SDL_Surface swig_types[11]
 #define SWIGTYPE_p_Tile swig_types[12]
-#define SWIGTYPE_p_char swig_types[13]
-#define SWIGTYPE_p_vectorT_ActorType_t swig_types[14]
-static swig_type_info *swig_types[16];
-static swig_module_info swig_module = {swig_types, 15, 0, 0, 0, 0};
+#define SWIGTYPE_p_aiScene swig_types[13]
+#define SWIGTYPE_p_char swig_types[14]
+#define SWIGTYPE_p_vectorT_ActorType_t swig_types[15]
+static swig_type_info *swig_types[17];
+static swig_module_info swig_module = {swig_types, 16, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -3703,7 +3704,7 @@ fail:
 SWIGINTERN PyObject *_wrap_Actor_changePosition(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Actor *arg1 = (Actor *) 0 ;
-  Direction arg2 ;
+  int arg2 ;
   bool arg3 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -3724,9 +3725,9 @@ SWIGINTERN PyObject *_wrap_Actor_changePosition(PyObject *SWIGUNUSEDPARM(self), 
   arg1 = reinterpret_cast< Actor * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Actor_changePosition" "', argument " "2"" of type '" "Direction""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Actor_changePosition" "', argument " "2"" of type '" "int""'");
   } 
-  arg2 = static_cast< Direction >(val2);
+  arg2 = static_cast< int >(val2);
   ecode3 = SWIG_AsVal_bool(obj2, &val3);
   if (!SWIG_IsOK(ecode3)) {
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Actor_changePosition" "', argument " "3"" of type '" "bool""'");
@@ -4403,29 +4404,69 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Actor_setDirection(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Actor_getRotationF(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Actor *arg1 = (Actor *) 0 ;
-  Direction arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
   PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
+  PositionF result;
   
-  if (!PyArg_ParseTuple(args,(char *)"OO:Actor_setDirection",&obj0,&obj1)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"O:Actor_getRotationF",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_setDirection" "', argument " "1"" of type '" "Actor *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_getRotationF" "', argument " "1"" of type '" "Actor *""'"); 
   }
   arg1 = reinterpret_cast< Actor * >(argp1);
-  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  result = (arg1)->getRotationF();
+  resultobj = SWIG_NewPointerObj((new PositionF(static_cast< const PositionF& >(result))), SWIGTYPE_p_PositionF, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Actor_setRotationF(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Actor *arg1 = (Actor *) 0 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  float val2 ;
+  int ecode2 = 0 ;
+  float val3 ;
+  int ecode3 = 0 ;
+  float val4 ;
+  int ecode4 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOOO:Actor_setRotationF",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_setRotationF" "', argument " "1"" of type '" "Actor *""'"); 
+  }
+  arg1 = reinterpret_cast< Actor * >(argp1);
+  ecode2 = SWIG_AsVal_float(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Actor_setDirection" "', argument " "2"" of type '" "Direction""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Actor_setRotationF" "', argument " "2"" of type '" "float""'");
   } 
-  arg2 = static_cast< Direction >(val2);
-  (arg1)->setDirection(arg2);
+  arg2 = static_cast< float >(val2);
+  ecode3 = SWIG_AsVal_float(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Actor_setRotationF" "', argument " "3"" of type '" "float""'");
+  } 
+  arg3 = static_cast< float >(val3);
+  ecode4 = SWIG_AsVal_float(obj3, &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Actor_setRotationF" "', argument " "4"" of type '" "float""'");
+  } 
+  arg4 = static_cast< float >(val4);
+  (arg1)->setRotationF(arg2,arg3,arg4);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -4433,22 +4474,52 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Actor_getDirection(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Actor_getAngle(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Actor *arg1 = (Actor *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  Direction result;
+  int result;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:Actor_getDirection",&obj0)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"O:Actor_getAngle",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_getDirection" "', argument " "1"" of type '" "Actor *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_getAngle" "', argument " "1"" of type '" "Actor *""'"); 
   }
   arg1 = reinterpret_cast< Actor * >(argp1);
-  result = (Direction)(arg1)->getDirection();
+  result = (int)(arg1)->getAngle();
   resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Actor_setAngle(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Actor *arg1 = (Actor *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Actor_setAngle",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_setAngle" "', argument " "1"" of type '" "Actor *""'"); 
+  }
+  arg1 = reinterpret_cast< Actor * >(argp1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Actor_setAngle" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  (arg1)->setAngle(arg2);
+  resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
   return NULL;
@@ -8027,7 +8098,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Animation_loadSheet(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Animation_loadModel(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Animation *arg1 = (Animation *) 0 ;
   void *argp1 = 0 ;
@@ -8035,13 +8106,13 @@ SWIGINTERN PyObject *_wrap_Animation_loadSheet(PyObject *SWIGUNUSEDPARM(self), P
   PyObject * obj0 = 0 ;
   bool result;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:Animation_loadSheet",&obj0)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"O:Animation_loadModel",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Animation, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Animation_loadSheet" "', argument " "1"" of type '" "Animation *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Animation_loadModel" "', argument " "1"" of type '" "Animation *""'"); 
   }
   arg1 = reinterpret_cast< Animation * >(argp1);
-  result = (bool)(arg1)->loadSheet();
+  result = (bool)(arg1)->loadModel();
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -8049,7 +8120,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Animation_setSheetSource(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Animation_setModelSource(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Animation *arg1 = (Animation *) 0 ;
   std::string arg2 ;
@@ -8058,22 +8129,22 @@ SWIGINTERN PyObject *_wrap_Animation_setSheetSource(PyObject *SWIGUNUSEDPARM(sel
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OO:Animation_setSheetSource",&obj0,&obj1)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OO:Animation_setModelSource",&obj0,&obj1)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Animation, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Animation_setSheetSource" "', argument " "1"" of type '" "Animation *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Animation_setModelSource" "', argument " "1"" of type '" "Animation *""'"); 
   }
   arg1 = reinterpret_cast< Animation * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     int res = SWIG_AsPtr_std_string(obj1, &ptr);
     if (!SWIG_IsOK(res) || !ptr) {
-      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "Animation_setSheetSource" "', argument " "2"" of type '" "std::string""'"); 
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "Animation_setModelSource" "', argument " "2"" of type '" "std::string""'"); 
     }
     arg2 = *ptr;
     if (SWIG_IsNewObj(res)) delete ptr;
   }
-  (arg1)->setSheetSource(arg2);
+  (arg1)->setModelSource(arg2);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -8081,22 +8152,22 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Animation_getSheet(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Animation_getModel(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Animation *arg1 = (Animation *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  SDL_Surface *result = 0 ;
+  aiScene *result = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:Animation_getSheet",&obj0)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"O:Animation_getModel",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Animation, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Animation_getSheet" "', argument " "1"" of type '" "Animation *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Animation_getModel" "', argument " "1"" of type '" "Animation *""'"); 
   }
   arg1 = reinterpret_cast< Animation * >(argp1);
-  result = (SDL_Surface *)(arg1)->getSheet();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_SDL_Surface, 0 |  0 );
+  result = (aiScene *)(arg1)->getModel();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_aiScene, 0 |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -8561,8 +8632,10 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Actor_setPosition", _wrap_Actor_setPosition, METH_VARARGS, NULL},
 	 { (char *)"Actor_getPositionF", _wrap_Actor_getPositionF, METH_VARARGS, NULL},
 	 { (char *)"Actor_setPositionF", _wrap_Actor_setPositionF, METH_VARARGS, NULL},
-	 { (char *)"Actor_setDirection", _wrap_Actor_setDirection, METH_VARARGS, NULL},
-	 { (char *)"Actor_getDirection", _wrap_Actor_getDirection, METH_VARARGS, NULL},
+	 { (char *)"Actor_getRotationF", _wrap_Actor_getRotationF, METH_VARARGS, NULL},
+	 { (char *)"Actor_setRotationF", _wrap_Actor_setRotationF, METH_VARARGS, NULL},
+	 { (char *)"Actor_getAngle", _wrap_Actor_getAngle, METH_VARARGS, NULL},
+	 { (char *)"Actor_setAngle", _wrap_Actor_setAngle, METH_VARARGS, NULL},
 	 { (char *)"Actor_getConversation", _wrap_Actor_getConversation, METH_VARARGS, NULL},
 	 { (char *)"Actor_setConversation", _wrap_Actor_setConversation, METH_VARARGS, NULL},
 	 { (char *)"Actor_getSpeed", _wrap_Actor_getSpeed, METH_VARARGS, NULL},
@@ -8634,9 +8707,9 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Animation_getFrame", _wrap_Animation_getFrame, METH_VARARGS, NULL},
 	 { (char *)"Animation_getFrameRect", _wrap_Animation_getFrameRect, METH_VARARGS, NULL},
 	 { (char *)"Animation_currentFramePlus", _wrap_Animation_currentFramePlus, METH_VARARGS, NULL},
-	 { (char *)"Animation_loadSheet", _wrap_Animation_loadSheet, METH_VARARGS, NULL},
-	 { (char *)"Animation_setSheetSource", _wrap_Animation_setSheetSource, METH_VARARGS, NULL},
-	 { (char *)"Animation_getSheet", _wrap_Animation_getSheet, METH_VARARGS, NULL},
+	 { (char *)"Animation_loadModel", _wrap_Animation_loadModel, METH_VARARGS, NULL},
+	 { (char *)"Animation_setModelSource", _wrap_Animation_setModelSource, METH_VARARGS, NULL},
+	 { (char *)"Animation_getModel", _wrap_Animation_getModel, METH_VARARGS, NULL},
 	 { (char *)"Animation_reset", _wrap_Animation_reset, METH_VARARGS, NULL},
 	 { (char *)"Animation_getCurrentFrame", _wrap_Animation_getCurrentFrame, METH_VARARGS, NULL},
 	 { (char *)"Animation_setCurrentFrame", _wrap_Animation_setCurrentFrame, METH_VARARGS, NULL},
@@ -8679,6 +8752,7 @@ static swig_type_info _swigt__p_PositionF = {"_p_PositionF", "PositionF *", 0, 0
 static swig_type_info _swigt__p_SDL_Rect = {"_p_SDL_Rect", "SDL_Rect *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_SDL_Surface = {"_p_SDL_Surface", "SDL_Surface *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Tile = {"_p_Tile", "Tile *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_aiScene = {"_p_aiScene", "aiScene *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_vectorT_ActorType_t = {"_p_vectorT_ActorType_t", "vector< ActorType > *", 0, 0, (void*)0, 0};
 
@@ -8696,6 +8770,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_SDL_Rect,
   &_swigt__p_SDL_Surface,
   &_swigt__p_Tile,
+  &_swigt__p_aiScene,
   &_swigt__p_char,
   &_swigt__p_vectorT_ActorType_t,
 };
@@ -8713,6 +8788,7 @@ static swig_cast_info _swigc__p_PositionF[] = {  {&_swigt__p_PositionF, 0, 0, 0}
 static swig_cast_info _swigc__p_SDL_Rect[] = {  {&_swigt__p_SDL_Rect, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_SDL_Surface[] = {  {&_swigt__p_SDL_Surface, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Tile[] = {  {&_swigt__p_Tile, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_aiScene[] = {  {&_swigt__p_aiScene, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_vectorT_ActorType_t[] = {  {&_swigt__p_vectorT_ActorType_t, 0, 0, 0},{0, 0, 0, 0}};
 
@@ -8730,6 +8806,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_SDL_Rect,
   _swigc__p_SDL_Surface,
   _swigc__p_Tile,
+  _swigc__p_aiScene,
   _swigc__p_char,
   _swigc__p_vectorT_ActorType_t,
 };

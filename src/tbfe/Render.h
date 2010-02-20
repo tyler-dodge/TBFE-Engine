@@ -3,8 +3,13 @@
 
 #include "SDL/SDL.h"
 #include "SDL/SDL_ttf.h"
+#include "SDL/SDL_opengl.h"
 #include "misc/Timer.h"
 #include "misc/SdlFunctions.h"
+#include <assimp.hpp>
+#include <assimp.h>
+#include <aiScene.h>
+#include <aiPostProcess.h>
 //#include "SunVector.h"
 #include "UI/Window.h"
 #include "Base.h"
@@ -27,6 +32,8 @@ class TBFE_Render
   void renderWindowList();
   int renderMapLayer(int,int,int);
   void renderForeground(int,int,bool);
+  GLfloat lightPosition_[4];
+  aiScene * model;
  public:
   TBFE_Render();
   ~TBFE_Render();
@@ -34,6 +41,8 @@ class TBFE_Render
   bool addTileSet(string);
   void changeLighting(int);
   void init();
+  void initGl();
+  void setLightPosition(float,float,float);
   void finalRender(bool);
 };
 #endif

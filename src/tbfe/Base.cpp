@@ -22,6 +22,7 @@ namespace TBFE_Base
   TTF_Font * font;
   Element * KeyTarget;
   float GameSpeed=1;
+  vector<Model> ModelList;
   vector<AnimationSheet> AnimationSheets;
   int GetActorNum(Actor *actorPtr)
   {  
@@ -57,6 +58,25 @@ namespace TBFE_Base
   void SetCollisionTile(SDL_Surface * newTile)
   {
     CollisionTile=newTile;
+  };
+  aiScene * CheckModels(string source)
+  {
+    for (int i=0;i<ModelList.size();i++)
+      {
+	if (ModelList.at(i).Source==source)
+	  {
+	    return ModelList.at(i).Data;
+	  };
+      };
+    Model newModel;
+    newModel.Data=loadModel(source);
+    if (newModel.Data==NULL)
+      {
+	return NULL;
+      };
+    newModel.Source=source;
+    ModelList.push_back(newModel);
+    return newModel.Data;
   };
   SDL_Surface * CheckSheets(string source)
   {

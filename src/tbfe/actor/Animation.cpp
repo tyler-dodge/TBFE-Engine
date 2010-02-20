@@ -7,7 +7,7 @@ Animation::Animation(string imageSource,string frames,int width, int height,
 		     int OffsetX, int OffsetY, float fps, bool doesLoop,int startX,int finalFrame)
 {
   setCurrentFrame(0);
-  setSheetSource(imageSource);
+  setModelSource(imageSource);
   setDimensions(width,height);
   setLoop(doesLoop);
   setStartX(startX);
@@ -91,23 +91,23 @@ bool Animation::currentFramePlus()
     };
   return true;
 };
-SDL_Surface * Animation::getSheet()
+aiScene * Animation::getModel()
 {
-  loadSheet();
-  return image_.Data;
+  loadModel();
+  return model_.Data;
 };
-void Animation::setSheetSource(string newSource)
+void Animation::setModelSource(string newSource)
 {
-  image_.Source=newSource;
-  image_.Data=NULL;
-  image_.isLoaded=false;
+  model_.Source=newSource;
+  model_.Data=NULL;
+  model_.isLoaded=false;
 };
-bool Animation::loadSheet()
+bool Animation::loadModel()
 {
-  if (!image_.isLoaded)
+  if (!model_.isLoaded)
     {
-      image_.Data=TBFE_Base::CheckSheets(image_.Source);
-      image_.isLoaded=true;
+      model_.Data=TBFE_Base::CheckModels(model_.Source);
+      model_.isLoaded=true;
     };
   return true;
 };

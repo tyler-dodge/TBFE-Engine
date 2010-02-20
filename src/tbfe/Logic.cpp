@@ -14,21 +14,8 @@ int TBFE_Logic::checkTalker()
 {
   int NPC_Exists=-1;  
   int PlayerNumber=TBFE_Base::GetActorNum(TBFE_Base::MainPlayer);
-  switch(TBFE_Base::MainPlayer->getDirection())
-    {
-    case UP:
-      NPC_Exists=TBFE_Base::MainPlayer->checkActorCollision(true,0,-50);
-      break;
-    case RIGHT:
-      NPC_Exists=TBFE_Base::MainPlayer->checkActorCollision(true,50,0);
-      break;
-    case DOWN:
-      NPC_Exists=TBFE_Base::MainPlayer->checkActorCollision(true,0,50);
-      break;
-    case LEFT:
-      NPC_Exists=TBFE_Base::MainPlayer->checkActorCollision(true,-50,0);
-      break;
-    };
+  NPC_Exists=TBFE_Base::MainPlayer->checkActorCollision(true,50*cos(TBFE_Base::MainPlayer->getAngle())*3.14/180,50*sin(TBFE_Base::MainPlayer->getAngle())*3.14/180);
+  
   return NPC_Exists;
 };
 void TBFE_Logic::playerMovement()
@@ -41,19 +28,19 @@ void TBFE_Logic::playerMovement()
     {
       if (keysDown_[SDLK_UP])
 	{
-	  TBFE_Base::MainPlayer->changePosition(UP,true);
+	  TBFE_Base::MainPlayer->changePosition(90,true);
 	}
       else if (keysDown_[SDLK_DOWN])
 	{
-	  TBFE_Base::MainPlayer->changePosition(DOWN,true);
+	  TBFE_Base::MainPlayer->changePosition(270,true);
 	}
       else if (keysDown_[SDLK_RIGHT])
 	{
-	  TBFE_Base::MainPlayer->changePosition(RIGHT,true);
+	  TBFE_Base::MainPlayer->changePosition(0,true);
 	}
       else if (keysDown_[SDLK_LEFT])
 	{
-	  TBFE_Base::MainPlayer->changePosition(LEFT,true);
+	  TBFE_Base::MainPlayer->changePosition(180,true);
 	};
     };
 };
@@ -70,21 +57,7 @@ int TBFE_Logic::contextAction()
       TBFE_Base::Talker=TBFE_Base::ActorList[NPC_Exists];
       if (TBFE_Base::Talker->getMobile())
 	{
-	  switch(TBFE_Base::MainPlayer->getDirection())
-	    {
-	    case LEFT:
-	      TBFE_Base::Talker->setDirection(RIGHT);
-	      break;
-	    case UP:
-	      TBFE_Base::Talker->setDirection(DOWN);
-	      break;
-	    case RIGHT:
-	      TBFE_Base::Talker->setDirection(LEFT);
-	      break;
-	    case DOWN:
-	      TBFE_Base::Talker->setDirection(UP);
-	      break;
-	    };
+	  TBFE_Base::Talker->setAngle(360-TBFE_Base::MainPlayer->getAngle());
 	};
       TBFE_Base::Talker->getConversation(false);
       stringstream ActorSelf;

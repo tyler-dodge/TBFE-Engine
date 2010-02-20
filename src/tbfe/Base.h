@@ -21,6 +21,7 @@ namespace TBFE_Base
   extern void DeleteAnimationSheets();
   extern int GetActorNum(Actor *);
   extern Actor * GetActorByNum(int);
+  extern aiScene * CheckModels(string);
   extern SDL_Surface * CheckSheets(string);
   
   extern TTF_Font * GetFont();

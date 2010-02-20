@@ -54,6 +54,7 @@ import Map
 DeleteAnimationSheets = _TBFE.DeleteAnimationSheets
 GetActorNum = _TBFE.GetActorNum
 GetActorByNum = _TBFE.GetActorByNum
+CheckModels = _TBFE.CheckModels
 CheckSheets = _TBFE.CheckSheets
 GetFont = _TBFE.GetFont
 SetFont = _TBFE.SetFont
@@ -110,6 +111,8 @@ class TBFE_Render(_object):
     def addTileSet(*args): return _TBFE.TBFE_Render_addTileSet(*args)
     def changeLighting(*args): return _TBFE.TBFE_Render_changeLighting(*args)
     def init(*args): return _TBFE.TBFE_Render_init(*args)
+    def initGl(*args): return _TBFE.TBFE_Render_initGl(*args)
+    def setLightPosition(*args): return _TBFE.TBFE_Render_setLightPosition(*args)
     def finalRender(*args): return _TBFE.TBFE_Render_finalRender(*args)
 TBFE_Render_swigregister = _TBFE.TBFE_Render_swigregister
 TBFE_Render_swigregister(TBFE_Render)

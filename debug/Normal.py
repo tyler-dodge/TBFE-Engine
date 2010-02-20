@@ -39,7 +39,7 @@ class Console:
 Tbfe.cvar.ScreenDimensions.X=1440
 Tbfe.cvar.ScreenDimensions.Y=900
 engine=Tbfe.TBFE()
-Tbfe.GetMainPlayer().setPosition(100,100)
+Tbfe.GetMainPlayer().setPosition(0,0)
 engine.changeMap("test.fmm")
 Tbfe.cvar.CurrentMap.generateMap(25,25)
 engine.initMap()
@@ -57,4 +57,5 @@ while action!=Misc.QUIT:
     mousePosition=engine.getMousePosition()
     uiMousePosition.getElement("lblRate").setProperty("text",('%i,%i' % (mousePosition.X,mousePosition.Y)))
     uiMousePosition.getElement("lblRate").reload()
+    print(('%i,%i,%i' % (Tbfe.GetMainPlayer().getPosition().X,Tbfe.GetMainPlayer().getPosition().Y,Tbfe.GetMainPlayer().getPosition().Z)))
     i+=1

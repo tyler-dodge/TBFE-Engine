@@ -49,6 +49,9 @@ del types
 
 
 getPixel = _Misc.getPixel
+loadModel = _Misc.loadModel
+drawNodes = _Misc.drawNodes
+applyMaterial = _Misc.applyMaterial
 loadString = _Misc.loadString
 nextSet = _Misc.nextSet
 nextChar = _Misc.nextChar
@@ -113,6 +116,30 @@ class AnimationSheet(_object):
     __del__ = lambda self : None;
 AnimationSheet_swigregister = _Misc.AnimationSheet_swigregister
 AnimationSheet_swigregister(AnimationSheet)
+
+class Model(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, Model, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, Model, name)
+    __repr__ = _swig_repr
+    __swig_setmethods__["Data"] = _Misc.Model_Data_set
+    __swig_getmethods__["Data"] = _Misc.Model_Data_get
+    if _newclass:Data = _swig_property(_Misc.Model_Data_get, _Misc.Model_Data_set)
+    __swig_setmethods__["Source"] = _Misc.Model_Source_set
+    __swig_getmethods__["Source"] = _Misc.Model_Source_get
+    if _newclass:Source = _swig_property(_Misc.Model_Source_get, _Misc.Model_Source_set)
+    __swig_setmethods__["isLoaded"] = _Misc.Model_isLoaded_set
+    __swig_getmethods__["isLoaded"] = _Misc.Model_isLoaded_get
+    if _newclass:isLoaded = _swig_property(_Misc.Model_isLoaded_get, _Misc.Model_isLoaded_set)
+    def __init__(self, *args): 
+        this = _Misc.new_Model(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    __swig_destroy__ = _Misc.delete_Model
+    __del__ = lambda self : None;
+Model_swigregister = _Misc.Model_swigregister
+Model_swigregister(Model)
 
 class Tile(_object):
     __swig_setmethods__ = {}
