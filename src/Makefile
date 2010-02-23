@@ -1,7 +1,7 @@
 di=../debug/
 dirLibs=../libs/
 fonts=font.ttf
-libs=-lSDL -lSDL_image -lSDL_ttf -lboost_thread -lpython2.6 -L/assimp/bin/gcc/ -lassimp -lGL -lGLU
+libs=-lSDL -lSDL_image -lSDL_ttf -lboost_thread -lpython2.6 -L/assimp/bin/gcc -lassimp -lGL -lGLU
 headerDirs=tbfe/Main.* tbfe/Logic.* tbfe/Render.* tbfe/Base.* tbfe/Console.*
 libDirs=-I/usr/include/python2.6 -I/assimp/include
 $(di)Agrarious:$(dirLibs)Actor.lib $(dirLibs)UI.lib $(dirLibs)Misc.lib  $(dirLibs)Map.lib  $(dirLibs)TBFE.lib $(dirLibs)Interpreter.o 

@@ -1,4 +1,3 @@
-
 #include "Render.h"
 TBFE_Render::TBFE_Render()
 {
@@ -28,9 +27,11 @@ void TBFE_Render::initGl()
   glClearColor( 0, 0, .5, 0 );
   glMatrixMode( GL_PROJECTION );
   glLoadIdentity();
-  glFrustum( -(double)TBFE_Base::ScreenDimensions.X/(double)TBFE_Base::ScreenDimensions.Y,(double)TBFE_Base::ScreenDimensions.X/(double)TBFE_Base::ScreenDimensions.Y, 
-	     -(double)TBFE_Base::ScreenDimensions.Y/(double)TBFE_Base::ScreenDimensions.X,(double)TBFE_Base::ScreenDimensions.Y/(double)TBFE_Base::ScreenDimensions.X, 
-	     1,100);
+  glFrustum(-1,
+	    1, 
+	    -((double)TBFE_Base::ScreenDimensions.Y/(double)TBFE_Base::ScreenDimensions.X),
+	    ((double)TBFE_Base::ScreenDimensions.Y/(double)TBFE_Base::ScreenDimensions.X), 
+	     1,100);			
   glMatrixMode( GL_MODELVIEW );
   glEnable(GL_NORMALIZE);
   glEnable(GL_LIGHTING);
@@ -75,7 +76,7 @@ void TBFE_Render::init()
       SDL_FreeSurface(screen_);
     };
   SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,8);
-  screen_=SDL_SetVideoMode(1440,900,32,SDL_OPENGL | SDL_FULLSCREEN);
+  screen_=SDL_SetVideoMode(1024,600,32,SDL_OPENGL | SDL_FULLSCREEN);
   TBFE_Base::MainConsole.write("SDL initialized");
   initGl();
  };
@@ -150,13 +151,17 @@ void TBFE_Render::finalRender(bool doFlip)
     {
       //SDL_Flip(screen_);
     };
+  lightPosition_[1]=1.0f;
+  lightPosition_[0]=0.0f;
+  lightPosition_[2]=0.0f;
   lightPosition_[3]=1.0f;
+  glLoadIdentity();
   glLightfv(GL_LIGHT0,GL_POSITION,lightPosition_);
   glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
   glLoadIdentity();
-  renderMapLayer(0,0,0);
-  glLoadIdentity();
+  glTranslatef(-TBFE_Base::MainPlayer->getPositionD().X/20,-7,-TBFE_Base::MainPlayer->getPositionD().Z/20-10);
   renderActors();
+  renderMapLayer(0,0,0);
   SDL_GL_SwapBuffers();
   int Error=glGetError();
   if(Error != GL_NO_ERROR )
@@ -201,19 +206,16 @@ void TBFE_Render::arrangeActors()
 };
 int TBFE_Render::renderMapLayer(int x,int y, int Layer)
 {
-  glPushMatrix();
   vector<GLuint> indices;
   vector<GLfloat> vertices;
   vector<GLfloat> colors;
-  glTranslatef(0,0,-10);
   Position dimensions=TBFE_Base::CurrentMap.getDimensions();
-  cout << dimensions.X << "," << dimensions.Y << "\n";
   for (int mapY=0;mapY<dimensions.Y;mapY++)
     {
       for (int mapX=0;mapX<dimensions.X;mapX++)
 	{
 	  Tile tile=TBFE_Base::CurrentMap.getTile(mapX,mapY,Layer);
-	  GLfloat vertex[]={mapX,0,mapY};
+	  GLfloat vertex[]={3*mapX,0,3*mapY};
 	  vertices.push_back(vertex[0]);
 	  vertices.push_back(vertex[1]);
 	  vertices.push_back(vertex[2]);
@@ -223,7 +225,7 @@ int TBFE_Render::renderMapLayer(int x,int y, int Layer)
 	      colors.push_back(1);
 	      colors.push_back(1);
 	    };
-	  if (mapX==0)
+	  if (3*mapX==0)
 	    {
 	      tile=TBFE_Base::CurrentMap.getTile(mapX,mapY,Layer);
 	    }
@@ -231,9 +233,9 @@ int TBFE_Render::renderMapLayer(int x,int y, int Layer)
 	    {
 	      tile=TBFE_Base::CurrentMap.getTile(mapX-1,mapY,Layer);
 	    };
-	  vertex[0]=mapX-1;
+	  vertex[0]=3*mapX-3;
 	  vertex[1]=0;
-	  vertex[2]=mapY;
+	  vertex[2]=3*mapY;
 	  vertices.push_back(vertex[0]); 
 	  vertices.push_back(vertex[1]); 
 	  vertices.push_back(vertex[2]);
@@ -245,9 +247,9 @@ int TBFE_Render::renderMapLayer(int x,int y, int Layer)
 	    {
 	      tile=TBFE_Base::CurrentMap.getTile(mapX-1,mapY-1,Layer);
 	    };
-	  vertex[0]=mapX-1;
+	  vertex[0]=3*mapX-3;
 	  vertex[1]=0;
-	  vertex[2]=mapY-1;
+	  vertex[2]=3*mapY-3;
 	  vertices.push_back(vertex[0]); 
 	  vertices.push_back(vertex[1]); 
 	  vertices.push_back(vertex[2]);
@@ -259,9 +261,9 @@ int TBFE_Render::renderMapLayer(int x,int y, int Layer)
 	    {
 	      tile=TBFE_Base::CurrentMap.getTile(mapX,mapY-1,Layer);
 	    };
-	  vertex[0]=mapX;
+	  vertex[0]=3*mapX;
 	  vertex[1]=0;
-	  vertex[2]=mapY-1;
+	  vertex[2]=3*mapY-3;
 	  vertices.push_back(vertex[0]); 
 	  vertices.push_back(vertex[1]); 
 	  vertices.push_back(vertex[2]);
@@ -270,29 +272,18 @@ int TBFE_Render::renderMapLayer(int x,int y, int Layer)
   for (int i=0;i<dimensions.X*dimensions.Y*4;i++)
     {
       indices.push_back(i);
-    };			
-  // for (int i=0;i<vertices.size()/3/4;i++)
-  //{
-  //  for (int a=0;a<4;a++)
-  //	{
-  //	  cout << vertices[i*3+4*a] << "," << vertices[i*3+1+4*a] << "," << vertices[i*3+2+4*a] << ": ";
-  ///	};
-//     cout << "\n";
-  // };
-  //exit(0);
-  //cout << "vertices:" << vertices.size() << "\n";
-  //cout << "indices:" << indices.size() << "\n";
+    };		
+  
   glEnableClientState(GL_VERTEX_ARRAY);
-  glEnableClientState(GL_COLOR_ARRAY);
-  glEnable(GL_COLOR_MATERIAL);
+  //glEnableClientState(GL_COLOR_ARRAY);
+  //glEnable(GL_COLOR_MATERIAL);
   glVertexPointer(3,GL_FLOAT,0,&vertices[0]);
-  glColorMaterial(GL_FRONT,GL_AMBIENT_AND_DIFFUSE);
-  glColorPointer(3,GL_FLOAT,0,&colors[0]);
+  //glColorMaterial(GL_FRONT,GL_AMBIENT_AND_DIFFUSE);
+  //glColorPointer(3,GL_FLOAT,0,&colors[0]);
   glDrawElements(GL_QUADS,indices.size(),GL_UNSIGNED_INT,&indices[0]);
-  glDisable(GL_COLOR_MATERIAL);
-  glDisableClientState(GL_COLOR_ARRAY);
+  //glDisable(GL_COLOR_MATERIAL);
+  //glDisableClientState(GL_COLOR_ARRAY);
   glDisableClientState(GL_VERTEX_ARRAY);
-  glPopMatrix();
 };
 void TBFE_Render::renderActors()
 {
@@ -323,8 +314,6 @@ void TBFE_Render::renderActors()
 	      currentActor->setAngle(270);
 	      //aiVector3D trotation(rotation.X,rotation.Y,rotation.Z);
 	      aiVector3D tscale(0,0,0);
-	      glLoadIdentity();
-	      cout << "position:" << tposition[0] << "," << tposition[1] << "," << tposition[2] << "\n";
 	      drawNodes(model,model->mRootNode,tposition,currentActor->getAngle(),trotation,tscale);
 	      //applyImage(x+animation->getOffset().X,
 	      // y-sqrt(pow(animation->getOffset().Y,2)+
