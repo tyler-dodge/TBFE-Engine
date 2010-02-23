@@ -46,7 +46,7 @@ void applyImage(int x,int y,SDL_Surface* source,SDL_Surface* target, SDL_Rect* c
 aiScene * loadModel(string model)
 {
   Assimp::Importer importer;
-  importer.ReadFile(model.c_str(),aiProcess_CalcTangentSpace | aiProcess_JoinIdenticalVertices | aiProcess_Triangulate );
+  const aiScene * test=importer.ReadFile(model.c_str(),aiProcess_CalcTangentSpace | aiProcess_JoinIdenticalVertices | aiProcess_Triangulate );
   aiScene * newModel=importer.GetOrphanedScene();
   return newModel;
 };
@@ -151,6 +151,7 @@ void drawNodes( aiScene * scene, aiNode * currentNode, aiVector3D position,int a
       return;
     };
   glPushMatrix();
+  //glTranslatef(position[0],position[1],-position[2]);
   glTranslatef(position[0],position[1],position[2]);
   glRotatef(angle,rotation[0],rotation[1],rotation[2]);
   for (int i=0;i<currentNode->mNumMeshes;i++)
@@ -160,8 +161,7 @@ void drawNodes( aiScene * scene, aiNode * currentNode, aiVector3D position,int a
       glEnableClientState(GL_NORMAL_ARRAY);
       glVertexPointer(3,GL_FLOAT,0,currentMesh->mVertices);
       glNormalPointer(GL_FLOAT,0,currentMesh->mNormals);
-      vector<int> indices;
-      glBegin(GL_TRIANGLES);
+      vector<GLuint> indices;
       applyMaterial(scene->mMaterials[currentMesh->mMaterialIndex]);
       for (int i=0;i<currentMesh->mNumFaces;i++)
 	{
@@ -171,7 +171,6 @@ void drawNodes( aiScene * scene, aiNode * currentNode, aiVector3D position,int a
 	    };
 	};
       glDrawElements(GL_TRIANGLES,indices.size(),GL_UNSIGNED_INT,&indices[0]);
-      glEnd();
       glDisableClientState(GL_NORMAL_ARRAY);
       glDisableClientState(GL_VERTEX_ARRAY);
     };

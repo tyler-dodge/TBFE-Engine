@@ -213,6 +213,30 @@ class Position(_object):
 Position_swigregister = _Misc.Position_swigregister
 Position_swigregister(Position)
 
+class PositionD(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, PositionD, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, PositionD, name)
+    __repr__ = _swig_repr
+    __swig_setmethods__["X"] = _Misc.PositionD_X_set
+    __swig_getmethods__["X"] = _Misc.PositionD_X_get
+    if _newclass:X = _swig_property(_Misc.PositionD_X_get, _Misc.PositionD_X_set)
+    __swig_setmethods__["Y"] = _Misc.PositionD_Y_set
+    __swig_getmethods__["Y"] = _Misc.PositionD_Y_get
+    if _newclass:Y = _swig_property(_Misc.PositionD_Y_get, _Misc.PositionD_Y_set)
+    __swig_setmethods__["Z"] = _Misc.PositionD_Z_set
+    __swig_getmethods__["Z"] = _Misc.PositionD_Z_get
+    if _newclass:Z = _swig_property(_Misc.PositionD_Z_get, _Misc.PositionD_Z_set)
+    def __init__(self, *args): 
+        this = _Misc.new_PositionD(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    __swig_destroy__ = _Misc.delete_PositionD
+    __del__ = lambda self : None;
+PositionD_swigregister = _Misc.PositionD_swigregister
+PositionD_swigregister(PositionD)
+
 class CollidedTile(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, CollidedTile, name, value)

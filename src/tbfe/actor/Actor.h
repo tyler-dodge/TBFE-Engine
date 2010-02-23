@@ -25,8 +25,8 @@ class Actor
   Action * getAction(string);
   std::string conversation_;
  private:
-  PositionF position_;
-  PositionF rotation_;
+  PositionD position_;
+  PositionD rotation_;
   int angle_;
   Action * currentAction_;
   SDL_Surface * collisionMap_;
@@ -63,11 +63,11 @@ class Actor
   Position getPosition();
   void setPosition(int,int,int Z=0);
 
-  PositionF getPositionF();
-  void setPositionF(float,float,float);
+  PositionD getPositionD();
+  void setPositionD(double,double,double);
 
-  PositionF getRotationF();
-  void setRotationF(float,float,float);
+  PositionD getRotationD();
+  void setRotationD(double,double,double);
 
   int getAngle();
   void setAngle(int);

@@ -2509,25 +2509,26 @@ SWIG_Python_MustGetPtr(PyObject *obj, swig_type_info *ty, int argnum, int flags)
 #define SWIGTYPE_p_EventType swig_types[5]
 #define SWIGTYPE_p_Model swig_types[6]
 #define SWIGTYPE_p_Position swig_types[7]
-#define SWIGTYPE_p_PositionF swig_types[8]
-#define SWIGTYPE_p_Property swig_types[9]
-#define SWIGTYPE_p_SDL_Rect swig_types[10]
-#define SWIGTYPE_p_SDL_Surface swig_types[11]
-#define SWIGTYPE_p_Tile swig_types[12]
-#define SWIGTYPE_p_Timer swig_types[13]
-#define SWIGTYPE_p_Uint32 swig_types[14]
-#define SWIGTYPE_p_Window swig_types[15]
-#define SWIGTYPE_p_WindowType swig_types[16]
-#define SWIGTYPE_p_aiMaterial swig_types[17]
-#define SWIGTYPE_p_aiNode swig_types[18]
-#define SWIGTYPE_p_aiScene swig_types[19]
-#define SWIGTYPE_p_aiVector3D swig_types[20]
-#define SWIGTYPE_p_char swig_types[21]
-#define SWIGTYPE_p_ifstream swig_types[22]
-#define SWIGTYPE_p_std__string swig_types[23]
-#define SWIGTYPE_p_vectorT_ElementList_t swig_types[24]
-static swig_type_info *swig_types[26];
-static swig_module_info swig_module = {swig_types, 25, 0, 0, 0, 0};
+#define SWIGTYPE_p_PositionD swig_types[8]
+#define SWIGTYPE_p_PositionF swig_types[9]
+#define SWIGTYPE_p_Property swig_types[10]
+#define SWIGTYPE_p_SDL_Rect swig_types[11]
+#define SWIGTYPE_p_SDL_Surface swig_types[12]
+#define SWIGTYPE_p_Tile swig_types[13]
+#define SWIGTYPE_p_Timer swig_types[14]
+#define SWIGTYPE_p_Uint32 swig_types[15]
+#define SWIGTYPE_p_Window swig_types[16]
+#define SWIGTYPE_p_WindowType swig_types[17]
+#define SWIGTYPE_p_aiMaterial swig_types[18]
+#define SWIGTYPE_p_aiNode swig_types[19]
+#define SWIGTYPE_p_aiScene swig_types[20]
+#define SWIGTYPE_p_aiVector3D swig_types[21]
+#define SWIGTYPE_p_char swig_types[22]
+#define SWIGTYPE_p_ifstream swig_types[23]
+#define SWIGTYPE_p_std__string swig_types[24]
+#define SWIGTYPE_p_vectorT_ElementList_t swig_types[25]
+static swig_type_info *swig_types[27];
+static swig_module_info swig_module = {swig_types, 26, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -4679,6 +4680,203 @@ SWIGINTERN PyObject *Position_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObj
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *_wrap_PositionD_X_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  PositionD *arg1 = (PositionD *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:PositionD_X_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_PositionD, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PositionD_X_set" "', argument " "1"" of type '" "PositionD *""'"); 
+  }
+  arg1 = reinterpret_cast< PositionD * >(argp1);
+  ecode2 = SWIG_AsVal_double(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "PositionD_X_set" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  if (arg1) (arg1)->X = arg2;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_PositionD_X_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  PositionD *arg1 = (PositionD *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  double result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:PositionD_X_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_PositionD, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PositionD_X_get" "', argument " "1"" of type '" "PositionD *""'"); 
+  }
+  arg1 = reinterpret_cast< PositionD * >(argp1);
+  result = (double) ((arg1)->X);
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_PositionD_Y_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  PositionD *arg1 = (PositionD *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:PositionD_Y_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_PositionD, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PositionD_Y_set" "', argument " "1"" of type '" "PositionD *""'"); 
+  }
+  arg1 = reinterpret_cast< PositionD * >(argp1);
+  ecode2 = SWIG_AsVal_double(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "PositionD_Y_set" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  if (arg1) (arg1)->Y = arg2;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_PositionD_Y_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  PositionD *arg1 = (PositionD *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  double result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:PositionD_Y_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_PositionD, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PositionD_Y_get" "', argument " "1"" of type '" "PositionD *""'"); 
+  }
+  arg1 = reinterpret_cast< PositionD * >(argp1);
+  result = (double) ((arg1)->Y);
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_PositionD_Z_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  PositionD *arg1 = (PositionD *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:PositionD_Z_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_PositionD, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PositionD_Z_set" "', argument " "1"" of type '" "PositionD *""'"); 
+  }
+  arg1 = reinterpret_cast< PositionD * >(argp1);
+  ecode2 = SWIG_AsVal_double(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "PositionD_Z_set" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  if (arg1) (arg1)->Z = arg2;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_PositionD_Z_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  PositionD *arg1 = (PositionD *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  double result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:PositionD_Z_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_PositionD, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PositionD_Z_get" "', argument " "1"" of type '" "PositionD *""'"); 
+  }
+  arg1 = reinterpret_cast< PositionD * >(argp1);
+  result = (double) ((arg1)->Z);
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_PositionD(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  PositionD *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":new_PositionD")) SWIG_fail;
+  result = (PositionD *)new PositionD();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_PositionD, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_PositionD(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  PositionD *arg1 = (PositionD *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_PositionD",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_PositionD, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_PositionD" "', argument " "1"" of type '" "PositionD *""'"); 
+  }
+  arg1 = reinterpret_cast< PositionD * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *PositionD_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_PositionD, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
 SWIGINTERN PyObject *_wrap_CollidedTile_Passability_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   CollidedTile *arg1 = (CollidedTile *) 0 ;
@@ -6364,6 +6562,15 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_Position", _wrap_new_Position, METH_VARARGS, NULL},
 	 { (char *)"delete_Position", _wrap_delete_Position, METH_VARARGS, NULL},
 	 { (char *)"Position_swigregister", Position_swigregister, METH_VARARGS, NULL},
+	 { (char *)"PositionD_X_set", _wrap_PositionD_X_set, METH_VARARGS, NULL},
+	 { (char *)"PositionD_X_get", _wrap_PositionD_X_get, METH_VARARGS, NULL},
+	 { (char *)"PositionD_Y_set", _wrap_PositionD_Y_set, METH_VARARGS, NULL},
+	 { (char *)"PositionD_Y_get", _wrap_PositionD_Y_get, METH_VARARGS, NULL},
+	 { (char *)"PositionD_Z_set", _wrap_PositionD_Z_set, METH_VARARGS, NULL},
+	 { (char *)"PositionD_Z_get", _wrap_PositionD_Z_get, METH_VARARGS, NULL},
+	 { (char *)"new_PositionD", _wrap_new_PositionD, METH_VARARGS, NULL},
+	 { (char *)"delete_PositionD", _wrap_delete_PositionD, METH_VARARGS, NULL},
+	 { (char *)"PositionD_swigregister", PositionD_swigregister, METH_VARARGS, NULL},
 	 { (char *)"CollidedTile_Passability_set", _wrap_CollidedTile_Passability_set, METH_VARARGS, NULL},
 	 { (char *)"CollidedTile_Passability_get", _wrap_CollidedTile_Passability_get, METH_VARARGS, NULL},
 	 { (char *)"CollidedTile_position_set", _wrap_CollidedTile_position_set, METH_VARARGS, NULL},
@@ -6444,6 +6651,7 @@ static swig_type_info _swigt__p_ElementList = {"_p_ElementList", "ElementList *"
 static swig_type_info _swigt__p_EventType = {"_p_EventType", "EventType *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Model = {"_p_Model", "Model *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Position = {"_p_Position", "Position *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_PositionD = {"_p_PositionD", "PositionD *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_PositionF = {"_p_PositionF", "PositionF *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Property = {"_p_Property", "Property *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_SDL_Rect = {"_p_SDL_Rect", "SDL_Rect *", 0, 0, (void*)0, 0};
@@ -6471,6 +6679,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_EventType,
   &_swigt__p_Model,
   &_swigt__p_Position,
+  &_swigt__p_PositionD,
   &_swigt__p_PositionF,
   &_swigt__p_Property,
   &_swigt__p_SDL_Rect,
@@ -6498,6 +6707,7 @@ static swig_cast_info _swigc__p_ElementList[] = {  {&_swigt__p_ElementList, 0, 0
 static swig_cast_info _swigc__p_EventType[] = {  {&_swigt__p_EventType, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Model[] = {  {&_swigt__p_Model, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Position[] = {  {&_swigt__p_Position, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_PositionD[] = {  {&_swigt__p_PositionD, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_PositionF[] = {  {&_swigt__p_PositionF, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Property[] = {  {&_swigt__p_Property, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_SDL_Rect[] = {  {&_swigt__p_SDL_Rect, 0, 0, 0},{0, 0, 0, 0}};
@@ -6525,6 +6735,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_EventType,
   _swigc__p_Model,
   _swigc__p_Position,
+  _swigc__p_PositionD,
   _swigc__p_PositionF,
   _swigc__p_Property,
   _swigc__p_SDL_Rect,

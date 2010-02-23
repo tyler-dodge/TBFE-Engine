@@ -15,7 +15,6 @@ TBFE_Render::TBFE_Render()
   changeLighting(10);
   window_=SDL_CreateRGBSurface(SDL_HWSURFACE,100,100,32,0,0,0,100);
   TBFE_Base::CollisionTile=TBFE_Base::CheckSheets("Tile.png");
-  model=TBFE_Base::CheckModels("test.dae");
   setLightPosition(0,0,0);
 };
 void TBFE_Render::setLightPosition(float x,float y,float z)
@@ -29,7 +28,9 @@ void TBFE_Render::initGl()
   glClearColor( 0, 0, .5, 0 );
   glMatrixMode( GL_PROJECTION );
   glLoadIdentity();
-  glFrustum( -1,1, -1, 1, 1,10);
+  glFrustum( -(double)TBFE_Base::ScreenDimensions.X/(double)TBFE_Base::ScreenDimensions.Y,(double)TBFE_Base::ScreenDimensions.X/(double)TBFE_Base::ScreenDimensions.Y, 
+	     -(double)TBFE_Base::ScreenDimensions.Y/(double)TBFE_Base::ScreenDimensions.X,(double)TBFE_Base::ScreenDimensions.Y/(double)TBFE_Base::ScreenDimensions.X, 
+	     1,100);
   glMatrixMode( GL_MODELVIEW );
   glEnable(GL_NORMALIZE);
   glEnable(GL_LIGHTING);
@@ -54,8 +55,9 @@ void TBFE_Render::initGl()
   specular[2]=0.0f;
   glLightfv(GL_LIGHT0,GL_AMBIENT,specular);
   glEnable(GL_LIGHT0);
+  int Error=glGetError();
   //If there was any errors
-  if( glGetError() != GL_NO_ERROR )
+  if(Error != GL_NO_ERROR )
     {
       TBFE_Base::MainConsole.write("OpenGl failed to load");
       return;    
@@ -73,13 +75,14 @@ void TBFE_Render::init()
       SDL_FreeSurface(screen_);
     };
   SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,8);
-  SDL_SetVideoMode(640,480,32,SDL_OPENGL);
+  screen_=SDL_SetVideoMode(1440,900,32,SDL_OPENGL | SDL_FULLSCREEN);
   TBFE_Base::MainConsole.write("SDL initialized");
   initGl();
  };
 TBFE_Render::~TBFE_Render()
 {
   TTF_CloseFont(TBFE_Base::font);
+  SDL_FreeSurface(screen_);
   TTF_Quit();
   SDL_Quit();
 };
@@ -108,7 +111,6 @@ inline void TBFE_Render::initializeTileSets()
 };
 void TBFE_Render::finalRender(bool doFlip)
 {  
-  glLightfv(GL_LIGHT0,GL_POSITION,lightPosition_);
   Position ScreenPosition;
   Position CurrentPosition;
   CurrentPosition=TBFE_Base::MainPlayer->getPosition();
@@ -131,8 +133,6 @@ void TBFE_Render::finalRender(bool doFlip)
     {
       offset_.X=CurrentPosition.X-mapDimensions.X*TBFE_Base::TileSize+TBFE_Base::ScreenDimensions.X;
     };
-  
-  //renderMapLayer(CurrentPosition.X-offset_.X,CurrentPosition.Y-offset_.Y,0);
   //arrangeActors();
   //renderActors();
   for (int i=1;i<TBFE_Base::CurrentMap.getNumberOfLayers();i++)
@@ -150,10 +150,19 @@ void TBFE_Render::finalRender(bool doFlip)
     {
       //SDL_Flip(screen_);
     };
+  lightPosition_[3]=1.0f;
+  glLightfv(GL_LIGHT0,GL_POSITION,lightPosition_);
   glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+  glLoadIdentity();
+  renderMapLayer(0,0,0);
   glLoadIdentity();
   renderActors();
   SDL_GL_SwapBuffers();
+  int Error=glGetError();
+  if(Error != GL_NO_ERROR )
+    {
+      TBFE_Base::MainConsole.write("OpenGl failed to load");
+    }
   glFlush();
 };
 void TBFE_Render::arrangeActors()
@@ -192,25 +201,98 @@ void TBFE_Render::arrangeActors()
 };
 int TBFE_Render::renderMapLayer(int x,int y, int Layer)
 {
-    SDL_Rect TileRect;
-    int TileNumber;
-    for (int mapY=y/TBFE_Base::TileSize;mapY<y/TBFE_Base::TileSize+TBFE_Base::ScreenDimensions.Y/TBFE_Base::TileSize+3;mapY++)
-      {
-	for(int mapX=x/TBFE_Base::TileSize;mapX<x/TBFE_Base::TileSize+TBFE_Base::ScreenDimensions.X/TBFE_Base::TileSize+3;mapX++)
-	  {
-	    Tile tile=TBFE_Base::CurrentMap.getTile(mapX,mapY,Layer);
-	    TileNumber=(int)tile.Type;
-	    TileRect.x=(TileNumber-(int)(TileNumber/2)*2)*TBFE_Base::TileSize;
-	    TileRect.y=(int)(TileNumber/2)*TBFE_Base::TileSize;
-	    TileRect.w=TBFE_Base::TileSize;
-	    TileRect.h=TBFE_Base::TileSize;
-	    if (tile.TileSet<tileSet_.size())
-	      {
-		applyImage(mapX*TBFE_Base::TileSize-x,mapY*TBFE_Base::TileSize-y,
-			   tileSet_.at(tile.TileSet),screen_,&TileRect);
-	      }
-	  };	 
-      };
+  glPushMatrix();
+  vector<GLuint> indices;
+  vector<GLfloat> vertices;
+  vector<GLfloat> colors;
+  glTranslatef(0,0,-10);
+  Position dimensions=TBFE_Base::CurrentMap.getDimensions();
+  cout << dimensions.X << "," << dimensions.Y << "\n";
+  for (int mapY=0;mapY<dimensions.Y;mapY++)
+    {
+      for (int mapX=0;mapX<dimensions.X;mapX++)
+	{
+	  Tile tile=TBFE_Base::CurrentMap.getTile(mapX,mapY,Layer);
+	  GLfloat vertex[]={mapX,0,mapY};
+	  vertices.push_back(vertex[0]);
+	  vertices.push_back(vertex[1]);
+	  vertices.push_back(vertex[2]);
+	  for (int i=0;i<4;i++)
+	    {
+	      colors.push_back(1);
+	      colors.push_back(1);
+	      colors.push_back(1);
+	    };
+	  if (mapX==0)
+	    {
+	      tile=TBFE_Base::CurrentMap.getTile(mapX,mapY,Layer);
+	    }
+	  else
+	    {
+	      tile=TBFE_Base::CurrentMap.getTile(mapX-1,mapY,Layer);
+	    };
+	  vertex[0]=mapX-1;
+	  vertex[1]=0;
+	  vertex[2]=mapY;
+	  vertices.push_back(vertex[0]); 
+	  vertices.push_back(vertex[1]); 
+	  vertices.push_back(vertex[2]);
+	  if (mapX==0 || mapY==0)
+	    {
+	      tile=TBFE_Base::CurrentMap.getTile(mapX,mapY,Layer);
+	    }
+	  else
+	    {
+	      tile=TBFE_Base::CurrentMap.getTile(mapX-1,mapY-1,Layer);
+	    };
+	  vertex[0]=mapX-1;
+	  vertex[1]=0;
+	  vertex[2]=mapY-1;
+	  vertices.push_back(vertex[0]); 
+	  vertices.push_back(vertex[1]); 
+	  vertices.push_back(vertex[2]);
+	  if (mapY==0)
+	    {
+	      tile=TBFE_Base::CurrentMap.getTile(mapX,mapY,Layer);
+	    }
+	  else
+	    {
+	      tile=TBFE_Base::CurrentMap.getTile(mapX,mapY-1,Layer);
+	    };
+	  vertex[0]=mapX;
+	  vertex[1]=0;
+	  vertex[2]=mapY-1;
+	  vertices.push_back(vertex[0]); 
+	  vertices.push_back(vertex[1]); 
+	  vertices.push_back(vertex[2]);
+	};
+    };
+  for (int i=0;i<dimensions.X*dimensions.Y*4;i++)
+    {
+      indices.push_back(i);
+    };			
+  // for (int i=0;i<vertices.size()/3/4;i++)
+  //{
+  //  for (int a=0;a<4;a++)
+  //	{
+  //	  cout << vertices[i*3+4*a] << "," << vertices[i*3+1+4*a] << "," << vertices[i*3+2+4*a] << ": ";
+  ///	};
+//     cout << "\n";
+  // };
+  //exit(0);
+  //cout << "vertices:" << vertices.size() << "\n";
+  //cout << "indices:" << indices.size() << "\n";
+  glEnableClientState(GL_VERTEX_ARRAY);
+  glEnableClientState(GL_COLOR_ARRAY);
+  glEnable(GL_COLOR_MATERIAL);
+  glVertexPointer(3,GL_FLOAT,0,&vertices[0]);
+  glColorMaterial(GL_FRONT,GL_AMBIENT_AND_DIFFUSE);
+  glColorPointer(3,GL_FLOAT,0,&colors[0]);
+  glDrawElements(GL_QUADS,indices.size(),GL_UNSIGNED_INT,&indices[0]);
+  glDisable(GL_COLOR_MATERIAL);
+  glDisableClientState(GL_COLOR_ARRAY);
+  glDisableClientState(GL_VERTEX_ARRAY);
+  glPopMatrix();
 };
 void TBFE_Render::renderActors()
 {
@@ -220,8 +302,8 @@ void TBFE_Render::renderActors()
     };
   for (int i=0;i<TBFE_Base::ActorList.size();i++)
     {
-      PositionF ActorPosition=TBFE_Base::ActorList.at(i)->getPositionF();
-      PositionF rotation=TBFE_Base::ActorList.at(i)->getRotationF();
+      PositionD ActorPosition=TBFE_Base::ActorList.at(i)->getPositionD();
+      PositionD rotation=TBFE_Base::ActorList.at(i)->getRotationD();
       Position CurrentPosition=TBFE_Base::MainPlayer->getPosition();
       Actor * currentActor=TBFE_Base::ActorList.at(i);
       SDL_Rect Frame;
@@ -231,13 +313,18 @@ void TBFE_Render::renderActors()
 	{
 	  Animation * animation=action.getLayer(Layer);
 	  Frame=action.getFrameRect(Layer);
+	  aiScene * model;
+	  model=animation->getModel();
 	  if (animation->getModel()!=NULL)
 	    {
-	      aiScene * model;
-	      model=animation->getModel();
-	      aiVector3D tposition(ActorPosition.X,ActorPosition.Y,ActorPosition.Z);
-	      aiVector3D trotation(rotation.X,rotation.Y,rotation.Z);
+	      //aiVector3D tposition(ActorPosition.X,ActorPosition.Y,ActorPosition.Z);
+	      aiVector3D tposition(ActorPosition.X/20,ActorPosition.Y/20,ActorPosition.Z/20);
+	      aiVector3D trotation(1,0,0);
+	      currentActor->setAngle(270);
+	      //aiVector3D trotation(rotation.X,rotation.Y,rotation.Z);
 	      aiVector3D tscale(0,0,0);
+	      glLoadIdentity();
+	      cout << "position:" << tposition[0] << "," << tposition[1] << "," << tposition[2] << "\n";
 	      drawNodes(model,model->mRootNode,tposition,currentActor->getAngle(),trotation,tscale);
 	      //applyImage(x+animation->getOffset().X,
 	      // y-sqrt(pow(animation->getOffset().Y,2)+

@@ -57,5 +57,4 @@ while action!=Misc.QUIT:
     mousePosition=engine.getMousePosition()
     uiMousePosition.getElement("lblRate").setProperty("text",('%i,%i' % (mousePosition.X,mousePosition.Y)))
     uiMousePosition.getElement("lblRate").reload()
-    print(('%i,%i,%i' % (Tbfe.GetMainPlayer().getPosition().X,Tbfe.GetMainPlayer().getPosition().Y,Tbfe.GetMainPlayer().getPosition().Z)))
     i+=1

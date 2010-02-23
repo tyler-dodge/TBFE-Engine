@@ -39,6 +39,12 @@ struct Position
   int Y;
   int Z;
 };
+struct PositionD
+{
+  double X;
+  double Y;
+  double Z;
+};
 struct CollidedTile
 {
   int Passability;

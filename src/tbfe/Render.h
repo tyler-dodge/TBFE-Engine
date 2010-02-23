@@ -33,7 +33,6 @@ class TBFE_Render
   int renderMapLayer(int,int,int);
   void renderForeground(int,int,bool);
   GLfloat lightPosition_[4];
-  aiScene * model;
  public:
   TBFE_Render();
   ~TBFE_Render();

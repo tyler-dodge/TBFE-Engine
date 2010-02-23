@@ -26,19 +26,19 @@ void TBFE_Logic::playerMovement()
   if (TBFE_Base::MainPlayer->getCurrentAction().getName()=="Walk" ||
       TBFE_Base::MainPlayer->getCurrentAction().getName()=="None")
     {
-      if (keysDown_[SDLK_UP])
+      if (keysDown_['w'])
 	{
 	  TBFE_Base::MainPlayer->changePosition(90,true);
 	}
-      else if (keysDown_[SDLK_DOWN])
+      else if (keysDown_['s'])
 	{
 	  TBFE_Base::MainPlayer->changePosition(270,true);
 	}
-      else if (keysDown_[SDLK_RIGHT])
+      else if (keysDown_['d'])
 	{
 	  TBFE_Base::MainPlayer->changePosition(0,true);
 	}
-      else if (keysDown_[SDLK_LEFT])
+      else if (keysDown_['a'])
 	{
 	  TBFE_Base::MainPlayer->changePosition(180,true);
 	};

@@ -1,4 +1,5 @@
 #include "Actor.h"
+#define PI 3.14159265
 Actor::Actor (int PositionX,int PositionY)
     {
       currentAction_=NULL;
@@ -9,12 +10,12 @@ Actor::Actor (int PositionX,int PositionY)
       setCollisionDimensions(40,60,170);
       setPosition(PositionX,PositionY);
       setName("None");
-      setSpeed(5);
+      setSpeed(1);
       setAngle(0);
-      string WalkAnimationBody="0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,,";
+      string WalkAnimationBody="0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,";
       string WalkHeads="0,";
       Action Walk("Walk","");
-      Animation Body("Actors/living/body/normal/walk.png",WalkAnimationBody,
+      Animation Body("test.dae",WalkAnimationBody,
 		     100,200,-30,-140,1,true);
       Walk.addAnimation(Body);
       Walk.setMainAnimation(0);
@@ -25,11 +26,11 @@ int Actor::getAngle()
 {
   return angle_;
 };
-PositionF Actor::getRotationF()
+PositionD Actor::getRotationD()
 {
   return rotation_;
 };
-void Actor::setRotationF(float x,float y, float z)
+void Actor::setRotationD(double x,double y, double z)
 {
   rotation_.X=x;
   rotation_.Y=y;
@@ -156,10 +157,10 @@ int Actor::changePosition(int newAngle,bool ChangeDirection)
       startAction("Walk");
     }
   setWalking(true);
-  PositionF position;
-  position=getPositionF();
-  position.X+=(float)getSpeed()*TBFE_Base::GameSpeed*cos(newAngle*3.14/180);
-  position.Y+=(float)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*3.14/180);
+  PositionD position;
+  position=getPositionD();
+  position.X+=(double)getSpeed()*TBFE_Base::GameSpeed*cos(newAngle*PI/180);
+  position.Z+=(double)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*PI/180);
   //switch(NewDirection)
   // {
   //  case UP:
@@ -175,7 +176,7 @@ int Actor::changePosition(int newAngle,bool ChangeDirection)
   //    position.X-=fabs((float)getSpeed()*TBFE_Base::GameSpeed);
   //    break;
   //  };
-  setPositionF(position.X,position.Y,position.Z);
+  setPositionD(position.X,position.Y,position.Z);
   vector<CollidedTile> collisionTest=TBFE_Base::CurrentMap.collisionTest((int)position_.X,
 									 (int)position_.Y);
   if (collisionTest.size()>0)
@@ -215,11 +216,11 @@ int Actor::changePosition(int newAngle,bool ChangeDirection)
 		    };
 		  break;
 		case 255:
-		  position.X-=(float)getSpeed()*TBFE_Base::GameSpeed*cos(newAngle*3.14/180);
-		  position.Y-=(float)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*3.14/180);
+		  position.X-=(double)getSpeed()*TBFE_Base::GameSpeed*cos(newAngle*PI/180);
+		  position.Y-=(double)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*PI/180);
 		  break;
 		};
-	      setPositionF(position.X,position.Y,position.Z);
+	      setPositionD(position.X,position.Y,position.Z);
 	      return -2;
 	    };
 	};
@@ -228,9 +229,9 @@ int Actor::changePosition(int newAngle,bool ChangeDirection)
 					 (int)position.Y,true);
   if (ncollisionTest!=-1)
     {
-      position.X-=(float)getSpeed()*TBFE_Base::GameSpeed*cos(newAngle*3.14/180);
-      position.Y-=(float)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*3.14/180);
-      setPositionF(position.X,position.Y,position.Z);
+      position.X-=(double)getSpeed()*TBFE_Base::GameSpeed*cos(newAngle*PI/180);
+      position.Y-=(double)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*PI/180);
+      setPositionD(position.X,position.Y,position.Z);
       return ncollisionTest;
     };
   return -1;
@@ -263,15 +264,15 @@ Position Actor::getPosition()
 };
 void Actor::setPosition(int x,int y,int z)
 {
-  position_.X=(float)x;
-  position_.Y=(float)y;
-  position_.Z=(float)z;
+  position_.X=(double)x;
+  position_.Y=(double)y;
+  position_.Z=(double)z;
 };
-void Actor::setPositionF(float x,float y,float z)
+void Actor::setPositionD(double x,double y,double z)
 {
-  position_.X=(float)x;
-  position_.Y=(float)y;
-  position_.Z=(float)z;
+  position_.X=x;
+  position_.Y=y;
+  position_.Z=z;
 };
 bool Actor::advancedCollision(SDL_Surface * ColliderMap,SDL_Rect ColliderRect,Position ColliderOffset)
 {
@@ -502,7 +503,7 @@ void Actor::loadCollisionMap(string newSource)
   collisionSource_=newSource;
   collisionMap_=newCollision;
 };
-PositionF Actor::getPositionF()
+PositionD Actor::getPositionD()
 {
   return position_;
 };
