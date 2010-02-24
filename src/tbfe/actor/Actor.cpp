@@ -8,9 +8,9 @@ Actor::Actor (int PositionX,int PositionY)
       setMobile(true);
       actionList_.resize(0);
       setCollisionDimensions(40,60,170);
-      setPosition(PositionX,PositionY);
+      setPosition(PositionX,0,PositionY);
       setName("None");
-      setSpeed(1);
+      setSpeed(5);
       setAngle(0);
       string WalkAnimationBody="0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,";
       string WalkHeads="0,";
@@ -217,7 +217,7 @@ int Actor::changePosition(int newAngle,bool ChangeDirection)
 		  break;
 		case 255:
 		  position.X-=(double)getSpeed()*TBFE_Base::GameSpeed*cos(newAngle*PI/180);
-		  position.Y-=(double)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*PI/180);
+		  position.Z-=(double)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*PI/180);
 		  break;
 		};
 	      setPositionD(position.X,position.Y,position.Z);
@@ -226,11 +226,11 @@ int Actor::changePosition(int newAngle,bool ChangeDirection)
 	};
     };
   int ncollisionTest=checkActorCollision((int)position.X,
-					 (int)position.Y,true);
+					 (int)position.Z,true);
   if (ncollisionTest!=-1)
     {
       position.X-=(double)getSpeed()*TBFE_Base::GameSpeed*cos(newAngle*PI/180);
-      position.Y-=(double)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*PI/180);
+      position.Z-=(double)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*PI/180);
       setPositionD(position.X,position.Y,position.Z);
       return ncollisionTest;
     };

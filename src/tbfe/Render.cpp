@@ -159,7 +159,9 @@ void TBFE_Render::finalRender(bool doFlip)
   glLightfv(GL_LIGHT0,GL_POSITION,lightPosition_);
   glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
   glLoadIdentity();
-  glTranslatef(-TBFE_Base::MainPlayer->getPositionD().X/20,-7,-TBFE_Base::MainPlayer->getPositionD().Z/20-10);
+  glTranslatef(-1,-9,-4);
+  glRotatef(TBFE_Base::MainPlayer->getAngle()+90,0,1,0);
+  glTranslatef(-TBFE_Base::MainPlayer->getPositionD().X/30,0,-TBFE_Base::MainPlayer->getPositionD().Z/30);
   renderActors();
   renderMapLayer(0,0,0);
   SDL_GL_SwapBuffers();
@@ -309,12 +311,11 @@ void TBFE_Render::renderActors()
 	  if (animation->getModel()!=NULL)
 	    {
 	      //aiVector3D tposition(ActorPosition.X,ActorPosition.Y,ActorPosition.Z);
-	      aiVector3D tposition(ActorPosition.X/20,ActorPosition.Y/20,ActorPosition.Z/20);
+	      aiVector3D tposition(ActorPosition.X/30,ActorPosition.Y/30,ActorPosition.Z/30);
 	      aiVector3D trotation(1,0,0);
-	      currentActor->setAngle(270);
 	      //aiVector3D trotation(rotation.X,rotation.Y,rotation.Z);
 	      aiVector3D tscale(0,0,0);
-	      drawNodes(model,model->mRootNode,tposition,currentActor->getAngle(),trotation,tscale);
+	      drawNodes(model,model->mRootNode,tposition,270,trotation,tscale);
 	      //applyImage(x+animation->getOffset().X,
 	      // y-sqrt(pow(animation->getOffset().Y,2)+
 	      //		pow(ActorPosition.Z,2)), 

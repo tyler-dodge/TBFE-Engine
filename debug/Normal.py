@@ -39,7 +39,7 @@ class Console:
 Tbfe.cvar.ScreenDimensions.X=1024
 Tbfe.cvar.ScreenDimensions.Y=600
 engine=Tbfe.TBFE()
-Tbfe.GetMainPlayer().setPosition(0,0)
+Tbfe.GetMainPlayer().setPosition(100,0,400)
 engine.changeMap("test.fmm")
 Tbfe.cvar.CurrentMap.generateMap(25,25)
 engine.initMap()
@@ -51,6 +51,8 @@ uiMousePosition=UI.createWindow(0,800,"FrameRate")
 engine.addWindow(uiMousePosition)
 action=5
 i=0
+randomNpc=Actor.createActor(400,100,"Npc","Npc")
+engine.addActor(randomNpc)
 while action!=Misc.QUIT:
     uiConsole.refreshWindow()
     action=engine.runEngine()
