@@ -52,6 +52,7 @@ getPixel = _Misc.getPixel
 loadModel = _Misc.loadModel
 drawNodes = _Misc.drawNodes
 applyMaterial = _Misc.applyMaterial
+bindImage = _Misc.bindImage
 loadString = _Misc.loadString
 nextSet = _Misc.nextSet
 nextChar = _Misc.nextChar
@@ -398,6 +399,27 @@ class EventType(_object):
     __del__ = lambda self : None;
 EventType_swigregister = _Misc.EventType_swigregister
 EventType_swigregister(EventType)
+
+class TileSheet(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, TileSheet, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, TileSheet, name)
+    __repr__ = _swig_repr
+    __swig_setmethods__["texture"] = _Misc.TileSheet_texture_set
+    __swig_getmethods__["texture"] = _Misc.TileSheet_texture_get
+    if _newclass:texture = _swig_property(_Misc.TileSheet_texture_get, _Misc.TileSheet_texture_set)
+    __swig_setmethods__["dimensions"] = _Misc.TileSheet_dimensions_set
+    __swig_getmethods__["dimensions"] = _Misc.TileSheet_dimensions_get
+    if _newclass:dimensions = _swig_property(_Misc.TileSheet_dimensions_get, _Misc.TileSheet_dimensions_set)
+    def __init__(self, *args): 
+        this = _Misc.new_TileSheet(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    __swig_destroy__ = _Misc.delete_TileSheet
+    __del__ = lambda self : None;
+TileSheet_swigregister = _Misc.TileSheet_swigregister
+TileSheet_swigregister(TileSheet)
 
 
 

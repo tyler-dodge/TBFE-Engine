@@ -26,7 +26,7 @@ class TBFE_Render
   SDL_Color textColor_;
   Position offset_;
   SDL_Surface * screen_;
-  vector<SDL_Surface *> tileSet_;
+  vector<TileSheet> tileSet_;
   void renderActors();
   void arrangeActors();
   void renderWindowList();

@@ -1,5 +1,6 @@
 #ifndef Structs_L
 #define Structs_L
+#include <SDL/SDL_opengl.h>
 #include "Enums.h"
 #include <string>
 #include <vector>
@@ -86,5 +87,10 @@ struct EventType
   bool Enabled;
   std::string Function;
   int Key;
+};
+struct TileSheet
+{
+  GLuint texture;
+  Position dimensions;
 };
 #endif

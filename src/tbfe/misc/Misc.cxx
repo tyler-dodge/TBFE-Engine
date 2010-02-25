@@ -2507,28 +2507,30 @@ SWIG_Python_MustGetPtr(PyObject *obj, swig_type_info *ty, int argnum, int flags)
 #define SWIGTYPE_p_Element swig_types[3]
 #define SWIGTYPE_p_ElementList swig_types[4]
 #define SWIGTYPE_p_EventType swig_types[5]
-#define SWIGTYPE_p_Model swig_types[6]
-#define SWIGTYPE_p_Position swig_types[7]
-#define SWIGTYPE_p_PositionD swig_types[8]
-#define SWIGTYPE_p_PositionF swig_types[9]
-#define SWIGTYPE_p_Property swig_types[10]
-#define SWIGTYPE_p_SDL_Rect swig_types[11]
-#define SWIGTYPE_p_SDL_Surface swig_types[12]
-#define SWIGTYPE_p_Tile swig_types[13]
-#define SWIGTYPE_p_Timer swig_types[14]
-#define SWIGTYPE_p_Uint32 swig_types[15]
-#define SWIGTYPE_p_Window swig_types[16]
-#define SWIGTYPE_p_WindowType swig_types[17]
-#define SWIGTYPE_p_aiMaterial swig_types[18]
-#define SWIGTYPE_p_aiNode swig_types[19]
-#define SWIGTYPE_p_aiScene swig_types[20]
-#define SWIGTYPE_p_aiVector3D swig_types[21]
-#define SWIGTYPE_p_char swig_types[22]
-#define SWIGTYPE_p_ifstream swig_types[23]
-#define SWIGTYPE_p_std__string swig_types[24]
-#define SWIGTYPE_p_vectorT_ElementList_t swig_types[25]
-static swig_type_info *swig_types[27];
-static swig_module_info swig_module = {swig_types, 26, 0, 0, 0, 0};
+#define SWIGTYPE_p_GLuint swig_types[6]
+#define SWIGTYPE_p_Model swig_types[7]
+#define SWIGTYPE_p_Position swig_types[8]
+#define SWIGTYPE_p_PositionD swig_types[9]
+#define SWIGTYPE_p_PositionF swig_types[10]
+#define SWIGTYPE_p_Property swig_types[11]
+#define SWIGTYPE_p_SDL_Rect swig_types[12]
+#define SWIGTYPE_p_SDL_Surface swig_types[13]
+#define SWIGTYPE_p_Tile swig_types[14]
+#define SWIGTYPE_p_TileSheet swig_types[15]
+#define SWIGTYPE_p_Timer swig_types[16]
+#define SWIGTYPE_p_Uint32 swig_types[17]
+#define SWIGTYPE_p_Window swig_types[18]
+#define SWIGTYPE_p_WindowType swig_types[19]
+#define SWIGTYPE_p_aiMaterial swig_types[20]
+#define SWIGTYPE_p_aiNode swig_types[21]
+#define SWIGTYPE_p_aiScene swig_types[22]
+#define SWIGTYPE_p_aiVector3D swig_types[23]
+#define SWIGTYPE_p_char swig_types[24]
+#define SWIGTYPE_p_ifstream swig_types[25]
+#define SWIGTYPE_p_std__string swig_types[26]
+#define SWIGTYPE_p_vectorT_ElementList_t swig_types[27]
+static swig_type_info *swig_types[29];
+static swig_module_info swig_module = {swig_types, 28, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -3355,29 +3357,25 @@ SWIGINTERN PyObject *_wrap_drawNodes(PyObject *SWIGUNUSEDPARM(self), PyObject *a
   aiScene *arg1 = (aiScene *) 0 ;
   aiNode *arg2 = (aiNode *) 0 ;
   aiVector3D arg3 ;
-  int arg4 ;
+  aiVector3D arg4 ;
   aiVector3D arg5 ;
-  aiVector3D arg6 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   void *argp3 ;
   int res3 = 0 ;
-  int val4 ;
-  int ecode4 = 0 ;
+  void *argp4 ;
+  int res4 = 0 ;
   void *argp5 ;
   int res5 = 0 ;
-  void *argp6 ;
-  int res6 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
   PyObject * obj3 = 0 ;
   PyObject * obj4 = 0 ;
-  PyObject * obj5 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OOOOOO:drawNodes",&obj0,&obj1,&obj2,&obj3,&obj4,&obj5)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OOOOO:drawNodes",&obj0,&obj1,&obj2,&obj3,&obj4)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_aiScene, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "drawNodes" "', argument " "1"" of type '" "aiScene *""'"); 
@@ -3401,11 +3399,19 @@ SWIGINTERN PyObject *_wrap_drawNodes(PyObject *SWIGUNUSEDPARM(self), PyObject *a
       if (SWIG_IsNewObj(res3)) delete temp;
     }
   }
-  ecode4 = SWIG_AsVal_int(obj3, &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "drawNodes" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
+  {
+    res4 = SWIG_ConvertPtr(obj3, &argp4, SWIGTYPE_p_aiVector3D,  0  | 0);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "drawNodes" "', argument " "4"" of type '" "aiVector3D""'"); 
+    }  
+    if (!argp4) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "drawNodes" "', argument " "4"" of type '" "aiVector3D""'");
+    } else {
+      aiVector3D * temp = reinterpret_cast< aiVector3D * >(argp4);
+      arg4 = *temp;
+      if (SWIG_IsNewObj(res4)) delete temp;
+    }
+  }
   {
     res5 = SWIG_ConvertPtr(obj4, &argp5, SWIGTYPE_p_aiVector3D,  0  | 0);
     if (!SWIG_IsOK(res5)) {
@@ -3419,20 +3425,7 @@ SWIGINTERN PyObject *_wrap_drawNodes(PyObject *SWIGUNUSEDPARM(self), PyObject *a
       if (SWIG_IsNewObj(res5)) delete temp;
     }
   }
-  {
-    res6 = SWIG_ConvertPtr(obj5, &argp6, SWIGTYPE_p_aiVector3D,  0  | 0);
-    if (!SWIG_IsOK(res6)) {
-      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "drawNodes" "', argument " "6"" of type '" "aiVector3D""'"); 
-    }  
-    if (!argp6) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "drawNodes" "', argument " "6"" of type '" "aiVector3D""'");
-    } else {
-      aiVector3D * temp = reinterpret_cast< aiVector3D * >(argp6);
-      arg6 = *temp;
-      if (SWIG_IsNewObj(res6)) delete temp;
-    }
-  }
-  drawNodes(arg1,arg2,arg3,arg4,arg5,arg6);
+  drawNodes(arg1,arg2,arg3,arg4,arg5);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -3455,6 +3448,28 @@ SWIGINTERN PyObject *_wrap_applyMaterial(PyObject *SWIGUNUSEDPARM(self), PyObjec
   arg1 = reinterpret_cast< aiMaterial * >(argp1);
   applyMaterial((aiMaterial const *)arg1);
   resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_bindImage(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  SDL_Surface *arg1 = (SDL_Surface *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  GLuint result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:bindImage",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_SDL_Surface, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "bindImage" "', argument " "1"" of type '" "SDL_Surface *""'"); 
+  }
+  arg1 = reinterpret_cast< SDL_Surface * >(argp1);
+  result = bindImage(arg1);
+  resultobj = SWIG_NewPointerObj((new GLuint(static_cast< const GLuint& >(result))), SWIGTYPE_p_GLuint, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -6501,6 +6516,159 @@ SWIGINTERN PyObject *EventType_swigregister(PyObject *SWIGUNUSEDPARM(self), PyOb
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *_wrap_TileSheet_texture_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  TileSheet *arg1 = (TileSheet *) 0 ;
+  GLuint arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:TileSheet_texture_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TileSheet, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TileSheet_texture_set" "', argument " "1"" of type '" "TileSheet *""'"); 
+  }
+  arg1 = reinterpret_cast< TileSheet * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_GLuint,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TileSheet_texture_set" "', argument " "2"" of type '" "GLuint""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TileSheet_texture_set" "', argument " "2"" of type '" "GLuint""'");
+    } else {
+      GLuint * temp = reinterpret_cast< GLuint * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  if (arg1) (arg1)->texture = arg2;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TileSheet_texture_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  TileSheet *arg1 = (TileSheet *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  GLuint result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:TileSheet_texture_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TileSheet, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TileSheet_texture_get" "', argument " "1"" of type '" "TileSheet *""'"); 
+  }
+  arg1 = reinterpret_cast< TileSheet * >(argp1);
+  result =  ((arg1)->texture);
+  resultobj = SWIG_NewPointerObj((new GLuint(static_cast< const GLuint& >(result))), SWIGTYPE_p_GLuint, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TileSheet_dimensions_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  TileSheet *arg1 = (TileSheet *) 0 ;
+  Position *arg2 = (Position *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:TileSheet_dimensions_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TileSheet, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TileSheet_dimensions_set" "', argument " "1"" of type '" "TileSheet *""'"); 
+  }
+  arg1 = reinterpret_cast< TileSheet * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_Position, 0 |  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TileSheet_dimensions_set" "', argument " "2"" of type '" "Position *""'"); 
+  }
+  arg2 = reinterpret_cast< Position * >(argp2);
+  if (arg1) (arg1)->dimensions = *arg2;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TileSheet_dimensions_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  TileSheet *arg1 = (TileSheet *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  Position *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:TileSheet_dimensions_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TileSheet, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TileSheet_dimensions_get" "', argument " "1"" of type '" "TileSheet *""'"); 
+  }
+  arg1 = reinterpret_cast< TileSheet * >(argp1);
+  result = (Position *)& ((arg1)->dimensions);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Position, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_TileSheet(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  TileSheet *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":new_TileSheet")) SWIG_fail;
+  result = (TileSheet *)new TileSheet();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_TileSheet, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_TileSheet(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  TileSheet *arg1 = (TileSheet *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_TileSheet",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TileSheet, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_TileSheet" "', argument " "1"" of type '" "TileSheet *""'"); 
+  }
+  arg1 = reinterpret_cast< TileSheet * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *TileSheet_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_TileSheet, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"loadImage", _wrap_loadImage, METH_VARARGS, NULL},
 	 { (char *)"applyImage", _wrap_applyImage, METH_VARARGS, NULL},
@@ -6508,6 +6676,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"loadModel", _wrap_loadModel, METH_VARARGS, NULL},
 	 { (char *)"drawNodes", _wrap_drawNodes, METH_VARARGS, NULL},
 	 { (char *)"applyMaterial", _wrap_applyMaterial, METH_VARARGS, NULL},
+	 { (char *)"bindImage", _wrap_bindImage, METH_VARARGS, NULL},
 	 { (char *)"loadString", _wrap_loadString, METH_VARARGS, NULL},
 	 { (char *)"nextSet", _wrap_nextSet, METH_VARARGS, NULL},
 	 { (char *)"nextChar", _wrap_nextChar, METH_VARARGS, NULL},
@@ -6637,6 +6806,13 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_EventType", _wrap_new_EventType, METH_VARARGS, NULL},
 	 { (char *)"delete_EventType", _wrap_delete_EventType, METH_VARARGS, NULL},
 	 { (char *)"EventType_swigregister", EventType_swigregister, METH_VARARGS, NULL},
+	 { (char *)"TileSheet_texture_set", _wrap_TileSheet_texture_set, METH_VARARGS, NULL},
+	 { (char *)"TileSheet_texture_get", _wrap_TileSheet_texture_get, METH_VARARGS, NULL},
+	 { (char *)"TileSheet_dimensions_set", _wrap_TileSheet_dimensions_set, METH_VARARGS, NULL},
+	 { (char *)"TileSheet_dimensions_get", _wrap_TileSheet_dimensions_get, METH_VARARGS, NULL},
+	 { (char *)"new_TileSheet", _wrap_new_TileSheet, METH_VARARGS, NULL},
+	 { (char *)"delete_TileSheet", _wrap_delete_TileSheet, METH_VARARGS, NULL},
+	 { (char *)"TileSheet_swigregister", TileSheet_swigregister, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
@@ -6649,6 +6825,7 @@ static swig_type_info _swigt__p_CollidedTile = {"_p_CollidedTile", "CollidedTile
 static swig_type_info _swigt__p_Element = {"_p_Element", "Element *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_ElementList = {"_p_ElementList", "ElementList *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_EventType = {"_p_EventType", "EventType *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_GLuint = {"_p_GLuint", "GLuint *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Model = {"_p_Model", "Model *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Position = {"_p_Position", "Position *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_PositionD = {"_p_PositionD", "PositionD *", 0, 0, (void*)0, 0};
@@ -6657,6 +6834,7 @@ static swig_type_info _swigt__p_Property = {"_p_Property", "Property *", 0, 0, (
 static swig_type_info _swigt__p_SDL_Rect = {"_p_SDL_Rect", "SDL_Rect *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_SDL_Surface = {"_p_SDL_Surface", "SDL_Surface *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Tile = {"_p_Tile", "Tile *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_TileSheet = {"_p_TileSheet", "TileSheet *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Timer = {"_p_Timer", "Timer *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Uint32 = {"_p_Uint32", "Uint32 *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Window = {"_p_Window", "Window *", 0, 0, (void*)0, 0};
@@ -6677,6 +6855,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_Element,
   &_swigt__p_ElementList,
   &_swigt__p_EventType,
+  &_swigt__p_GLuint,
   &_swigt__p_Model,
   &_swigt__p_Position,
   &_swigt__p_PositionD,
@@ -6685,6 +6864,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_SDL_Rect,
   &_swigt__p_SDL_Surface,
   &_swigt__p_Tile,
+  &_swigt__p_TileSheet,
   &_swigt__p_Timer,
   &_swigt__p_Uint32,
   &_swigt__p_Window,
@@ -6705,6 +6885,7 @@ static swig_cast_info _swigc__p_CollidedTile[] = {  {&_swigt__p_CollidedTile, 0,
 static swig_cast_info _swigc__p_Element[] = {  {&_swigt__p_Element, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_ElementList[] = {  {&_swigt__p_ElementList, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_EventType[] = {  {&_swigt__p_EventType, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GLuint[] = {  {&_swigt__p_GLuint, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Model[] = {  {&_swigt__p_Model, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Position[] = {  {&_swigt__p_Position, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_PositionD[] = {  {&_swigt__p_PositionD, 0, 0, 0},{0, 0, 0, 0}};
@@ -6713,6 +6894,7 @@ static swig_cast_info _swigc__p_Property[] = {  {&_swigt__p_Property, 0, 0, 0},{
 static swig_cast_info _swigc__p_SDL_Rect[] = {  {&_swigt__p_SDL_Rect, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_SDL_Surface[] = {  {&_swigt__p_SDL_Surface, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Tile[] = {  {&_swigt__p_Tile, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_TileSheet[] = {  {&_swigt__p_TileSheet, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Timer[] = {  {&_swigt__p_Timer, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Uint32[] = {  {&_swigt__p_Uint32, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Window[] = {  {&_swigt__p_Window, 0, 0, 0},{0, 0, 0, 0}};
@@ -6733,6 +6915,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_Element,
   _swigc__p_ElementList,
   _swigc__p_EventType,
+  _swigc__p_GLuint,
   _swigc__p_Model,
   _swigc__p_Position,
   _swigc__p_PositionD,
@@ -6741,6 +6924,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_SDL_Rect,
   _swigc__p_SDL_Surface,
   _swigc__p_Tile,
+  _swigc__p_TileSheet,
   _swigc__p_Timer,
   _swigc__p_Uint32,
   _swigc__p_Window,

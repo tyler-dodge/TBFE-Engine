@@ -36,8 +36,8 @@ class Console:
             print(consoleText)
         self.window.getElement("txtData").setProperty("text",consoleText)
         self.window.getElement("txtData").reload()
-Tbfe.cvar.ScreenDimensions.X=1024
-Tbfe.cvar.ScreenDimensions.Y=600
+Tbfe.cvar.ScreenDimensions.X=1440
+Tbfe.cvar.ScreenDimensions.Y=900
 engine=Tbfe.TBFE()
 Tbfe.GetMainPlayer().setPosition(100,0,400)
 engine.changeMap("test.fmm")

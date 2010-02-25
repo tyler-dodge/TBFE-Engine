@@ -160,7 +160,7 @@ int Actor::changePosition(int newAngle,bool ChangeDirection)
   PositionD position;
   position=getPositionD();
   position.X+=(double)getSpeed()*TBFE_Base::GameSpeed*cos(newAngle*PI/180);
-  position.Z+=(double)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*PI/180);
+  position.Z-=(double)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*PI/180);
   //switch(NewDirection)
   // {
   //  case UP:
@@ -217,7 +217,7 @@ int Actor::changePosition(int newAngle,bool ChangeDirection)
 		  break;
 		case 255:
 		  position.X-=(double)getSpeed()*TBFE_Base::GameSpeed*cos(newAngle*PI/180);
-		  position.Z-=(double)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*PI/180);
+		  position.Z+=(double)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*PI/180);
 		  break;
 		};
 	      setPositionD(position.X,position.Y,position.Z);
@@ -230,7 +230,7 @@ int Actor::changePosition(int newAngle,bool ChangeDirection)
   if (ncollisionTest!=-1)
     {
       position.X-=(double)getSpeed()*TBFE_Base::GameSpeed*cos(newAngle*PI/180);
-      position.Z-=(double)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*PI/180);
+      position.Z+=(double)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*PI/180);
       setPositionD(position.X,position.Y,position.Z);
       return ncollisionTest;
     };

@@ -26,6 +26,36 @@ SDL_Surface *loadImage(std::string filename,bool UseA)
     };
   return newImage;
 };
+GLuint bindImage(SDL_Surface * textureSource)
+{
+  GLuint texture;
+  GLint colors;
+  GLenum format;
+  colors=textureSource->format->BytesPerPixel;
+  if (colors == 4)     // contains an alpha channel
+    {
+      if (textureSource->format->Rmask == 0x000000ff)
+	format = GL_RGBA;
+      else
+	format = GL_BGRA;
+    } else if (colors == 3)     // no alpha channel
+    {
+      if (textureSource->format->Rmask == 0x000000ff)
+	format = GL_RGB;
+      else
+	format = GL_BGR;
+    } 
+  else
+    {
+      TBFE_Base::MainConsole.write("texture fail");
+    };
+  glGenTextures(1,&texture);
+  glBindTexture(GL_TEXTURE_2D,texture);
+  glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+  glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+  glTexImage2D(GL_TEXTURE_2D,0,colors,textureSource->w,textureSource->h,0,format,
+	       GL_UNSIGNED_BYTE,textureSource->pixels);
+};
 void applyImage(int x,int y,SDL_Surface* source,SDL_Surface* target, SDL_Rect* clip)
 {
   SDL_Rect offset;
@@ -144,16 +174,22 @@ void applyMaterial(const struct aiMaterial *mtl)
 		glDisable(GL_CULL_FACE);
 }
 
-void drawNodes( aiScene * scene, aiNode * currentNode, aiVector3D position,int angle, aiVector3D rotation, aiVector3D scale)
+void drawNodes( aiScene * scene, aiNode * currentNode, aiVector3D position,aiVector3D rotation, aiVector3D scale)
 {
   if (currentNode==NULL || scene==NULL)
     {
       return;
     };
+  if (currentNode==scene->mRootNode)
+    {
+      glPushMatrix();
+      //glTranslatef(position[0],position[1],-position[2]);
+      glTranslatef(position[0],position[1],position[2]);
+      glRotatef(rotation[0],1,0,0);
+      glRotatef(rotation[1],0,1,0);
+      glRotatef(rotation[2],0,0,1);
+    };
   glPushMatrix();
-  //glTranslatef(position[0],position[1],-position[2]);
-  glTranslatef(position[0],position[1],position[2]);
-  glRotatef(angle,rotation[0],rotation[1],rotation[2]);
   for (int i=0;i<currentNode->mNumMeshes;i++)
     {
       aiMesh * currentMesh=scene->mMeshes[currentNode->mMeshes[i]];
@@ -174,10 +210,14 @@ void drawNodes( aiScene * scene, aiNode * currentNode, aiVector3D position,int a
       glDisableClientState(GL_NORMAL_ARRAY);
       glDisableClientState(GL_VERTEX_ARRAY);
     };
-  glPopMatrix();
   for (int i=0;i<currentNode->mNumChildren;i++)
     {
-      drawNodes(scene,currentNode->mChildren[i],position,angle,rotation,scale);
+      drawNodes(scene,currentNode->mChildren[i],position,rotation,scale);
+    };
+  glPopMatrix();
+  if (currentNode==scene->mRootNode)
+    {
+      glPopMatrix();
     };
 };
 

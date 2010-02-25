@@ -28,19 +28,19 @@ void TBFE_Logic::playerMovement()
     {
       if (keysDown_['w'])
 	{
-	  TBFE_Base::MainPlayer->changePosition(TBFE_Base::MainPlayer->getAngle(),true);
+	  TBFE_Base::MainPlayer->changePosition(TBFE_Base::MainPlayer->getAngle()+90,false);
 	}
-      else if (keysDown_['s'])
+      if (keysDown_['s'])
 	{
-	  TBFE_Base::MainPlayer->changePosition(180+TBFE_Base::MainPlayer->getAngle(),false);
+	  TBFE_Base::MainPlayer->changePosition(270+TBFE_Base::MainPlayer->getAngle(),false);
 	}
-      else if (keysDown_['d'])
-	{
-	  TBFE_Base::MainPlayer->setAngle(TBFE_Base::MainPlayer->getAngle()+5);
-	}
-      else if (keysDown_['a'])
+      if (keysDown_['d'])
 	{
 	  TBFE_Base::MainPlayer->setAngle(TBFE_Base::MainPlayer->getAngle()-5);
+	}
+      if (keysDown_['a'])
+	{
+	  TBFE_Base::MainPlayer->setAngle(TBFE_Base::MainPlayer->getAngle()+5);
 	};
     };
 };
