@@ -57,7 +57,7 @@ void TextBox::wordWrap()
 	{
 	  textSegment << " ";
 	};
-      text_.push_back(TTF_RenderText_Solid(TBFE_Base::GetFont(),textSegment.str().c_str(),textColor_));
+      text_.push_back(TTF_RenderText_Blended(TBFE_Base::GetFont(),textSegment.str().c_str(),textColor_));
     };
 };
 TextBox::~TextBox()
@@ -89,7 +89,7 @@ void TextBox::renderElement(SDL_Surface * screen, Position ScreenPosition)
     {
       if (lastLine)
 	{
-	  return;
+	  applyImage(ScreenPosition.X+CurrentPosition.X,ScreenPosition.Y+CurrentPosition.Y,intermediary,NULL);
 	};
       textDimensions.x=0;
       textDimensions.y=0;
@@ -111,7 +111,7 @@ void TextBox::renderElement(SDL_Surface * screen, Position ScreenPosition)
       SDL_Rect position;
       position.x=0;
       position.y=text_.at(i)->h*i-scrollY;
+      cout << position.y << "\n";
       SDL_BlitSurface(text_.at(i),NULL,intermediary,&position);
     };
-  applyImage(ScreenPosition.X+CurrentPosition.X,ScreenPosition.Y+CurrentPosition.Y,intermediary,NULL);
 };
