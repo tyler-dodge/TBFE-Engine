@@ -48,6 +48,7 @@ except AttributeError:
 del types
 
 
+applyImage = _Misc.applyImage
 getPixel = _Misc.getPixel
 loadModel = _Misc.loadModel
 drawNodes = _Misc.drawNodes
@@ -74,7 +75,6 @@ class Timer(_object):
 Timer_swigregister = _Misc.Timer_swigregister
 Timer_swigregister(Timer)
 loadImage = _Misc.loadImage
-applyImage = _Misc.applyImage
 
 NONE = _Misc.NONE
 GRASS = _Misc.GRASS
@@ -106,6 +106,9 @@ class AnimationSheet(_object):
     __swig_setmethods__["Source"] = _Misc.AnimationSheet_Source_set
     __swig_getmethods__["Source"] = _Misc.AnimationSheet_Source_get
     if _newclass:Source = _swig_property(_Misc.AnimationSheet_Source_get, _Misc.AnimationSheet_Source_set)
+    __swig_setmethods__["Texture"] = _Misc.AnimationSheet_Texture_set
+    __swig_getmethods__["Texture"] = _Misc.AnimationSheet_Texture_get
+    if _newclass:Texture = _swig_property(_Misc.AnimationSheet_Texture_get, _Misc.AnimationSheet_Texture_set)
     __swig_setmethods__["isLoaded"] = _Misc.AnimationSheet_isLoaded_set
     __swig_getmethods__["isLoaded"] = _Misc.AnimationSheet_isLoaded_get
     if _newclass:isLoaded = _swig_property(_Misc.AnimationSheet_isLoaded_get, _Misc.AnimationSheet_isLoaded_set)

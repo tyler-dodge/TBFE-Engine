@@ -51,7 +51,7 @@ uiMousePosition=UI.createWindow(0,800,"FrameRate")
 engine.addWindow(uiMousePosition)
 action=5
 i=0
-randomNpc=Actor.createActor(400,100,"Npc","Npc")
+randomNpc=Actor.createActor(0,0,"Npc","Npc")
 engine.addActor(randomNpc)
 while action!=Misc.QUIT:
     uiConsole.refreshWindow()

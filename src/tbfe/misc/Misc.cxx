@@ -3106,69 +3106,12 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_applyImage__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_applyImage(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   int arg1 ;
   int arg2 ;
   SDL_Surface *arg3 = (SDL_Surface *) 0 ;
-  SDL_Surface *arg4 = (SDL_Surface *) 0 ;
-  SDL_Rect *arg5 = (SDL_Rect *) 0 ;
-  int val1 ;
-  int ecode1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  void *argp3 = 0 ;
-  int res3 = 0 ;
-  void *argp4 = 0 ;
-  int res4 = 0 ;
-  void *argp5 = 0 ;
-  int res5 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  PyObject * obj2 = 0 ;
-  PyObject * obj3 = 0 ;
-  PyObject * obj4 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OOOOO:applyImage",&obj0,&obj1,&obj2,&obj3,&obj4)) SWIG_fail;
-  ecode1 = SWIG_AsVal_int(obj0, &val1);
-  if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "applyImage" "', argument " "1"" of type '" "int""'");
-  } 
-  arg1 = static_cast< int >(val1);
-  ecode2 = SWIG_AsVal_int(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "applyImage" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  res3 = SWIG_ConvertPtr(obj2, &argp3,SWIGTYPE_p_SDL_Surface, 0 |  0 );
-  if (!SWIG_IsOK(res3)) {
-    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "applyImage" "', argument " "3"" of type '" "SDL_Surface *""'"); 
-  }
-  arg3 = reinterpret_cast< SDL_Surface * >(argp3);
-  res4 = SWIG_ConvertPtr(obj3, &argp4,SWIGTYPE_p_SDL_Surface, 0 |  0 );
-  if (!SWIG_IsOK(res4)) {
-    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "applyImage" "', argument " "4"" of type '" "SDL_Surface *""'"); 
-  }
-  arg4 = reinterpret_cast< SDL_Surface * >(argp4);
-  res5 = SWIG_ConvertPtr(obj4, &argp5,SWIGTYPE_p_SDL_Rect, 0 |  0 );
-  if (!SWIG_IsOK(res5)) {
-    SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "applyImage" "', argument " "5"" of type '" "SDL_Rect *""'"); 
-  }
-  arg5 = reinterpret_cast< SDL_Rect * >(argp5);
-  applyImage(arg1,arg2,arg3,arg4,arg5);
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_applyImage__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  int arg1 ;
-  int arg2 ;
-  SDL_Surface *arg3 = (SDL_Surface *) 0 ;
-  SDL_Surface *arg4 = (SDL_Surface *) 0 ;
+  SDL_Rect *arg4 = (SDL_Rect *) 0 ;
   int val1 ;
   int ecode1 = 0 ;
   int val2 ;
@@ -3198,92 +3141,15 @@ SWIGINTERN PyObject *_wrap_applyImage__SWIG_1(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "applyImage" "', argument " "3"" of type '" "SDL_Surface *""'"); 
   }
   arg3 = reinterpret_cast< SDL_Surface * >(argp3);
-  res4 = SWIG_ConvertPtr(obj3, &argp4,SWIGTYPE_p_SDL_Surface, 0 |  0 );
+  res4 = SWIG_ConvertPtr(obj3, &argp4,SWIGTYPE_p_SDL_Rect, 0 |  0 );
   if (!SWIG_IsOK(res4)) {
-    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "applyImage" "', argument " "4"" of type '" "SDL_Surface *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "applyImage" "', argument " "4"" of type '" "SDL_Rect *""'"); 
   }
-  arg4 = reinterpret_cast< SDL_Surface * >(argp4);
+  arg4 = reinterpret_cast< SDL_Rect * >(argp4);
   applyImage(arg1,arg2,arg3,arg4);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_applyImage(PyObject *self, PyObject *args) {
-  int argc;
-  PyObject *argv[6];
-  int ii;
-  
-  if (!PyTuple_Check(args)) SWIG_fail;
-  argc = (int)PyObject_Length(args);
-  for (ii = 0; (ii < argc) && (ii < 5); ii++) {
-    argv[ii] = PyTuple_GET_ITEM(args,ii);
-  }
-  if (argc == 4) {
-    int _v;
-    {
-      int res = SWIG_AsVal_int(argv[0], NULL);
-      _v = SWIG_CheckState(res);
-    }
-    if (_v) {
-      {
-        int res = SWIG_AsVal_int(argv[1], NULL);
-        _v = SWIG_CheckState(res);
-      }
-      if (_v) {
-        void *vptr = 0;
-        int res = SWIG_ConvertPtr(argv[2], &vptr, SWIGTYPE_p_SDL_Surface, 0);
-        _v = SWIG_CheckState(res);
-        if (_v) {
-          void *vptr = 0;
-          int res = SWIG_ConvertPtr(argv[3], &vptr, SWIGTYPE_p_SDL_Surface, 0);
-          _v = SWIG_CheckState(res);
-          if (_v) {
-            return _wrap_applyImage__SWIG_1(self, args);
-          }
-        }
-      }
-    }
-  }
-  if (argc == 5) {
-    int _v;
-    {
-      int res = SWIG_AsVal_int(argv[0], NULL);
-      _v = SWIG_CheckState(res);
-    }
-    if (_v) {
-      {
-        int res = SWIG_AsVal_int(argv[1], NULL);
-        _v = SWIG_CheckState(res);
-      }
-      if (_v) {
-        void *vptr = 0;
-        int res = SWIG_ConvertPtr(argv[2], &vptr, SWIGTYPE_p_SDL_Surface, 0);
-        _v = SWIG_CheckState(res);
-        if (_v) {
-          void *vptr = 0;
-          int res = SWIG_ConvertPtr(argv[3], &vptr, SWIGTYPE_p_SDL_Surface, 0);
-          _v = SWIG_CheckState(res);
-          if (_v) {
-            void *vptr = 0;
-            int res = SWIG_ConvertPtr(argv[4], &vptr, SWIGTYPE_p_SDL_Rect, 0);
-            _v = SWIG_CheckState(res);
-            if (_v) {
-              return _wrap_applyImage__SWIG_0(self, args);
-            }
-          }
-        }
-      }
-    }
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number of arguments for overloaded function 'applyImage'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    applyImage(int,int,SDL_Surface *,SDL_Surface *,SDL_Rect *)\n"
-    "    applyImage(int,int,SDL_Surface *,SDL_Surface *)\n");
   return NULL;
 }
 
@@ -3798,6 +3664,66 @@ SWIGINTERN PyObject *_wrap_AnimationSheet_Source_get(PyObject *SWIGUNUSEDPARM(se
     result = (std::string *) &_result_ref;
   }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_AnimationSheet_Texture_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  AnimationSheet *arg1 = (AnimationSheet *) 0 ;
+  GLuint arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:AnimationSheet_Texture_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_AnimationSheet, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AnimationSheet_Texture_set" "', argument " "1"" of type '" "AnimationSheet *""'"); 
+  }
+  arg1 = reinterpret_cast< AnimationSheet * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_GLuint,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AnimationSheet_Texture_set" "', argument " "2"" of type '" "GLuint""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "AnimationSheet_Texture_set" "', argument " "2"" of type '" "GLuint""'");
+    } else {
+      GLuint * temp = reinterpret_cast< GLuint * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  if (arg1) (arg1)->Texture = arg2;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_AnimationSheet_Texture_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  AnimationSheet *arg1 = (AnimationSheet *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  GLuint result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:AnimationSheet_Texture_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_AnimationSheet, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AnimationSheet_Texture_get" "', argument " "1"" of type '" "AnimationSheet *""'"); 
+  }
+  arg1 = reinterpret_cast< AnimationSheet * >(argp1);
+  result =  ((arg1)->Texture);
+  resultobj = SWIG_NewPointerObj((new GLuint(static_cast< const GLuint& >(result))), SWIGTYPE_p_GLuint, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -6690,6 +6616,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"AnimationSheet_Data_get", _wrap_AnimationSheet_Data_get, METH_VARARGS, NULL},
 	 { (char *)"AnimationSheet_Source_set", _wrap_AnimationSheet_Source_set, METH_VARARGS, NULL},
 	 { (char *)"AnimationSheet_Source_get", _wrap_AnimationSheet_Source_get, METH_VARARGS, NULL},
+	 { (char *)"AnimationSheet_Texture_set", _wrap_AnimationSheet_Texture_set, METH_VARARGS, NULL},
+	 { (char *)"AnimationSheet_Texture_get", _wrap_AnimationSheet_Texture_get, METH_VARARGS, NULL},
 	 { (char *)"AnimationSheet_isLoaded_set", _wrap_AnimationSheet_isLoaded_set, METH_VARARGS, NULL},
 	 { (char *)"AnimationSheet_isLoaded_get", _wrap_AnimationSheet_isLoaded_get, METH_VARARGS, NULL},
 	 { (char *)"new_AnimationSheet", _wrap_new_AnimationSheet, METH_VARARGS, NULL},

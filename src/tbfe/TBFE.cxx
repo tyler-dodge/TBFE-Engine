@@ -2506,24 +2506,25 @@ SWIG_Python_MustGetPtr(PyObject *obj, swig_type_info *ty, int argnum, int flags)
 #define SWIGTYPE_p_Console swig_types[2]
 #define SWIGTYPE_p_Element swig_types[3]
 #define SWIGTYPE_p_EventType swig_types[4]
-#define SWIGTYPE_p_Map swig_types[5]
-#define SWIGTYPE_p_NonLiving swig_types[6]
-#define SWIGTYPE_p_Npc swig_types[7]
-#define SWIGTYPE_p_Position swig_types[8]
-#define SWIGTYPE_p_SDL_Event swig_types[9]
-#define SWIGTYPE_p_SDL_Surface swig_types[10]
-#define SWIGTYPE_p_SunVector swig_types[11]
-#define SWIGTYPE_p_TBFE swig_types[12]
-#define SWIGTYPE_p_TBFE_Logic swig_types[13]
-#define SWIGTYPE_p_TBFE_Render swig_types[14]
-#define SWIGTYPE_p_TTF_Font swig_types[15]
-#define SWIGTYPE_p_Window swig_types[16]
-#define SWIGTYPE_p_aiScene swig_types[17]
-#define SWIGTYPE_p_char swig_types[18]
-#define SWIGTYPE_p_vectorT_Actor_p_t swig_types[19]
-#define SWIGTYPE_p_vectorT_Window_p_t swig_types[20]
-static swig_type_info *swig_types[22];
-static swig_module_info swig_module = {swig_types, 21, 0, 0, 0, 0};
+#define SWIGTYPE_p_GLuint swig_types[5]
+#define SWIGTYPE_p_Map swig_types[6]
+#define SWIGTYPE_p_NonLiving swig_types[7]
+#define SWIGTYPE_p_Npc swig_types[8]
+#define SWIGTYPE_p_Position swig_types[9]
+#define SWIGTYPE_p_SDL_Event swig_types[10]
+#define SWIGTYPE_p_SDL_Surface swig_types[11]
+#define SWIGTYPE_p_SunVector swig_types[12]
+#define SWIGTYPE_p_TBFE swig_types[13]
+#define SWIGTYPE_p_TBFE_Logic swig_types[14]
+#define SWIGTYPE_p_TBFE_Render swig_types[15]
+#define SWIGTYPE_p_TTF_Font swig_types[16]
+#define SWIGTYPE_p_Window swig_types[17]
+#define SWIGTYPE_p_aiScene swig_types[18]
+#define SWIGTYPE_p_char swig_types[19]
+#define SWIGTYPE_p_vectorT_Actor_p_t swig_types[20]
+#define SWIGTYPE_p_vectorT_Window_p_t swig_types[21]
+static swig_type_info *swig_types[23];
+static swig_module_info swig_module = {swig_types, 22, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -2939,13 +2940,6 @@ SWIG_FromCharPtrAndSize(const char* carray, size_t size)
 
 
 SWIGINTERNINLINE PyObject *
-SWIG_From_char  (char c) 
-{ 
-  return SWIG_FromCharPtrAndSize(&c,1);
-}
-
-
-SWIGINTERNINLINE PyObject *
 SWIG_From_std_string  (const std::string& s)
 {
   if (s.size()) {
@@ -2953,6 +2947,13 @@ SWIG_From_std_string  (const std::string& s)
   } else {
     return SWIG_FromCharPtrAndSize(s.c_str(), 0);
   }
+}
+
+
+SWIGINTERNINLINE PyObject *
+SWIG_From_char  (char c) 
+{ 
+  return SWIG_FromCharPtrAndSize(&c,1);
 }
 
 #ifdef __cplusplus
@@ -3321,6 +3322,50 @@ SWIGINTERN PyObject *_wrap_CheckSheets(PyObject *SWIGUNUSEDPARM(self), PyObject 
   }
   result = (SDL_Surface *)TBFE_Base::CheckSheets(arg1);
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_SDL_Surface, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_GetSheetName(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  SDL_Surface *arg1 = (SDL_Surface *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::string result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:GetSheetName",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_SDL_Surface, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GetSheetName" "', argument " "1"" of type '" "SDL_Surface *""'"); 
+  }
+  arg1 = reinterpret_cast< SDL_Surface * >(argp1);
+  result = TBFE_Base::GetSheetName(arg1);
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_GetTexture(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  SDL_Surface *arg1 = (SDL_Surface *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  GLuint result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:GetTexture",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_SDL_Surface, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GetTexture" "', argument " "1"" of type '" "SDL_Surface *""'"); 
+  }
+  arg1 = reinterpret_cast< SDL_Surface * >(argp1);
+  result = TBFE_Base::GetTexture(arg1);
+  resultobj = SWIG_NewPointerObj((new GLuint(static_cast< const GLuint& >(result))), SWIGTYPE_p_GLuint, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -5165,6 +5210,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"GetActorByNum", _wrap_GetActorByNum, METH_VARARGS, NULL},
 	 { (char *)"CheckModels", _wrap_CheckModels, METH_VARARGS, NULL},
 	 { (char *)"CheckSheets", _wrap_CheckSheets, METH_VARARGS, NULL},
+	 { (char *)"GetSheetName", _wrap_GetSheetName, METH_VARARGS, NULL},
+	 { (char *)"GetTexture", _wrap_GetTexture, METH_VARARGS, NULL},
 	 { (char *)"GetFont", _wrap_GetFont, METH_VARARGS, NULL},
 	 { (char *)"SetFont", _wrap_SetFont, METH_VARARGS, NULL},
 	 { (char *)"GetCollisionTile", _wrap_GetCollisionTile, METH_VARARGS, NULL},
@@ -5254,6 +5301,7 @@ static swig_type_info _swigt__p_Building = {"_p_Building", "Building *", 0, 0, (
 static swig_type_info _swigt__p_Console = {"_p_Console", "Console *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Element = {"_p_Element", "Element *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_EventType = {"_p_EventType", "EventType *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_GLuint = {"_p_GLuint", "GLuint *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Map = {"_p_Map", "Map *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Position = {"_p_Position", "Position *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_SDL_Event = {"_p_SDL_Event", "SDL_Event *", 0, 0, (void*)0, 0};
@@ -5275,6 +5323,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_Console,
   &_swigt__p_Element,
   &_swigt__p_EventType,
+  &_swigt__p_GLuint,
   &_swigt__p_Map,
   &_swigt__p_NonLiving,
   &_swigt__p_Npc,
@@ -5300,6 +5349,7 @@ static swig_cast_info _swigc__p_Building[] = {  {&_swigt__p_Building, 0, 0, 0},{
 static swig_cast_info _swigc__p_Console[] = {  {&_swigt__p_Console, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Element[] = {  {&_swigt__p_Element, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_EventType[] = {  {&_swigt__p_EventType, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GLuint[] = {  {&_swigt__p_GLuint, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Map[] = {  {&_swigt__p_Map, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Position[] = {  {&_swigt__p_Position, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_SDL_Event[] = {  {&_swigt__p_SDL_Event, 0, 0, 0},{0, 0, 0, 0}};
@@ -5321,6 +5371,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_Console,
   _swigc__p_Element,
   _swigc__p_EventType,
+  _swigc__p_GLuint,
   _swigc__p_Map,
   _swigc__p_NonLiving,
   _swigc__p_Npc,

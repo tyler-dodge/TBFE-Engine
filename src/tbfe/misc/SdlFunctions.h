@@ -13,7 +13,7 @@
 #define SdlFunctions_L
 using namespace std;
 extern SDL_Surface *loadImage(std::string filename,bool UseA=true);
-extern void applyImage(int,int,SDL_Surface*,SDL_Surface *,SDL_Rect * clip=NULL);
+extern void applyImage(int,int,SDL_Surface*,SDL_Rect*);
 extern Uint32 getPixel( SDL_Surface *, int, int);
 extern aiScene * loadModel(string);
 extern void drawNodes(aiScene *,aiNode *, aiVector3D,aiVector3D,aiVector3D);

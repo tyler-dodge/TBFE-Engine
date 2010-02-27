@@ -5,7 +5,7 @@ Label::Label(int x,int y,string text):Element(x,y)
   textColor_.g=255;
   textColor_.b=255;
   setProperty("text",text);
-  text_=TTF_RenderText_Solid(TBFE_Base::GetFont(),getProperty("text").c_str(),textColor_);
+  text_=TTF_RenderText_Blended(TBFE_Base::GetFont(),getProperty("text").c_str(),textColor_);
   if (text_!=NULL)
     {
       setDimensions(text_->w,text_->h);
@@ -22,7 +22,7 @@ Label::~Label()
 void Label::reload()
 {
   SDL_FreeSurface(text_);
-  text_=TTF_RenderText_Solid(TBFE_Base::GetFont(),getProperty("text").c_str(),textColor_);
+  text_=TTF_RenderText_Blended(TBFE_Base::GetFont(),getProperty("text").c_str(),textColor_);
   if (text_!=NULL)
     {
       setDimensions(text_->w,text_->h);
@@ -44,5 +44,8 @@ void Label::renderElement(SDL_Surface * screen, Position ScreenPosition)
       setDimensions(atoi(getProperty("width").c_str()),getDimensions().Y);
     };
   Position currentPosition=getPosition();
-  applyImage(ScreenPosition.X+currentPosition.X,ScreenPosition.Y+currentPosition.Y,text_,screen,NULL);
+  SDL_Surface * intermediary = SDL_CreateRGBSurface(0, text_->w, text_->h, 32, 
+						    0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
+  SDL_BlitSurface(text_,0,intermediary,0);
+  applyImage(ScreenPosition.X+currentPosition.X,ScreenPosition.Y+currentPosition.Y,intermediary,NULL);
 };

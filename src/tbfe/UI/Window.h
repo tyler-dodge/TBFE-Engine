@@ -14,8 +14,8 @@ class Window
   Position screenPosition_;
   bool showBackground_;
   bool isVisible_;
+  SDL_Surface * border_;
  protected:
-  static SDL_Surface * border_;
  public:
   Window(int,int,int,int,std::string ImageSource="");
   ~Window();

@@ -10,15 +10,11 @@ Window::Window(int width, int height, int positionX, int positionY, string Image
   setDimensions(width,height);
   setScreenPosition(positionX,positionY);
   setShowBackground(true);
-  if (border_==NULL)
-    {
-      border_=TBFE_Base::CheckSheets("border.png");
-    };
+  border_=TBFE_Base::CheckSheets("border.png");
 };
 Window::~Window()
 {
 };
-SDL_Surface * Window::border_=NULL;
 Element * Window::getElement(std::string Name)
 {
   for (int i=0;i<elements_.size();i++)
@@ -68,8 +64,8 @@ void Window::renderElements(SDL_Surface * screen)
 		      //	{
 		      //	  rect.h=border_->h;
 		      //	};
-		      applyImage(screenPosition_.X+elementPosition.X+x,screenPosition_.Y+elementPosition.Y-2,border_,screen,&rect);
-		      applyImage(screenPosition_.X+elementPosition.X+x,screenPosition_.Y+elementPosition.Y+elementDimensions.Y+2,border_,screen,&rect);
+		      applyImage(screenPosition_.X+elementPosition.X+x,screenPosition_.Y+elementPosition.Y-2,border_,&rect);
+		      applyImage(screenPosition_.X+elementPosition.X+x,screenPosition_.Y+elementPosition.Y+elementDimensions.Y+2,border_,&rect);
 		    };
 		  for (int y=-2;y<elementDimensions.Y+2;y+=border_->h)
 		    {
@@ -85,8 +81,8 @@ void Window::renderElements(SDL_Surface * screen)
 			  rect.h=border_->h;
 			};
 		      rect.w=1;
-		      applyImage(screenPosition_.X+elementPosition.X-2,screenPosition_.Y+elementPosition.Y+y,border_,screen,&rect);
-		      applyImage(screenPosition_.X+elementPosition.X+elementDimensions.X+2,screenPosition_.Y+elementPosition.Y+y,border_,screen,&rect);
+		      applyImage(screenPosition_.X+elementPosition.X-2,screenPosition_.Y+elementPosition.Y+y,border_,&rect);
+		      applyImage(screenPosition_.X+elementPosition.X+elementDimensions.X+2,screenPosition_.Y+elementPosition.Y+y,border_,&rect);
 		    };
 		};
 	    };

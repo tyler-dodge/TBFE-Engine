@@ -51,16 +51,63 @@ GLuint bindImage(SDL_Surface * textureSource)
     };
   glGenTextures(1,&texture);
   glBindTexture(GL_TEXTURE_2D,texture);
+  glActiveTexture(texture);
   glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
   glTexImage2D(GL_TEXTURE_2D,0,colors,textureSource->w,textureSource->h,0,format,
 	       GL_UNSIGNED_BYTE,textureSource->pixels);
+  return texture;
 };
-void applyImage(int x,int y,SDL_Surface* source,SDL_Surface* target, SDL_Rect* clip)
+void applyImage(int x,int y,SDL_Surface* source, SDL_Rect* clip)
 {
+  
   SDL_Rect offset;
   offset.x=x;
   offset.y=y;
+  glMatrixMode(GL_PROJECTION);
+  glPushMatrix();
+  {
+    glLoadIdentity();
+    glOrtho(0,TBFE_Base::ScreenDimensions.X,TBFE_Base::ScreenDimensions.Y,0,1,10);
+    glMatrixMode(GL_MODELVIEW);
+    {
+      glLoadIdentity();
+      glPushMatrix();
+      glTranslatef(x,y,-2);
+      Position dimensions;
+      if (clip!=NULL)
+	{
+	  dimensions.X=clip->w;
+	  dimensions.Y=clip->h;
+	}
+      else
+	{
+	  dimensions.X=source->w;
+	  dimensions.Y=source->h;
+	};
+      if (source!=NULL)
+	{
+	  GLuint texture=TBFE_Base::GetTexture(source);
+	  glEnable(GL_TEXTURE_2D);
+	  glBindTexture(GL_TEXTURE_2D,texture);
+	  glDisable(GL_DEPTH_TEST);
+	  glDisable(GL_LIGHTING);
+	  glBegin(GL_QUADS);
+	  glTexCoord2f(0,0);glVertex3f(0,0,0);
+	  glTexCoord2f(0,1);glVertex3f(0,dimensions.Y,0);
+	  glTexCoord2f(1,1);glVertex3f(dimensions.X,dimensions.Y,0);
+	  glTexCoord2f(1,0);glVertex3f(dimensions.X,0,0);
+	  glEnd();
+	  glDisable(GL_TEXTURE_2D);
+	  glEnable(GL_LIGHTING);
+	  glEnable(GL_DEPTH_TEST);
+	};
+      glPopMatrix();
+    };
+  };
+  glMatrixMode(GL_PROJECTION);
+  glPopMatrix();
+  glMatrixMode(GL_MODELVIEW);
   if (clip!=NULL && source!=NULL)
     {
       if (clip->x+clip->w > source->w || clip->y+clip->h > source->h)
@@ -70,7 +117,7 @@ void applyImage(int x,int y,SDL_Surface* source,SDL_Surface* target, SDL_Rect* c
     };
   if (source!=NULL)
     {
-      SDL_BlitSurface(source, clip, target, &offset);
+      //SDL_BlitSurface(source, clip, target, &offset);
     };
 };
 aiScene * loadModel(string model)

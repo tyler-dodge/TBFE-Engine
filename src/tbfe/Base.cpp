@@ -84,6 +84,10 @@ namespace TBFE_Base
       {
 	if (AnimationSheets.at(i).Source==source)
 	  {
+	    if (AnimationSheets.at(i).Texture==0)
+	      {
+		AnimationSheets.at(i).Texture=bindImage(AnimationSheets.at(i).Data);
+	      };
 	    return AnimationSheets.at(i).Data;
 	  };
       };
@@ -93,18 +97,49 @@ namespace TBFE_Base
       {
 	return NULL;
       };
+    sheet.Texture=bindImage(sheet.Data);
     sheet.Source=source;
     AnimationSheets.push_back(sheet);
     return sheet.Data;
+  };
+  string GetSheetName(SDL_Surface * newSheet)
+  {
+    for (int i=0;i<AnimationSheets.size();i++)
+      {
+	if (AnimationSheets.at(i).Data==newSheet)
+	  {
+	    return AnimationSheets.at(i).Source;
+	  };
+      };
+    return "DNE";
+  };
+  GLuint GetTexture(SDL_Surface * surface)
+  {
+    for (int i=0;i<AnimationSheets.size();i++)
+      {
+	if (AnimationSheets.at(i).Data==surface)
+	  {
+	    if (AnimationSheets.at(i).Texture==0)
+	      {
+		AnimationSheets.at(i).Texture=bindImage(AnimationSheets.at(i).Data);
+	      };
+	    return AnimationSheets.at(0).Texture;
+	  };
+      };
+    return bindImage(surface);
   };
   void DeleteAnimationSheets()
   {
     for (int i=0;i<AnimationSheets.size();i++)
       {
-	if (AnimationSheets.at(i).Data!=NULL)
+	if (AnimationSheets.at(i).Texture!=NULL)
 	  {
-	    SDL_FreeSurface(AnimationSheets.at(i).Data);
+	    glDeleteTextures(1,&AnimationSheets.at(i).Texture);
 	  };
+	//	if (AnimationSheets.at(i).Data!=NULL)
+	//  {
+	//    SDL_FreeSurface(AnimationSheets.at(i).Data);
+	//  };
       };
     AnimationSheets.resize(0);
   };

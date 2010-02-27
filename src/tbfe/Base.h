@@ -23,7 +23,8 @@ namespace TBFE_Base
   extern Actor * GetActorByNum(int);
   extern aiScene * CheckModels(string);
   extern SDL_Surface * CheckSheets(string);
-  
+  extern string GetSheetName(SDL_Surface *);
+  extern GLuint GetTexture(SDL_Surface *);
   extern TTF_Font * GetFont();
   extern void SetFont(TTF_Font *);
 

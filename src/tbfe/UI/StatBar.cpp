@@ -32,17 +32,15 @@ void StatBar::reload()
 };
 StatBar::~StatBar()
 {
-  SDL_FreeSurface(statBarSurface_);
-  SDL_FreeSurface(statBarBack_);
 };
 void StatBar::renderElement(SDL_Surface * screen, Position ScreenPosition)
 {
   float percentage=(float)atoi(getProperty("percentage").c_str());
   Position CurrentPosition=getPosition();
-  applyImage(ScreenPosition.X+CurrentPosition.X,ScreenPosition.Y+CurrentPosition.Y,statBarBack_,screen,&barDimensions_);
+  applyImage(ScreenPosition.X+CurrentPosition.X,ScreenPosition.Y+CurrentPosition.Y,statBarBack_,&barDimensions_);
   bar_.x=0;
   bar_.y=0;
   bar_.w=percentage/100*barDimensions_.w;
   bar_.h=15;
-  applyImage(ScreenPosition.X+CurrentPosition.X,ScreenPosition.Y+CurrentPosition.Y+1,statBarSurface_,screen,&bar_);
+  applyImage(ScreenPosition.X+CurrentPosition.X,ScreenPosition.Y+CurrentPosition.Y+1,statBarSurface_,&bar_);
 };

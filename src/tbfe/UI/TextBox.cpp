@@ -83,6 +83,8 @@ void TextBox::renderElement(SDL_Surface * screen, Position ScreenPosition)
     {
       scrollY=0;
     };
+  SDL_Surface * intermediary = SDL_CreateRGBSurface(0, getDimensions().X, getDimensions().Y, 32, 
+						    0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
   for (int i=scrollY/text_.at(0)->h;i<text_.size();i++)
     {
       if (lastLine)
@@ -106,6 +108,10 @@ void TextBox::renderElement(SDL_Surface * screen, Position ScreenPosition)
 	      return;
 	    };
 	};
-      applyImage(ScreenPosition.X+CurrentPosition.X,ScreenPosition.Y+CurrentPosition.Y+text_.at(i)->h*i-scrollY,text_.at(i),screen,&textDimensions);
+      SDL_Rect position;
+      position.x=0;
+      position.y=text_.at(i)->h*i-scrollY;
+      SDL_BlitSurface(text_.at(i),NULL,intermediary,&position);
     };
+  applyImage(ScreenPosition.X+CurrentPosition.X,ScreenPosition.Y+CurrentPosition.Y,intermediary,NULL);
 };

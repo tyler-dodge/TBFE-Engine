@@ -9,10 +9,9 @@ TBFE_Render::TBFE_Render()
   textColor_.r=255;
   textColor_.g=255;
   textColor_.b=255;
-  collision_=TBFE_Base::CheckSheets("Images/UI/Collision.png");
   darkness_=TBFE_Base::CheckSheets("Images/Darkness.png");
   changeLighting(10);
-  window_=SDL_CreateRGBSurface(SDL_HWSURFACE,100,100,32,0,0,0,100);
+  window_=TBFE_Base::CheckSheets("Images/UI/Window.png");
   TBFE_Base::CollisionTile=TBFE_Base::CheckSheets("Tile.png");
   setLightPosition(0,0,0);
 };
@@ -76,14 +75,13 @@ void TBFE_Render::init()
       SDL_FreeSurface(screen_);
     };
   SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,8);
-  screen_=SDL_SetVideoMode(TBFE_Base::ScreenDimensions.X,TBFE_Base::ScreenDimensions.Y,32,SDL_OPENGL | SDL_FULLSCREEN);
+  screen_=SDL_SetVideoMode(TBFE_Base::ScreenDimensions.X,TBFE_Base::ScreenDimensions.Y,32,SDL_OPENGL | SDL_FULLSCREEN | SDL_HWSURFACE);
   TBFE_Base::MainConsole.write("SDL initialized");
   initGl();
  };
 TBFE_Render::~TBFE_Render()
 {
   TTF_CloseFont(TBFE_Base::font);
-  SDL_FreeSurface(screen_);
   TTF_Quit();
   SDL_Quit();
 };
@@ -145,7 +143,6 @@ void TBFE_Render::finalRender(bool doFlip)
     {
       //renderMapLayer(CurrentPosition.X-offset_.X,CurrentPosition.Y-offset_.Y,i);
     };
-  //renderWindowList();
   SDL_Rect Dark;
   Dark.x=0;
   Dark.y=0;
@@ -166,49 +163,16 @@ void TBFE_Render::finalRender(bool doFlip)
   glLoadIdentity();
   glTranslatef(-1,-9,-4);
   glRotatef(-TBFE_Base::MainPlayer->getAngle(),0,1,0);
-  glTranslatef(-TBFE_Base::MainPlayer->getPositionD().X/30,0,-TBFE_Base::MainPlayer->getPositionD().Z/30);
+  glTranslatef(-TBFE_Base::MainPlayer->getPositionD().X/20,0,-TBFE_Base::MainPlayer->getPositionD().Z/20);
   renderActors();
   renderMapLayer(0,0,0);
+  renderWindowList();
   SDL_GL_SwapBuffers();
   int Error=glGetError();
   if(Error != GL_NO_ERROR )
     {
       TBFE_Base::MainConsole.write("OpenGl failed to load");
     }
-};
-void TBFE_Render::arrangeActors()
-{
-  vector<Actor *> tempActors;
-  vector<Position> positions;
-  vector<int> Order;
-  Order.resize(0);
-  positions.resize(TBFE_Base::ActorList.size());
-  for(int getPos=0;getPos<TBFE_Base::ActorList.size();getPos++)
-    {
-      positions.at(getPos)=TBFE_Base::ActorList.at(getPos)->getPosition();
-    };
-  for (int x=0;x<positions.size();x++)
-    {
-      bool isInserted=false;
-      for (int checkPositions=0;checkPositions<Order.size();checkPositions++)
-	{
-	  if (positions.at(x).Y<positions.at(checkPositions).Y && !isInserted)
-	    {
-	      Order.insert(Order.begin()+checkPositions,x);
-	      isInserted=true;
-	    };
-	};
-      if (isInserted==false)
-	{
-	  Order.push_back(x);
-	};
-    };
-  int newPlayerNum;
-  for (int i=0;i<Order.size();i++)
-    {
-      tempActors.push_back(TBFE_Base::ActorList.at(Order.at(i)));
-    };
-  TBFE_Base::ActorList=tempActors;
 };
 int TBFE_Render::renderMapLayer(int x,int y, int Layer)
 {
@@ -218,6 +182,7 @@ int TBFE_Render::renderMapLayer(int x,int y, int Layer)
   vector<GLfloat> texCoords;
   vector<GLfloat> normals;
   Position dimensions=TBFE_Base::CurrentMap.getDimensions();
+  int tileSize=5;
   for (int mapY=0;mapY<dimensions.Y;mapY++)
     {
       for (int mapX=0;mapX<dimensions.X;mapX++)
@@ -241,7 +206,7 @@ int TBFE_Render::renderMapLayer(int x,int y, int Layer)
 	    };
 	  //bottom Right
 	  GLfloat coords[]={start.X,start.Y};
-	  GLfloat vertex[]={3*mapX,0,3*mapY};
+	  GLfloat vertex[]={tileSize*mapX,0,tileSize*mapY};
 	  vertices.push_back(vertex[0]);
 	  vertices.push_back(vertex[1]);
 	  vertices.push_back(vertex[2]);
@@ -256,9 +221,9 @@ int TBFE_Render::renderMapLayer(int x,int y, int Layer)
 	    {
 	      tile=TBFE_Base::CurrentMap.getTile(mapX,mapY-1,Layer);
 	    };
-	  vertex[0]=3*mapX;
+	  vertex[0]=tileSize*mapX;
 	  vertex[1]=0;
-	  vertex[2]=3*mapY-3;
+	  vertex[2]=tileSize*mapY-tileSize;
 	  vertices.push_back(vertex[0]); 
 	  vertices.push_back(vertex[1]); 
 	  vertices.push_back(vertex[2]);
@@ -275,9 +240,9 @@ int TBFE_Render::renderMapLayer(int x,int y, int Layer)
 	    {
 	      tile=TBFE_Base::CurrentMap.getTile(mapX-1,mapY-1,Layer);
 	    };
-	  vertex[0]=3*mapX-3;
+	  vertex[0]=tileSize*mapX-tileSize;
 	  vertex[1]=0;
-	  vertex[2]=3*mapY-3;
+	  vertex[2]=tileSize*mapY-tileSize;
 	  vertices.push_back(vertex[0]); 
 	  vertices.push_back(vertex[1]); 
 	  vertices.push_back(vertex[2]);
@@ -286,7 +251,7 @@ int TBFE_Render::renderMapLayer(int x,int y, int Layer)
 	  texCoords.push_back(coords[0]);
 	  texCoords.push_back(coords[1]);
 	  //Bottom Left
-	  if (3*mapX==0)
+	  if (mapX==0)
 	    {
 	      tile=TBFE_Base::CurrentMap.getTile(mapX,mapY,Layer);
 	    }
@@ -294,9 +259,9 @@ int TBFE_Render::renderMapLayer(int x,int y, int Layer)
 	    {
 	      tile=TBFE_Base::CurrentMap.getTile(mapX-1,mapY,Layer);
 	    };
-	  vertex[0]=3*mapX-3;
+	  vertex[0]=tileSize*mapX-tileSize;
 	  vertex[1]=0;
-	  vertex[2]=3*mapY;
+	  vertex[2]=tileSize*mapY;
 	  vertices.push_back(vertex[0]); 
 	  vertices.push_back(vertex[1]); 
 	  vertices.push_back(vertex[2]);
@@ -316,7 +281,7 @@ int TBFE_Render::renderMapLayer(int x,int y, int Layer)
   glEnableClientState(GL_VERTEX_ARRAY);
   glEnableClientState(GL_TEXTURE_COORD_ARRAY);
   glEnableClientState(GL_NORMAL_ARRAY);
-  glActiveTexture(tileSet_.at(0).texture);
+  glBindTexture(GL_TEXTURE_2D,tileSet_.at(0).texture);
   glVertexPointer(3,GL_FLOAT,0,&vertices[0]);
   glNormalPointer(GL_FLOAT,0,&normals[0]);
   glTexCoordPointer(2,GL_FLOAT,0,&texCoords[0]);
@@ -351,16 +316,10 @@ void TBFE_Render::renderActors()
 	  model=animation->getModel();
 	  if (animation->getModel()!=NULL)
 	    {
-	      //aiVector3D tposition(ActorPosition.X,ActorPosition.Y,ActorPosition.Z);
-	      aiVector3D tposition(ActorPosition.X/30,ActorPosition.Y/30,ActorPosition.Z/30);
+	      aiVector3D tposition(ActorPosition.X/20,ActorPosition.Y/20,ActorPosition.Z/20);
 	      aiVector3D trotation(270,0,currentActor->getAngle()+180);
-	      //aiVector3D trotation(rotation.X,rotation.Y,rotation.Z);
 	      aiVector3D tscale(0,0,0);
 	      drawNodes(model,model->mRootNode,tposition,trotation,tscale);
-	      //applyImage(x+animation->getOffset().X,
-	      // y-sqrt(pow(animation->getOffset().Y,2)+
-	      //		pow(ActorPosition.Z,2)), 
-	      //	 animation->getModel(),screen_,&Frame);
 	    };
 	};
       if (currentActor->getWalking())
@@ -404,7 +363,7 @@ void TBFE_Render::renderWindowList()
 			{
 			  NewWindow.h=window_->h;
 			};
-		      applyImage(windowPosition.X+x*window_->w,windowPosition.Y+y*window_->h,window_,screen_,&NewWindow);
+		      applyImage(windowPosition.X+x*window_->w,windowPosition.Y+y*window_->h,window_,&NewWindow);
 		    };
 		};
 	    };

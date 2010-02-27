@@ -28,7 +28,6 @@ class TBFE_Render
   SDL_Surface * screen_;
   vector<TileSheet> tileSet_;
   void renderActors();
-  void arrangeActors();
   void renderWindowList();
   int renderMapLayer(int,int,int);
   void renderForeground(int,int,bool);

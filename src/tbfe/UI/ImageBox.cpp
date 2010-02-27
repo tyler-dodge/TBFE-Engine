@@ -55,7 +55,6 @@ ImageBox::ImageBox(int x,int y,string Source):Element(x,y)
 };
 ImageBox::~ImageBox()
 {
-  SDL_FreeSurface(image_);
 };
 void ImageBox::reload()
 {
@@ -93,5 +92,5 @@ void ImageBox::renderElement(SDL_Surface * screen, Position ScreenPosition)
       setDimensions(Clip.w,Clip.h);
     };
   Position CurrentPosition=getPosition();
-  applyImage(ScreenPosition.X+CurrentPosition.X,ScreenPosition.Y+CurrentPosition.Y,image_,screen,&Clip);
+  applyImage(ScreenPosition.X+CurrentPosition.X,ScreenPosition.Y+CurrentPosition.Y,image_,&Clip);
 };

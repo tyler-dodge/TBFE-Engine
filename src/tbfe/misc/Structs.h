@@ -14,6 +14,7 @@ struct AnimationSheet
 {
   SDL_Surface * Data;
   std::string Source;
+  GLuint Texture;
   bool isLoaded;
 };
 struct Model
