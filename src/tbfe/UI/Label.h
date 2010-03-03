@@ -5,10 +5,11 @@ class Label:public Element
 {
  private:
   SDL_Surface * text_;
+  SDL_Surface * intermediary_;
   SDL_Color textColor_;
   string currentText_;
  public:
-  void renderElement(SDL_Surface *, Position);
+  SDL_Surface * renderElement();
   Label(int,int,string);
   ~Label();
   void reload();

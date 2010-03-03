@@ -3,17 +3,15 @@ Animation::Animation()
 {
   setCurrentFrame(0);
 };
-Animation::Animation(string imageSource,string frames,int width, int height,
-		     int OffsetX, int OffsetY, float fps, bool doesLoop,int startX,int finalFrame)
+Animation::Animation(string imageSource,string frames,float OffsetX, float OffsetY, float fps, bool doesLoop,int finalFrame)
 {
   setCurrentFrame(0);
   setModelSource(imageSource);
-  setDimensions(width,height);
   setLoop(doesLoop);
-  setStartX(startX);
-  setOffset(OffsetX,OffsetY);
+  setOffset(OffsetX,OffsetY,0);
   setFinalFrame(finalFrame);
   setRate(fps);
+  setRotation(0,0,0);
   do
     {
       string FrameSelection=nextSet(&frames,',');
@@ -43,31 +41,6 @@ int Animation::getFrame()
     };
   Frame=frames_.at((int)currentFrame);
   return Frame;
-};
-SDL_Rect Animation::getFrameRect(Direction currentDirection)
-{
-  SDL_Rect FrameRect;
-  Position DirectionOffset;
-  Position ActionDimensions;
-  Position Dimensions=getDimensions();
-  int frame;
-  int AnimationOffsetX;
-  
-  DirectionOffset.X=(currentDirection-(int)(currentDirection/2)*2);
-  DirectionOffset.Y=(int)((int)currentDirection/2);
-  frame=getFrame();
-  
-  DirectionOffset.X*=Dimensions.X;
-  DirectionOffset.Y*=Dimensions.Y;
-  
-  ActionDimensions.X=Dimensions.X;
-  ActionDimensions.Y=Dimensions.Y;
-  AnimationOffsetX=2*ActionDimensions.X*frame;
-  FrameRect.x=AnimationOffsetX+DirectionOffset.X;
-  FrameRect.y=DirectionOffset.Y;
-  FrameRect.w=ActionDimensions.X;
-  FrameRect.h=ActionDimensions.Y;
-  return FrameRect;
 };
 bool Animation::currentFramePlus()
 {
@@ -111,7 +84,7 @@ bool Animation::loadModel()
     };
   return true;
 };
-Position Animation::getOffset()
+PositionF Animation::getOffset()
 {
   return offset_;
 };
@@ -127,15 +100,6 @@ void Animation::setCurrentFrame(float newFrame)
 {
   currentFrame_=newFrame;
 };
-Position Animation::getDimensions()
-{
-  return dimensions_;
-};
-void Animation::setDimensions(int width,int height)
-{
-  dimensions_.X=width;
-  dimensions_.Y=height;
-};
 bool Animation::getLoop()
 {
   return loop_;
@@ -143,14 +107,6 @@ bool Animation::getLoop()
 void Animation::setLoop(bool newLoop)
 {
   loop_=newLoop;
-};
-int Animation::getStartX()
-{
-  return startX_;
-};
-void Animation::setStartX(int newStartX)
-{
-  startX_=newStartX;
 };
 int Animation::getFinalFrame()
 {
@@ -160,10 +116,11 @@ void Animation::setFinalFrame(int newFinalFrame)
 {
   finalFrame_=newFinalFrame;
 };
-void Animation::setOffset(int x, int y)
+void Animation::setOffset(float x,float y, float z)
 {
   offset_.X=x;
   offset_.Y=y;
+  offset_.Z=z;
 };
 float Animation::getRate()
 {
@@ -172,4 +129,14 @@ float Animation::getRate()
 void Animation::setRate(float newRate)
 {
   rate_=newRate;
+};
+PositionF Animation::getRotation()
+{
+  return rotation_;
+};
+void Animation::setRotation(float x,float y,float z)
+{
+  rotation_.X=x;
+  rotation_.Y=y;
+  rotation_.Z=z;
 };

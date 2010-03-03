@@ -3813,44 +3813,19 @@ fail:
 SWIGINTERN PyObject *_wrap_Element_renderElement(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Element *arg1 = (Element *) 0 ;
-  SDL_Surface *arg2 = (SDL_Surface *) 0 ;
-  Position arg3 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  void *argp3 ;
-  int res3 = 0 ;
   PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  PyObject * obj2 = 0 ;
+  SDL_Surface *result = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OOO:Element_renderElement",&obj0,&obj1,&obj2)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"O:Element_renderElement",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Element, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Element_renderElement" "', argument " "1"" of type '" "Element *""'"); 
   }
   arg1 = reinterpret_cast< Element * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_SDL_Surface, 0 |  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Element_renderElement" "', argument " "2"" of type '" "SDL_Surface *""'"); 
-  }
-  arg2 = reinterpret_cast< SDL_Surface * >(argp2);
-  {
-    res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_Position,  0  | 0);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Element_renderElement" "', argument " "3"" of type '" "Position""'"); 
-    }  
-    if (!argp3) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Element_renderElement" "', argument " "3"" of type '" "Position""'");
-    } else {
-      Position * temp = reinterpret_cast< Position * >(argp3);
-      arg3 = *temp;
-      if (SWIG_IsNewObj(res3)) delete temp;
-    }
-  }
-  (arg1)->renderElement(arg2,arg3);
-  resultobj = SWIG_Py_Void();
+  result = (SDL_Surface *)(arg1)->renderElement();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_SDL_Surface, 0 |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -3909,44 +3884,19 @@ SWIGINTERN PyObject *Element_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObje
 SWIGINTERN PyObject *_wrap_Label_renderElement(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Label *arg1 = (Label *) 0 ;
-  SDL_Surface *arg2 = (SDL_Surface *) 0 ;
-  Position arg3 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  void *argp3 ;
-  int res3 = 0 ;
   PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  PyObject * obj2 = 0 ;
+  SDL_Surface *result = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OOO:Label_renderElement",&obj0,&obj1,&obj2)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"O:Label_renderElement",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Label, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Label_renderElement" "', argument " "1"" of type '" "Label *""'"); 
   }
   arg1 = reinterpret_cast< Label * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_SDL_Surface, 0 |  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Label_renderElement" "', argument " "2"" of type '" "SDL_Surface *""'"); 
-  }
-  arg2 = reinterpret_cast< SDL_Surface * >(argp2);
-  {
-    res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_Position,  0  | 0);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Label_renderElement" "', argument " "3"" of type '" "Position""'"); 
-    }  
-    if (!argp3) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Label_renderElement" "', argument " "3"" of type '" "Position""'");
-    } else {
-      Position * temp = reinterpret_cast< Position * >(argp3);
-      arg3 = *temp;
-      if (SWIG_IsNewObj(res3)) delete temp;
-    }
-  }
-  (arg1)->renderElement(arg2,arg3);
-  resultobj = SWIG_Py_Void();
+  result = (SDL_Surface *)(arg1)->renderElement();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_SDL_Surface, 0 |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -4047,44 +3997,19 @@ SWIGINTERN PyObject *Label_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject
 SWIGINTERN PyObject *_wrap_StatBar_renderElement(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   StatBar *arg1 = (StatBar *) 0 ;
-  SDL_Surface *arg2 = (SDL_Surface *) 0 ;
-  Position arg3 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  void *argp3 ;
-  int res3 = 0 ;
   PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  PyObject * obj2 = 0 ;
+  SDL_Surface *result = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OOO:StatBar_renderElement",&obj0,&obj1,&obj2)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"O:StatBar_renderElement",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_StatBar, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "StatBar_renderElement" "', argument " "1"" of type '" "StatBar *""'"); 
   }
   arg1 = reinterpret_cast< StatBar * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_SDL_Surface, 0 |  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "StatBar_renderElement" "', argument " "2"" of type '" "SDL_Surface *""'"); 
-  }
-  arg2 = reinterpret_cast< SDL_Surface * >(argp2);
-  {
-    res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_Position,  0  | 0);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "StatBar_renderElement" "', argument " "3"" of type '" "Position""'"); 
-    }  
-    if (!argp3) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "StatBar_renderElement" "', argument " "3"" of type '" "Position""'");
-    } else {
-      Position * temp = reinterpret_cast< Position * >(argp3);
-      arg3 = *temp;
-      if (SWIG_IsNewObj(res3)) delete temp;
-    }
-  }
-  (arg1)->renderElement(arg2,arg3);
-  resultobj = SWIG_Py_Void();
+  result = (SDL_Surface *)(arg1)->renderElement();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_SDL_Surface, 0 |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -4185,44 +4110,19 @@ SWIGINTERN PyObject *StatBar_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObje
 SWIGINTERN PyObject *_wrap_ImageBox_renderElement(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ImageBox *arg1 = (ImageBox *) 0 ;
-  SDL_Surface *arg2 = (SDL_Surface *) 0 ;
-  Position arg3 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  void *argp3 ;
-  int res3 = 0 ;
   PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  PyObject * obj2 = 0 ;
+  SDL_Surface *result = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OOO:ImageBox_renderElement",&obj0,&obj1,&obj2)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"O:ImageBox_renderElement",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ImageBox, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ImageBox_renderElement" "', argument " "1"" of type '" "ImageBox *""'"); 
   }
   arg1 = reinterpret_cast< ImageBox * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_SDL_Surface, 0 |  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ImageBox_renderElement" "', argument " "2"" of type '" "SDL_Surface *""'"); 
-  }
-  arg2 = reinterpret_cast< SDL_Surface * >(argp2);
-  {
-    res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_Position,  0  | 0);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "ImageBox_renderElement" "', argument " "3"" of type '" "Position""'"); 
-    }  
-    if (!argp3) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ImageBox_renderElement" "', argument " "3"" of type '" "Position""'");
-    } else {
-      Position * temp = reinterpret_cast< Position * >(argp3);
-      arg3 = *temp;
-      if (SWIG_IsNewObj(res3)) delete temp;
-    }
-  }
-  (arg1)->renderElement(arg2,arg3);
-  resultobj = SWIG_Py_Void();
+  result = (SDL_Surface *)(arg1)->renderElement();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_SDL_Surface, 0 |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -4530,44 +4430,19 @@ SWIGINTERN PyObject *Swig_var_pyInterface_get(void) {
 SWIGINTERN PyObject *_wrap_TextBox_renderElement(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   TextBox *arg1 = (TextBox *) 0 ;
-  SDL_Surface *arg2 = (SDL_Surface *) 0 ;
-  Position arg3 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  void *argp3 ;
-  int res3 = 0 ;
   PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  PyObject * obj2 = 0 ;
+  SDL_Surface *result = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OOO:TextBox_renderElement",&obj0,&obj1,&obj2)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"O:TextBox_renderElement",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TextBox, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TextBox_renderElement" "', argument " "1"" of type '" "TextBox *""'"); 
   }
   arg1 = reinterpret_cast< TextBox * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_SDL_Surface, 0 |  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TextBox_renderElement" "', argument " "2"" of type '" "SDL_Surface *""'"); 
-  }
-  arg2 = reinterpret_cast< SDL_Surface * >(argp2);
-  {
-    res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_Position,  0  | 0);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "TextBox_renderElement" "', argument " "3"" of type '" "Position""'"); 
-    }  
-    if (!argp3) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TextBox_renderElement" "', argument " "3"" of type '" "Position""'");
-    } else {
-      Position * temp = reinterpret_cast< Position * >(argp3);
-      arg3 = *temp;
-      if (SWIG_IsNewObj(res3)) delete temp;
-    }
-  }
-  (arg1)->renderElement(arg2,arg3);
-  resultobj = SWIG_Py_Void();
+  result = (SDL_Surface *)(arg1)->renderElement();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_SDL_Surface, 0 |  0 );
   return resultobj;
 fail:
   return NULL;

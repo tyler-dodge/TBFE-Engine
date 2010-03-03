@@ -2506,19 +2506,18 @@ SWIG_Python_MustGetPtr(PyObject *obj, swig_type_info *ty, int argnum, int flags)
 #define SWIGTYPE_p_ActorType swig_types[2]
 #define SWIGTYPE_p_Animation swig_types[3]
 #define SWIGTYPE_p_Building swig_types[4]
-#define SWIGTYPE_p_Inventory swig_types[5]
-#define SWIGTYPE_p_NonLiving swig_types[6]
-#define SWIGTYPE_p_Npc swig_types[7]
-#define SWIGTYPE_p_Position swig_types[8]
-#define SWIGTYPE_p_PositionD swig_types[9]
-#define SWIGTYPE_p_SDL_Rect swig_types[10]
-#define SWIGTYPE_p_SDL_Surface swig_types[11]
-#define SWIGTYPE_p_Tile swig_types[12]
-#define SWIGTYPE_p_aiScene swig_types[13]
-#define SWIGTYPE_p_char swig_types[14]
-#define SWIGTYPE_p_vectorT_ActorType_t swig_types[15]
-static swig_type_info *swig_types[17];
-static swig_module_info swig_module = {swig_types, 16, 0, 0, 0, 0};
+#define SWIGTYPE_p_CollisionBox swig_types[5]
+#define SWIGTYPE_p_Inventory swig_types[6]
+#define SWIGTYPE_p_NonLiving swig_types[7]
+#define SWIGTYPE_p_Npc swig_types[8]
+#define SWIGTYPE_p_Position swig_types[9]
+#define SWIGTYPE_p_PositionF swig_types[10]
+#define SWIGTYPE_p_Tile swig_types[11]
+#define SWIGTYPE_p_aiScene swig_types[12]
+#define SWIGTYPE_p_char swig_types[13]
+#define SWIGTYPE_p_vectorT_ActorType_t swig_types[14]
+static swig_type_info *swig_types[16];
+static swig_module_info swig_module = {swig_types, 15, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -2621,6 +2620,7 @@ namespace swig {
 #include "Building.cpp"
 #include "Action.cpp"
 #include "Animation.cpp"
+#include "CollisionBox.cpp"
 
 
 #include <limits.h>
@@ -3625,6 +3625,92 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_Actor_addCollisionBox(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Actor *arg1 = (Actor *) 0 ;
+  PositionF arg2 ;
+  PositionF arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:Actor_addCollisionBox",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_addCollisionBox" "', argument " "1"" of type '" "Actor *""'"); 
+  }
+  arg1 = reinterpret_cast< Actor * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_PositionF,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Actor_addCollisionBox" "', argument " "2"" of type '" "PositionF""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Actor_addCollisionBox" "', argument " "2"" of type '" "PositionF""'");
+    } else {
+      PositionF * temp = reinterpret_cast< PositionF * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  {
+    res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_PositionF,  0  | 0);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Actor_addCollisionBox" "', argument " "3"" of type '" "PositionF""'"); 
+    }  
+    if (!argp3) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Actor_addCollisionBox" "', argument " "3"" of type '" "PositionF""'");
+    } else {
+      PositionF * temp = reinterpret_cast< PositionF * >(argp3);
+      arg3 = *temp;
+      if (SWIG_IsNewObj(res3)) delete temp;
+    }
+  }
+  (arg1)->addCollisionBox(arg2,arg3);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Actor_getCollisionBox(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Actor *arg1 = (Actor *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  SwigValueWrapper< CollisionBox > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Actor_getCollisionBox",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_getCollisionBox" "', argument " "1"" of type '" "Actor *""'"); 
+  }
+  arg1 = reinterpret_cast< Actor * >(argp1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Actor_getCollisionBox" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (arg1)->getCollisionBox(arg2);
+  resultobj = SWIG_NewPointerObj((new CollisionBox(static_cast< const CollisionBox& >(result))), SWIGTYPE_p_CollisionBox, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_Actor_getProperty(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Actor *arg1 = (Actor *) 0 ;
@@ -3704,11 +3790,11 @@ fail:
 SWIGINTERN PyObject *_wrap_Actor_changePosition(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Actor *arg1 = (Actor *) 0 ;
-  int arg2 ;
+  float arg2 ;
   bool arg3 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  int val2 ;
+  float val2 ;
   int ecode2 = 0 ;
   bool val3 ;
   int ecode3 = 0 ;
@@ -3723,11 +3809,11 @@ SWIGINTERN PyObject *_wrap_Actor_changePosition(PyObject *SWIGUNUSEDPARM(self), 
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_changePosition" "', argument " "1"" of type '" "Actor *""'"); 
   }
   arg1 = reinterpret_cast< Actor * >(argp1);
-  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  ecode2 = SWIG_AsVal_float(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Actor_changePosition" "', argument " "2"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Actor_changePosition" "', argument " "2"" of type '" "float""'");
   } 
-  arg2 = static_cast< int >(val2);
+  arg2 = static_cast< float >(val2);
   ecode3 = SWIG_AsVal_bool(obj2, &val3);
   if (!SWIG_IsOK(ecode3)) {
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Actor_changePosition" "', argument " "3"" of type '" "bool""'");
@@ -3741,231 +3827,19 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Actor_changeScreen(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Actor_checkActorCollision(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Actor *arg1 = (Actor *) 0 ;
-  int arg2 ;
-  int arg3 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  int val2 ;
+  float val2 ;
   int ecode2 = 0 ;
-  int val3 ;
+  float val3 ;
   int ecode3 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  PyObject * obj2 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OOO:Actor_changeScreen",&obj0,&obj1,&obj2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_changeScreen" "', argument " "1"" of type '" "Actor *""'"); 
-  }
-  arg1 = reinterpret_cast< Actor * >(argp1);
-  ecode2 = SWIG_AsVal_int(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Actor_changeScreen" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_int(obj2, &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Actor_changeScreen" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  (arg1)->changeScreen(arg2,arg3);
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Actor_getCollisionRect(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Actor *arg1 = (Actor *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  SDL_Rect result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Actor_getCollisionRect",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_getCollisionRect" "', argument " "1"" of type '" "Actor *""'"); 
-  }
-  arg1 = reinterpret_cast< Actor * >(argp1);
-  result = (arg1)->getCollisionRect();
-  resultobj = SWIG_NewPointerObj((new SDL_Rect(static_cast< const SDL_Rect& >(result))), SWIGTYPE_p_SDL_Rect, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Actor_getCollisionMap(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Actor *arg1 = (Actor *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  SDL_Surface *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Actor_getCollisionMap",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_getCollisionMap" "', argument " "1"" of type '" "Actor *""'"); 
-  }
-  arg1 = reinterpret_cast< Actor * >(argp1);
-  result = (SDL_Surface *)(arg1)->getCollisionMap();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_SDL_Surface, 0 |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Actor_setCollisionMap(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Actor *arg1 = (Actor *) 0 ;
-  std::string arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Actor_setCollisionMap",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_setCollisionMap" "', argument " "1"" of type '" "Actor *""'"); 
-  }
-  arg1 = reinterpret_cast< Actor * >(argp1);
-  {
-    std::string *ptr = (std::string *)0;
-    int res = SWIG_AsPtr_std_string(obj1, &ptr);
-    if (!SWIG_IsOK(res) || !ptr) {
-      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "Actor_setCollisionMap" "', argument " "2"" of type '" "std::string""'"); 
-    }
-    arg2 = *ptr;
-    if (SWIG_IsNewObj(res)) delete ptr;
-  }
-  (arg1)->setCollisionMap(arg2);
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Actor_loadCollisionMap(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Actor *arg1 = (Actor *) 0 ;
-  std::string arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Actor_loadCollisionMap",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_loadCollisionMap" "', argument " "1"" of type '" "Actor *""'"); 
-  }
-  arg1 = reinterpret_cast< Actor * >(argp1);
-  {
-    std::string *ptr = (std::string *)0;
-    int res = SWIG_AsPtr_std_string(obj1, &ptr);
-    if (!SWIG_IsOK(res) || !ptr) {
-      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "Actor_loadCollisionMap" "', argument " "2"" of type '" "std::string""'"); 
-    }
-    arg2 = *ptr;
-    if (SWIG_IsNewObj(res)) delete ptr;
-  }
-  (arg1)->loadCollisionMap(arg2);
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Actor_advancedCollision(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Actor *arg1 = (Actor *) 0 ;
-  SDL_Surface *arg2 = (SDL_Surface *) 0 ;
-  SDL_Rect arg3 ;
-  Position arg4 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  void *argp3 ;
-  int res3 = 0 ;
-  void *argp4 ;
-  int res4 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  PyObject * obj2 = 0 ;
-  PyObject * obj3 = 0 ;
-  bool result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OOOO:Actor_advancedCollision",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_advancedCollision" "', argument " "1"" of type '" "Actor *""'"); 
-  }
-  arg1 = reinterpret_cast< Actor * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_SDL_Surface, 0 |  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Actor_advancedCollision" "', argument " "2"" of type '" "SDL_Surface *""'"); 
-  }
-  arg2 = reinterpret_cast< SDL_Surface * >(argp2);
-  {
-    res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_SDL_Rect,  0  | 0);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Actor_advancedCollision" "', argument " "3"" of type '" "SDL_Rect""'"); 
-    }  
-    if (!argp3) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Actor_advancedCollision" "', argument " "3"" of type '" "SDL_Rect""'");
-    } else {
-      SDL_Rect * temp = reinterpret_cast< SDL_Rect * >(argp3);
-      arg3 = *temp;
-      if (SWIG_IsNewObj(res3)) delete temp;
-    }
-  }
-  {
-    res4 = SWIG_ConvertPtr(obj3, &argp4, SWIGTYPE_p_Position,  0  | 0);
-    if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Actor_advancedCollision" "', argument " "4"" of type '" "Position""'"); 
-    }  
-    if (!argp4) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Actor_advancedCollision" "', argument " "4"" of type '" "Position""'");
-    } else {
-      Position * temp = reinterpret_cast< Position * >(argp4);
-      arg4 = *temp;
-      if (SWIG_IsNewObj(res4)) delete temp;
-    }
-  }
-  result = (bool)(arg1)->advancedCollision(arg2,arg3,arg4);
-  resultobj = SWIG_From_bool(static_cast< bool >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Actor_checkActorCollision__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Actor *arg1 = (Actor *) 0 ;
-  bool arg2 ;
-  int arg3 ;
-  int arg4 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  bool val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  int val4 ;
+  float val4 ;
   int ecode4 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
@@ -3979,180 +3853,25 @@ SWIGINTERN PyObject *_wrap_Actor_checkActorCollision__SWIG_0(PyObject *SWIGUNUSE
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_checkActorCollision" "', argument " "1"" of type '" "Actor *""'"); 
   }
   arg1 = reinterpret_cast< Actor * >(argp1);
-  ecode2 = SWIG_AsVal_bool(obj1, &val2);
+  ecode2 = SWIG_AsVal_float(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Actor_checkActorCollision" "', argument " "2"" of type '" "bool""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Actor_checkActorCollision" "', argument " "2"" of type '" "float""'");
   } 
-  arg2 = static_cast< bool >(val2);
-  ecode3 = SWIG_AsVal_int(obj2, &val3);
+  arg2 = static_cast< float >(val2);
+  ecode3 = SWIG_AsVal_float(obj2, &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Actor_checkActorCollision" "', argument " "3"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Actor_checkActorCollision" "', argument " "3"" of type '" "float""'");
   } 
-  arg3 = static_cast< int >(val3);
-  ecode4 = SWIG_AsVal_int(obj3, &val4);
+  arg3 = static_cast< float >(val3);
+  ecode4 = SWIG_AsVal_float(obj3, &val4);
   if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Actor_checkActorCollision" "', argument " "4"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Actor_checkActorCollision" "', argument " "4"" of type '" "float""'");
   } 
-  arg4 = static_cast< int >(val4);
+  arg4 = static_cast< float >(val4);
   result = (int)(arg1)->checkActorCollision(arg2,arg3,arg4);
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Actor_checkActorCollision__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Actor *arg1 = (Actor *) 0 ;
-  bool arg2 ;
-  int arg3 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  bool val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  PyObject * obj2 = 0 ;
-  int result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OOO:Actor_checkActorCollision",&obj0,&obj1,&obj2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_checkActorCollision" "', argument " "1"" of type '" "Actor *""'"); 
-  }
-  arg1 = reinterpret_cast< Actor * >(argp1);
-  ecode2 = SWIG_AsVal_bool(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Actor_checkActorCollision" "', argument " "2"" of type '" "bool""'");
-  } 
-  arg2 = static_cast< bool >(val2);
-  ecode3 = SWIG_AsVal_int(obj2, &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Actor_checkActorCollision" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  result = (int)(arg1)->checkActorCollision(arg2,arg3);
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Actor_checkActorCollision__SWIG_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Actor *arg1 = (Actor *) 0 ;
-  bool arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  bool val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  int result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Actor_checkActorCollision",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_checkActorCollision" "', argument " "1"" of type '" "Actor *""'"); 
-  }
-  arg1 = reinterpret_cast< Actor * >(argp1);
-  ecode2 = SWIG_AsVal_bool(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Actor_checkActorCollision" "', argument " "2"" of type '" "bool""'");
-  } 
-  arg2 = static_cast< bool >(val2);
-  result = (int)(arg1)->checkActorCollision(arg2);
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Actor_checkActorCollision(PyObject *self, PyObject *args) {
-  int argc;
-  PyObject *argv[5];
-  int ii;
-  
-  if (!PyTuple_Check(args)) SWIG_fail;
-  argc = (int)PyObject_Length(args);
-  for (ii = 0; (ii < argc) && (ii < 4); ii++) {
-    argv[ii] = PyTuple_GET_ITEM(args,ii);
-  }
-  if (argc == 2) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Actor, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        int res = SWIG_AsVal_bool(argv[1], NULL);
-        _v = SWIG_CheckState(res);
-      }
-      if (_v) {
-        return _wrap_Actor_checkActorCollision__SWIG_2(self, args);
-      }
-    }
-  }
-  if (argc == 3) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Actor, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        int res = SWIG_AsVal_bool(argv[1], NULL);
-        _v = SWIG_CheckState(res);
-      }
-      if (_v) {
-        {
-          int res = SWIG_AsVal_int(argv[2], NULL);
-          _v = SWIG_CheckState(res);
-        }
-        if (_v) {
-          return _wrap_Actor_checkActorCollision__SWIG_1(self, args);
-        }
-      }
-    }
-  }
-  if (argc == 4) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Actor, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        int res = SWIG_AsVal_bool(argv[1], NULL);
-        _v = SWIG_CheckState(res);
-      }
-      if (_v) {
-        {
-          int res = SWIG_AsVal_int(argv[2], NULL);
-          _v = SWIG_CheckState(res);
-        }
-        if (_v) {
-          {
-            int res = SWIG_AsVal_int(argv[3], NULL);
-            _v = SWIG_CheckState(res);
-          }
-          if (_v) {
-            return _wrap_Actor_checkActorCollision__SWIG_0(self, args);
-          }
-        }
-      }
-    }
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number of arguments for overloaded function 'Actor_checkActorCollision'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    checkActorCollision(Actor *,bool,int,int)\n"
-    "    checkActorCollision(Actor *,bool,int)\n"
-    "    checkActorCollision(Actor *,bool)\n");
   return NULL;
 }
 
@@ -4334,69 +4053,69 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Actor_getPositionD(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Actor_getPositionF(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Actor *arg1 = (Actor *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  PositionD result;
+  PositionF result;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:Actor_getPositionD",&obj0)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"O:Actor_getPositionF",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_getPositionD" "', argument " "1"" of type '" "Actor *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_getPositionF" "', argument " "1"" of type '" "Actor *""'"); 
   }
   arg1 = reinterpret_cast< Actor * >(argp1);
-  result = (arg1)->getPositionD();
-  resultobj = SWIG_NewPointerObj((new PositionD(static_cast< const PositionD& >(result))), SWIGTYPE_p_PositionD, SWIG_POINTER_OWN |  0 );
+  result = (arg1)->getPositionF();
+  resultobj = SWIG_NewPointerObj((new PositionF(static_cast< const PositionF& >(result))), SWIGTYPE_p_PositionF, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_Actor_setPositionD(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Actor_setPositionF(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Actor *arg1 = (Actor *) 0 ;
-  double arg2 ;
-  double arg3 ;
-  double arg4 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  double val2 ;
+  float val2 ;
   int ecode2 = 0 ;
-  double val3 ;
+  float val3 ;
   int ecode3 = 0 ;
-  double val4 ;
+  float val4 ;
   int ecode4 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
   PyObject * obj3 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OOOO:Actor_setPositionD",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OOOO:Actor_setPositionF",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_setPositionD" "', argument " "1"" of type '" "Actor *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_setPositionF" "', argument " "1"" of type '" "Actor *""'"); 
   }
   arg1 = reinterpret_cast< Actor * >(argp1);
-  ecode2 = SWIG_AsVal_double(obj1, &val2);
+  ecode2 = SWIG_AsVal_float(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Actor_setPositionD" "', argument " "2"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Actor_setPositionF" "', argument " "2"" of type '" "float""'");
   } 
-  arg2 = static_cast< double >(val2);
-  ecode3 = SWIG_AsVal_double(obj2, &val3);
+  arg2 = static_cast< float >(val2);
+  ecode3 = SWIG_AsVal_float(obj2, &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Actor_setPositionD" "', argument " "3"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Actor_setPositionF" "', argument " "3"" of type '" "float""'");
   } 
-  arg3 = static_cast< double >(val3);
-  ecode4 = SWIG_AsVal_double(obj3, &val4);
+  arg3 = static_cast< float >(val3);
+  ecode4 = SWIG_AsVal_float(obj3, &val4);
   if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Actor_setPositionD" "', argument " "4"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Actor_setPositionF" "', argument " "4"" of type '" "float""'");
   } 
-  arg4 = static_cast< double >(val4);
-  (arg1)->setPositionD(arg2,arg3,arg4);
+  arg4 = static_cast< float >(val4);
+  (arg1)->setPositionF(arg2,arg3,arg4);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -4404,121 +4123,69 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Actor_getRotationD(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Actor_getRotationF(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Actor *arg1 = (Actor *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  PositionD result;
+  PositionF result;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:Actor_getRotationD",&obj0)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"O:Actor_getRotationF",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_getRotationD" "', argument " "1"" of type '" "Actor *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_getRotationF" "', argument " "1"" of type '" "Actor *""'"); 
   }
   arg1 = reinterpret_cast< Actor * >(argp1);
-  result = (arg1)->getRotationD();
-  resultobj = SWIG_NewPointerObj((new PositionD(static_cast< const PositionD& >(result))), SWIGTYPE_p_PositionD, SWIG_POINTER_OWN |  0 );
+  result = (arg1)->getRotationF();
+  resultobj = SWIG_NewPointerObj((new PositionF(static_cast< const PositionF& >(result))), SWIGTYPE_p_PositionF, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_Actor_setRotationD(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Actor_setRotationF(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Actor *arg1 = (Actor *) 0 ;
-  double arg2 ;
-  double arg3 ;
-  double arg4 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  double val2 ;
+  float val2 ;
   int ecode2 = 0 ;
-  double val3 ;
+  float val3 ;
   int ecode3 = 0 ;
-  double val4 ;
+  float val4 ;
   int ecode4 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
   PyObject * obj3 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OOOO:Actor_setRotationD",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OOOO:Actor_setRotationF",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_setRotationD" "', argument " "1"" of type '" "Actor *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_setRotationF" "', argument " "1"" of type '" "Actor *""'"); 
   }
   arg1 = reinterpret_cast< Actor * >(argp1);
-  ecode2 = SWIG_AsVal_double(obj1, &val2);
+  ecode2 = SWIG_AsVal_float(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Actor_setRotationD" "', argument " "2"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Actor_setRotationF" "', argument " "2"" of type '" "float""'");
   } 
-  arg2 = static_cast< double >(val2);
-  ecode3 = SWIG_AsVal_double(obj2, &val3);
+  arg2 = static_cast< float >(val2);
+  ecode3 = SWIG_AsVal_float(obj2, &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Actor_setRotationD" "', argument " "3"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Actor_setRotationF" "', argument " "3"" of type '" "float""'");
   } 
-  arg3 = static_cast< double >(val3);
-  ecode4 = SWIG_AsVal_double(obj3, &val4);
+  arg3 = static_cast< float >(val3);
+  ecode4 = SWIG_AsVal_float(obj3, &val4);
   if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Actor_setRotationD" "', argument " "4"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Actor_setRotationF" "', argument " "4"" of type '" "float""'");
   } 
-  arg4 = static_cast< double >(val4);
-  (arg1)->setRotationD(arg2,arg3,arg4);
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Actor_getAngle(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Actor *arg1 = (Actor *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  int result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Actor_getAngle",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_getAngle" "', argument " "1"" of type '" "Actor *""'"); 
-  }
-  arg1 = reinterpret_cast< Actor * >(argp1);
-  result = (int)(arg1)->getAngle();
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Actor_setAngle(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Actor *arg1 = (Actor *) 0 ;
-  int arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Actor_setAngle",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_setAngle" "', argument " "1"" of type '" "Actor *""'"); 
-  }
-  arg1 = reinterpret_cast< Actor * >(argp1);
-  ecode2 = SWIG_AsVal_int(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Actor_setAngle" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  (arg1)->setAngle(arg2);
+  arg4 = static_cast< float >(val4);
+  (arg1)->setRotationF(arg2,arg3,arg4);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -4796,76 +4463,6 @@ SWIGINTERN PyObject *_wrap_Actor_setBaseAction(PyObject *SWIGUNUSEDPARM(self), P
     if (SWIG_IsNewObj(res)) delete ptr;
   }
   (arg1)->setBaseAction(arg2);
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Actor_getCollisionDimensions(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Actor *arg1 = (Actor *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  Position result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Actor_getCollisionDimensions",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_getCollisionDimensions" "', argument " "1"" of type '" "Actor *""'"); 
-  }
-  arg1 = reinterpret_cast< Actor * >(argp1);
-  result = (arg1)->getCollisionDimensions();
-  resultobj = SWIG_NewPointerObj((new Position(static_cast< const Position& >(result))), SWIGTYPE_p_Position, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Actor_setCollisionDimensions(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Actor *arg1 = (Actor *) 0 ;
-  int arg2 ;
-  int arg3 ;
-  int arg4 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  int val4 ;
-  int ecode4 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  PyObject * obj2 = 0 ;
-  PyObject * obj3 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OOOO:Actor_setCollisionDimensions",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_setCollisionDimensions" "', argument " "1"" of type '" "Actor *""'"); 
-  }
-  arg1 = reinterpret_cast< Actor * >(argp1);
-  ecode2 = SWIG_AsVal_int(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Actor_setCollisionDimensions" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_int(obj2, &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Actor_setCollisionDimensions" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  ecode4 = SWIG_AsVal_int(obj3, &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Actor_setCollisionDimensions" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
-  (arg1)->setCollisionDimensions(arg2,arg3,arg4);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -6787,90 +6384,6 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Action_setDirection(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Action *arg1 = (Action *) 0 ;
-  Direction arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  bool result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Action_setDirection",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Action, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Action_setDirection" "', argument " "1"" of type '" "Action *""'"); 
-  }
-  arg1 = reinterpret_cast< Action * >(argp1);
-  ecode2 = SWIG_AsVal_int(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Action_setDirection" "', argument " "2"" of type '" "Direction""'");
-  } 
-  arg2 = static_cast< Direction >(val2);
-  result = (bool)(arg1)->setDirection(arg2);
-  resultobj = SWIG_From_bool(static_cast< bool >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Action_getDirection(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Action *arg1 = (Action *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  Direction result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Action_getDirection",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Action, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Action_getDirection" "', argument " "1"" of type '" "Action *""'"); 
-  }
-  arg1 = reinterpret_cast< Action * >(argp1);
-  result = (Direction)(arg1)->getDirection();
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Action_getFrameRect(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Action *arg1 = (Action *) 0 ;
-  int arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  SDL_Rect result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Action_getFrameRect",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Action, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Action_getFrameRect" "', argument " "1"" of type '" "Action *""'"); 
-  }
-  arg1 = reinterpret_cast< Action * >(argp1);
-  ecode2 = SWIG_AsVal_int(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Action_getFrameRect" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  result = (arg1)->getFrameRect(arg2);
-  resultobj = SWIG_NewPointerObj((new SDL_Rect(static_cast< const SDL_Rect& >(result))), SWIGTYPE_p_SDL_Rect, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_Action_animationPlus(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Action *arg1 = (Action *) 0 ;
@@ -7033,314 +6546,20 @@ SWIGINTERN PyObject *_wrap_new_Animation__SWIG_1(PyObject *SWIGUNUSEDPARM(self),
   PyObject *resultobj = 0;
   std::string arg1 ;
   std::string arg2 ;
-  int arg3 ;
-  int arg4 ;
-  int arg5 ;
-  int arg6 ;
-  float arg7 ;
-  bool arg8 ;
-  int arg9 ;
-  int arg10 ;
-  int val3 ;
+  float arg3 ;
+  float arg4 ;
+  float arg5 ;
+  bool arg6 ;
+  int arg7 ;
+  float val3 ;
   int ecode3 = 0 ;
-  int val4 ;
+  float val4 ;
   int ecode4 = 0 ;
-  int val5 ;
+  float val5 ;
   int ecode5 = 0 ;
-  int val6 ;
+  bool val6 ;
   int ecode6 = 0 ;
-  float val7 ;
-  int ecode7 = 0 ;
-  bool val8 ;
-  int ecode8 = 0 ;
-  int val9 ;
-  int ecode9 = 0 ;
-  int val10 ;
-  int ecode10 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  PyObject * obj2 = 0 ;
-  PyObject * obj3 = 0 ;
-  PyObject * obj4 = 0 ;
-  PyObject * obj5 = 0 ;
-  PyObject * obj6 = 0 ;
-  PyObject * obj7 = 0 ;
-  PyObject * obj8 = 0 ;
-  PyObject * obj9 = 0 ;
-  Animation *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OOOOOOOOOO:new_Animation",&obj0,&obj1,&obj2,&obj3,&obj4,&obj5,&obj6,&obj7,&obj8,&obj9)) SWIG_fail;
-  {
-    std::string *ptr = (std::string *)0;
-    int res = SWIG_AsPtr_std_string(obj0, &ptr);
-    if (!SWIG_IsOK(res) || !ptr) {
-      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "new_Animation" "', argument " "1"" of type '" "std::string""'"); 
-    }
-    arg1 = *ptr;
-    if (SWIG_IsNewObj(res)) delete ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    int res = SWIG_AsPtr_std_string(obj1, &ptr);
-    if (!SWIG_IsOK(res) || !ptr) {
-      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "new_Animation" "', argument " "2"" of type '" "std::string""'"); 
-    }
-    arg2 = *ptr;
-    if (SWIG_IsNewObj(res)) delete ptr;
-  }
-  ecode3 = SWIG_AsVal_int(obj2, &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_Animation" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  ecode4 = SWIG_AsVal_int(obj3, &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_Animation" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_int(obj4, &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_Animation" "', argument " "5"" of type '" "int""'");
-  } 
-  arg5 = static_cast< int >(val5);
-  ecode6 = SWIG_AsVal_int(obj5, &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_Animation" "', argument " "6"" of type '" "int""'");
-  } 
-  arg6 = static_cast< int >(val6);
-  ecode7 = SWIG_AsVal_float(obj6, &val7);
-  if (!SWIG_IsOK(ecode7)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_Animation" "', argument " "7"" of type '" "float""'");
-  } 
-  arg7 = static_cast< float >(val7);
-  ecode8 = SWIG_AsVal_bool(obj7, &val8);
-  if (!SWIG_IsOK(ecode8)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_Animation" "', argument " "8"" of type '" "bool""'");
-  } 
-  arg8 = static_cast< bool >(val8);
-  ecode9 = SWIG_AsVal_int(obj8, &val9);
-  if (!SWIG_IsOK(ecode9)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode9), "in method '" "new_Animation" "', argument " "9"" of type '" "int""'");
-  } 
-  arg9 = static_cast< int >(val9);
-  ecode10 = SWIG_AsVal_int(obj9, &val10);
-  if (!SWIG_IsOK(ecode10)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode10), "in method '" "new_Animation" "', argument " "10"" of type '" "int""'");
-  } 
-  arg10 = static_cast< int >(val10);
-  result = (Animation *)new Animation(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Animation, SWIG_POINTER_NEW |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_Animation__SWIG_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::string arg1 ;
-  std::string arg2 ;
-  int arg3 ;
-  int arg4 ;
-  int arg5 ;
-  int arg6 ;
-  float arg7 ;
-  bool arg8 ;
-  int arg9 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  int val4 ;
-  int ecode4 = 0 ;
-  int val5 ;
-  int ecode5 = 0 ;
-  int val6 ;
-  int ecode6 = 0 ;
-  float val7 ;
-  int ecode7 = 0 ;
-  bool val8 ;
-  int ecode8 = 0 ;
-  int val9 ;
-  int ecode9 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  PyObject * obj2 = 0 ;
-  PyObject * obj3 = 0 ;
-  PyObject * obj4 = 0 ;
-  PyObject * obj5 = 0 ;
-  PyObject * obj6 = 0 ;
-  PyObject * obj7 = 0 ;
-  PyObject * obj8 = 0 ;
-  Animation *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OOOOOOOOO:new_Animation",&obj0,&obj1,&obj2,&obj3,&obj4,&obj5,&obj6,&obj7,&obj8)) SWIG_fail;
-  {
-    std::string *ptr = (std::string *)0;
-    int res = SWIG_AsPtr_std_string(obj0, &ptr);
-    if (!SWIG_IsOK(res) || !ptr) {
-      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "new_Animation" "', argument " "1"" of type '" "std::string""'"); 
-    }
-    arg1 = *ptr;
-    if (SWIG_IsNewObj(res)) delete ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    int res = SWIG_AsPtr_std_string(obj1, &ptr);
-    if (!SWIG_IsOK(res) || !ptr) {
-      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "new_Animation" "', argument " "2"" of type '" "std::string""'"); 
-    }
-    arg2 = *ptr;
-    if (SWIG_IsNewObj(res)) delete ptr;
-  }
-  ecode3 = SWIG_AsVal_int(obj2, &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_Animation" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  ecode4 = SWIG_AsVal_int(obj3, &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_Animation" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_int(obj4, &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_Animation" "', argument " "5"" of type '" "int""'");
-  } 
-  arg5 = static_cast< int >(val5);
-  ecode6 = SWIG_AsVal_int(obj5, &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_Animation" "', argument " "6"" of type '" "int""'");
-  } 
-  arg6 = static_cast< int >(val6);
-  ecode7 = SWIG_AsVal_float(obj6, &val7);
-  if (!SWIG_IsOK(ecode7)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_Animation" "', argument " "7"" of type '" "float""'");
-  } 
-  arg7 = static_cast< float >(val7);
-  ecode8 = SWIG_AsVal_bool(obj7, &val8);
-  if (!SWIG_IsOK(ecode8)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_Animation" "', argument " "8"" of type '" "bool""'");
-  } 
-  arg8 = static_cast< bool >(val8);
-  ecode9 = SWIG_AsVal_int(obj8, &val9);
-  if (!SWIG_IsOK(ecode9)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode9), "in method '" "new_Animation" "', argument " "9"" of type '" "int""'");
-  } 
-  arg9 = static_cast< int >(val9);
-  result = (Animation *)new Animation(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Animation, SWIG_POINTER_NEW |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_Animation__SWIG_3(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::string arg1 ;
-  std::string arg2 ;
-  int arg3 ;
-  int arg4 ;
-  int arg5 ;
-  int arg6 ;
-  float arg7 ;
-  bool arg8 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  int val4 ;
-  int ecode4 = 0 ;
-  int val5 ;
-  int ecode5 = 0 ;
-  int val6 ;
-  int ecode6 = 0 ;
-  float val7 ;
-  int ecode7 = 0 ;
-  bool val8 ;
-  int ecode8 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  PyObject * obj2 = 0 ;
-  PyObject * obj3 = 0 ;
-  PyObject * obj4 = 0 ;
-  PyObject * obj5 = 0 ;
-  PyObject * obj6 = 0 ;
-  PyObject * obj7 = 0 ;
-  Animation *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OOOOOOOO:new_Animation",&obj0,&obj1,&obj2,&obj3,&obj4,&obj5,&obj6,&obj7)) SWIG_fail;
-  {
-    std::string *ptr = (std::string *)0;
-    int res = SWIG_AsPtr_std_string(obj0, &ptr);
-    if (!SWIG_IsOK(res) || !ptr) {
-      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "new_Animation" "', argument " "1"" of type '" "std::string""'"); 
-    }
-    arg1 = *ptr;
-    if (SWIG_IsNewObj(res)) delete ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    int res = SWIG_AsPtr_std_string(obj1, &ptr);
-    if (!SWIG_IsOK(res) || !ptr) {
-      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "new_Animation" "', argument " "2"" of type '" "std::string""'"); 
-    }
-    arg2 = *ptr;
-    if (SWIG_IsNewObj(res)) delete ptr;
-  }
-  ecode3 = SWIG_AsVal_int(obj2, &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_Animation" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  ecode4 = SWIG_AsVal_int(obj3, &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_Animation" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_int(obj4, &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_Animation" "', argument " "5"" of type '" "int""'");
-  } 
-  arg5 = static_cast< int >(val5);
-  ecode6 = SWIG_AsVal_int(obj5, &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_Animation" "', argument " "6"" of type '" "int""'");
-  } 
-  arg6 = static_cast< int >(val6);
-  ecode7 = SWIG_AsVal_float(obj6, &val7);
-  if (!SWIG_IsOK(ecode7)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_Animation" "', argument " "7"" of type '" "float""'");
-  } 
-  arg7 = static_cast< float >(val7);
-  ecode8 = SWIG_AsVal_bool(obj7, &val8);
-  if (!SWIG_IsOK(ecode8)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_Animation" "', argument " "8"" of type '" "bool""'");
-  } 
-  arg8 = static_cast< bool >(val8);
-  result = (Animation *)new Animation(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Animation, SWIG_POINTER_NEW |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_Animation__SWIG_4(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::string arg1 ;
-  std::string arg2 ;
-  int arg3 ;
-  int arg4 ;
-  int arg5 ;
-  int arg6 ;
-  float arg7 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  int val4 ;
-  int ecode4 = 0 ;
-  int val5 ;
-  int ecode5 = 0 ;
-  int val6 ;
-  int ecode6 = 0 ;
-  float val7 ;
+  int val7 ;
   int ecode7 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
@@ -7370,31 +6589,31 @@ SWIGINTERN PyObject *_wrap_new_Animation__SWIG_4(PyObject *SWIGUNUSEDPARM(self),
     arg2 = *ptr;
     if (SWIG_IsNewObj(res)) delete ptr;
   }
-  ecode3 = SWIG_AsVal_int(obj2, &val3);
+  ecode3 = SWIG_AsVal_float(obj2, &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_Animation" "', argument " "3"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_Animation" "', argument " "3"" of type '" "float""'");
   } 
-  arg3 = static_cast< int >(val3);
-  ecode4 = SWIG_AsVal_int(obj3, &val4);
+  arg3 = static_cast< float >(val3);
+  ecode4 = SWIG_AsVal_float(obj3, &val4);
   if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_Animation" "', argument " "4"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_Animation" "', argument " "4"" of type '" "float""'");
   } 
-  arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_int(obj4, &val5);
+  arg4 = static_cast< float >(val4);
+  ecode5 = SWIG_AsVal_float(obj4, &val5);
   if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_Animation" "', argument " "5"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_Animation" "', argument " "5"" of type '" "float""'");
   } 
-  arg5 = static_cast< int >(val5);
-  ecode6 = SWIG_AsVal_int(obj5, &val6);
+  arg5 = static_cast< float >(val5);
+  ecode6 = SWIG_AsVal_bool(obj5, &val6);
   if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_Animation" "', argument " "6"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_Animation" "', argument " "6"" of type '" "bool""'");
   } 
-  arg6 = static_cast< int >(val6);
-  ecode7 = SWIG_AsVal_float(obj6, &val7);
+  arg6 = static_cast< bool >(val6);
+  ecode7 = SWIG_AsVal_int(obj6, &val7);
   if (!SWIG_IsOK(ecode7)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_Animation" "', argument " "7"" of type '" "float""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_Animation" "', argument " "7"" of type '" "int""'");
   } 
-  arg7 = static_cast< float >(val7);
+  arg7 = static_cast< int >(val7);
   result = (Animation *)new Animation(arg1,arg2,arg3,arg4,arg5,arg6,arg7);
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Animation, SWIG_POINTER_NEW |  0 );
   return resultobj;
@@ -7403,21 +6622,21 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_Animation__SWIG_5(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_Animation__SWIG_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   std::string arg1 ;
   std::string arg2 ;
-  int arg3 ;
-  int arg4 ;
-  int arg5 ;
-  int arg6 ;
-  int val3 ;
+  float arg3 ;
+  float arg4 ;
+  float arg5 ;
+  bool arg6 ;
+  float val3 ;
   int ecode3 = 0 ;
-  int val4 ;
+  float val4 ;
   int ecode4 = 0 ;
-  int val5 ;
+  float val5 ;
   int ecode5 = 0 ;
-  int val6 ;
+  bool val6 ;
   int ecode6 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
@@ -7446,26 +6665,26 @@ SWIGINTERN PyObject *_wrap_new_Animation__SWIG_5(PyObject *SWIGUNUSEDPARM(self),
     arg2 = *ptr;
     if (SWIG_IsNewObj(res)) delete ptr;
   }
-  ecode3 = SWIG_AsVal_int(obj2, &val3);
+  ecode3 = SWIG_AsVal_float(obj2, &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_Animation" "', argument " "3"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_Animation" "', argument " "3"" of type '" "float""'");
   } 
-  arg3 = static_cast< int >(val3);
-  ecode4 = SWIG_AsVal_int(obj3, &val4);
+  arg3 = static_cast< float >(val3);
+  ecode4 = SWIG_AsVal_float(obj3, &val4);
   if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_Animation" "', argument " "4"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_Animation" "', argument " "4"" of type '" "float""'");
   } 
-  arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_int(obj4, &val5);
+  arg4 = static_cast< float >(val4);
+  ecode5 = SWIG_AsVal_float(obj4, &val5);
   if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_Animation" "', argument " "5"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_Animation" "', argument " "5"" of type '" "float""'");
   } 
-  arg5 = static_cast< int >(val5);
-  ecode6 = SWIG_AsVal_int(obj5, &val6);
+  arg5 = static_cast< float >(val5);
+  ecode6 = SWIG_AsVal_bool(obj5, &val6);
   if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_Animation" "', argument " "6"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_Animation" "', argument " "6"" of type '" "bool""'");
   } 
-  arg6 = static_cast< int >(val6);
+  arg6 = static_cast< bool >(val6);
   result = (Animation *)new Animation(arg1,arg2,arg3,arg4,arg5,arg6);
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Animation, SWIG_POINTER_NEW |  0 );
   return resultobj;
@@ -7474,18 +6693,18 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_Animation__SWIG_6(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_Animation__SWIG_3(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   std::string arg1 ;
   std::string arg2 ;
-  int arg3 ;
-  int arg4 ;
-  int arg5 ;
-  int val3 ;
+  float arg3 ;
+  float arg4 ;
+  float arg5 ;
+  float val3 ;
   int ecode3 = 0 ;
-  int val4 ;
+  float val4 ;
   int ecode4 = 0 ;
-  int val5 ;
+  float val5 ;
   int ecode5 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
@@ -7513,21 +6732,21 @@ SWIGINTERN PyObject *_wrap_new_Animation__SWIG_6(PyObject *SWIGUNUSEDPARM(self),
     arg2 = *ptr;
     if (SWIG_IsNewObj(res)) delete ptr;
   }
-  ecode3 = SWIG_AsVal_int(obj2, &val3);
+  ecode3 = SWIG_AsVal_float(obj2, &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_Animation" "', argument " "3"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_Animation" "', argument " "3"" of type '" "float""'");
   } 
-  arg3 = static_cast< int >(val3);
-  ecode4 = SWIG_AsVal_int(obj3, &val4);
+  arg3 = static_cast< float >(val3);
+  ecode4 = SWIG_AsVal_float(obj3, &val4);
   if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_Animation" "', argument " "4"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_Animation" "', argument " "4"" of type '" "float""'");
   } 
-  arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_int(obj4, &val5);
+  arg4 = static_cast< float >(val4);
+  ecode5 = SWIG_AsVal_float(obj4, &val5);
   if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_Animation" "', argument " "5"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_Animation" "', argument " "5"" of type '" "float""'");
   } 
-  arg5 = static_cast< int >(val5);
+  arg5 = static_cast< float >(val5);
   result = (Animation *)new Animation(arg1,arg2,arg3,arg4,arg5);
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Animation, SWIG_POINTER_NEW |  0 );
   return resultobj;
@@ -7536,15 +6755,15 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_Animation__SWIG_7(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_Animation__SWIG_4(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   std::string arg1 ;
   std::string arg2 ;
-  int arg3 ;
-  int arg4 ;
-  int val3 ;
+  float arg3 ;
+  float arg4 ;
+  float val3 ;
   int ecode3 = 0 ;
-  int val4 ;
+  float val4 ;
   int ecode4 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
@@ -7571,16 +6790,16 @@ SWIGINTERN PyObject *_wrap_new_Animation__SWIG_7(PyObject *SWIGUNUSEDPARM(self),
     arg2 = *ptr;
     if (SWIG_IsNewObj(res)) delete ptr;
   }
-  ecode3 = SWIG_AsVal_int(obj2, &val3);
+  ecode3 = SWIG_AsVal_float(obj2, &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_Animation" "', argument " "3"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_Animation" "', argument " "3"" of type '" "float""'");
   } 
-  arg3 = static_cast< int >(val3);
-  ecode4 = SWIG_AsVal_int(obj3, &val4);
+  arg3 = static_cast< float >(val3);
+  ecode4 = SWIG_AsVal_float(obj3, &val4);
   if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_Animation" "', argument " "4"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_Animation" "', argument " "4"" of type '" "float""'");
   } 
-  arg4 = static_cast< int >(val4);
+  arg4 = static_cast< float >(val4);
   result = (Animation *)new Animation(arg1,arg2,arg3,arg4);
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Animation, SWIG_POINTER_NEW |  0 );
   return resultobj;
@@ -7589,12 +6808,12 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_Animation__SWIG_8(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_Animation__SWIG_5(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   std::string arg1 ;
   std::string arg2 ;
-  int arg3 ;
-  int val3 ;
+  float arg3 ;
+  float val3 ;
   int ecode3 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
@@ -7620,11 +6839,11 @@ SWIGINTERN PyObject *_wrap_new_Animation__SWIG_8(PyObject *SWIGUNUSEDPARM(self),
     arg2 = *ptr;
     if (SWIG_IsNewObj(res)) delete ptr;
   }
-  ecode3 = SWIG_AsVal_int(obj2, &val3);
+  ecode3 = SWIG_AsVal_float(obj2, &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_Animation" "', argument " "3"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_Animation" "', argument " "3"" of type '" "float""'");
   } 
-  arg3 = static_cast< int >(val3);
+  arg3 = static_cast< float >(val3);
   result = (Animation *)new Animation(arg1,arg2,arg3);
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Animation, SWIG_POINTER_NEW |  0 );
   return resultobj;
@@ -7633,7 +6852,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_Animation__SWIG_9(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_Animation__SWIG_6(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   std::string arg1 ;
   std::string arg2 ;
@@ -7670,12 +6889,12 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_Animation(PyObject *self, PyObject *args) {
   int argc;
-  PyObject *argv[11];
+  PyObject *argv[8];
   int ii;
   
   if (!PyTuple_Check(args)) SWIG_fail;
   argc = (int)PyObject_Length(args);
-  for (ii = 0; (ii < argc) && (ii < 10); ii++) {
+  for (ii = 0; (ii < argc) && (ii < 7); ii++) {
     argv[ii] = PyTuple_GET_ITEM(args,ii);
   }
   if (argc == 0) {
@@ -7689,7 +6908,7 @@ SWIGINTERN PyObject *_wrap_new_Animation(PyObject *self, PyObject *args) {
       int res = SWIG_AsPtr_std_string(argv[1], (std::string**)(0));
       _v = SWIG_CheckState(res);
       if (_v) {
-        return _wrap_new_Animation__SWIG_9(self, args);
+        return _wrap_new_Animation__SWIG_6(self, args);
       }
     }
   }
@@ -7702,11 +6921,11 @@ SWIGINTERN PyObject *_wrap_new_Animation(PyObject *self, PyObject *args) {
       _v = SWIG_CheckState(res);
       if (_v) {
         {
-          int res = SWIG_AsVal_int(argv[2], NULL);
+          int res = SWIG_AsVal_float(argv[2], NULL);
           _v = SWIG_CheckState(res);
         }
         if (_v) {
-          return _wrap_new_Animation__SWIG_8(self, args);
+          return _wrap_new_Animation__SWIG_5(self, args);
         }
       }
     }
@@ -7720,16 +6939,16 @@ SWIGINTERN PyObject *_wrap_new_Animation(PyObject *self, PyObject *args) {
       _v = SWIG_CheckState(res);
       if (_v) {
         {
-          int res = SWIG_AsVal_int(argv[2], NULL);
+          int res = SWIG_AsVal_float(argv[2], NULL);
           _v = SWIG_CheckState(res);
         }
         if (_v) {
           {
-            int res = SWIG_AsVal_int(argv[3], NULL);
+            int res = SWIG_AsVal_float(argv[3], NULL);
             _v = SWIG_CheckState(res);
           }
           if (_v) {
-            return _wrap_new_Animation__SWIG_7(self, args);
+            return _wrap_new_Animation__SWIG_4(self, args);
           }
         }
       }
@@ -7744,21 +6963,21 @@ SWIGINTERN PyObject *_wrap_new_Animation(PyObject *self, PyObject *args) {
       _v = SWIG_CheckState(res);
       if (_v) {
         {
-          int res = SWIG_AsVal_int(argv[2], NULL);
+          int res = SWIG_AsVal_float(argv[2], NULL);
           _v = SWIG_CheckState(res);
         }
         if (_v) {
           {
-            int res = SWIG_AsVal_int(argv[3], NULL);
+            int res = SWIG_AsVal_float(argv[3], NULL);
             _v = SWIG_CheckState(res);
           }
           if (_v) {
             {
-              int res = SWIG_AsVal_int(argv[4], NULL);
+              int res = SWIG_AsVal_float(argv[4], NULL);
               _v = SWIG_CheckState(res);
             }
             if (_v) {
-              return _wrap_new_Animation__SWIG_6(self, args);
+              return _wrap_new_Animation__SWIG_3(self, args);
             }
           }
         }
@@ -7774,26 +6993,26 @@ SWIGINTERN PyObject *_wrap_new_Animation(PyObject *self, PyObject *args) {
       _v = SWIG_CheckState(res);
       if (_v) {
         {
-          int res = SWIG_AsVal_int(argv[2], NULL);
+          int res = SWIG_AsVal_float(argv[2], NULL);
           _v = SWIG_CheckState(res);
         }
         if (_v) {
           {
-            int res = SWIG_AsVal_int(argv[3], NULL);
+            int res = SWIG_AsVal_float(argv[3], NULL);
             _v = SWIG_CheckState(res);
           }
           if (_v) {
             {
-              int res = SWIG_AsVal_int(argv[4], NULL);
+              int res = SWIG_AsVal_float(argv[4], NULL);
               _v = SWIG_CheckState(res);
             }
             if (_v) {
               {
-                int res = SWIG_AsVal_int(argv[5], NULL);
+                int res = SWIG_AsVal_bool(argv[5], NULL);
                 _v = SWIG_CheckState(res);
               }
               if (_v) {
-                return _wrap_new_Animation__SWIG_5(self, args);
+                return _wrap_new_Animation__SWIG_2(self, args);
               }
             }
           }
@@ -7810,193 +7029,31 @@ SWIGINTERN PyObject *_wrap_new_Animation(PyObject *self, PyObject *args) {
       _v = SWIG_CheckState(res);
       if (_v) {
         {
-          int res = SWIG_AsVal_int(argv[2], NULL);
+          int res = SWIG_AsVal_float(argv[2], NULL);
           _v = SWIG_CheckState(res);
         }
         if (_v) {
           {
-            int res = SWIG_AsVal_int(argv[3], NULL);
+            int res = SWIG_AsVal_float(argv[3], NULL);
             _v = SWIG_CheckState(res);
           }
           if (_v) {
             {
-              int res = SWIG_AsVal_int(argv[4], NULL);
+              int res = SWIG_AsVal_float(argv[4], NULL);
               _v = SWIG_CheckState(res);
             }
             if (_v) {
               {
-                int res = SWIG_AsVal_int(argv[5], NULL);
+                int res = SWIG_AsVal_bool(argv[5], NULL);
                 _v = SWIG_CheckState(res);
               }
               if (_v) {
                 {
-                  int res = SWIG_AsVal_float(argv[6], NULL);
+                  int res = SWIG_AsVal_int(argv[6], NULL);
                   _v = SWIG_CheckState(res);
                 }
                 if (_v) {
-                  return _wrap_new_Animation__SWIG_4(self, args);
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  if (argc == 8) {
-    int _v;
-    int res = SWIG_AsPtr_std_string(argv[0], (std::string**)(0));
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      int res = SWIG_AsPtr_std_string(argv[1], (std::string**)(0));
-      _v = SWIG_CheckState(res);
-      if (_v) {
-        {
-          int res = SWIG_AsVal_int(argv[2], NULL);
-          _v = SWIG_CheckState(res);
-        }
-        if (_v) {
-          {
-            int res = SWIG_AsVal_int(argv[3], NULL);
-            _v = SWIG_CheckState(res);
-          }
-          if (_v) {
-            {
-              int res = SWIG_AsVal_int(argv[4], NULL);
-              _v = SWIG_CheckState(res);
-            }
-            if (_v) {
-              {
-                int res = SWIG_AsVal_int(argv[5], NULL);
-                _v = SWIG_CheckState(res);
-              }
-              if (_v) {
-                {
-                  int res = SWIG_AsVal_float(argv[6], NULL);
-                  _v = SWIG_CheckState(res);
-                }
-                if (_v) {
-                  {
-                    int res = SWIG_AsVal_bool(argv[7], NULL);
-                    _v = SWIG_CheckState(res);
-                  }
-                  if (_v) {
-                    return _wrap_new_Animation__SWIG_3(self, args);
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  if (argc == 9) {
-    int _v;
-    int res = SWIG_AsPtr_std_string(argv[0], (std::string**)(0));
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      int res = SWIG_AsPtr_std_string(argv[1], (std::string**)(0));
-      _v = SWIG_CheckState(res);
-      if (_v) {
-        {
-          int res = SWIG_AsVal_int(argv[2], NULL);
-          _v = SWIG_CheckState(res);
-        }
-        if (_v) {
-          {
-            int res = SWIG_AsVal_int(argv[3], NULL);
-            _v = SWIG_CheckState(res);
-          }
-          if (_v) {
-            {
-              int res = SWIG_AsVal_int(argv[4], NULL);
-              _v = SWIG_CheckState(res);
-            }
-            if (_v) {
-              {
-                int res = SWIG_AsVal_int(argv[5], NULL);
-                _v = SWIG_CheckState(res);
-              }
-              if (_v) {
-                {
-                  int res = SWIG_AsVal_float(argv[6], NULL);
-                  _v = SWIG_CheckState(res);
-                }
-                if (_v) {
-                  {
-                    int res = SWIG_AsVal_bool(argv[7], NULL);
-                    _v = SWIG_CheckState(res);
-                  }
-                  if (_v) {
-                    {
-                      int res = SWIG_AsVal_int(argv[8], NULL);
-                      _v = SWIG_CheckState(res);
-                    }
-                    if (_v) {
-                      return _wrap_new_Animation__SWIG_2(self, args);
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  if (argc == 10) {
-    int _v;
-    int res = SWIG_AsPtr_std_string(argv[0], (std::string**)(0));
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      int res = SWIG_AsPtr_std_string(argv[1], (std::string**)(0));
-      _v = SWIG_CheckState(res);
-      if (_v) {
-        {
-          int res = SWIG_AsVal_int(argv[2], NULL);
-          _v = SWIG_CheckState(res);
-        }
-        if (_v) {
-          {
-            int res = SWIG_AsVal_int(argv[3], NULL);
-            _v = SWIG_CheckState(res);
-          }
-          if (_v) {
-            {
-              int res = SWIG_AsVal_int(argv[4], NULL);
-              _v = SWIG_CheckState(res);
-            }
-            if (_v) {
-              {
-                int res = SWIG_AsVal_int(argv[5], NULL);
-                _v = SWIG_CheckState(res);
-              }
-              if (_v) {
-                {
-                  int res = SWIG_AsVal_float(argv[6], NULL);
-                  _v = SWIG_CheckState(res);
-                }
-                if (_v) {
-                  {
-                    int res = SWIG_AsVal_bool(argv[7], NULL);
-                    _v = SWIG_CheckState(res);
-                  }
-                  if (_v) {
-                    {
-                      int res = SWIG_AsVal_int(argv[8], NULL);
-                      _v = SWIG_CheckState(res);
-                    }
-                    if (_v) {
-                      {
-                        int res = SWIG_AsVal_int(argv[9], NULL);
-                        _v = SWIG_CheckState(res);
-                      }
-                      if (_v) {
-                        return _wrap_new_Animation__SWIG_1(self, args);
-                      }
-                    }
-                  }
+                  return _wrap_new_Animation__SWIG_1(self, args);
                 }
               }
             }
@@ -8010,14 +7067,11 @@ fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number of arguments for overloaded function 'new_Animation'.\n"
     "  Possible C/C++ prototypes are:\n"
     "    Animation()\n"
-    "    Animation(std::string,std::string,int,int,int,int,float,bool,int,int)\n"
-    "    Animation(std::string,std::string,int,int,int,int,float,bool,int)\n"
-    "    Animation(std::string,std::string,int,int,int,int,float,bool)\n"
-    "    Animation(std::string,std::string,int,int,int,int,float)\n"
-    "    Animation(std::string,std::string,int,int,int,int)\n"
-    "    Animation(std::string,std::string,int,int,int)\n"
-    "    Animation(std::string,std::string,int,int)\n"
-    "    Animation(std::string,std::string,int)\n"
+    "    Animation(std::string,std::string,float,float,float,bool,int)\n"
+    "    Animation(std::string,std::string,float,float,float,bool)\n"
+    "    Animation(std::string,std::string,float,float,float)\n"
+    "    Animation(std::string,std::string,float,float)\n"
+    "    Animation(std::string,std::string,float)\n"
     "    Animation(std::string,std::string)\n");
   return NULL;
 }
@@ -8039,37 +7093,6 @@ SWIGINTERN PyObject *_wrap_Animation_getFrame(PyObject *SWIGUNUSEDPARM(self), Py
   arg1 = reinterpret_cast< Animation * >(argp1);
   result = (int)(arg1)->getFrame();
   resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Animation_getFrameRect(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Animation *arg1 = (Animation *) 0 ;
-  Direction arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  SDL_Rect result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Animation_getFrameRect",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Animation, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Animation_getFrameRect" "', argument " "1"" of type '" "Animation *""'"); 
-  }
-  arg1 = reinterpret_cast< Animation * >(argp1);
-  ecode2 = SWIG_AsVal_int(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Animation_getFrameRect" "', argument " "2"" of type '" "Direction""'");
-  } 
-  arg2 = static_cast< Direction >(val2);
-  result = (arg1)->getFrameRect(arg2);
-  resultobj = SWIG_NewPointerObj((new SDL_Rect(static_cast< const SDL_Rect& >(result))), SWIGTYPE_p_SDL_Rect, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -8247,67 +7270,6 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Animation_getDimensions(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Animation *arg1 = (Animation *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  Position result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Animation_getDimensions",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Animation, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Animation_getDimensions" "', argument " "1"" of type '" "Animation *""'"); 
-  }
-  arg1 = reinterpret_cast< Animation * >(argp1);
-  result = (arg1)->getDimensions();
-  resultobj = SWIG_NewPointerObj((new Position(static_cast< const Position& >(result))), SWIGTYPE_p_Position, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Animation_setDimensions(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Animation *arg1 = (Animation *) 0 ;
-  int arg2 ;
-  int arg3 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  PyObject * obj2 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OOO:Animation_setDimensions",&obj0,&obj1,&obj2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Animation, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Animation_setDimensions" "', argument " "1"" of type '" "Animation *""'"); 
-  }
-  arg1 = reinterpret_cast< Animation * >(argp1);
-  ecode2 = SWIG_AsVal_int(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Animation_setDimensions" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_int(obj2, &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Animation_setDimensions" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  (arg1)->setDimensions(arg2,arg3);
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_Animation_getLoop(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Animation *arg1 = (Animation *) 0 ;
@@ -8353,58 +7315,6 @@ SWIGINTERN PyObject *_wrap_Animation_setLoop(PyObject *SWIGUNUSEDPARM(self), PyO
   } 
   arg2 = static_cast< bool >(val2);
   (arg1)->setLoop(arg2);
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Animation_getStartX(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Animation *arg1 = (Animation *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  int result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Animation_getStartX",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Animation, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Animation_getStartX" "', argument " "1"" of type '" "Animation *""'"); 
-  }
-  arg1 = reinterpret_cast< Animation * >(argp1);
-  result = (int)(arg1)->getStartX();
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Animation_setStartX(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Animation *arg1 = (Animation *) 0 ;
-  int arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Animation_setStartX",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Animation, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Animation_setStartX" "', argument " "1"" of type '" "Animation *""'"); 
-  }
-  arg1 = reinterpret_cast< Animation * >(argp1);
-  ecode2 = SWIG_AsVal_int(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Animation_setStartX" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  (arg1)->setStartX(arg2);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -8470,7 +7380,7 @@ SWIGINTERN PyObject *_wrap_Animation_getOffset(PyObject *SWIGUNUSEDPARM(self), P
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  Position result;
+  PositionF result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Animation_getOffset",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Animation, 0 |  0 );
@@ -8479,23 +7389,71 @@ SWIGINTERN PyObject *_wrap_Animation_getOffset(PyObject *SWIGUNUSEDPARM(self), P
   }
   arg1 = reinterpret_cast< Animation * >(argp1);
   result = (arg1)->getOffset();
-  resultobj = SWIG_NewPointerObj((new Position(static_cast< const Position& >(result))), SWIGTYPE_p_Position, SWIG_POINTER_OWN |  0 );
+  resultobj = SWIG_NewPointerObj((new PositionF(static_cast< const PositionF& >(result))), SWIGTYPE_p_PositionF, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_Animation_setOffset(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Animation_setOffset__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Animation *arg1 = (Animation *) 0 ;
-  int arg2 ;
-  int arg3 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  int val2 ;
+  float val2 ;
   int ecode2 = 0 ;
-  int val3 ;
+  float val3 ;
+  int ecode3 = 0 ;
+  float val4 ;
+  int ecode4 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOOO:Animation_setOffset",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Animation, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Animation_setOffset" "', argument " "1"" of type '" "Animation *""'"); 
+  }
+  arg1 = reinterpret_cast< Animation * >(argp1);
+  ecode2 = SWIG_AsVal_float(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Animation_setOffset" "', argument " "2"" of type '" "float""'");
+  } 
+  arg2 = static_cast< float >(val2);
+  ecode3 = SWIG_AsVal_float(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Animation_setOffset" "', argument " "3"" of type '" "float""'");
+  } 
+  arg3 = static_cast< float >(val3);
+  ecode4 = SWIG_AsVal_float(obj3, &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Animation_setOffset" "', argument " "4"" of type '" "float""'");
+  } 
+  arg4 = static_cast< float >(val4);
+  (arg1)->setOffset(arg2,arg3,arg4);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Animation_setOffset__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Animation *arg1 = (Animation *) 0 ;
+  float arg2 ;
+  float arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  float val2 ;
+  int ecode2 = 0 ;
+  float val3 ;
   int ecode3 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
@@ -8507,17 +7465,155 @@ SWIGINTERN PyObject *_wrap_Animation_setOffset(PyObject *SWIGUNUSEDPARM(self), P
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Animation_setOffset" "', argument " "1"" of type '" "Animation *""'"); 
   }
   arg1 = reinterpret_cast< Animation * >(argp1);
-  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  ecode2 = SWIG_AsVal_float(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Animation_setOffset" "', argument " "2"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Animation_setOffset" "', argument " "2"" of type '" "float""'");
   } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_int(obj2, &val3);
+  arg2 = static_cast< float >(val2);
+  ecode3 = SWIG_AsVal_float(obj2, &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Animation_setOffset" "', argument " "3"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Animation_setOffset" "', argument " "3"" of type '" "float""'");
   } 
-  arg3 = static_cast< int >(val3);
+  arg3 = static_cast< float >(val3);
   (arg1)->setOffset(arg2,arg3);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Animation_setOffset(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[5];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = (int)PyObject_Length(args);
+  for (ii = 0; (ii < argc) && (ii < 4); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 3) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Animation, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_float(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        {
+          int res = SWIG_AsVal_float(argv[2], NULL);
+          _v = SWIG_CheckState(res);
+        }
+        if (_v) {
+          return _wrap_Animation_setOffset__SWIG_1(self, args);
+        }
+      }
+    }
+  }
+  if (argc == 4) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Animation, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_float(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        {
+          int res = SWIG_AsVal_float(argv[2], NULL);
+          _v = SWIG_CheckState(res);
+        }
+        if (_v) {
+          {
+            int res = SWIG_AsVal_float(argv[3], NULL);
+            _v = SWIG_CheckState(res);
+          }
+          if (_v) {
+            return _wrap_Animation_setOffset__SWIG_0(self, args);
+          }
+        }
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number of arguments for overloaded function 'Animation_setOffset'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    setOffset(Animation *,float,float,float)\n"
+    "    setOffset(Animation *,float,float)\n");
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Animation_getRotation(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Animation *arg1 = (Animation *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PositionF result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Animation_getRotation",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Animation, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Animation_getRotation" "', argument " "1"" of type '" "Animation *""'"); 
+  }
+  arg1 = reinterpret_cast< Animation * >(argp1);
+  result = (arg1)->getRotation();
+  resultobj = SWIG_NewPointerObj((new PositionF(static_cast< const PositionF& >(result))), SWIGTYPE_p_PositionF, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Animation_setRotation(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Animation *arg1 = (Animation *) 0 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  float val2 ;
+  int ecode2 = 0 ;
+  float val3 ;
+  int ecode3 = 0 ;
+  float val4 ;
+  int ecode4 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOOO:Animation_setRotation",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Animation, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Animation_setRotation" "', argument " "1"" of type '" "Animation *""'"); 
+  }
+  arg1 = reinterpret_cast< Animation * >(argp1);
+  ecode2 = SWIG_AsVal_float(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Animation_setRotation" "', argument " "2"" of type '" "float""'");
+  } 
+  arg2 = static_cast< float >(val2);
+  ecode3 = SWIG_AsVal_float(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Animation_setRotation" "', argument " "3"" of type '" "float""'");
+  } 
+  arg3 = static_cast< float >(val3);
+  ecode4 = SWIG_AsVal_float(obj3, &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Animation_setRotation" "', argument " "4"" of type '" "float""'");
+  } 
+  arg4 = static_cast< float >(val4);
+  (arg1)->setRotation(arg2,arg3,arg4);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -8605,6 +7701,386 @@ SWIGINTERN PyObject *Animation_swigregister(PyObject *SWIGUNUSEDPARM(self), PyOb
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *_wrap_new_CollisionBox(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  PositionF arg1 ;
+  PositionF arg2 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  CollisionBox *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:new_CollisionBox",&obj0,&obj1)) SWIG_fail;
+  {
+    res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_PositionF,  0  | 0);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_CollisionBox" "', argument " "1"" of type '" "PositionF""'"); 
+    }  
+    if (!argp1) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_CollisionBox" "', argument " "1"" of type '" "PositionF""'");
+    } else {
+      PositionF * temp = reinterpret_cast< PositionF * >(argp1);
+      arg1 = *temp;
+      if (SWIG_IsNewObj(res1)) delete temp;
+    }
+  }
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_PositionF,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_CollisionBox" "', argument " "2"" of type '" "PositionF""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_CollisionBox" "', argument " "2"" of type '" "PositionF""'");
+    } else {
+      PositionF * temp = reinterpret_cast< PositionF * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  result = (CollisionBox *)new CollisionBox(arg1,arg2);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CollisionBox, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CollisionBox_getDimensions(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CollisionBox *arg1 = (CollisionBox *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PositionF result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CollisionBox_getDimensions",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CollisionBox, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CollisionBox_getDimensions" "', argument " "1"" of type '" "CollisionBox *""'"); 
+  }
+  arg1 = reinterpret_cast< CollisionBox * >(argp1);
+  result = (arg1)->getDimensions();
+  resultobj = SWIG_NewPointerObj((new PositionF(static_cast< const PositionF& >(result))), SWIGTYPE_p_PositionF, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CollisionBox_setDimensions(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CollisionBox *arg1 = (CollisionBox *) 0 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  float val2 ;
+  int ecode2 = 0 ;
+  float val3 ;
+  int ecode3 = 0 ;
+  float val4 ;
+  int ecode4 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOOO:CollisionBox_setDimensions",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CollisionBox, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CollisionBox_setDimensions" "', argument " "1"" of type '" "CollisionBox *""'"); 
+  }
+  arg1 = reinterpret_cast< CollisionBox * >(argp1);
+  ecode2 = SWIG_AsVal_float(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CollisionBox_setDimensions" "', argument " "2"" of type '" "float""'");
+  } 
+  arg2 = static_cast< float >(val2);
+  ecode3 = SWIG_AsVal_float(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "CollisionBox_setDimensions" "', argument " "3"" of type '" "float""'");
+  } 
+  arg3 = static_cast< float >(val3);
+  ecode4 = SWIG_AsVal_float(obj3, &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "CollisionBox_setDimensions" "', argument " "4"" of type '" "float""'");
+  } 
+  arg4 = static_cast< float >(val4);
+  (arg1)->setDimensions(arg2,arg3,arg4);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CollisionBox_getPosition(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CollisionBox *arg1 = (CollisionBox *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PositionF result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CollisionBox_getPosition",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CollisionBox, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CollisionBox_getPosition" "', argument " "1"" of type '" "CollisionBox *""'"); 
+  }
+  arg1 = reinterpret_cast< CollisionBox * >(argp1);
+  result = (arg1)->getPosition();
+  resultobj = SWIG_NewPointerObj((new PositionF(static_cast< const PositionF& >(result))), SWIGTYPE_p_PositionF, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CollisionBox_setPosition(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CollisionBox *arg1 = (CollisionBox *) 0 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  float val2 ;
+  int ecode2 = 0 ;
+  float val3 ;
+  int ecode3 = 0 ;
+  float val4 ;
+  int ecode4 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOOO:CollisionBox_setPosition",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CollisionBox, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CollisionBox_setPosition" "', argument " "1"" of type '" "CollisionBox *""'"); 
+  }
+  arg1 = reinterpret_cast< CollisionBox * >(argp1);
+  ecode2 = SWIG_AsVal_float(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CollisionBox_setPosition" "', argument " "2"" of type '" "float""'");
+  } 
+  arg2 = static_cast< float >(val2);
+  ecode3 = SWIG_AsVal_float(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "CollisionBox_setPosition" "', argument " "3"" of type '" "float""'");
+  } 
+  arg3 = static_cast< float >(val3);
+  ecode4 = SWIG_AsVal_float(obj3, &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "CollisionBox_setPosition" "', argument " "4"" of type '" "float""'");
+  } 
+  arg4 = static_cast< float >(val4);
+  (arg1)->setPosition(arg2,arg3,arg4);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CollisionBox_getRotation(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CollisionBox *arg1 = (CollisionBox *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PositionF result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CollisionBox_getRotation",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CollisionBox, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CollisionBox_getRotation" "', argument " "1"" of type '" "CollisionBox *""'"); 
+  }
+  arg1 = reinterpret_cast< CollisionBox * >(argp1);
+  result = (arg1)->getRotation();
+  resultobj = SWIG_NewPointerObj((new PositionF(static_cast< const PositionF& >(result))), SWIGTYPE_p_PositionF, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CollisionBox_setRotation(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CollisionBox *arg1 = (CollisionBox *) 0 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  float val2 ;
+  int ecode2 = 0 ;
+  float val3 ;
+  int ecode3 = 0 ;
+  float val4 ;
+  int ecode4 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOOO:CollisionBox_setRotation",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CollisionBox, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CollisionBox_setRotation" "', argument " "1"" of type '" "CollisionBox *""'"); 
+  }
+  arg1 = reinterpret_cast< CollisionBox * >(argp1);
+  ecode2 = SWIG_AsVal_float(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CollisionBox_setRotation" "', argument " "2"" of type '" "float""'");
+  } 
+  arg2 = static_cast< float >(val2);
+  ecode3 = SWIG_AsVal_float(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "CollisionBox_setRotation" "', argument " "3"" of type '" "float""'");
+  } 
+  arg3 = static_cast< float >(val3);
+  ecode4 = SWIG_AsVal_float(obj3, &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "CollisionBox_setRotation" "', argument " "4"" of type '" "float""'");
+  } 
+  arg4 = static_cast< float >(val4);
+  (arg1)->setRotation(arg2,arg3,arg4);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CollisionBox_applyRotations(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CollisionBox *arg1 = (CollisionBox *) 0 ;
+  PositionF arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PositionF result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:CollisionBox_applyRotations",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CollisionBox, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CollisionBox_applyRotations" "', argument " "1"" of type '" "CollisionBox *""'"); 
+  }
+  arg1 = reinterpret_cast< CollisionBox * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_PositionF,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CollisionBox_applyRotations" "', argument " "2"" of type '" "PositionF""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CollisionBox_applyRotations" "', argument " "2"" of type '" "PositionF""'");
+    } else {
+      PositionF * temp = reinterpret_cast< PositionF * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  result = (arg1)->applyRotations(arg2);
+  resultobj = SWIG_NewPointerObj((new PositionF(static_cast< const PositionF& >(result))), SWIGTYPE_p_PositionF, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CollisionBox_checkCollision(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CollisionBox *arg1 = (CollisionBox *) 0 ;
+  SwigValueWrapper< CollisionBox > arg2 ;
+  PositionF arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:CollisionBox_checkCollision",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CollisionBox, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CollisionBox_checkCollision" "', argument " "1"" of type '" "CollisionBox *""'"); 
+  }
+  arg1 = reinterpret_cast< CollisionBox * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_CollisionBox,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CollisionBox_checkCollision" "', argument " "2"" of type '" "CollisionBox""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CollisionBox_checkCollision" "', argument " "2"" of type '" "CollisionBox""'");
+    } else {
+      CollisionBox * temp = reinterpret_cast< CollisionBox * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  {
+    res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_PositionF,  0  | 0);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "CollisionBox_checkCollision" "', argument " "3"" of type '" "PositionF""'"); 
+    }  
+    if (!argp3) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CollisionBox_checkCollision" "', argument " "3"" of type '" "PositionF""'");
+    } else {
+      PositionF * temp = reinterpret_cast< PositionF * >(argp3);
+      arg3 = *temp;
+      if (SWIG_IsNewObj(res3)) delete temp;
+    }
+  }
+  result = (bool)(arg1)->checkCollision(arg2,arg3);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_CollisionBox(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CollisionBox *arg1 = (CollisionBox *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_CollisionBox",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CollisionBox, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_CollisionBox" "', argument " "1"" of type '" "CollisionBox *""'"); 
+  }
+  arg1 = reinterpret_cast< CollisionBox * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *CollisionBox_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_CollisionBox, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"createActor", _wrap_createActor, METH_VARARGS, NULL},
 	 { (char *)"loadActors", _wrap_loadActors, METH_VARARGS, NULL},
@@ -8618,24 +8094,18 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Actor_runAction", _wrap_Actor_runAction, METH_VARARGS, NULL},
 	 { (char *)"Actor_addAction", _wrap_Actor_addAction, METH_VARARGS, NULL},
 	 { (char *)"Actor_getCurrentAction", _wrap_Actor_getCurrentAction, METH_VARARGS, NULL},
+	 { (char *)"Actor_addCollisionBox", _wrap_Actor_addCollisionBox, METH_VARARGS, NULL},
+	 { (char *)"Actor_getCollisionBox", _wrap_Actor_getCollisionBox, METH_VARARGS, NULL},
 	 { (char *)"Actor_getProperty", _wrap_Actor_getProperty, METH_VARARGS, NULL},
 	 { (char *)"Actor_setProperty", _wrap_Actor_setProperty, METH_VARARGS, NULL},
 	 { (char *)"Actor_changePosition", _wrap_Actor_changePosition, METH_VARARGS, NULL},
-	 { (char *)"Actor_changeScreen", _wrap_Actor_changeScreen, METH_VARARGS, NULL},
-	 { (char *)"Actor_getCollisionRect", _wrap_Actor_getCollisionRect, METH_VARARGS, NULL},
-	 { (char *)"Actor_getCollisionMap", _wrap_Actor_getCollisionMap, METH_VARARGS, NULL},
-	 { (char *)"Actor_setCollisionMap", _wrap_Actor_setCollisionMap, METH_VARARGS, NULL},
-	 { (char *)"Actor_loadCollisionMap", _wrap_Actor_loadCollisionMap, METH_VARARGS, NULL},
-	 { (char *)"Actor_advancedCollision", _wrap_Actor_advancedCollision, METH_VARARGS, NULL},
 	 { (char *)"Actor_checkActorCollision", _wrap_Actor_checkActorCollision, METH_VARARGS, NULL},
 	 { (char *)"Actor_getPosition", _wrap_Actor_getPosition, METH_VARARGS, NULL},
 	 { (char *)"Actor_setPosition", _wrap_Actor_setPosition, METH_VARARGS, NULL},
-	 { (char *)"Actor_getPositionD", _wrap_Actor_getPositionD, METH_VARARGS, NULL},
-	 { (char *)"Actor_setPositionD", _wrap_Actor_setPositionD, METH_VARARGS, NULL},
-	 { (char *)"Actor_getRotationD", _wrap_Actor_getRotationD, METH_VARARGS, NULL},
-	 { (char *)"Actor_setRotationD", _wrap_Actor_setRotationD, METH_VARARGS, NULL},
-	 { (char *)"Actor_getAngle", _wrap_Actor_getAngle, METH_VARARGS, NULL},
-	 { (char *)"Actor_setAngle", _wrap_Actor_setAngle, METH_VARARGS, NULL},
+	 { (char *)"Actor_getPositionF", _wrap_Actor_getPositionF, METH_VARARGS, NULL},
+	 { (char *)"Actor_setPositionF", _wrap_Actor_setPositionF, METH_VARARGS, NULL},
+	 { (char *)"Actor_getRotationF", _wrap_Actor_getRotationF, METH_VARARGS, NULL},
+	 { (char *)"Actor_setRotationF", _wrap_Actor_setRotationF, METH_VARARGS, NULL},
 	 { (char *)"Actor_getConversation", _wrap_Actor_getConversation, METH_VARARGS, NULL},
 	 { (char *)"Actor_setConversation", _wrap_Actor_setConversation, METH_VARARGS, NULL},
 	 { (char *)"Actor_getSpeed", _wrap_Actor_getSpeed, METH_VARARGS, NULL},
@@ -8646,8 +8116,6 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Actor_setName", _wrap_Actor_setName, METH_VARARGS, NULL},
 	 { (char *)"Actor_getBaseAction", _wrap_Actor_getBaseAction, METH_VARARGS, NULL},
 	 { (char *)"Actor_setBaseAction", _wrap_Actor_setBaseAction, METH_VARARGS, NULL},
-	 { (char *)"Actor_getCollisionDimensions", _wrap_Actor_getCollisionDimensions, METH_VARARGS, NULL},
-	 { (char *)"Actor_setCollisionDimensions", _wrap_Actor_setCollisionDimensions, METH_VARARGS, NULL},
 	 { (char *)"Actor_getWalking", _wrap_Actor_getWalking, METH_VARARGS, NULL},
 	 { (char *)"Actor_setWalking", _wrap_Actor_setWalking, METH_VARARGS, NULL},
 	 { (char *)"Actor_getMobile", _wrap_Actor_getMobile, METH_VARARGS, NULL},
@@ -8693,9 +8161,6 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Action_setScript", _wrap_Action_setScript, METH_VARARGS, NULL},
 	 { (char *)"Action_getMainAnimationNum", _wrap_Action_getMainAnimationNum, METH_VARARGS, NULL},
 	 { (char *)"Action_setMainAnimation", _wrap_Action_setMainAnimation, METH_VARARGS, NULL},
-	 { (char *)"Action_setDirection", _wrap_Action_setDirection, METH_VARARGS, NULL},
-	 { (char *)"Action_getDirection", _wrap_Action_getDirection, METH_VARARGS, NULL},
-	 { (char *)"Action_getFrameRect", _wrap_Action_getFrameRect, METH_VARARGS, NULL},
 	 { (char *)"Action_animationPlus", _wrap_Action_animationPlus, METH_VARARGS, NULL},
 	 { (char *)"Action_loadAnimation", _wrap_Action_loadAnimation, METH_VARARGS, NULL},
 	 { (char *)"Action_getLayer", _wrap_Action_getLayer, METH_VARARGS, NULL},
@@ -8705,7 +8170,6 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Action_swigregister", Action_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_Animation", _wrap_new_Animation, METH_VARARGS, NULL},
 	 { (char *)"Animation_getFrame", _wrap_Animation_getFrame, METH_VARARGS, NULL},
-	 { (char *)"Animation_getFrameRect", _wrap_Animation_getFrameRect, METH_VARARGS, NULL},
 	 { (char *)"Animation_currentFramePlus", _wrap_Animation_currentFramePlus, METH_VARARGS, NULL},
 	 { (char *)"Animation_loadModel", _wrap_Animation_loadModel, METH_VARARGS, NULL},
 	 { (char *)"Animation_setModelSource", _wrap_Animation_setModelSource, METH_VARARGS, NULL},
@@ -8713,20 +8177,29 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Animation_reset", _wrap_Animation_reset, METH_VARARGS, NULL},
 	 { (char *)"Animation_getCurrentFrame", _wrap_Animation_getCurrentFrame, METH_VARARGS, NULL},
 	 { (char *)"Animation_setCurrentFrame", _wrap_Animation_setCurrentFrame, METH_VARARGS, NULL},
-	 { (char *)"Animation_getDimensions", _wrap_Animation_getDimensions, METH_VARARGS, NULL},
-	 { (char *)"Animation_setDimensions", _wrap_Animation_setDimensions, METH_VARARGS, NULL},
 	 { (char *)"Animation_getLoop", _wrap_Animation_getLoop, METH_VARARGS, NULL},
 	 { (char *)"Animation_setLoop", _wrap_Animation_setLoop, METH_VARARGS, NULL},
-	 { (char *)"Animation_getStartX", _wrap_Animation_getStartX, METH_VARARGS, NULL},
-	 { (char *)"Animation_setStartX", _wrap_Animation_setStartX, METH_VARARGS, NULL},
 	 { (char *)"Animation_getFinalFrame", _wrap_Animation_getFinalFrame, METH_VARARGS, NULL},
 	 { (char *)"Animation_setFinalFrame", _wrap_Animation_setFinalFrame, METH_VARARGS, NULL},
 	 { (char *)"Animation_getOffset", _wrap_Animation_getOffset, METH_VARARGS, NULL},
 	 { (char *)"Animation_setOffset", _wrap_Animation_setOffset, METH_VARARGS, NULL},
+	 { (char *)"Animation_getRotation", _wrap_Animation_getRotation, METH_VARARGS, NULL},
+	 { (char *)"Animation_setRotation", _wrap_Animation_setRotation, METH_VARARGS, NULL},
 	 { (char *)"Animation_getRate", _wrap_Animation_getRate, METH_VARARGS, NULL},
 	 { (char *)"Animation_setRate", _wrap_Animation_setRate, METH_VARARGS, NULL},
 	 { (char *)"delete_Animation", _wrap_delete_Animation, METH_VARARGS, NULL},
 	 { (char *)"Animation_swigregister", Animation_swigregister, METH_VARARGS, NULL},
+	 { (char *)"new_CollisionBox", _wrap_new_CollisionBox, METH_VARARGS, NULL},
+	 { (char *)"CollisionBox_getDimensions", _wrap_CollisionBox_getDimensions, METH_VARARGS, NULL},
+	 { (char *)"CollisionBox_setDimensions", _wrap_CollisionBox_setDimensions, METH_VARARGS, NULL},
+	 { (char *)"CollisionBox_getPosition", _wrap_CollisionBox_getPosition, METH_VARARGS, NULL},
+	 { (char *)"CollisionBox_setPosition", _wrap_CollisionBox_setPosition, METH_VARARGS, NULL},
+	 { (char *)"CollisionBox_getRotation", _wrap_CollisionBox_getRotation, METH_VARARGS, NULL},
+	 { (char *)"CollisionBox_setRotation", _wrap_CollisionBox_setRotation, METH_VARARGS, NULL},
+	 { (char *)"CollisionBox_applyRotations", _wrap_CollisionBox_applyRotations, METH_VARARGS, NULL},
+	 { (char *)"CollisionBox_checkCollision", _wrap_CollisionBox_checkCollision, METH_VARARGS, NULL},
+	 { (char *)"delete_CollisionBox", _wrap_delete_CollisionBox, METH_VARARGS, NULL},
+	 { (char *)"CollisionBox_swigregister", CollisionBox_swigregister, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
@@ -8744,13 +8217,12 @@ static swig_type_info _swigt__p_Actor = {"_p_Actor", "Actor *", 0, 0, (void*)0, 
 static swig_type_info _swigt__p_ActorType = {"_p_ActorType", "ActorType *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Animation = {"_p_Animation", "Animation *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Building = {"_p_Building", "Building *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_CollisionBox = {"_p_CollisionBox", "CollisionBox *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Inventory = {"_p_Inventory", "Inventory *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_NonLiving = {"_p_NonLiving", "NonLiving *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Npc = {"_p_Npc", "Npc *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Position = {"_p_Position", "Position *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_PositionD = {"_p_PositionD", "PositionD *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_SDL_Rect = {"_p_SDL_Rect", "SDL_Rect *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_SDL_Surface = {"_p_SDL_Surface", "SDL_Surface *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_PositionF = {"_p_PositionF", "PositionF *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Tile = {"_p_Tile", "Tile *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_aiScene = {"_p_aiScene", "aiScene *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
@@ -8762,13 +8234,12 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_ActorType,
   &_swigt__p_Animation,
   &_swigt__p_Building,
+  &_swigt__p_CollisionBox,
   &_swigt__p_Inventory,
   &_swigt__p_NonLiving,
   &_swigt__p_Npc,
   &_swigt__p_Position,
-  &_swigt__p_PositionD,
-  &_swigt__p_SDL_Rect,
-  &_swigt__p_SDL_Surface,
+  &_swigt__p_PositionF,
   &_swigt__p_Tile,
   &_swigt__p_aiScene,
   &_swigt__p_char,
@@ -8780,13 +8251,12 @@ static swig_cast_info _swigc__p_Actor[] = {  {&_swigt__p_Actor, 0, 0, 0},  {&_sw
 static swig_cast_info _swigc__p_ActorType[] = {  {&_swigt__p_ActorType, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Animation[] = {  {&_swigt__p_Animation, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Building[] = {  {&_swigt__p_Building, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_CollisionBox[] = {  {&_swigt__p_CollisionBox, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Inventory[] = {  {&_swigt__p_Inventory, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_NonLiving[] = {  {&_swigt__p_NonLiving, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Npc[] = {  {&_swigt__p_Npc, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Position[] = {  {&_swigt__p_Position, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_PositionD[] = {  {&_swigt__p_PositionD, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_SDL_Rect[] = {  {&_swigt__p_SDL_Rect, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_SDL_Surface[] = {  {&_swigt__p_SDL_Surface, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_PositionF[] = {  {&_swigt__p_PositionF, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Tile[] = {  {&_swigt__p_Tile, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_aiScene[] = {  {&_swigt__p_aiScene, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
@@ -8798,13 +8268,12 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_ActorType,
   _swigc__p_Animation,
   _swigc__p_Building,
+  _swigc__p_CollisionBox,
   _swigc__p_Inventory,
   _swigc__p_NonLiving,
   _swigc__p_Npc,
   _swigc__p_Position,
-  _swigc__p_PositionD,
-  _swigc__p_SDL_Rect,
-  _swigc__p_SDL_Surface,
+  _swigc__p_PositionF,
   _swigc__p_Tile,
   _swigc__p_aiScene,
   _swigc__p_char,

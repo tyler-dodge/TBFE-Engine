@@ -9,6 +9,9 @@ TBFE::TBFE()
   quit_=false;
   TBFE_Base::MainPlayer=createActor(1000,1000,"Player","Npc");
   addActor(TBFE_Base::MainPlayer);
+  SDL_GetMouseState(&mousePosition_.X,&mousePosition_.Y);
+  mouseMovement_.X=mousePosition_.X;
+  mouseMovement_.Y=mousePosition_.Y;
   return;
 };
 TBFE::~TBFE()
@@ -21,6 +24,14 @@ bool TBFE::createFile(string name)
 {  
   ofstream NewFile(name.c_str(),ofstream::binary);
   return true;
+};
+PositionF TBFE::getCameraAngle()
+{
+  return renderWindow_.getCameraAngle();
+};
+void TBFE::setCameraAngle(float x,float y,float z)
+{
+  renderWindow_.setCameraAngle(x,y,z);
 };
 void TBFE::addEvent(std::string Target,Element * element,Window * Parent,std::string Function,Event TargetEvent)
 {
@@ -160,9 +171,21 @@ void TBFE::checkEvents()
       EventType currentEvent=eventList_.at(i);
       if (currentEvent.Enabled)
 	{
-	  Position eventPosition=currentEvent.TargetElement->getPosition();
-	  Position screenPosition=currentEvent.Parent->getScreenPosition();
-	  Position elementDimensions=currentEvent.TargetElement->getDimensions();
+	  Position eventPosition;
+	  Position screenPosition;
+	  Position elementDimensions;
+	  if (currentEvent.TargetElement!=NULL)
+	    {
+	      eventPosition=currentEvent.TargetElement->getPosition();
+	    };
+	  if (currentEvent.Parent!=NULL)
+	    {
+	      screenPosition=currentEvent.Parent->getScreenPosition();
+	    };
+	  if (currentEvent.TargetElement!=NULL)
+	    {
+	      elementDimensions=currentEvent.TargetElement->getDimensions();
+	    };
 	  switch(currentEvent.TargetEvent)
 	    {
 	    case CLICK:
@@ -185,21 +208,37 @@ void TBFE::checkEvents()
 		};
 	      break;
 	    case MOUSEMOVE:
-	      if (mousePosition_.X>eventPosition.X+screenPosition.X 
-		  && mousePosition_.Y>eventPosition.Y+
-		  screenPosition.Y
-		  && mousePosition_.X<elementDimensions.X+
-		  eventPosition.X+screenPosition.X
-		  && mousePosition_.Y<elementDimensions.Y+
-		  eventPosition.Y+screenPosition.Y
-		  && currentEvent.Enabled 
-		  && currentEvent.Parent->getVisibility()
-		  && mouseMovement_.X!=mousePosition_.X && mouseMovement_.Y!=mousePosition_.Y
-		  )
+	      if ((mouseMovement_.X!=mousePosition_.X || mouseMovement_.Y!=mousePosition_.Y) &&
+		  currentEvent.Enabled==true && currentEvent.Parent==NULL && currentEvent.TargetElement==NULL)
 		{
+		  stringstream writeMouse;
+		  writeMouse << "mouseMovement=Misc.PositionF();mouseMovement.X=";
+		  writeMouse << -mouseMovement_.X+mousePosition_.X << ";mouseMovement.Y=";
+		  writeMouse << -mouseMovement_.Y+mousePosition_.Y << ";";
+		  TBFE_Base::MainConsole.runLine(writeMouse.str());
 		  TBFE_Base::MainConsole.runLine(currentEvent.Function.c_str());
 		  mouseMovement_.X=mousePosition_.X;
 		  mouseMovement_.Y=mousePosition_.Y;
+		};
+	      if (currentEvent.Parent!=NULL && currentEvent.TargetElement!=NULL)
+		{
+		  if (
+		      (mousePosition_.X>eventPosition.X+screenPosition.X 
+		       && mousePosition_.Y>eventPosition.Y+
+		       screenPosition.Y
+		       && mousePosition_.X<elementDimensions.X+
+		       eventPosition.X+screenPosition.X
+		       && mousePosition_.Y<elementDimensions.Y+
+		       eventPosition.Y+screenPosition.Y
+		       && currentEvent.Enabled 
+		       && currentEvent.Parent->getVisibility()
+		       && mouseMovement_.X!=mousePosition_.X && mouseMovement_.Y!=mousePosition_.Y)
+		      )
+		    {
+		      TBFE_Base::MainConsole.runLine(currentEvent.Function.c_str());
+		      mouseMovement_.X=mousePosition_.X;
+		      mouseMovement_.Y=mousePosition_.Y;
+		    };
 		};
 	      break;
 	    case KEYPRESS:

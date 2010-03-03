@@ -32,24 +32,23 @@ void Window::renderElements(SDL_Surface * screen)
     {
       if (elements_.at(i)!=NULL)
 	{
-	  if (elements_.at(i)->getVisibility()==true)
-	    {
-	      elements_.at(i)->renderElement(screen,getScreenPosition());
-	    };
+	  SDL_Surface * element=elements_.at(i)->renderElement();
 	  if (elements_.at(i)->getProperty("border")=="1")
 	    {
 	      Position elementDimensions=elements_.at(i)->getDimensions();
 	      Position elementPosition=elements_.at(i)->getPosition();
+	      SDL_Surface * border = SDL_CreateRGBSurface(0, elementDimensions.X+4,elementDimensions.Y+4, 32, 
+							  0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
 	      if (border_!=NULL)
 		{
-		  for (int x=-2;x<elementDimensions.X+2;x+=border_->w)
+		  for (int x=0;x<elementDimensions.X+4;x+=border_->w)
 		    {
 		      SDL_Rect rect;
 		      rect.x=0;
 		      rect.y=0;
-		      if (elementDimensions.X+2-x<border_->w)
+		      if (elementDimensions.X+4-x<border_->w)
 			{
-			  rect.w=elementDimensions.X+2-x;
+			  rect.w=elementDimensions.X+4-x;
 			}
 		      else
 			{
@@ -64,26 +63,58 @@ void Window::renderElements(SDL_Surface * screen)
 		      //	{
 		      //	  rect.h=border_->h;
 		      //	};
-		      applyImage(screenPosition_.X+elementPosition.X+x,screenPosition_.Y+elementPosition.Y-2,border_,&rect);
-		      applyImage(screenPosition_.X+elementPosition.X+x,screenPosition_.Y+elementPosition.Y+elementDimensions.Y+2,border_,&rect);
+		      SDL_Rect pos;
+		      pos.x=x;
+		      pos.y=0;
+		      SDL_BlitSurface(border_,&rect,border,&pos);
+
+		      pos.x=x;
+		      pos.y=elementDimensions.Y+3;
+		      SDL_BlitSurface(border_,&rect,border,&pos);
 		    };
-		  for (int y=-2;y<elementDimensions.Y+2;y+=border_->h)
+		  for (int y=0;y<elementDimensions.Y+4;y+=border_->h)
 		    {
 		      SDL_Rect rect;
 		      rect.x=0;
 		      rect.y=0;
-		      if (elementDimensions.Y+2-y<border_->h)
+		      if (elementDimensions.Y+4-y<border_->h)
 			{
-			  rect.h=elementDimensions.Y+2-y;
+			  rect.h=elementDimensions.Y+4-y;
 			}
 		      else
 			{
 			  rect.h=border_->h;
 			};
 		      rect.w=1;
-		      applyImage(screenPosition_.X+elementPosition.X-2,screenPosition_.Y+elementPosition.Y+y,border_,&rect);
-		      applyImage(screenPosition_.X+elementPosition.X+elementDimensions.X+2,screenPosition_.Y+elementPosition.Y+y,border_,&rect);
+		      SDL_Rect pos;
+		      pos.x=0;
+		      pos.y=y;
+		      SDL_BlitSurface(border_,&rect,border,&pos);
+
+		      pos.x=elementDimensions.X+3;
+		      pos.y=y;
+		      SDL_BlitSurface(border_,&rect,border,&pos);
 		    };
+		};
+	      SDL_Rect pos;
+	      pos.x=2;
+	      pos.y=2;
+	      SDL_BlitSurface(element,NULL,border,&pos);
+	      if (elements_.at(i)->getVisibility()==true)
+		{
+		  applyImage(getScreenPosition().X+elements_.at(i)->getPosition().X,
+			     getScreenPosition().Y+elements_.at(i)->getPosition().Y,border,NULL);
+		  applyImage(getScreenPosition().X+elements_.at(i)->getPosition().X+2,
+			     getScreenPosition().Y+elements_.at(i)->getPosition().Y+2,element,NULL);
+		};
+	      SDL_FreeSurface(border);
+	    }     
+	  else if (element!=NULL)
+	    {
+	      if (elements_.at(i)->getVisibility()==true)
+		{
+		  applyImage(getScreenPosition().X+elements_.at(i)->getPosition().X,
+			     getScreenPosition().Y+elements_.at(i)->getPosition().Y,element,NULL);
 		};
 	    };
 	};

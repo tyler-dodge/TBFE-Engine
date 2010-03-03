@@ -4,14 +4,12 @@ Action::Action(string name,string endScript)
   setName(name);
   setScript(endScript);
   animation_.resize(0);
-  setDirection(DOWN);
 };
 Action::Action()
 {
   setName("None");
   setScript("");
   animation_.resize(0);
-  setDirection(DOWN);
 };
 void Action::addAnimation(Animation newAnimation,int Layer)
 {
@@ -51,11 +49,6 @@ bool Action::setMainAnimation(int number)
   mainAnimation_=number;
   return true;
 };
-bool Action::setDirection(Direction direction)
-{
-  currentDirection_=direction;
-  return true;
-};
 Animation * Action::getLayer(int layer)
 {
   if (layer<0 || layer>animation_.size())
@@ -76,19 +69,6 @@ bool Action::animationPlus()
     };
   return true;
 };
-SDL_Rect Action::getFrameRect(int Layer)
-{
-  if (Layer<0 || Layer>animation_.size())
-    {
-      SDL_Rect newRect;
-      newRect.x=0;
-      newRect.y=0;
-      newRect.w=0;
-      newRect.h=0;
-      return newRect;
-    };
-  return animation_.at(Layer).getFrameRect(getDirection());
-};
 void Action::loadAnimation()
 {
   for (int i=0;i<animation_.size();i++)
@@ -107,8 +87,4 @@ void Action::reset()
     {
       animation_.at(i).reset();
     };
-};
-Direction Action::getDirection()
-{
-  return currentDirection_;
 };

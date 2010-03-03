@@ -36,6 +36,19 @@ class Console:
             print(consoleText)
         self.window.getElement("txtData").setProperty("text",consoleText)
         self.window.getElement("txtData").reload()
+def mouseCamera(MouseMovement):
+    Position=engine.getCameraAngle()
+    Position.X-=MouseMovement.Y/5
+    Position.Y-=MouseMovement.X/5
+    if Position.Y>180:
+        Position.Y=180
+    if Position.Y<0:
+        Position.Y=0
+    if Position.X>90:
+        Position.X=90
+    if Position.X<0:
+        Position.X=0
+    engine.setCameraAngle(Position.X,Position.Y,Position.Z)
 Tbfe.cvar.ScreenDimensions.X=1440
 Tbfe.cvar.ScreenDimensions.Y=900
 engine=Tbfe.TBFE()
@@ -49,14 +62,19 @@ uiConsole=Console(Tbfe.cvar.MainConsole,engine)
 engine.addWindow(uiConsole.getWindow())
 uiMousePosition=UI.createWindow(0,800,"FrameRate")
 engine.addWindow(uiMousePosition)
+uiFrameRate=UI.createWindow(0,700,"FrameRate")
+engine.addWindow(uiFrameRate)
 action=5
 i=0
-randomNpc=Actor.createActor(0,0,"Npc","Npc")
+randomNpc=Actor.createActor(500,200,"Npc","Npc")
 engine.addActor(randomNpc)
+engine.addGlobalEvent("MouseMove",Misc.MOUSEMOVE,0,"mouseCamera(mouseMovement)")
 while action!=Misc.QUIT:
     uiConsole.refreshWindow()
     action=engine.runEngine()
     mousePosition=engine.getMousePosition()
     uiMousePosition.getElement("lblRate").setProperty("text",('%i,%i' % (mousePosition.X,mousePosition.Y)))
     uiMousePosition.getElement("lblRate").reload()
+    uiFrameRate.getElement("lblRate").setProperty("text",('%f' % (60/Tbfe.cvar.GameSpeed)))
+    uiFrameRate.getElement("lblRate").reload()
     i+=1

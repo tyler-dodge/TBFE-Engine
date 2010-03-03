@@ -10,6 +10,7 @@
 #include "Building.cpp"
 #include "Action.cpp"
 #include "Animation.cpp"
+#include "CollisionBox.cpp"
 %}
 %include "ActorCreate.h"
 %include "Actor.h"
@@ -19,3 +20,4 @@
 %include "Building.h"
 %include "Action.h"
 %include "Animation.h"
+%include "CollisionBox.h"

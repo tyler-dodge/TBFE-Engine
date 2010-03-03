@@ -32,7 +32,10 @@ class TBFE_Render
   int renderMapLayer(int,int,int);
   void renderForeground(int,int,bool);
   GLfloat lightPosition_[4];
+  ModelData map_;
+  PositionF cameraAngle_;
  public:
+  void refreshMapLayer(int);
   TBFE_Render();
   ~TBFE_Render();
   void initializeTileSets();
@@ -40,6 +43,8 @@ class TBFE_Render
   void changeLighting(int);
   void init();
   void initGl();
+  PositionF getCameraAngle();
+  void setCameraAngle(float,float,float);
   void setLightPosition(float,float,float);
   void finalRender(bool);
 };

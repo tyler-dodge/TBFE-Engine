@@ -23,11 +23,19 @@ struct Model
   std::string Source;
   bool isLoaded;
 };
+struct ModelData
+{
+  vector<GLuint> indices;
+  vector<GLfloat> vertices;
+  vector<GLfloat> texCoords;
+  vector<GLfloat> normals;
+};
 struct Tile
 {
   TileType Type;
   int TileSet;
   int Passability;
+  bool isChanged;
 };
 struct PositionF
 {
@@ -40,12 +48,6 @@ struct Position
   int X;
   int Y;
   int Z;
-};
-struct PositionD
-{
-  double X;
-  double Y;
-  double Z;
 };
 struct CollidedTile
 {

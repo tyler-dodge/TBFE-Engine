@@ -14,6 +14,9 @@ TBFE_Render::TBFE_Render()
   window_=TBFE_Base::CheckSheets("Images/UI/Window.png");
   TBFE_Base::CollisionTile=TBFE_Base::CheckSheets("Tile.png");
   setLightPosition(0,0,0);
+  cameraAngle_.X=0;
+  cameraAngle_.Y=0;
+  cameraAngle_.Z=0;
 };
 void TBFE_Render::setLightPosition(float x,float y,float z)
 {
@@ -47,7 +50,7 @@ void TBFE_Render::initGl()
   specular[0]=0.3f;
   specular[1]=0.3f;
   specular[2]=0.3f;
-  glShadeModel(GL_FLAT);
+  glShadeModel(GL_SMOOTH);
   glLightfv(GL_LIGHT0,GL_SPECULAR,specular);
   glLightfv(GL_LIGHT0,GL_DIFFUSE,specular);
   specular[0]=0.0f;
@@ -75,7 +78,7 @@ void TBFE_Render::init()
       SDL_FreeSurface(screen_);
     };
   SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,8);
-  screen_=SDL_SetVideoMode(TBFE_Base::ScreenDimensions.X,TBFE_Base::ScreenDimensions.Y,32,SDL_OPENGL | SDL_FULLSCREEN | SDL_HWSURFACE);
+  screen_=SDL_SetVideoMode(1440,900,32,SDL_OPENGL | SDL_FULLSCREEN );
   TBFE_Base::MainConsole.write("SDL initialized");
   initGl();
  };
@@ -112,58 +115,26 @@ inline void TBFE_Render::initializeTileSets()
       newTileSheet.dimensions.Y=texture->h;
       tileSet_.push_back(newTileSheet);
     };
+  refreshMapLayer(0);
 };
 void TBFE_Render::finalRender(bool doFlip)
 {  
-  Position ScreenPosition;
-  Position CurrentPosition;
-  CurrentPosition=TBFE_Base::MainPlayer->getPosition();
-  offset_.X=TBFE_Base::ScreenDimensions.X/2-TBFE_Base::TileSize/2;
-  offset_.Y=TBFE_Base::ScreenDimensions.Y/2; 
-  if (offset_.X>CurrentPosition.X)
-    {
-      offset_.X=CurrentPosition.X;
-    };
-  if (offset_.Y>CurrentPosition.Y)
-    {
-      offset_.Y=CurrentPosition.Y;
-    };
   Position mapDimensions=TBFE_Base::CurrentMap.getDimensions();
-  if (offset_.Y+2*TBFE_Base::TileSize+CurrentPosition.Y>mapDimensions.Y*TBFE_Base::TileSize)
-    {
-      offset_.Y=CurrentPosition.Y-mapDimensions.Y*TBFE_Base::TileSize+TBFE_Base::ScreenDimensions.Y;
-    };
-  if (offset_.X+TBFE_Base::TileSize+CurrentPosition.X>mapDimensions.X*TBFE_Base::TileSize)
-    {
-      offset_.X=CurrentPosition.X-mapDimensions.X*TBFE_Base::TileSize+TBFE_Base::ScreenDimensions.X;
-    };
-  //arrangeActors();
-  //renderActors();
-  for (int i=1;i<TBFE_Base::CurrentMap.getNumberOfLayers();i++)
-    {
-      //renderMapLayer(CurrentPosition.X-offset_.X,CurrentPosition.Y-offset_.Y,i);
-    };
-  SDL_Rect Dark;
-  Dark.x=0;
-  Dark.y=0;
-  Dark.w=TBFE_Base::ScreenDimensions.X;
-  Dark.h=TBFE_Base::ScreenDimensions.Y;
-  //applyImage(0,0,darkness_,screen_,&Dark);
-  if (doFlip && SDL_WasInit(SDL_INIT_VIDEO)!=0)
-    {
-      //SDL_Flip(screen_);
-    };
-  lightPosition_[1]=1.0f;
   lightPosition_[0]=0.0f;
+  lightPosition_[1]=1.0f;
   lightPosition_[2]=0.0f;
   lightPosition_[3]=1.0f;
   glLoadIdentity();
   glLightfv(GL_LIGHT0,GL_POSITION,lightPosition_);
   glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
   glLoadIdentity();
-  glTranslatef(-1,-9,-4);
-  glRotatef(-TBFE_Base::MainPlayer->getAngle(),0,1,0);
-  glTranslatef(-TBFE_Base::MainPlayer->getPositionD().X/20,0,-TBFE_Base::MainPlayer->getPositionD().Z/20);
+  glTranslatef(0,0,-12);
+  glRotatef(cameraAngle_.X,1,0,0);
+  glRotatef(cameraAngle_.Y,0,1,0);
+  glRotatef(cameraAngle_.Z,0,0,1);
+  glTranslatef(0,-6,0);
+  glRotatef(-TBFE_Base::MainPlayer->getRotationF().Z,0,1,0);
+  glTranslatef(-TBFE_Base::MainPlayer->getPositionF().X/20,0,-TBFE_Base::MainPlayer->getPositionF().Z/20);
   renderActors();
   renderMapLayer(0,0,0);
   renderWindowList();
@@ -174,13 +145,18 @@ void TBFE_Render::finalRender(bool doFlip)
       TBFE_Base::MainConsole.write("OpenGl failed to load");
     }
 };
-int TBFE_Render::renderMapLayer(int x,int y, int Layer)
+PositionF TBFE_Render::getCameraAngle()
 {
-  vector<GLuint> indices;
-  vector<GLfloat> vertices;
-  vector<GLfloat> colors;
-  vector<GLfloat> texCoords;
-  vector<GLfloat> normals;
+  return cameraAngle_;
+};
+void TBFE_Render::setCameraAngle(float x,float y,float z)
+{
+  cameraAngle_.X=x;
+  cameraAngle_.Y=y;
+  cameraAngle_.Z=z;
+};
+void TBFE_Render::refreshMapLayer(int Layer)
+{
   Position dimensions=TBFE_Base::CurrentMap.getDimensions();
   int tileSize=5;
   for (int mapY=0;mapY<dimensions.Y;mapY++)
@@ -200,18 +176,18 @@ int TBFE_Render::renderMapLayer(int x,int y, int Layer)
 	  end.Y=100.0f/(float)currentSheet.dimensions.Y;
 	  for (int i=0;i<4;i++)
 	    {
-	      normals.push_back(0);
-	      normals.push_back(1);
-	      normals.push_back(0);
+	      map_.normals.push_back(0);
+	      map_.normals.push_back(1);
+	      map_.normals.push_back(0);
 	    };
 	  //bottom Right
 	  GLfloat coords[]={start.X,start.Y};
 	  GLfloat vertex[]={tileSize*mapX,0,tileSize*mapY};
-	  vertices.push_back(vertex[0]);
-	  vertices.push_back(vertex[1]);
-	  vertices.push_back(vertex[2]);
-	  texCoords.push_back(coords[0]);
-	  texCoords.push_back(coords[1]);
+	  map_.vertices.push_back(vertex[0]);
+	  map_.vertices.push_back(vertex[1]);
+	  map_.vertices.push_back(vertex[2]);
+	  map_.texCoords.push_back(coords[0]);
+	  map_.texCoords.push_back(coords[1]);
 	  //top right
 	  if (mapY==0)
 	    {
@@ -224,13 +200,13 @@ int TBFE_Render::renderMapLayer(int x,int y, int Layer)
 	  vertex[0]=tileSize*mapX;
 	  vertex[1]=0;
 	  vertex[2]=tileSize*mapY-tileSize;
-	  vertices.push_back(vertex[0]); 
-	  vertices.push_back(vertex[1]); 
-	  vertices.push_back(vertex[2]);
+	  map_.vertices.push_back(vertex[0]); 
+	  map_.vertices.push_back(vertex[1]); 
+	  map_.vertices.push_back(vertex[2]);
 	  coords[0]=start.X+end.X;
 	  coords[1]=start.Y;
-	  texCoords.push_back(coords[0]);
-	  texCoords.push_back(coords[1]);
+	  map_.texCoords.push_back(coords[0]);
+	  map_.texCoords.push_back(coords[1]);
 	  //Top Left
 	  if (mapX==0 || mapY==0)
 	    {
@@ -243,13 +219,13 @@ int TBFE_Render::renderMapLayer(int x,int y, int Layer)
 	  vertex[0]=tileSize*mapX-tileSize;
 	  vertex[1]=0;
 	  vertex[2]=tileSize*mapY-tileSize;
-	  vertices.push_back(vertex[0]); 
-	  vertices.push_back(vertex[1]); 
-	  vertices.push_back(vertex[2]);
+	  map_.vertices.push_back(vertex[0]); 
+	  map_.vertices.push_back(vertex[1]); 
+	  map_.vertices.push_back(vertex[2]);
 	  coords[0]=start.X+end.X;
 	  coords[1]=start.Y+end.Y;
-	  texCoords.push_back(coords[0]);
-	  texCoords.push_back(coords[1]);
+	  map_.texCoords.push_back(coords[0]);
+	  map_.texCoords.push_back(coords[1]);
 	  //Bottom Left
 	  if (mapX==0)
 	    {
@@ -262,19 +238,22 @@ int TBFE_Render::renderMapLayer(int x,int y, int Layer)
 	  vertex[0]=tileSize*mapX-tileSize;
 	  vertex[1]=0;
 	  vertex[2]=tileSize*mapY;
-	  vertices.push_back(vertex[0]); 
-	  vertices.push_back(vertex[1]); 
-	  vertices.push_back(vertex[2]);
+	  map_.vertices.push_back(vertex[0]); 
+	  map_.vertices.push_back(vertex[1]); 
+	  map_.vertices.push_back(vertex[2]);
 	  coords[0]=start.X;
 	  coords[1]=start.Y+end.Y;
-	  texCoords.push_back(coords[0]);
-	  texCoords.push_back(coords[1]);
+	  map_.texCoords.push_back(coords[0]);
+	  map_.texCoords.push_back(coords[1]);
 	};
     };
   for (int i=0;i<dimensions.X*dimensions.Y*4;i++)
     {
-      indices.push_back(i);
-    };
+      map_.indices.push_back(i);
+    };  
+};
+int TBFE_Render::renderMapLayer(int x,int y, int Layer)
+{
   glEnable(GL_TEXTURE_2D);
   glEnable(GL_CULL_FACE);
   glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
@@ -282,12 +261,12 @@ int TBFE_Render::renderMapLayer(int x,int y, int Layer)
   glEnableClientState(GL_TEXTURE_COORD_ARRAY);
   glEnableClientState(GL_NORMAL_ARRAY);
   glBindTexture(GL_TEXTURE_2D,tileSet_.at(0).texture);
-  glVertexPointer(3,GL_FLOAT,0,&vertices[0]);
-  glNormalPointer(GL_FLOAT,0,&normals[0]);
-  glTexCoordPointer(2,GL_FLOAT,0,&texCoords[0]);
+  glVertexPointer(3,GL_FLOAT,0,&map_.vertices[0]);
+  glNormalPointer(GL_FLOAT,0,&map_.normals[0]);
+  glTexCoordPointer(2,GL_FLOAT,0,&map_.texCoords[0]);
   GLfloat color[]={1.0f,1.0f,1.0f};
   glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,color);
-  glDrawElements(GL_QUADS,indices.size(),GL_UNSIGNED_INT,&indices[0]);
+  glDrawElements(GL_QUADS,map_.indices.size(),GL_UNSIGNED_INT,&map_.indices[0]);
   glDisableClientState(GL_VERTEX_ARRAY);
   glDisableClientState(GL_TEXTURE_COORD_ARRAY);
   glDisableClientState(GL_NORMAL_ARRAY);
@@ -301,25 +280,69 @@ void TBFE_Render::renderActors()
     };
   for (int i=0;i<TBFE_Base::ActorList.size();i++)
     {
-      PositionD ActorPosition=TBFE_Base::ActorList.at(i)->getPositionD();
-      PositionD rotation=TBFE_Base::ActorList.at(i)->getRotationD();
+      PositionF ActorPosition=TBFE_Base::ActorList.at(i)->getPositionF();
+      PositionF rotation=TBFE_Base::ActorList.at(i)->getRotationF();
       Position CurrentPosition=TBFE_Base::MainPlayer->getPosition();
       Actor * currentActor=TBFE_Base::ActorList.at(i);
       SDL_Rect Frame;
       Action action=currentActor->getCurrentAction();
-      Frame=currentActor->getCollisionRect();
+      //Frame=currentActor->getCollisionRect();
       for (int Layer=0;Layer<action.getLayerSize();Layer++)
 	{
 	  Animation * animation=action.getLayer(Layer);
-	  Frame=action.getFrameRect(Layer);
 	  aiScene * model;
+	  PositionF layerOffset=animation->getOffset();
+	  PositionF layerRotation=animation->getRotation();
+	  
 	  model=animation->getModel();
 	  if (animation->getModel()!=NULL)
 	    {
-	      aiVector3D tposition(ActorPosition.X/20,ActorPosition.Y/20,ActorPosition.Z/20);
-	      aiVector3D trotation(270,0,currentActor->getAngle()+180);
+	      aiVector3D tposition(ActorPosition.X/20+layerOffset.X,ActorPosition.Y/20+layerOffset.Y,ActorPosition.Z/20+layerOffset.Z);
+	      aiVector3D trotation(rotation.X+layerRotation.X,rotation.Y+layerRotation.Y,rotation.Z+layerRotation.Z);
 	      aiVector3D tscale(0,0,0);
 	      drawNodes(model,model->mRootNode,tposition,trotation,tscale);
+
+	      glPushMatrix();
+	      glTranslatef(ActorPosition.X/20,ActorPosition.Y/20,ActorPosition.Z/20);
+	      glRotatef(270,1,0,0);
+	      glRotatef(currentActor->getRotationF().Z+180,0,0,1);
+	      PositionF dimensions;
+	      PositionF offset;
+	      CollisionBox actorCollision=currentActor->getCollisionBox(0);
+	      dimensions=actorCollision.getDimensions();
+	      offset=actorCollision.getPosition();
+	      glTranslatef(offset.X,offset.Y,offset.Z);
+	      glBegin(GL_QUADS);
+	      glVertex3f(0,0,0);
+	      glVertex3f(dimensions.X,0,0);
+	      glVertex3f(dimensions.X,dimensions.Y,0);
+	      glVertex3f(0,dimensions.Y,0);
+
+	      glVertex3f(dimensions.X,0,0);
+	      glVertex3f(dimensions.X,0,dimensions.Z);
+	      glVertex3f(dimensions.X,dimensions.Y,dimensions.Z);
+	      glVertex3f(dimensions.X,dimensions.Y,0);
+	      glVertex3f(0,0,0);
+	      glVertex3f(0,0,dimensions.Z);
+	      glVertex3f(0,dimensions.Y,dimensions.Z);
+	      glVertex3f(0,dimensions.Y,0);
+
+	      glVertex3f(0,dimensions.Y,0);
+	      glVertex3f(0,dimensions.Y,dimensions.Z);
+	      glVertex3f(dimensions.X,dimensions.Y,dimensions.Z);
+	      glVertex3f(dimensions.X,dimensions.Y,0);
+
+	      glVertex3f(0,0,0);
+	      glVertex3f(0,0,dimensions.Z);
+	      glVertex3f(dimensions.X,0,dimensions.Z);
+	      glVertex3f(dimensions.X,0,0);
+
+	      glVertex3f(0,0,dimensions.Z);
+	      glVertex3f(dimensions.X,0,dimensions.Z);
+	      glVertex3f(dimensions.X,dimensions.Y,dimensions.Z);
+	      glVertex3f(0,dimensions.Y,dimensions.Z);
+	      glEnd();
+	      glPopMatrix();
 	    };
 	};
       if (currentActor->getWalking())

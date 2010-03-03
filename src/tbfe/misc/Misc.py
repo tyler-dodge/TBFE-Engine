@@ -145,6 +145,33 @@ class Model(_object):
 Model_swigregister = _Misc.Model_swigregister
 Model_swigregister(Model)
 
+class ModelData(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, ModelData, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, ModelData, name)
+    __repr__ = _swig_repr
+    __swig_setmethods__["indices"] = _Misc.ModelData_indices_set
+    __swig_getmethods__["indices"] = _Misc.ModelData_indices_get
+    if _newclass:indices = _swig_property(_Misc.ModelData_indices_get, _Misc.ModelData_indices_set)
+    __swig_setmethods__["vertices"] = _Misc.ModelData_vertices_set
+    __swig_getmethods__["vertices"] = _Misc.ModelData_vertices_get
+    if _newclass:vertices = _swig_property(_Misc.ModelData_vertices_get, _Misc.ModelData_vertices_set)
+    __swig_setmethods__["texCoords"] = _Misc.ModelData_texCoords_set
+    __swig_getmethods__["texCoords"] = _Misc.ModelData_texCoords_get
+    if _newclass:texCoords = _swig_property(_Misc.ModelData_texCoords_get, _Misc.ModelData_texCoords_set)
+    __swig_setmethods__["normals"] = _Misc.ModelData_normals_set
+    __swig_getmethods__["normals"] = _Misc.ModelData_normals_get
+    if _newclass:normals = _swig_property(_Misc.ModelData_normals_get, _Misc.ModelData_normals_set)
+    def __init__(self, *args): 
+        this = _Misc.new_ModelData(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    __swig_destroy__ = _Misc.delete_ModelData
+    __del__ = lambda self : None;
+ModelData_swigregister = _Misc.ModelData_swigregister
+ModelData_swigregister(ModelData)
+
 class Tile(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, Tile, name, value)
@@ -160,6 +187,9 @@ class Tile(_object):
     __swig_setmethods__["Passability"] = _Misc.Tile_Passability_set
     __swig_getmethods__["Passability"] = _Misc.Tile_Passability_get
     if _newclass:Passability = _swig_property(_Misc.Tile_Passability_get, _Misc.Tile_Passability_set)
+    __swig_setmethods__["isChanged"] = _Misc.Tile_isChanged_set
+    __swig_getmethods__["isChanged"] = _Misc.Tile_isChanged_get
+    if _newclass:isChanged = _swig_property(_Misc.Tile_isChanged_get, _Misc.Tile_isChanged_set)
     def __init__(self, *args): 
         this = _Misc.new_Tile(*args)
         try: self.this.append(this)
@@ -216,30 +246,6 @@ class Position(_object):
     __del__ = lambda self : None;
 Position_swigregister = _Misc.Position_swigregister
 Position_swigregister(Position)
-
-class PositionD(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, PositionD, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, PositionD, name)
-    __repr__ = _swig_repr
-    __swig_setmethods__["X"] = _Misc.PositionD_X_set
-    __swig_getmethods__["X"] = _Misc.PositionD_X_get
-    if _newclass:X = _swig_property(_Misc.PositionD_X_get, _Misc.PositionD_X_set)
-    __swig_setmethods__["Y"] = _Misc.PositionD_Y_set
-    __swig_getmethods__["Y"] = _Misc.PositionD_Y_get
-    if _newclass:Y = _swig_property(_Misc.PositionD_Y_get, _Misc.PositionD_Y_set)
-    __swig_setmethods__["Z"] = _Misc.PositionD_Z_set
-    __swig_getmethods__["Z"] = _Misc.PositionD_Z_get
-    if _newclass:Z = _swig_property(_Misc.PositionD_Z_get, _Misc.PositionD_Z_set)
-    def __init__(self, *args): 
-        this = _Misc.new_PositionD(*args)
-        try: self.this.append(this)
-        except: self.this = this
-    __swig_destroy__ = _Misc.delete_PositionD
-    __del__ = lambda self : None;
-PositionD_swigregister = _Misc.PositionD_swigregister
-PositionD_swigregister(PositionD)
 
 class CollidedTile(_object):
     __swig_setmethods__ = {}

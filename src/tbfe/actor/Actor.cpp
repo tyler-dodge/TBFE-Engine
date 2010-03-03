@@ -3,34 +3,52 @@
 Actor::Actor (int PositionX,int PositionY)
     {
       currentAction_=NULL;
-      setCollisionMap("Actors/living/Collision.png");
       setWalking(false);
       setMobile(true);
       actionList_.resize(0);
-      setCollisionDimensions(40,60,170);
       setPosition(PositionX,0,PositionY);
       setName("None");
       setSpeed(5);
-      setAngle(0);
+      setRotationF(0,0,0);
       string WalkAnimationBody="0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,";
       string WalkHeads="0,";
       Action Walk("Walk","");
       Animation Body("test.dae",WalkAnimationBody,
-		     100,200,-30,-140,1,true);
+		     0,0,1,true);
+      Body.setRotation(270,0,90);
       Walk.addAnimation(Body);
       Walk.setMainAnimation(0);
       addAction(Walk);
+      PositionF position;
+      position.X=-0.7;
+      position.Y=-1.8;
+      position.Z=0;
+      PositionF dimensions;
+      dimensions.X=1;
+      dimensions.Y=2;
+      dimensions.Z=2;
+      addCollisionBox(position,dimensions);
       setBaseAction("Walk");
     };
-int Actor::getAngle()
-{
-  return angle_;
-};
-PositionD Actor::getRotationD()
+PositionF Actor::getRotationF()
 {
   return rotation_;
 };
-void Actor::setRotationD(double x,double y, double z)
+void Actor::addCollisionBox(PositionF position,PositionF dimensions)
+{
+  CollisionBox newCollision(position,dimensions);
+  collisionMaps_.push_back(newCollision);
+};
+CollisionBox Actor::getCollisionBox(int num)
+{
+  if (num>collisionMaps_.size() || num<0)
+    {
+      cout << "collision Map goes past bounds\n";
+      return collisionMaps_.at(0);
+    };
+  return collisionMaps_.at(num);
+};
+void Actor::setRotationF(float x,float y, float z)
 {
   rotation_.X=x;
   rotation_.Y=y;
@@ -142,25 +160,21 @@ void Actor::setConversation(string text)
 {
   conversation_=text;
 };
-void Actor::setAngle(int newAngle)
+int Actor::changePosition(float newAngle,bool ChangeDirection)
 {
-  angle_=newAngle;
-};
-int Actor::changePosition(int newAngle,bool ChangeDirection)
-{
-  if (getAngle()!=newAngle && ChangeDirection==true)
+  if (rotation_.Z!=newAngle && ChangeDirection==true)
     {
-      setAngle(newAngle);
+      rotation_.Z=newAngle;
     };
   if (getCurrentAction().getName()!="Walk")
     {
       startAction("Walk");
     }
   setWalking(true);
-  PositionD position;
-  position=getPositionD();
-  position.X+=(double)getSpeed()*TBFE_Base::GameSpeed*cos(newAngle*PI/180);
-  position.Z-=(double)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*PI/180);
+  PositionF position;
+  position=getPositionF();
+  position.X+=(float)getSpeed()*TBFE_Base::GameSpeed*cos(newAngle*PI/180);
+  position.Z-=(float)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*PI/180);
   //switch(NewDirection)
   // {
   //  case UP:
@@ -176,29 +190,14 @@ int Actor::changePosition(int newAngle,bool ChangeDirection)
   //    position.X-=fabs((float)getSpeed()*TBFE_Base::GameSpeed);
   //    break;
   //  };
-  setPositionD(position.X,position.Y,position.Z);
+  setPositionF(position.X,position.Y,position.Z);
   vector<CollidedTile> collisionTest=TBFE_Base::CurrentMap.collisionTest((int)position_.X,
 									 (int)position_.Y);
   if (collisionTest.size()>0)
     {
       for (int i=0;i<collisionTest.size();i++)
 	{
-	  Position TileOffset;
-	  Position tile=collisionTest.at(i).position;
-	  SDL_Rect actorRect=getCollisionRect();
-	  TileOffset.X=-tile.X+position.X;
-	  TileOffset.Y=-tile.Y+position.Y;
-	  if (actorRect.h>100)
-	    {
-	      TileOffset.Y-=100;
-	    };
-	  SDL_Rect tileRect;
-	  tileRect.x=0;
-	  tileRect.y=0;
-	  tileRect.h=100;
-	  tileRect.w=100;
-	  bool AdvancedCollision=advancedCollision(TBFE_Base::GetCollisionTile(),
-						   tileRect,TileOffset);
+	  bool AdvancedCollision=false;
 	  if (AdvancedCollision)
 	    {
 	      switch(collisionTest.at(i).Passability)
@@ -216,43 +215,24 @@ int Actor::changePosition(int newAngle,bool ChangeDirection)
 		    };
 		  break;
 		case 255:
-		  position.X-=(double)getSpeed()*TBFE_Base::GameSpeed*cos(newAngle*PI/180);
-		  position.Z+=(double)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*PI/180);
+		  position.X-=(float)getSpeed()*TBFE_Base::GameSpeed*cos(newAngle*PI/180);
+		  position.Z+=(float)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*PI/180);
 		  break;
 		};
-	      setPositionD(position.X,position.Y,position.Z);
+	      setPositionF(position.X,position.Y,position.Z);
 	      return -2;
 	    };
 	};
     };
-  int ncollisionTest=checkActorCollision((int)position.X,
-					 (int)position.Z,true);
+  int ncollisionTest=checkActorCollision(position.X,position.Y,position.Z);
   if (ncollisionTest!=-1)
     {
-      position.X-=(double)getSpeed()*TBFE_Base::GameSpeed*cos(newAngle*PI/180);
-      position.Z+=(double)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*PI/180);
-      setPositionD(position.X,position.Y,position.Z);
+      position.X-=(float)getSpeed()*TBFE_Base::GameSpeed*cos(newAngle*PI/180);
+      position.Z+=(float)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*PI/180);
+      setPositionF(position.X,position.Y,position.Z);
       return ncollisionTest;
     };
   return -1;
-};
-void Actor::changeScreen(int MapWidth, int MapHeight)
-{
-  switch(getAngle())
-    {
-    case 180:
-      position_.X=MapWidth*100-50;
-      break;
-    case 90:
-      position_.Y=MapHeight*100-100;
-      break;
-    case 0:
-      position_.X=10;
-      break;
-    case 270:
-      position_.Y=10;
-      break;
-    };
 };
 Position Actor::getPosition()
 {
@@ -264,146 +244,45 @@ Position Actor::getPosition()
 };
 void Actor::setPosition(int x,int y,int z)
 {
-  position_.X=(double)x;
-  position_.Y=(double)y;
-  position_.Z=(double)z;
+  position_.X=(float)x;
+  position_.Y=(float)y;
+  position_.Z=(float)z;
 };
-void Actor::setPositionD(double x,double y,double z)
+void Actor::setPositionF(float x,float y,float z)
 {
   position_.X=x;
   position_.Y=y;
   position_.Z=z;
 };
-bool Actor::advancedCollision(SDL_Surface * ColliderMap,SDL_Rect ColliderRect,Position ColliderOffset)
+int Actor::checkActorCollision(float offsetX,float offsetY,float offsetZ)
 {
-  SDL_Rect selfRect=getCollisionRect();
-  //TODO: collisionMap Lock
-  if (ColliderMap!=NULL && collisionMap_!=NULL)
+  for (int i=0;i<TBFE_Base::ActorList.size();i++)
     {
-      Uint32 aColor=SDL_MapRGB(ColliderMap->format,255,255,255);
-      for (int y=0;y<=selfRect.h;y+=2)
+      Actor * targetActor=TBFE_Base::ActorList.at(i);
+      CollisionBox targetCollision=targetActor->getCollisionBox(0);
+      if (targetActor!=this)
 	{
-	  for (int x=0;x<=selfRect.w;x+=2)
+	  for (int a=0;a<collisionMaps_.size();a++)
 	    {
-	      if (getPixel(collisionMap_,x+selfRect.x,y+selfRect.y)==aColor)
-		{							 
-		  if (x+ColliderOffset.X>=0 && y+ColliderOffset.Y>=0 &&
-		      x+ColliderOffset.X<=ColliderMap->w/2 && y+ColliderOffset.Y<=ColliderMap->h/2)
-		    {
-		      int pixX=x+ColliderOffset.X+ColliderRect.x;
-		      int pixY=y+ColliderOffset.Y+ColliderRect.y;
-		      if (getPixel(ColliderMap,pixX,pixY)==aColor)
-			{
-			  return true;
-			}
-		    };
-		};
-	    };
-	};
-    };
-  return false;
-};
-int Actor::checkActorCollision(bool useAdvancedCollision,int OffsetX,int OffsetY)
-{
-  int ActorNumber=TBFE_Base::GetActorNum(this);
-  SDL_Rect selfArea=getCollisionRect();
-  Position selfPosition=getPosition();
-  for (int i=TBFE_Base::ActorList.size()-1;i>=0;i--)
-    { 
-      Actor * iActor=TBFE_Base::ActorList.at(i);
-      Position iPosition=iActor->getPosition();
-      SDL_Rect iArea=iActor->getCollisionRect();
-      if ((iPosition.X<=selfPosition.X && 
-	   iPosition.X+iArea.w>=selfPosition.X &&
-	   iPosition.Y<=selfPosition.Y &&
-	   iPosition.Y+iArea.h>=selfPosition.Y) ||
-	  
-	  (selfPosition.X<=iPosition.X && 
-	   selfPosition.X+selfArea.w>=iPosition.X &&
-	   selfPosition.Y<=iPosition.Y &&
-	   selfPosition.Y+selfArea.h>=iPosition.Y) ||
-	  
-	  (selfPosition.X<=iPosition.X+iArea.w &&
-	   selfPosition.X+selfArea.w>=iPosition.X+iArea.w &&
-	   selfPosition.Y<=iPosition.Y+iArea.h &&
-	   selfPosition.Y+selfArea.h>=iPosition.Y+iArea.h)	||
-	  
-	  (iPosition.X<=selfPosition.X+selfArea.w &&
-	   iPosition.X+iArea.w>=selfPosition.X+selfArea.w &&
-	   iPosition.Y<=selfPosition.Y+selfArea.h &&
-	   iPosition.Y+iArea.h>=selfPosition.Y+selfArea.h) || 
-	  
-	  (selfPosition.X<=iPosition.X+iArea.w &&
-	   selfPosition.X+selfArea.w>=iPosition.X+iArea.w &&
-	   selfPosition.Y<=iPosition.Y+iArea.h &&
-	   selfPosition.Y+selfArea.h>=iPosition.Y)	||
-	  
-	  (iPosition.X<=selfPosition.X+selfArea.w &&
-	   iPosition.X+iArea.w>=selfPosition.X+selfArea.w &&
-	   iPosition.Y<=selfPosition.Y+selfArea.h &&
-	   iPosition.Y+iArea.h>=selfPosition.Y)) 
-	{
-	  Position selfDimensions=getCollisionDimensions();
-	  Position iDimensions=iActor->getCollisionDimensions();
-	  if ((selfDimensions.Z+selfPosition.Z>=iPosition.Z && 
-	       selfDimensions.Z+selfPosition.Z<=iPosition.Z+iDimensions.Z) ||
-	    (iPosition.Z+iDimensions.Z>=selfPosition.Z &&	      
-	     iPosition.Z+iDimensions.Z<=selfPosition.Z+selfDimensions.Z))
-	    {
-	      if (i!=ActorNumber)
-		{	
-		  Position iOffset;
-		  iOffset.X=selfPosition.X-iPosition.X;
-		  iOffset.Y=selfPosition.Y-iPosition.Y;
-		  if (useAdvancedCollision)
-		    {
-		      //TODO: iActor Collision Map Lock
-		      if (advancedCollision(iActor->getCollisionMap(),iArea,iOffset))
-			{
-			  return i;
-			};
-		    }
-		  else
-		    {
-		      return i;
-		    };
+	      PositionF targetPosition=targetActor->getPositionF();
+	      PositionF offset;
+	      offset.X=offsetX-targetPosition.X;
+	      offset.Y=offsetY-targetPosition.Y;
+	      offset.Z=offsetZ-targetPosition.Z;
+	      cout << "offsetPosition:" <<offsetX << "," << offsetY << "," << offsetZ << ":";
+	      cout << "targetActor Position:" << targetPosition.X << "," << targetPosition.Y << "," << targetPosition.Z << "\n";
+	      cout << "offset:" << offset.X << "," << offset.Y << "," << offset.Z << "\n";
+	      PositionF targetRotation=targetActor->getRotationF();
+	      targetCollision.setRotation(targetRotation.X,targetRotation.Y,targetRotation.Z);
+	      collisionMaps_.at(a).setRotation(rotation_.X,rotation_.Y,rotation_.Z);
+	      if (collisionMaps_.at(a).checkCollision(targetCollision,offset))
+		{
+		  return a;
 		};
 	    };
 	};
     };
   return -1;
-};
-SDL_Rect Actor::getCollisionRect()
-{
-  SDL_Rect collisionRect;
-  Position dimensions;
-  dimensions=getCollisionDimensions();
-  collisionRect.x=0;
-  collisionRect.y=0;
-  collisionRect.w=dimensions.X;
-  collisionRect.h=dimensions.Y;
-  return collisionRect;
-};
-SDL_Surface * Actor::getCollisionMap()
-{
-  //TODO: collision Map Lock
-  if (collisionMap_==NULL)
-    {
-      //TODO: collisionSource_ Lock
-      collisionMap_=TBFE_Base::CheckSheets(collisionSource_);
-    };
-  return collisionMap_;
-};
-void Actor::setCollisionMap(string source)
-{ 
-  SDL_Surface * newCollision;
-  newCollision=TBFE_Base::CheckSheets(source);
-  if (newCollision==NULL)
-    {
-      return;
-    };
-  collisionMap_=newCollision;
-  collisionSource_=source;
 };
 int Actor::getSpeed()
 {
@@ -442,16 +321,6 @@ void Actor::setBaseAction(string newBaseAction)
     };
   baseAction_=newBaseAction;
 };
-Position Actor::getCollisionDimensions()
-{
-  return collisionDimensions_;
-};
-void Actor::setCollisionDimensions(int x,int y, int z)
-{
-  collisionDimensions_.X=x;
-  collisionDimensions_.Y=y;
-  collisionDimensions_.Z=z;
-};
 bool Actor::getWalking()
 {
   return isWalking_;
@@ -472,38 +341,11 @@ void Actor::setMobile(bool newMobility)
 Position Actor::getDirOffset()
 {
   Position offset;
-  switch (getAngle())
-    {
-    case 90:
-      offset.X=0;
-      offset.Y=-1;
-      break;
-    case 0:
-      offset.X=1;
-      offset.Y=0;
-      break;
-    case 270:
-      offset.X=0;
-      offset.Y=1;
-      break;
-    case 180:
-      offset.X=-1;
-      offset.Y=0;
-      break;
-    };
+  offset.X=0;
+  offset.Y=-1;
   return offset;
 };
-void Actor::loadCollisionMap(string newSource)
-{
-  SDL_Surface * newCollision=TBFE_Base::CheckSheets(newSource);
-  if (newCollision==NULL)
-    {
-      return;
-    };
-  collisionSource_=newSource;
-  collisionMap_=newCollision;
-};
-PositionD Actor::getPositionD()
+PositionF Actor::getPositionF()
 {
   return position_;
 };

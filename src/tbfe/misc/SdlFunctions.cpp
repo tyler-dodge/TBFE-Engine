@@ -75,15 +75,26 @@ void applyImage(int x,int y,SDL_Surface* source, SDL_Rect* clip)
       glPushMatrix();
       glTranslatef(x,y,-2);
       Position dimensions;
+      PositionF start;
+      PositionF end;
       if (clip!=NULL)
 	{
 	  dimensions.X=clip->w;
 	  dimensions.Y=clip->h;
+	  start.X=(float)clip->x/(float)source->w;
+	  start.Y=(float)clip->y/(float)source->h;
+	  end.X=(float)clip->w/(float)source->w;
+	  end.Y=(float)clip->h/(float)source->h;
+	  //cout << start.X << "," << start.Y << ":" << end.X << "," << end.Y << "\n";
 	}
       else
 	{
 	  dimensions.X=source->w;
 	  dimensions.Y=source->h;
+	  start.X=0;
+	  start.Y=0;
+	  end.X=1;
+	  end.Y=1;
 	};
       if (source!=NULL)
 	{
@@ -93,10 +104,10 @@ void applyImage(int x,int y,SDL_Surface* source, SDL_Rect* clip)
 	  glDisable(GL_DEPTH_TEST);
 	  glDisable(GL_LIGHTING);
 	  glBegin(GL_QUADS);
-	  glTexCoord2f(0,0);glVertex3f(0,0,0);
-	  glTexCoord2f(0,1);glVertex3f(0,dimensions.Y,0);
-	  glTexCoord2f(1,1);glVertex3f(dimensions.X,dimensions.Y,0);
-	  glTexCoord2f(1,0);glVertex3f(dimensions.X,0,0);
+	  glTexCoord2f(start.X,start.Y);glVertex3f(0,0,0);
+	  glTexCoord2f(start.X,start.Y+end.Y);glVertex3f(0,dimensions.Y,0);
+	  glTexCoord2f(start.X+end.X,start.Y+end.Y);glVertex3f(dimensions.X,dimensions.Y,0);
+	  glTexCoord2f(start.X+end.X,start.Y);glVertex3f(dimensions.X,0,0);
 	  glEnd();
 	  glDisable(GL_TEXTURE_2D);
 	  glEnable(GL_LIGHTING);
@@ -123,7 +134,7 @@ void applyImage(int x,int y,SDL_Surface* source, SDL_Rect* clip)
 aiScene * loadModel(string model)
 {
   Assimp::Importer importer;
-  const aiScene * test=importer.ReadFile(model.c_str(),aiProcess_CalcTangentSpace | aiProcess_JoinIdenticalVertices | aiProcess_Triangulate );
+  const aiScene * test=importer.ReadFile(model.c_str(),aiProcess_CalcTangentSpace | aiProcess_JoinIdenticalVertices | aiProcess_Triangulate);
   aiScene * newModel=importer.GetOrphanedScene();
   return newModel;
 };
@@ -220,7 +231,6 @@ void applyMaterial(const struct aiMaterial *mtl)
 	else 
 		glDisable(GL_CULL_FACE);
 }
-
 void drawNodes( aiScene * scene, aiNode * currentNode, aiVector3D position,aiVector3D rotation, aiVector3D scale)
 {
   if (currentNode==NULL || scene==NULL)
@@ -239,18 +249,19 @@ void drawNodes( aiScene * scene, aiNode * currentNode, aiVector3D position,aiVec
   glPushMatrix();
   for (int i=0;i<currentNode->mNumMeshes;i++)
     {
+      vector<GLuint> indices;
+      indices.resize(0);
       aiMesh * currentMesh=scene->mMeshes[currentNode->mMeshes[i]];
       glEnableClientState(GL_VERTEX_ARRAY);
       glEnableClientState(GL_NORMAL_ARRAY);
       glVertexPointer(3,GL_FLOAT,0,currentMesh->mVertices);
       glNormalPointer(GL_FLOAT,0,currentMesh->mNormals);
-      vector<GLuint> indices;
       applyMaterial(scene->mMaterials[currentMesh->mMaterialIndex]);
-      for (int i=0;i<currentMesh->mNumFaces;i++)
+      for (int face=0;face<currentMesh->mNumFaces;face++)
 	{
 	  for (int indice=0;indice<3;indice++)
 	    {
-	      indices.push_back(currentMesh->mFaces[i].mIndices[indice]);
+	      indices.push_back(currentMesh->mFaces[face].mIndices[indice]);
 	    };
 	};
       glDrawElements(GL_TRIANGLES,indices.size(),GL_UNSIGNED_INT,&indices[0]);

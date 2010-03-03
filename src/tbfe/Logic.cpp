@@ -14,7 +14,7 @@ int TBFE_Logic::checkTalker()
 {
   int NPC_Exists=-1;  
   int PlayerNumber=TBFE_Base::GetActorNum(TBFE_Base::MainPlayer);
-  NPC_Exists=TBFE_Base::MainPlayer->checkActorCollision(true,50*cos(TBFE_Base::MainPlayer->getAngle())*3.14/180,50*sin(TBFE_Base::MainPlayer->getAngle())*3.14/180);
+  NPC_Exists=TBFE_Base::MainPlayer->checkActorCollision(true,50*cos(TBFE_Base::MainPlayer->getRotationF().Z)*3.14/180,50*sin(TBFE_Base::MainPlayer->getRotationF().Z)*3.14/180);
   
   return NPC_Exists;
 };
@@ -28,19 +28,23 @@ void TBFE_Logic::playerMovement()
     {
       if (keysDown_['w'])
 	{
-	  TBFE_Base::MainPlayer->changePosition(TBFE_Base::MainPlayer->getAngle()+90,false);
+	  TBFE_Base::MainPlayer->changePosition(TBFE_Base::MainPlayer->getRotationF().Z,false);
 	}
       if (keysDown_['s'])
 	{
-	  TBFE_Base::MainPlayer->changePosition(270+TBFE_Base::MainPlayer->getAngle(),false);
+	  TBFE_Base::MainPlayer->changePosition(180.0f+TBFE_Base::MainPlayer->getRotationF().Z,false);
 	}
       if (keysDown_['d'])
 	{
-	  TBFE_Base::MainPlayer->setAngle(TBFE_Base::MainPlayer->getAngle()-5);
+	  PositionF newAngle=TBFE_Base::MainPlayer->getRotationF();
+	  newAngle.Z-=5;
+	  TBFE_Base::MainPlayer->setRotationF(newAngle.X,newAngle.Y,newAngle.Z);
 	}
       if (keysDown_['a'])
 	{
-	  TBFE_Base::MainPlayer->setAngle(TBFE_Base::MainPlayer->getAngle()+5);
+	  PositionF newAngle=TBFE_Base::MainPlayer->getRotationF();
+	  newAngle.Z+=5;
+	  TBFE_Base::MainPlayer->setRotationF(newAngle.X,newAngle.Y,newAngle.Z);
 	};
     };
 };
@@ -57,7 +61,9 @@ int TBFE_Logic::contextAction()
       TBFE_Base::Talker=TBFE_Base::ActorList[NPC_Exists];
       if (TBFE_Base::Talker->getMobile())
 	{
-	  TBFE_Base::Talker->setAngle(360-TBFE_Base::MainPlayer->getAngle());
+	  PositionF newAngle=TBFE_Base::MainPlayer->getRotationF();
+	  newAngle.Z=360-newAngle.Z;
+	  TBFE_Base::Talker->setRotationF(newAngle.X,newAngle.Y,newAngle.Z);
 	};
       TBFE_Base::Talker->getConversation(false);
       stringstream ActorSelf;

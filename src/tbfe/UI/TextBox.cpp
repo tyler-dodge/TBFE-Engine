@@ -9,6 +9,7 @@ TextBox::TextBox(int x,int y,string text):Element(x,y)
   textColor_.r=255;
   textColor_.g=255;
   textColor_.b=255;
+  intermediary_=NULL;
   wordWrap();
 };
 void TextBox::wordWrap()
@@ -66,52 +67,65 @@ TextBox::~TextBox()
     {
       SDL_FreeSurface(text_.at(i));
     };
+  if (intermediary_!=NULL)
+    {
+      SDL_FreeSurface(intermediary_);
+    };
   text_.resize(0);
  
 };
 void TextBox::reload()
 {
   wordWrap();
+  isReloaded=true;
 };
-void TextBox::renderElement(SDL_Surface * screen, Position ScreenPosition)
+SDL_Surface * TextBox::renderElement()
 {
   Position CurrentPosition=getPosition();
   int scrollY=atoi(getProperty("scrollY").c_str());
-  bool lastLine=false;
-  SDL_Rect textDimensions;
-  if (scrollY<0)
+  if (isReloaded==true || currentScrollY!=scrollY)
     {
-      scrollY=0;
-    };
-  SDL_Surface * intermediary = SDL_CreateRGBSurface(0, getDimensions().X, getDimensions().Y, 32, 
-						    0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
-  for (int i=scrollY/text_.at(0)->h;i<text_.size();i++)
-    {
-      if (lastLine)
+      isReloaded=false;
+      currentScrollY=scrollY;
+      bool lastLine=false;
+      SDL_Rect textDimensions;
+      if (scrollY<0)
 	{
-	  applyImage(ScreenPosition.X+CurrentPosition.X,ScreenPosition.Y+CurrentPosition.Y,intermediary,NULL);
+	  scrollY=0;
 	};
-      textDimensions.x=0;
-      textDimensions.y=0;
-      textDimensions.w=text_.at(i)->w;
-      textDimensions.h=text_.at(i)->h;
-      if (scrollY/text_.at(0)->h==i)
+      if (intermediary_!=NULL)
 	{
-	  textDimensions.y=scrollY-(scrollY/text_.at(0)->h)*text_.at(0)->h;
+	  SDL_FreeSurface(intermediary_);
 	};
-      if (text_.at(i)->h*(i+1)-scrollY>getDimensions().Y)
+      intermediary_ = SDL_CreateRGBSurface(0, getDimensions().X, getDimensions().Y, 32, 
+					   0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
+      for (int i=scrollY/text_.at(0)->h;i<text_.size();i++)
 	{
-	  lastLine=true;
-	  textDimensions.h+=getDimensions().Y-(text_.at(i)->h*(i+1)-scrollY);
-	  if (textDimensions.h<0)
+	  if (lastLine)
 	    {
-	      return;
+	      return intermediary_;
 	    };
+	  textDimensions.x=0;
+	  textDimensions.y=0;
+	  textDimensions.w=text_.at(i)->w;
+	  textDimensions.h=text_.at(i)->h;
+	  if (scrollY/text_.at(0)->h==i)
+	    {
+	      textDimensions.y=scrollY-(scrollY/text_.at(0)->h)*text_.at(0)->h;
+	    };
+	  if (text_.at(i)->h*(i+1)-scrollY>getDimensions().Y)
+	    {
+	      lastLine=true;
+	      textDimensions.h+=getDimensions().Y-(text_.at(i)->h*(i+1)-scrollY);
+	      if (textDimensions.h<0)
+		{
+		  return NULL;
+		};
+	    };
+	  SDL_Rect position;
+	  position.x=0;
+	  position.y=text_.at(i)->h*i-scrollY;
+	  SDL_BlitSurface(text_.at(i),NULL,intermediary_,&position);
 	};
-      SDL_Rect position;
-      position.x=0;
-      position.y=text_.at(i)->h*i-scrollY;
-      cout << position.y << "\n";
-      SDL_BlitSurface(text_.at(i),NULL,intermediary,&position);
     };
 };

@@ -11,6 +11,7 @@ class Actor;
 #include "../Base.h"
 #include "Action.h"
 #include "Animation.h"
+#include "CollisionBox.h"
 #include "Inventory.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,22 +22,20 @@ class Actor
  protected:
   vector<Action> actionList_;
   vector<Property> propertyList_;
-  string collisionSource_;
   Action * getAction(string);
   std::string conversation_;
  private:
-  PositionD position_;
-  PositionD rotation_;
+  PositionF position_;
+  PositionF rotation_;
   int angle_;
   Action * currentAction_;
-  SDL_Surface * collisionMap_;
   float speed_;
   string scriptSource_;
   string name_;
   string baseAction_;
   bool isWalking_;
   bool isMobile_;
-  Position collisionDimensions_;
+  vector<CollisionBox> collisionMaps_;
  public:  
   Actor(int,int);
   virtual ~Actor();
@@ -46,32 +45,23 @@ class Actor
   bool runAction();
   bool addAction(Action);
   Action getCurrentAction();
-  
+  void addCollisionBox(PositionF,PositionF);
+  CollisionBox getCollisionBox(int);
   //Changes actorPosition relatively using direction
   string getProperty(string);
   void setProperty(string,string);
-  int changePosition(int,bool);
-  void changeScreen(int,int);
+  int changePosition(float,bool);
 
-  SDL_Rect getCollisionRect(); 
-  SDL_Surface * getCollisionMap();
-  void setCollisionMap(string);
-  void loadCollisionMap(string);
-  bool advancedCollision(SDL_Surface *,SDL_Rect,Position);  
-  int checkActorCollision(bool,int OffsetX=0,int OffsetY=0);
+  int checkActorCollision(float,float,float);
 
   Position getPosition();
   void setPosition(int,int,int Z=0);
 
-  PositionD getPositionD();
-  void setPositionD(double,double,double);
+  PositionF getPositionF();
+  void setPositionF(float,float,float);
 
-  PositionD getRotationD();
-  void setRotationD(double,double,double);
-
-  int getAngle();
-  void setAngle(int);
-
+  PositionF getRotationF();
+  void setRotationF(float,float,float);
   virtual string getConversation(bool)=0;
   void setConversation(string);
   
@@ -86,9 +76,6 @@ class Actor
 
   string getBaseAction();
   void setBaseAction(string);
-
-  Position getCollisionDimensions();
-  void setCollisionDimensions(int,int,int);
 
   bool getWalking();
   void setWalking(bool);

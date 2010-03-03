@@ -132,7 +132,7 @@ namespace TBFE_Base
   {
     for (int i=0;i<AnimationSheets.size();i++)
       {
-	if (AnimationSheets.at(i).Texture!=NULL)
+	if (AnimationSheets.at(i).Texture!=0)
 	  {
 	    glDeleteTextures(1,&AnimationSheets.at(i).Texture);
 	  };

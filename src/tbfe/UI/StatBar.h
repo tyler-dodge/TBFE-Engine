@@ -8,8 +8,10 @@ class StatBar:public Element
   SDL_Surface * statBarBack_;
   SDL_Rect bar_;
   SDL_Rect barDimensions_;
+  SDL_Surface * intermediary_;
+  float percentage_;
  public:
-  void renderElement(SDL_Surface *, Position);
+  SDL_Surface * renderElement();
   void reload();
   StatBar(int,int,string);
   ~StatBar();

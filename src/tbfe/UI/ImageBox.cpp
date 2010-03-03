@@ -1,6 +1,7 @@
 #include "ImageBox.h"
 ImageBox::ImageBox(int x,int y,string Source):Element(x,y)
 {
+  intermediary_=NULL;
   string Special=Source;
   string ImageSource=Source;
   if (ImageSource.find('(')<ImageSource.size())
@@ -60,9 +61,7 @@ void ImageBox::reload()
 {
   SDL_FreeSurface(image_);
   image_=TBFE_Base::CheckSheets(getProperty("imageSource").c_str());
-};
-void ImageBox::renderElement(SDL_Surface * screen, Position ScreenPosition)
-{
+
   SDL_Rect Clip;
   Position dimensions=getDimensions();
   if (getProperty("clipX")!="")
@@ -92,5 +91,10 @@ void ImageBox::renderElement(SDL_Surface * screen, Position ScreenPosition)
       setDimensions(Clip.w,Clip.h);
     };
   Position CurrentPosition=getPosition();
-  applyImage(ScreenPosition.X+CurrentPosition.X,ScreenPosition.Y+CurrentPosition.Y,image_,&Clip);
+  SDL_BlitSurface(intermediary_,&Clip,image_,NULL);
+};
+SDL_Surface * ImageBox::renderElement()
+{
+  reload();
+  return intermediary_;
 };

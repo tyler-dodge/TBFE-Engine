@@ -7,8 +7,11 @@ class TextBox:public Element
   vector<SDL_Surface *> text_;
   SDL_Color textColor_;
   void wordWrap();
+  SDL_Surface * intermediary_;
+  int currentScrollY;
+  bool isReloaded;
  public:
-  void renderElement(SDL_Surface *, Position);
+  SDL_Surface * renderElement();
   TextBox(int,int,string);
   ~TextBox();
   void reload();

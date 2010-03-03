@@ -19,9 +19,6 @@ class Action
   void setScript(string);
   int getMainAnimationNum();
   bool setMainAnimation(int);
-  bool setDirection(Direction);
-  Direction getDirection();
-  SDL_Rect getFrameRect(int);
   bool animationPlus();
   void loadAnimation();
   Animation * getLayer(int);

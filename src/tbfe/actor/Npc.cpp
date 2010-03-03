@@ -4,14 +4,12 @@
 Npc::Npc():Actor(0,0)
 {
   setConversation("The programmers were too lazy to give me lines to say");
-  setCollisionMap("Actors/living/Collision.png");
 };
 Npc::Npc(int PositionX,int PositionY,string PlayerConversation)
 :Actor(PositionX,PositionY)
 {
   setConversation(PlayerConversation);
   setScriptSource("Actors/Npc/Npc.lua");
-  setCollisionMap("Actors/living/Collision.png");
 };
 Npc::~Npc()
 {

@@ -30,7 +30,7 @@ class Element
   void setProperty(string,string);
   bool getVisibility();
   void setVisibility(bool);
-  virtual void renderElement(SDL_Surface *, Position)=0;
+  virtual SDL_Surface * renderElement()=0;
   virtual void reload()=0;
   Element(int,int);
   virtual ~Element();

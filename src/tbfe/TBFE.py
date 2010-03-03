@@ -90,6 +90,8 @@ class TBFE(_object):
     def addEvent(*args): return _TBFE.TBFE_addEvent(*args)
     def selectEvent(*args): return _TBFE.TBFE_selectEvent(*args)
     def getMousePosition(*args): return _TBFE.TBFE_getMousePosition(*args)
+    def getCameraAngle(*args): return _TBFE.TBFE_getCameraAngle(*args)
+    def setCameraAngle(*args): return _TBFE.TBFE_setCameraAngle(*args)
     def addGlobalEvent(*args): return _TBFE.TBFE_addGlobalEvent(*args)
     __swig_destroy__ = _TBFE.delete_TBFE
     __del__ = lambda self : None;
@@ -103,6 +105,7 @@ class TBFE_Render(_object):
     __swig_getmethods__ = {}
     __getattr__ = lambda self, name: _swig_getattr(self, TBFE_Render, name)
     __repr__ = _swig_repr
+    def refreshMapLayer(*args): return _TBFE.TBFE_Render_refreshMapLayer(*args)
     def __init__(self, *args): 
         this = _TBFE.new_TBFE_Render(*args)
         try: self.this.append(this)
@@ -114,6 +117,8 @@ class TBFE_Render(_object):
     def changeLighting(*args): return _TBFE.TBFE_Render_changeLighting(*args)
     def init(*args): return _TBFE.TBFE_Render_init(*args)
     def initGl(*args): return _TBFE.TBFE_Render_initGl(*args)
+    def getCameraAngle(*args): return _TBFE.TBFE_Render_getCameraAngle(*args)
+    def setCameraAngle(*args): return _TBFE.TBFE_Render_setCameraAngle(*args)
     def setLightPosition(*args): return _TBFE.TBFE_Render_setLightPosition(*args)
     def finalRender(*args): return _TBFE.TBFE_Render_finalRender(*args)
 TBFE_Render_swigregister = _TBFE.TBFE_Render_swigregister
