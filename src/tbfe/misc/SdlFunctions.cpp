@@ -185,7 +185,7 @@ void applyMaterial(const struct aiMaterial *mtl)
 	int two_sided;
 	int wireframe;
 	int max;
-
+	GLuint test;
 	set_float4(c, 0.8f, 0.8f, 0.8f, 1.0f);
 	if(AI_SUCCESS == aiGetMaterialColor(mtl, AI_MATKEY_COLOR_DIFFUSE, &diffuse))
 		color4_to_float4(&diffuse, c);
@@ -230,6 +230,7 @@ void applyMaterial(const struct aiMaterial *mtl)
 		glEnable(GL_CULL_FACE);
 	else 
 		glDisable(GL_CULL_FACE);
+	
 }
 void drawNodes( aiScene * scene, aiNode * currentNode, aiVector3D position,aiVector3D rotation, aiVector3D scale)
 {
@@ -254,8 +255,10 @@ void drawNodes( aiScene * scene, aiNode * currentNode, aiVector3D position,aiVec
       aiMesh * currentMesh=scene->mMeshes[currentNode->mMeshes[i]];
       glEnableClientState(GL_VERTEX_ARRAY);
       glEnableClientState(GL_NORMAL_ARRAY);
+      glEnableClientState(GL_TEXTURE_COORD_ARRAY);
       glVertexPointer(3,GL_FLOAT,0,currentMesh->mVertices);
       glNormalPointer(GL_FLOAT,0,currentMesh->mNormals);
+      glTexCoordPointer(2,GL_FLOAT,0,currentMesh->mTextureCoords);
       applyMaterial(scene->mMaterials[currentMesh->mMaterialIndex]);
       for (int face=0;face<currentMesh->mNumFaces;face++)
 	{
@@ -265,6 +268,7 @@ void drawNodes( aiScene * scene, aiNode * currentNode, aiVector3D position,aiVec
 	    };
 	};
       glDrawElements(GL_TRIANGLES,indices.size(),GL_UNSIGNED_INT,&indices[0]);
+      glDisableClientState(GL_TEXTURE_COORD_ARRAY);
       glDisableClientState(GL_NORMAL_ARRAY);
       glDisableClientState(GL_VERTEX_ARRAY);
     };

@@ -49,6 +49,12 @@ def mouseCamera(MouseMovement):
     if Position.X<0:
         Position.X=0
     engine.setCameraAngle(Position.X,Position.Y,Position.Z)
+def house(newHouse):
+    Body=Actor.Animation("house.dae","0,",0,0.01,1,True)
+    Walk=Actor.Action("Walk","")
+    Body.setRotation(-90,0,0)
+    Walk.addAnimation(Body)
+    newHouse.addAction(Walk)
 Tbfe.cvar.ScreenDimensions.X=1440
 Tbfe.cvar.ScreenDimensions.Y=900
 engine=Tbfe.TBFE()
@@ -67,6 +73,9 @@ engine.addWindow(uiFrameRate)
 action=5
 i=0
 randomNpc=Actor.createActor(500,200,"Npc","Npc")
+housing=Actor.createActor(0,0,"Npc","Npc")
+house(housing)
+engine.addActor(housing)
 engine.addActor(randomNpc)
 engine.addGlobalEvent("MouseMove",Misc.MOUSEMOVE,0,"mouseCamera(mouseMovement)")
 while action!=Misc.QUIT:
