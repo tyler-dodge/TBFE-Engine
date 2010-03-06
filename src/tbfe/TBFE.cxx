@@ -3237,6 +3237,18 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_DeleteTempSheets(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  
+  if (!PyArg_ParseTuple(args,(char *)":DeleteTempSheets")) SWIG_fail;
+  TBFE_Base::DeleteTempSheets();
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_GetActorNum(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Actor *arg1 = (Actor *) 0 ;
@@ -5377,6 +5389,7 @@ SWIGINTERN PyObject *SunVector_swigregister(PyObject *SWIGUNUSEDPARM(self), PyOb
 
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"DeleteAnimationSheets", _wrap_DeleteAnimationSheets, METH_VARARGS, NULL},
+	 { (char *)"DeleteTempSheets", _wrap_DeleteTempSheets, METH_VARARGS, NULL},
 	 { (char *)"GetActorNum", _wrap_GetActorNum, METH_VARARGS, NULL},
 	 { (char *)"GetActorByNum", _wrap_GetActorByNum, METH_VARARGS, NULL},
 	 { (char *)"CheckModels", _wrap_CheckModels, METH_VARARGS, NULL},

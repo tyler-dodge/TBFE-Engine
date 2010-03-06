@@ -19,6 +19,7 @@ namespace TBFE_Base
   extern float GameSpeed;
   extern Position ScreenDimensions;
   extern void DeleteAnimationSheets();
+  extern void DeleteTempSheets();
   extern int GetActorNum(Actor *);
   extern Actor * GetActorByNum(int);
   extern aiScene * CheckModels(string);

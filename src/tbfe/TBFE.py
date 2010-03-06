@@ -52,6 +52,7 @@ import Actor
 import Misc
 import Map
 DeleteAnimationSheets = _TBFE.DeleteAnimationSheets
+DeleteTempSheets = _TBFE.DeleteTempSheets
 GetActorNum = _TBFE.GetActorNum
 GetActorByNum = _TBFE.GetActorByNum
 CheckModels = _TBFE.CheckModels

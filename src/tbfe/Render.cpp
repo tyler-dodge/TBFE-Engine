@@ -139,6 +139,7 @@ void TBFE_Render::finalRender(bool doFlip)
   renderMapLayer(0,0,0);
   renderWindowList();
   SDL_GL_SwapBuffers();
+  TBFE_Base::DeleteTempSheets();
   int Error=glGetError();
   if(Error != GL_NO_ERROR )
     {

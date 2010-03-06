@@ -24,6 +24,7 @@ namespace TBFE_Base
   float GameSpeed=1;
   vector<Model> ModelList;
   vector<AnimationSheet> AnimationSheets;
+  vector<AnimationSheet> TempSheets;
   int GetActorNum(Actor *actorPtr)
   {  
     for (int i=0;i<ActorList.size();i++)
@@ -126,7 +127,24 @@ namespace TBFE_Base
 	    return AnimationSheets.at(0).Texture;
 	  };
       };
-    return bindImage(surface);
+    AnimationSheet tempSheet;
+    tempSheet.Data=surface;
+    tempSheet.Texture=bindImage(surface);
+    
+    TempSheets.push_back(tempSheet);
+    return tempSheet.Texture;
+  };
+  void DeleteTempSheets()
+  {
+    //TempSheets do not delete SDL_Surfaces
+    for (int i=0;i<TempSheets.size();i++)
+      {
+	if (TempSheets.at(i).Texture!=0)
+	  {
+	    glDeleteTextures(1,&TempSheets.at(i).Texture);
+	  };
+      };
+    TempSheets.resize(0);
   };
   void DeleteAnimationSheets()
   {

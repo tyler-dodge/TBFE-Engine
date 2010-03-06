@@ -60,7 +60,6 @@ GLuint bindImage(SDL_Surface * textureSource)
 };
 void applyImage(int x,int y,SDL_Surface* source, SDL_Rect* clip)
 {
-  
   SDL_Rect offset;
   offset.x=x;
   offset.y=y;
@@ -185,7 +184,6 @@ void applyMaterial(const struct aiMaterial *mtl)
 	int two_sided;
 	int wireframe;
 	int max;
-	GLuint test;
 	set_float4(c, 0.8f, 0.8f, 0.8f, 1.0f);
 	if(AI_SUCCESS == aiGetMaterialColor(mtl, AI_MATKEY_COLOR_DIFFUSE, &diffuse))
 		color4_to_float4(&diffuse, c);
