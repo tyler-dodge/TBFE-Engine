@@ -61,11 +61,12 @@ def house(newHouse):
     Body.setRotation(-90,0,0)
     Walk.addAnimation(Body)
     newHouse.addAction(Walk)
-Tbfe.cvar.ScreenDimensions.X=1440
-Tbfe.cvar.ScreenDimensions.Y=900
+Tbfe.cvar.ScreenDimensions.X=1024
+Tbfe.cvar.ScreenDimensions.Y=600
 engine=Tbfe.TBFE()
 Tbfe.GetMainPlayer().setPosition(100,0,400)
 engine.changeMap("test.fmm")
+print("test")
 Tbfe.cvar.CurrentMap.generateMap(25,25)
 engine.initMap()
 Tbfe.cvar.MainConsole.write("test\nbob")

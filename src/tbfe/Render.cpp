@@ -78,7 +78,7 @@ void TBFE_Render::init()
       SDL_FreeSurface(screen_);
     };
   SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,8);
-  screen_=SDL_SetVideoMode(1440,900,32,SDL_OPENGL | SDL_FULLSCREEN );
+  screen_=SDL_SetVideoMode(TBFE_Base::ScreenDimensions.X,TBFE_Base::ScreenDimensions.Y,32,SDL_OPENGL | SDL_FULLSCREEN );
   TBFE_Base::MainConsole.write("SDL initialized");
   initGl();
  };
