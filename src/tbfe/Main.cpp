@@ -76,7 +76,7 @@ bool TBFE::addTileSet(std::string Source)
     };
   TBFE_Base::CurrentMap.addTileSet(Source);  
 };
-EventType * TBFE::selectEvent(std::string Name)
+EventType * TBFE::getEvent(std::string Name)
 {
   for(int i=0;i<eventList_.size();i++)
     {
@@ -85,6 +85,7 @@ EventType * TBFE::selectEvent(std::string Name)
 	  return &eventList_.at(i);
 	};
     };
+  return NULL;
 };
 void TBFE::initMap()
 {
@@ -166,29 +167,49 @@ void TBFE::addBuilding(Building newBuilding)
 void TBFE::checkEvents()
 {
   int mouseState=SDL_GetMouseState(&mousePosition_.X,&mousePosition_.Y);
+  SDL_Event currentSdlEvent=logic_.getEvent();
   for(int i=0;i<eventList_.size();i++)
     {
-      EventType currentEvent=eventList_.at(i);
-      if (currentEvent.Enabled)
+      EventType  * currentEvent=&eventList_.at(i);
+      if (currentEvent->Enabled)
 	{
 	  Position eventPosition;
 	  Position screenPosition;
 	  Position elementDimensions;
-	  if (currentEvent.TargetElement!=NULL)
+	  if (currentEvent->TargetElement!=NULL)
 	    {
-	      eventPosition=currentEvent.TargetElement->getPosition();
+	      eventPosition=currentEvent->TargetElement->getPosition();
 	    };
-	  if (currentEvent.Parent!=NULL)
+	  if (currentEvent->Parent!=NULL)
 	    {
-	      screenPosition=currentEvent.Parent->getScreenPosition();
+	      screenPosition=currentEvent->Parent->getScreenPosition();
 	    };
-	  if (currentEvent.TargetElement!=NULL)
+	  if (currentEvent->TargetElement!=NULL)
 	    {
-	      elementDimensions=currentEvent.TargetElement->getDimensions();
+	      elementDimensions=currentEvent->TargetElement->getDimensions();
 	    };
-	  switch(currentEvent.TargetEvent)
+	  switch(currentEvent->TargetEvent)
 	    {
 	    case CLICK:
+	      if (mousePosition_.X>eventPosition.X+screenPosition.X && logic_.isEventNew()
+		  && mousePosition_.Y>eventPosition.Y+
+		  screenPosition.Y
+		  && mousePosition_.X<elementDimensions.X+
+		  eventPosition.X+screenPosition.X
+		  && mousePosition_.Y<elementDimensions.Y+
+		  eventPosition.Y+screenPosition.Y
+		  && currentEvent->Enabled 
+		  && currentEvent->Parent->getVisibility()
+		  && mouseState==1 && mouseDown_==false
+		  )
+		{
+		  stringstream windowString;
+		  windowString << "elementTarget=Tbfe.getWindowByNum(" << TBFE_Base::getWindowNum(currentEvent->Parent) << ")";
+		  TBFE_Base::MainConsole.runLine(windowString.str().c_str());
+		  TBFE_Base::MainConsole.runLine(currentEvent->Function.c_str());
+		};
+	      break;
+	    case MOUSEHOLD:
 	      if (mousePosition_.X>eventPosition.X+screenPosition.X 
 		  && mousePosition_.Y>eventPosition.Y+
 		  screenPosition.Y
@@ -196,57 +217,67 @@ void TBFE::checkEvents()
 		  eventPosition.X+screenPosition.X
 		  && mousePosition_.Y<elementDimensions.Y+
 		  eventPosition.Y+screenPosition.Y
-		  && currentEvent.Enabled 
-		  && currentEvent.Parent->getVisibility()
-		  && mouseState==1 && mouseDown_==false
+		  && currentEvent->Enabled 
+		  && currentEvent->Parent->getVisibility()
+		  && mouseState==1
 		  )
 		{
 		  stringstream windowString;
-		  windowString << "elementTarget=Tbfe.getWindowByNum(" << TBFE_Base::getWindowNum(currentEvent.Parent) << ")";
+		  windowString << "elementTarget=Tbfe.getWindowByNum(" << TBFE_Base::getWindowNum(currentEvent->Parent) << ")";
 		  TBFE_Base::MainConsole.runLine(windowString.str().c_str());
-		  TBFE_Base::MainConsole.runLine(currentEvent.Function.c_str());
+		  TBFE_Base::MainConsole.runLine(currentEvent->Function.c_str());
 		};
 	      break;
 	    case MOUSEMOVE:
-	      if ((mouseMovement_.X!=mousePosition_.X || mouseMovement_.Y!=mousePosition_.Y) &&
-		  currentEvent.Enabled==true && currentEvent.Parent==NULL && currentEvent.TargetElement==NULL)
+	      if ( currentSdlEvent.type==SDL_MOUSEMOTION && logic_.isEventNew())
 		{
-		  stringstream writeMouse;
-		  writeMouse << "mouseMovement=Misc.PositionF();mouseMovement.X=";
-		  writeMouse << -mouseMovement_.X+mousePosition_.X << ";mouseMovement.Y=";
-		  writeMouse << -mouseMovement_.Y+mousePosition_.Y << ";";
-		  TBFE_Base::MainConsole.runLine(writeMouse.str());
-		  TBFE_Base::MainConsole.runLine(currentEvent.Function.c_str());
-		  mouseMovement_.X=mousePosition_.X;
-		  mouseMovement_.Y=mousePosition_.Y;
-		};
-	      if (currentEvent.Parent!=NULL && currentEvent.TargetElement!=NULL)
-		{
-		  if (
-		      (mousePosition_.X>eventPosition.X+screenPosition.X 
-		       && mousePosition_.Y>eventPosition.Y+
-		       screenPosition.Y
-		       && mousePosition_.X<elementDimensions.X+
-		       eventPosition.X+screenPosition.X
-		       && mousePosition_.Y<elementDimensions.Y+
-		       eventPosition.Y+screenPosition.Y
-		       && currentEvent.Enabled 
-		       && currentEvent.Parent->getVisibility()
-		       && mouseMovement_.X!=mousePosition_.X && mouseMovement_.Y!=mousePosition_.Y)
-		      )
+		  if (currentEvent->Enabled==true && currentEvent->Parent==NULL && currentEvent->TargetElement==NULL)
 		    {
-		      TBFE_Base::MainConsole.runLine(currentEvent.Function.c_str());
-		      mouseMovement_.X=mousePosition_.X;
-		      mouseMovement_.Y=mousePosition_.Y;
+		      stringstream writeMouse;
+		      writeMouse << "mouseMovement=Misc.PositionF();mouseMovement.X=";
+		      writeMouse << currentSdlEvent.motion.xrel << ";mouseMovement.Y=";
+		      writeMouse << currentSdlEvent.motion.yrel << ";";
+		      TBFE_Base::MainConsole.runLine(writeMouse.str());
+		      TBFE_Base::MainConsole.runLine(currentEvent->Function.c_str());
+		    };
+		  if (currentEvent->Parent!=NULL && currentEvent->TargetElement!=NULL)
+		    {
+		      if (
+			  (mousePosition_.X>eventPosition.X+screenPosition.X 
+			   && mousePosition_.Y>eventPosition.Y+
+			   screenPosition.Y
+			   && mousePosition_.X<elementDimensions.X+
+			   eventPosition.X+screenPosition.X
+			   && mousePosition_.Y<elementDimensions.Y+
+			   eventPosition.Y+screenPosition.Y
+			   && currentEvent->Enabled 
+			   && currentEvent->Parent->getVisibility())
+			  )
+			{
+			  stringstream writeMouse;
+			  writeMouse << "mouseMovement=Misc.PositionF();mouseMovement.X=";
+			  writeMouse << currentSdlEvent.motion.xrel << ";mouseMovement.Y=";
+			  writeMouse << currentSdlEvent.motion.yrel << ";";
+			  TBFE_Base::MainConsole.runLine(currentEvent->Function.c_str());
+			};
 		    };
 		};
 	      break;
 	    case KEYPRESS:
-	      SDL_Event currentSdlEvent=logic_.getEvent();
-	      if (currentSdlEvent.key.keysym.sym==currentEvent.Key && 
-		  logic_.checkKeyDown(currentEvent.Key))
+	      if (currentSdlEvent.type==SDL_KEYUP && logic_.isEventNew())
 		{
-		  TBFE_Base::MainConsole.runLine(currentEvent.Function.c_str());	      
+		  if (currentSdlEvent.key.keysym.sym==currentEvent->Key)
+		    {
+		      currentEvent->keyDown=false;
+		    };
+		};
+	      if (currentSdlEvent.type==SDL_KEYDOWN)
+		{
+		  if (currentSdlEvent.key.keysym.sym==currentEvent->Key && !currentEvent->keyDown)
+		    {
+		      currentEvent->keyDown=true;
+		      TBFE_Base::MainConsole.runLine(currentEvent->Function.c_str());	      
+		    };
 		};
 	      break;
 	    };
@@ -261,10 +292,22 @@ void TBFE::checkEvents()
       mouseDown_=false;
     };
 };
+void TBFE::setShowMouse(bool newState)
+{
+  if (newState)
+    {
+      SDL_ShowCursor(SDL_ENABLE);
+    }
+  else
+    {
+      SDL_ShowCursor(SDL_DISABLE);
+    };
+};
 Direction TBFE::runEngine()
 {
   frame_++;
-  while(logic_.pollEvent())
+  bool checkOnce=false;
+  while(logic_.pollEvent() || !checkOnce)
     {
       SDL_Event currentSdlEvent=logic_.getEvent();
       checkEvents();
@@ -309,6 +352,7 @@ Direction TBFE::runEngine()
 	{
 	  logic_.setKeyDown(currentSdlEvent.key.keysym.sym,false);
 	};
+      checkOnce=true;
     };
   Position mapDimensions=TBFE_Base::CurrentMap.getDimensions();
   if (TBFE_Base::KeyControl==true)
@@ -349,6 +393,13 @@ Direction TBFE::runEngine()
 	};
       frame_=0;
       return SECOND;
+    };
+  if (mousePosition_.X!=TBFE_Base::ScreenDimensions.X/2 || mousePosition_.Y!=TBFE_Base::ScreenDimensions.Y/2)
+    {
+      SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
+      SDL_WarpMouse(TBFE_Base::ScreenDimensions.X/2,TBFE_Base::ScreenDimensions.Y/2);
+      SDL_WM_GrabInput( SDL_GRAB_ON );
+      SDL_EventState(SDL_MOUSEMOTION, SDL_ENABLE);
     };
   TBFE_Base::GameSpeed=60/(frame_*1000/frameRate_.GetTicks());
   if (TBFE_Base::GameSpeed>3)

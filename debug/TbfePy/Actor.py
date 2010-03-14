@@ -254,7 +254,10 @@ class CollisionBox(_object):
         try: self.this.append(this)
         except: self.this = this
     def getDimensions(*args): return _Actor.CollisionBox_getDimensions(*args)
+    def generatePoints(*args): return _Actor.CollisionBox_generatePoints(*args)
     def setDimensions(*args): return _Actor.CollisionBox_setDimensions(*args)
+    def checkLine(*args): return _Actor.CollisionBox_checkLine(*args)
+    def convertToAngle(*args): return _Actor.CollisionBox_convertToAngle(*args)
     def getPosition(*args): return _Actor.CollisionBox_getPosition(*args)
     def setPosition(*args): return _Actor.CollisionBox_setPosition(*args)
     def getRotation(*args): return _Actor.CollisionBox_getRotation(*args)

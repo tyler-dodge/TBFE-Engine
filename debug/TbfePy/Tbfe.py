@@ -89,9 +89,10 @@ class TBFE(_object):
     def addBuilding(*args): return _TBFE.TBFE_addBuilding(*args)
     def addTileSet(*args): return _TBFE.TBFE_addTileSet(*args)
     def addEvent(*args): return _TBFE.TBFE_addEvent(*args)
-    def selectEvent(*args): return _TBFE.TBFE_selectEvent(*args)
+    def getEvent(*args): return _TBFE.TBFE_getEvent(*args)
     def getMousePosition(*args): return _TBFE.TBFE_getMousePosition(*args)
     def getCameraAngle(*args): return _TBFE.TBFE_getCameraAngle(*args)
+    def setShowMouse(*args): return _TBFE.TBFE_setShowMouse(*args)
     def setCameraAngle(*args): return _TBFE.TBFE_setCameraAngle(*args)
     def addGlobalEvent(*args): return _TBFE.TBFE_addGlobalEvent(*args)
     __swig_destroy__ = _TBFE.delete_TBFE
@@ -133,6 +134,7 @@ class TBFE_Logic(_object):
     __repr__ = _swig_repr
     def getEvent(*args): return _TBFE.TBFE_Logic_getEvent(*args)
     def pollEvent(*args): return _TBFE.TBFE_Logic_pollEvent(*args)
+    def isEventNew(*args): return _TBFE.TBFE_Logic_isEventNew(*args)
     def checkKeyDown(*args): return _TBFE.TBFE_Logic_checkKeyDown(*args)
     def setKeyDown(*args): return _TBFE.TBFE_Logic_setKeyDown(*args)
     def playerMovement(*args): return _TBFE.TBFE_Logic_playerMovement(*args)

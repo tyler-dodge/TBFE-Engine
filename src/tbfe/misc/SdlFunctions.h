@@ -19,4 +19,5 @@ extern aiScene * loadModel(string);
 extern void drawNodes(aiScene *,aiNode *, aiVector3D,aiVector3D,aiVector3D);
 extern void applyMaterial(const struct aiMaterial *);
 extern GLuint bindImage(SDL_Surface*);
+extern float roundDown(float,int);
 #endif

@@ -14,7 +14,7 @@ int TBFE_Logic::checkTalker()
 {
   int NPC_Exists=-1;  
   int PlayerNumber=TBFE_Base::GetActorNum(TBFE_Base::MainPlayer);
-  NPC_Exists=TBFE_Base::MainPlayer->checkActorCollision(true,50*cos(TBFE_Base::MainPlayer->getRotationF().Z)*3.14/180,50*sin(TBFE_Base::MainPlayer->getRotationF().Z)*3.14/180);
+  NPC_Exists=TBFE_Base::MainPlayer->checkActorCollision(true,50*cos(TBFE_Base::MainPlayer->getRotationF().Y)*3.14/180,50*sin(TBFE_Base::MainPlayer->getRotationF().Y)*3.14/180);
   
   return NPC_Exists;
 };
@@ -28,23 +28,31 @@ void TBFE_Logic::playerMovement()
     {
       if (keysDown_['w'])
 	{
-	  TBFE_Base::MainPlayer->changePosition(TBFE_Base::MainPlayer->getRotationF().Z,false);
+	  TBFE_Base::MainPlayer->changePosition(TBFE_Base::MainPlayer->getRotationF().Y,false);
 	}
       if (keysDown_['s'])
 	{
-	  TBFE_Base::MainPlayer->changePosition(180.0f+TBFE_Base::MainPlayer->getRotationF().Z,false);
+	  TBFE_Base::MainPlayer->changePosition(180.0f+TBFE_Base::MainPlayer->getRotationF().Y,false);
 	}
       if (keysDown_['d'])
 	{
-	  PositionF newAngle=TBFE_Base::MainPlayer->getRotationF();
-	  newAngle.Z-=5;
-	  TBFE_Base::MainPlayer->setRotationF(newAngle.X,newAngle.Y,newAngle.Z);
+	  TBFE_Base::MainPlayer->changePosition(TBFE_Base::MainPlayer->getRotationF().Y+270.0f,false);
 	}
       if (keysDown_['a'])
 	{
-	  PositionF newAngle=TBFE_Base::MainPlayer->getRotationF();
-	  newAngle.Z+=5;
-	  TBFE_Base::MainPlayer->setRotationF(newAngle.X,newAngle.Y,newAngle.Z);
+	  TBFE_Base::MainPlayer->changePosition(TBFE_Base::MainPlayer->getRotationF().Y+90.0f,false);
+	;}
+      if (keysDown_['q'])
+	{
+	  PositionF rotation=TBFE_Base::MainPlayer->getRotationF();
+	  rotation.Y+=5;
+	  TBFE_Base::MainPlayer->setRotationF(rotation.X,rotation.Y,rotation.Z);
+	};
+      if (keysDown_['e'])
+	{
+	  PositionF rotation=TBFE_Base::MainPlayer->getRotationF();
+	  rotation.Y-=5;
+	  TBFE_Base::MainPlayer->setRotationF(rotation.X,rotation.Y,rotation.Z);
 	};
     };
 };
@@ -160,7 +168,12 @@ char TBFE_Logic::textInput(int KeyPress,bool ShiftDown)
 };
 bool TBFE_Logic::pollEvent()
 {
-  return SDL_PollEvent(&event_);
+  newEvent_=SDL_PollEvent(&event_);
+  return newEvent_;
+};
+bool TBFE_Logic::isEventNew()
+{
+  return newEvent_;
 };
 SDL_Event TBFE_Logic::getEvent()
 {

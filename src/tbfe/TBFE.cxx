@@ -3918,7 +3918,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_TBFE_selectEvent(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_TBFE_getEvent(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   TBFE *arg1 = (TBFE *) 0 ;
   std::string arg2 ;
@@ -3928,22 +3928,22 @@ SWIGINTERN PyObject *_wrap_TBFE_selectEvent(PyObject *SWIGUNUSEDPARM(self), PyOb
   PyObject * obj1 = 0 ;
   EventType *result = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OO:TBFE_selectEvent",&obj0,&obj1)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OO:TBFE_getEvent",&obj0,&obj1)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TBFE, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TBFE_selectEvent" "', argument " "1"" of type '" "TBFE *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TBFE_getEvent" "', argument " "1"" of type '" "TBFE *""'"); 
   }
   arg1 = reinterpret_cast< TBFE * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     int res = SWIG_AsPtr_std_string(obj1, &ptr);
     if (!SWIG_IsOK(res) || !ptr) {
-      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "TBFE_selectEvent" "', argument " "2"" of type '" "std::string""'"); 
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "TBFE_getEvent" "', argument " "2"" of type '" "std::string""'"); 
     }
     arg2 = *ptr;
     if (SWIG_IsNewObj(res)) delete ptr;
   }
-  result = (EventType *)(arg1)->selectEvent(arg2);
+  result = (EventType *)(arg1)->getEvent(arg2);
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_EventType, 0 |  0 );
   return resultobj;
 fail:
@@ -3989,6 +3989,36 @@ SWIGINTERN PyObject *_wrap_TBFE_getCameraAngle(PyObject *SWIGUNUSEDPARM(self), P
   arg1 = reinterpret_cast< TBFE * >(argp1);
   result = (arg1)->getCameraAngle();
   resultobj = SWIG_NewPointerObj((new PositionF(static_cast< const PositionF& >(result))), SWIGTYPE_p_PositionF, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TBFE_setShowMouse(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  TBFE *arg1 = (TBFE *) 0 ;
+  bool arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  bool val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:TBFE_setShowMouse",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TBFE, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TBFE_setShowMouse" "', argument " "1"" of type '" "TBFE *""'"); 
+  }
+  arg1 = reinterpret_cast< TBFE * >(argp1);
+  ecode2 = SWIG_AsVal_bool(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "TBFE_setShowMouse" "', argument " "2"" of type '" "bool""'");
+  } 
+  arg2 = static_cast< bool >(val2);
+  (arg1)->setShowMouse(arg2);
+  resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
   return NULL;
@@ -4514,6 +4544,28 @@ SWIGINTERN PyObject *_wrap_TBFE_Logic_pollEvent(PyObject *SWIGUNUSEDPARM(self), 
   }
   arg1 = reinterpret_cast< TBFE_Logic * >(argp1);
   result = (bool)(arg1)->pollEvent();
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TBFE_Logic_isEventNew(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  TBFE_Logic *arg1 = (TBFE_Logic *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:TBFE_Logic_isEventNew",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TBFE_Logic, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TBFE_Logic_isEventNew" "', argument " "1"" of type '" "TBFE_Logic *""'"); 
+  }
+  arg1 = reinterpret_cast< TBFE_Logic * >(argp1);
+  result = (bool)(arg1)->isEventNew();
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -5417,9 +5469,10 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"TBFE_addBuilding", _wrap_TBFE_addBuilding, METH_VARARGS, NULL},
 	 { (char *)"TBFE_addTileSet", _wrap_TBFE_addTileSet, METH_VARARGS, NULL},
 	 { (char *)"TBFE_addEvent", _wrap_TBFE_addEvent, METH_VARARGS, NULL},
-	 { (char *)"TBFE_selectEvent", _wrap_TBFE_selectEvent, METH_VARARGS, NULL},
+	 { (char *)"TBFE_getEvent", _wrap_TBFE_getEvent, METH_VARARGS, NULL},
 	 { (char *)"TBFE_getMousePosition", _wrap_TBFE_getMousePosition, METH_VARARGS, NULL},
 	 { (char *)"TBFE_getCameraAngle", _wrap_TBFE_getCameraAngle, METH_VARARGS, NULL},
+	 { (char *)"TBFE_setShowMouse", _wrap_TBFE_setShowMouse, METH_VARARGS, NULL},
 	 { (char *)"TBFE_setCameraAngle", _wrap_TBFE_setCameraAngle, METH_VARARGS, NULL},
 	 { (char *)"TBFE_addGlobalEvent", _wrap_TBFE_addGlobalEvent, METH_VARARGS, NULL},
 	 { (char *)"delete_TBFE", _wrap_delete_TBFE, METH_VARARGS, NULL},
@@ -5439,6 +5492,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"TBFE_Render_swigregister", TBFE_Render_swigregister, METH_VARARGS, NULL},
 	 { (char *)"TBFE_Logic_getEvent", _wrap_TBFE_Logic_getEvent, METH_VARARGS, NULL},
 	 { (char *)"TBFE_Logic_pollEvent", _wrap_TBFE_Logic_pollEvent, METH_VARARGS, NULL},
+	 { (char *)"TBFE_Logic_isEventNew", _wrap_TBFE_Logic_isEventNew, METH_VARARGS, NULL},
 	 { (char *)"TBFE_Logic_checkKeyDown", _wrap_TBFE_Logic_checkKeyDown, METH_VARARGS, NULL},
 	 { (char *)"TBFE_Logic_setKeyDown", _wrap_TBFE_Logic_setKeyDown, METH_VARARGS, NULL},
 	 { (char *)"TBFE_Logic_playerMovement", _wrap_TBFE_Logic_playerMovement, METH_VARARGS, NULL},

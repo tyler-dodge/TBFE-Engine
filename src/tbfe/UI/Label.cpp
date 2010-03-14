@@ -36,6 +36,10 @@ void Label::reload()
 	  setDimensions(0,15);
 	};
       currentText_=getProperty("text");
+      if (intermediary_!=NULL)
+	{
+	  SDL_FreeSurface(intermediary_);
+	};
       if (text_==NULL)
 	{
 	  intermediary_=NULL;

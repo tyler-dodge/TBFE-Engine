@@ -6,6 +6,7 @@
 #include <vector>
 #include "SDL/SDL.h"
 #include <aiScene.h>
+#include <sstream>
 using namespace std;
 class Window;
 class Element;
@@ -42,6 +43,46 @@ struct PositionF
   float X;
   float Y;
   float Z;
+  PositionF operator+(PositionF newPosition)
+  {
+    newPosition.X+=X;
+    newPosition.Y+=Y;
+    newPosition.Z+=Z;
+    return newPosition;
+  };
+  PositionF operator-(PositionF newPosition)
+  {
+    newPosition.X-=X;
+    newPosition.Y-=Y;
+    newPosition.Z-=Z;
+    return newPosition;
+  };
+  void operator+=(PositionF newPosition)
+  {
+    X+=newPosition.X;
+    Y+=newPosition.Y;
+    Z+=newPosition.Z;
+  };
+  void operator-=(PositionF newPosition)
+  {
+    X-=newPosition.X;
+    Y-=newPosition.Y;
+    Z-=newPosition.Z;
+  };
+  PositionF operator/(float num)
+  {
+    PositionF newPosition;
+    newPosition.X=X/num;
+    newPosition.Y=Y/num;
+    newPosition.Z=Z/num;
+    return newPosition;
+  };
+  string dumpString()
+  {
+    std::stringstream text;
+    text << '(' << X << ',' << Y << ',' << Z << ')';
+    return text.str();
+  };
 };
 struct Position
 {
@@ -90,6 +131,7 @@ struct EventType
   bool Enabled;
   std::string Function;
   int Key;
+  bool keyDown;
 };
 struct TileSheet
 {

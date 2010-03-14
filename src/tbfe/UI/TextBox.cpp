@@ -19,13 +19,8 @@ void TextBox::wordWrap()
       SDL_Init(SDL_INIT_VIDEO);
     };
   int width=getDimensions().X;
-  for (int i=0;i<text_.size();i++)
-    {
-      SDL_FreeSurface(text_.at(i));
-    };
-  text_.resize(0);
-  
   int textPt=0;
+  int lineNum=0;
   while (textPt<getProperty("text").size())
     {
       stringstream textSegment;
@@ -58,7 +53,31 @@ void TextBox::wordWrap()
 	{
 	  textSegment << " ";
 	};
-      text_.push_back(TTF_RenderText_Blended(TBFE_Base::GetFont(),textSegment.str().c_str(),textColor_));
+      bool reloadLine=false;
+      if (lineNum==textData_.size())
+	{
+	  reloadLine=true;
+	  textData_.push_back(textSegment.str());
+	  text_.push_back(NULL);
+	}
+      else if (lineNum>textData_.size())
+	{
+	  return;
+	}
+      else if (textData_.at(lineNum)!=textSegment.str())
+	{
+	  reloadLine=true;
+	  textData_.at(lineNum)=textSegment.str();
+	  if (text_.at(lineNum)!=NULL)
+	    {
+	      SDL_FreeSurface(text_.at(lineNum));
+	    };
+	};
+      if (reloadLine)
+	{
+	  text_.at(lineNum)=TTF_RenderText_Blended(TBFE_Base::GetFont(),textSegment.str().c_str(),textColor_);
+	};
+      lineNum++;
     };
 };
 TextBox::~TextBox()
@@ -99,6 +118,14 @@ SDL_Surface * TextBox::renderElement()
 	};
       intermediary_ = SDL_CreateRGBSurface(0, getDimensions().X, getDimensions().Y, 32, 
 					   0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
+      if (scrollY/text_.at(0)->h>=text_.size()-1)
+	{
+	  scrollY=text_.at(0)->h*(text_.size()-1);
+	  stringstream newScroll;
+	  newScroll << scrollY;
+	  currentScrollY=scrollY;
+	  setProperty("scrollY",newScroll.str());
+	};
       for (int i=scrollY/text_.at(0)->h;i<text_.size();i++)
 	{
 	  if (lastLine)
@@ -119,7 +146,7 @@ SDL_Surface * TextBox::renderElement()
 	      textDimensions.h+=getDimensions().Y-(text_.at(i)->h*(i+1)-scrollY);
 	      if (textDimensions.h<0)
 		{
-		  return NULL;
+		  return intermediary_;
 		};
 	    };
 	  SDL_Rect position;
@@ -128,4 +155,5 @@ SDL_Surface * TextBox::renderElement()
 	  SDL_BlitSurface(text_.at(i),NULL,intermediary_,&position);
 	};
     };
+  return intermediary_;
 };

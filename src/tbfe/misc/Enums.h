@@ -28,6 +28,7 @@ enum AI
 enum Event
   {
     CLICK,
+    MOUSEHOLD,
     MOUSEMOVE,
     KEYPRESS
   };

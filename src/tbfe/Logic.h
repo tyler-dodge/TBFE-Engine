@@ -8,9 +8,11 @@ class TBFE_Logic
  private:
   SDL_Event event_;
   bool keysDown_[316];
+  bool newEvent_;
  public:
   SDL_Event getEvent();
   bool pollEvent();
+  bool isEventNew();
   bool checkKeyDown(int);
   void setKeyDown(int,bool);
   void playerMovement();

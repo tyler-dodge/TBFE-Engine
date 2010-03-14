@@ -15,16 +15,16 @@ Actor::Actor (int PositionX,int PositionY)
       Action Walk("Walk","");
       Animation Body("test.dae",WalkAnimationBody,
 		     0,0,1,true);
-      Body.setRotation(270,0,90);
+      Body.setRotation(270,90,0);
       Walk.addAnimation(Body);
       Walk.setMainAnimation(0);
       addAction(Walk);
       PositionF position;
-      position.X=-0.7;
-      position.Y=-1.8;
-      position.Z=0;
+      position.X=-0.6;
+      position.Y=0;
+      position.Z=-2;
       PositionF dimensions;
-      dimensions.X=1;
+      dimensions.X=1.2;
       dimensions.Y=2;
       dimensions.Z=2;
       addCollisionBox(position,dimensions);
@@ -269,12 +269,9 @@ int Actor::checkActorCollision(float offsetX,float offsetY,float offsetZ)
 	      offset.X=offsetX-targetPosition.X;
 	      offset.Y=offsetY-targetPosition.Y;
 	      offset.Z=offsetZ-targetPosition.Z;
-	      cout << "offsetPosition:" <<offsetX << "," << offsetY << "," << offsetZ << ":";
-	      cout << "targetActor Position:" << targetPosition.X << "," << targetPosition.Y << "," << targetPosition.Z << "\n";
-	      cout << "offset:" << offset.X << "," << offset.Y << "," << offset.Z << "\n";
 	      PositionF targetRotation=targetActor->getRotationF();
 	      targetCollision.setRotation(targetRotation.X,targetRotation.Y,targetRotation.Z);
-	      collisionMaps_.at(a).setRotation(rotation_.X,rotation_.Y,rotation_.Z);
+	      collisionMaps_.at(a).setRotation(rotation_.X,-rotation_.Y,rotation_.Z);
 	      if (collisionMaps_.at(a).checkCollision(targetCollision,offset))
 		{
 		  return a;

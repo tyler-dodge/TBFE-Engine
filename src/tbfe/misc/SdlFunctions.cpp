@@ -60,6 +60,10 @@ GLuint bindImage(SDL_Surface * textureSource)
 };
 void applyImage(int x,int y,SDL_Surface* source, SDL_Rect* clip)
 {
+  if (source==NULL)
+    {
+      return;
+    };
   SDL_Rect offset;
   offset.x=x;
   offset.y=y;
@@ -118,17 +122,6 @@ void applyImage(int x,int y,SDL_Surface* source, SDL_Rect* clip)
   glMatrixMode(GL_PROJECTION);
   glPopMatrix();
   glMatrixMode(GL_MODELVIEW);
-  if (clip!=NULL && source!=NULL)
-    {
-      if (clip->x+clip->w > source->w || clip->y+clip->h > source->h)
-	{
-	  return;
-	};
-    };
-  if (source!=NULL)
-    {
-      //SDL_BlitSurface(source, clip, target, &offset);
-    };
 };
 aiScene * loadModel(string model)
 {
@@ -241,8 +234,8 @@ void drawNodes( aiScene * scene, aiNode * currentNode, aiVector3D position,aiVec
       glPushMatrix();
       //glTranslatef(position[0],position[1],-position[2]);
       glTranslatef(position[0],position[1],position[2]);
-      glRotatef(rotation[0],1,0,0);
       glRotatef(rotation[1],0,1,0);
+      glRotatef(rotation[0],1,0,0);
       glRotatef(rotation[2],0,0,1);
     };
   glPushMatrix();
@@ -281,3 +274,9 @@ void drawNodes( aiScene * scene, aiNode * currentNode, aiVector3D position,aiVec
     };
 };
 
+float roundDown(float num,int place)
+{
+  float newNum=floor(num*pow(10,place));
+  newNum/=pow(10,place);
+  return newNum;
+};

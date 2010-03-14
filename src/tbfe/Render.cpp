@@ -133,7 +133,7 @@ void TBFE_Render::finalRender(bool doFlip)
   glRotatef(cameraAngle_.Y,0,1,0);
   glRotatef(cameraAngle_.Z,0,0,1);
   glTranslatef(0,-6,0);
-  glRotatef(-TBFE_Base::MainPlayer->getRotationF().Z,0,1,0);
+  glRotatef(-TBFE_Base::MainPlayer->getRotationF().Y,0,1,0);
   glTranslatef(-TBFE_Base::MainPlayer->getPositionF().X/20,0,-TBFE_Base::MainPlayer->getPositionF().Z/20);
   renderActors();
   renderMapLayer(0,0,0);
@@ -305,44 +305,21 @@ void TBFE_Render::renderActors()
 
 	      glPushMatrix();
 	      glTranslatef(ActorPosition.X/20,ActorPosition.Y/20,ActorPosition.Z/20);
-	      glRotatef(270,1,0,0);
-	      glRotatef(currentActor->getRotationF().Z+180,0,0,1);
 	      PositionF dimensions;
 	      PositionF offset;
 	      CollisionBox actorCollision=currentActor->getCollisionBox(0);
 	      dimensions=actorCollision.getDimensions();
 	      offset=actorCollision.getPosition();
-	      glTranslatef(offset.X,offset.Y,offset.Z);
+	      actorCollision.setRotation(rotation.X,-rotation.Y,rotation.Z);   
+	      vector<PositionF> points=actorCollision.generatePoints(actorCollision.getPosition(),actorCollision.getDimensions());
+	      glDisable(GL_CULL_FACE);
 	      glBegin(GL_QUADS);
-	      glVertex3f(0,0,0);
-	      glVertex3f(dimensions.X,0,0);
-	      glVertex3f(dimensions.X,dimensions.Y,0);
-	      glVertex3f(0,dimensions.Y,0);
-
-	      glVertex3f(dimensions.X,0,0);
-	      glVertex3f(dimensions.X,0,dimensions.Z);
-	      glVertex3f(dimensions.X,dimensions.Y,dimensions.Z);
-	      glVertex3f(dimensions.X,dimensions.Y,0);
-	      glVertex3f(0,0,0);
-	      glVertex3f(0,0,dimensions.Z);
-	      glVertex3f(0,dimensions.Y,dimensions.Z);
-	      glVertex3f(0,dimensions.Y,0);
-
-	      glVertex3f(0,dimensions.Y,0);
-	      glVertex3f(0,dimensions.Y,dimensions.Z);
-	      glVertex3f(dimensions.X,dimensions.Y,dimensions.Z);
-	      glVertex3f(dimensions.X,dimensions.Y,0);
-
-	      glVertex3f(0,0,0);
-	      glVertex3f(0,0,dimensions.Z);
-	      glVertex3f(dimensions.X,0,dimensions.Z);
-	      glVertex3f(dimensions.X,0,0);
-
-	      glVertex3f(0,0,dimensions.Z);
-	      glVertex3f(dimensions.X,0,dimensions.Z);
-	      glVertex3f(dimensions.X,dimensions.Y,dimensions.Z);
-	      glVertex3f(0,dimensions.Y,dimensions.Z);
+	      glVertex3f(points[0].X,points[0].Y+7,points[0].Z);
+	      glVertex3f(points[1].X,points[1].Y+7,points[1].Z);
+	      glVertex3f(points[2].X,points[2].Y+7,points[2].Z);
+	      glVertex3f(points[3].X,points[3].Y+7,points[3].Z);
 	      glEnd();
+	      glEnable(GL_CULL_FACE);
 	      glPopMatrix();
 	    };
 	};

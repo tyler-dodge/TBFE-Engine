@@ -2516,8 +2516,9 @@ SWIG_Python_MustGetPtr(PyObject *obj, swig_type_info *ty, int argnum, int flags)
 #define SWIGTYPE_p_aiScene swig_types[12]
 #define SWIGTYPE_p_char swig_types[13]
 #define SWIGTYPE_p_vectorT_ActorType_t swig_types[14]
-static swig_type_info *swig_types[16];
-static swig_module_info swig_module = {swig_types, 15, 0, 0, 0, 0};
+#define SWIGTYPE_p_vectorT_PositionF_t swig_types[15]
+static swig_type_info *swig_types[17];
+static swig_module_info swig_module = {swig_types, 16, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -7770,6 +7771,62 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_CollisionBox_generatePoints(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CollisionBox *arg1 = (CollisionBox *) 0 ;
+  PositionF arg2 ;
+  PositionF arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  SwigValueWrapper< vector< PositionF > > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:CollisionBox_generatePoints",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CollisionBox, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CollisionBox_generatePoints" "', argument " "1"" of type '" "CollisionBox *""'"); 
+  }
+  arg1 = reinterpret_cast< CollisionBox * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_PositionF,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CollisionBox_generatePoints" "', argument " "2"" of type '" "PositionF""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CollisionBox_generatePoints" "', argument " "2"" of type '" "PositionF""'");
+    } else {
+      PositionF * temp = reinterpret_cast< PositionF * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  {
+    res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_PositionF,  0  | 0);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "CollisionBox_generatePoints" "', argument " "3"" of type '" "PositionF""'"); 
+    }  
+    if (!argp3) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CollisionBox_generatePoints" "', argument " "3"" of type '" "PositionF""'");
+    } else {
+      PositionF * temp = reinterpret_cast< PositionF * >(argp3);
+      arg3 = *temp;
+      if (SWIG_IsNewObj(res3)) delete temp;
+    }
+  }
+  result = (arg1)->generatePoints(arg2,arg3);
+  resultobj = SWIG_NewPointerObj((new vector< PositionF >(static_cast< const vector< PositionF >& >(result))), SWIGTYPE_p_vectorT_PositionF_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_CollisionBox_setDimensions(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   CollisionBox *arg1 = (CollisionBox *) 0 ;
@@ -7812,6 +7869,140 @@ SWIGINTERN PyObject *_wrap_CollisionBox_setDimensions(PyObject *SWIGUNUSEDPARM(s
   arg4 = static_cast< float >(val4);
   (arg1)->setDimensions(arg2,arg3,arg4);
   resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CollisionBox_checkLine(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CollisionBox *arg1 = (CollisionBox *) 0 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
+  float arg5 ;
+  float arg6 ;
+  float arg7 ;
+  float arg8 ;
+  float arg9 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  float val2 ;
+  int ecode2 = 0 ;
+  float val3 ;
+  int ecode3 = 0 ;
+  float val4 ;
+  int ecode4 = 0 ;
+  float val5 ;
+  int ecode5 = 0 ;
+  float val6 ;
+  int ecode6 = 0 ;
+  float val7 ;
+  int ecode7 = 0 ;
+  float val8 ;
+  int ecode8 = 0 ;
+  float val9 ;
+  int ecode9 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
+  PyObject * obj4 = 0 ;
+  PyObject * obj5 = 0 ;
+  PyObject * obj6 = 0 ;
+  PyObject * obj7 = 0 ;
+  PyObject * obj8 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOOOOOOOO:CollisionBox_checkLine",&obj0,&obj1,&obj2,&obj3,&obj4,&obj5,&obj6,&obj7,&obj8)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CollisionBox, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CollisionBox_checkLine" "', argument " "1"" of type '" "CollisionBox *""'"); 
+  }
+  arg1 = reinterpret_cast< CollisionBox * >(argp1);
+  ecode2 = SWIG_AsVal_float(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CollisionBox_checkLine" "', argument " "2"" of type '" "float""'");
+  } 
+  arg2 = static_cast< float >(val2);
+  ecode3 = SWIG_AsVal_float(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "CollisionBox_checkLine" "', argument " "3"" of type '" "float""'");
+  } 
+  arg3 = static_cast< float >(val3);
+  ecode4 = SWIG_AsVal_float(obj3, &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "CollisionBox_checkLine" "', argument " "4"" of type '" "float""'");
+  } 
+  arg4 = static_cast< float >(val4);
+  ecode5 = SWIG_AsVal_float(obj4, &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "CollisionBox_checkLine" "', argument " "5"" of type '" "float""'");
+  } 
+  arg5 = static_cast< float >(val5);
+  ecode6 = SWIG_AsVal_float(obj5, &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "CollisionBox_checkLine" "', argument " "6"" of type '" "float""'");
+  } 
+  arg6 = static_cast< float >(val6);
+  ecode7 = SWIG_AsVal_float(obj6, &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "CollisionBox_checkLine" "', argument " "7"" of type '" "float""'");
+  } 
+  arg7 = static_cast< float >(val7);
+  ecode8 = SWIG_AsVal_float(obj7, &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "CollisionBox_checkLine" "', argument " "8"" of type '" "float""'");
+  } 
+  arg8 = static_cast< float >(val8);
+  ecode9 = SWIG_AsVal_float(obj8, &val9);
+  if (!SWIG_IsOK(ecode9)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode9), "in method '" "CollisionBox_checkLine" "', argument " "9"" of type '" "float""'");
+  } 
+  arg9 = static_cast< float >(val9);
+  result = (bool)(arg1)->checkLine(arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CollisionBox_convertToAngle(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CollisionBox *arg1 = (CollisionBox *) 0 ;
+  float arg2 ;
+  float arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  float val2 ;
+  int ecode2 = 0 ;
+  float val3 ;
+  int ecode3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  float result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:CollisionBox_convertToAngle",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CollisionBox, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CollisionBox_convertToAngle" "', argument " "1"" of type '" "CollisionBox *""'"); 
+  }
+  arg1 = reinterpret_cast< CollisionBox * >(argp1);
+  ecode2 = SWIG_AsVal_float(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CollisionBox_convertToAngle" "', argument " "2"" of type '" "float""'");
+  } 
+  arg2 = static_cast< float >(val2);
+  ecode3 = SWIG_AsVal_float(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "CollisionBox_convertToAngle" "', argument " "3"" of type '" "float""'");
+  } 
+  arg3 = static_cast< float >(val3);
+  result = (float)(arg1)->convertToAngle(arg2,arg3);
+  resultobj = SWIG_From_float(static_cast< float >(result));
   return resultobj;
 fail:
   return NULL;
@@ -7997,7 +8188,72 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_CollisionBox_checkCollision(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_CollisionBox_checkCollision__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CollisionBox *arg1 = (CollisionBox *) 0 ;
+  SwigValueWrapper< CollisionBox > arg2 ;
+  PositionF arg3 ;
+  bool arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  bool val4 ;
+  int ecode4 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOOO:CollisionBox_checkCollision",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CollisionBox, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CollisionBox_checkCollision" "', argument " "1"" of type '" "CollisionBox *""'"); 
+  }
+  arg1 = reinterpret_cast< CollisionBox * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_CollisionBox,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CollisionBox_checkCollision" "', argument " "2"" of type '" "CollisionBox""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CollisionBox_checkCollision" "', argument " "2"" of type '" "CollisionBox""'");
+    } else {
+      CollisionBox * temp = reinterpret_cast< CollisionBox * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  {
+    res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_PositionF,  0  | 0);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "CollisionBox_checkCollision" "', argument " "3"" of type '" "PositionF""'"); 
+    }  
+    if (!argp3) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CollisionBox_checkCollision" "', argument " "3"" of type '" "PositionF""'");
+    } else {
+      PositionF * temp = reinterpret_cast< PositionF * >(argp3);
+      arg3 = *temp;
+      if (SWIG_IsNewObj(res3)) delete temp;
+    }
+  }
+  ecode4 = SWIG_AsVal_bool(obj3, &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "CollisionBox_checkCollision" "', argument " "4"" of type '" "bool""'");
+  } 
+  arg4 = static_cast< bool >(val4);
+  result = (bool)(arg1)->checkCollision(arg2,arg3,arg4);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CollisionBox_checkCollision__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   CollisionBox *arg1 = (CollisionBox *) 0 ;
   SwigValueWrapper< CollisionBox > arg2 ;
@@ -8049,6 +8305,66 @@ SWIGINTERN PyObject *_wrap_CollisionBox_checkCollision(PyObject *SWIGUNUSEDPARM(
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CollisionBox_checkCollision(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[5];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = (int)PyObject_Length(args);
+  for (ii = 0; (ii < argc) && (ii < 4); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 3) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_CollisionBox, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_CollisionBox, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_PositionF, 0);
+        _v = SWIG_CheckState(res);
+        if (_v) {
+          return _wrap_CollisionBox_checkCollision__SWIG_1(self, args);
+        }
+      }
+    }
+  }
+  if (argc == 4) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_CollisionBox, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_CollisionBox, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_PositionF, 0);
+        _v = SWIG_CheckState(res);
+        if (_v) {
+          {
+            int res = SWIG_AsVal_bool(argv[3], NULL);
+            _v = SWIG_CheckState(res);
+          }
+          if (_v) {
+            return _wrap_CollisionBox_checkCollision__SWIG_0(self, args);
+          }
+        }
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number of arguments for overloaded function 'CollisionBox_checkCollision'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    checkCollision(CollisionBox *,CollisionBox,PositionF,bool)\n"
+    "    checkCollision(CollisionBox *,CollisionBox,PositionF)\n");
   return NULL;
 }
 
@@ -8191,7 +8507,10 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Animation_swigregister", Animation_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_CollisionBox", _wrap_new_CollisionBox, METH_VARARGS, NULL},
 	 { (char *)"CollisionBox_getDimensions", _wrap_CollisionBox_getDimensions, METH_VARARGS, NULL},
+	 { (char *)"CollisionBox_generatePoints", _wrap_CollisionBox_generatePoints, METH_VARARGS, NULL},
 	 { (char *)"CollisionBox_setDimensions", _wrap_CollisionBox_setDimensions, METH_VARARGS, NULL},
+	 { (char *)"CollisionBox_checkLine", _wrap_CollisionBox_checkLine, METH_VARARGS, NULL},
+	 { (char *)"CollisionBox_convertToAngle", _wrap_CollisionBox_convertToAngle, METH_VARARGS, NULL},
 	 { (char *)"CollisionBox_getPosition", _wrap_CollisionBox_getPosition, METH_VARARGS, NULL},
 	 { (char *)"CollisionBox_setPosition", _wrap_CollisionBox_setPosition, METH_VARARGS, NULL},
 	 { (char *)"CollisionBox_getRotation", _wrap_CollisionBox_getRotation, METH_VARARGS, NULL},
@@ -8227,6 +8546,7 @@ static swig_type_info _swigt__p_Tile = {"_p_Tile", "Tile *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_aiScene = {"_p_aiScene", "aiScene *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_vectorT_ActorType_t = {"_p_vectorT_ActorType_t", "vector< ActorType > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_vectorT_PositionF_t = {"_p_vectorT_PositionF_t", "vector< PositionF > *", 0, 0, (void*)0, 0};
 
 static swig_type_info *swig_type_initial[] = {
   &_swigt__p_Action,
@@ -8244,6 +8564,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_aiScene,
   &_swigt__p_char,
   &_swigt__p_vectorT_ActorType_t,
+  &_swigt__p_vectorT_PositionF_t,
 };
 
 static swig_cast_info _swigc__p_Action[] = {  {&_swigt__p_Action, 0, 0, 0},{0, 0, 0, 0}};
@@ -8261,6 +8582,7 @@ static swig_cast_info _swigc__p_Tile[] = {  {&_swigt__p_Tile, 0, 0, 0},{0, 0, 0,
 static swig_cast_info _swigc__p_aiScene[] = {  {&_swigt__p_aiScene, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_vectorT_ActorType_t[] = {  {&_swigt__p_vectorT_ActorType_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_vectorT_PositionF_t[] = {  {&_swigt__p_vectorT_PositionF_t, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_Action,
@@ -8278,6 +8600,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_aiScene,
   _swigc__p_char,
   _swigc__p_vectorT_ActorType_t,
+  _swigc__p_vectorT_PositionF_t,
 };
 
 

@@ -54,6 +54,7 @@ loadModel = _Misc.loadModel
 drawNodes = _Misc.drawNodes
 applyMaterial = _Misc.applyMaterial
 bindImage = _Misc.bindImage
+roundDown = _Misc.roundDown
 loadString = _Misc.loadString
 nextSet = _Misc.nextSet
 nextChar = _Misc.nextChar
@@ -92,6 +93,7 @@ STANDING = _Misc.STANDING
 AIMLESS = _Misc.AIMLESS
 TALKING = _Misc.TALKING
 CLICK = _Misc.CLICK
+MOUSEHOLD = _Misc.MOUSEHOLD
 MOUSEMOVE = _Misc.MOUSEMOVE
 KEYPRESS = _Misc.KEYPRESS
 class AnimationSheet(_object):
@@ -214,6 +216,12 @@ class PositionF(_object):
     __swig_setmethods__["Z"] = _Misc.PositionF_Z_set
     __swig_getmethods__["Z"] = _Misc.PositionF_Z_get
     if _newclass:Z = _swig_property(_Misc.PositionF_Z_get, _Misc.PositionF_Z_set)
+    def __add__(*args): return _Misc.PositionF___add__(*args)
+    def __sub__(*args): return _Misc.PositionF___sub__(*args)
+    def __iadd__(*args): return _Misc.PositionF___iadd__(*args)
+    def __isub__(*args): return _Misc.PositionF___isub__(*args)
+    def __div__(*args): return _Misc.PositionF___div__(*args)
+    def dumpString(*args): return _Misc.PositionF_dumpString(*args)
     def __init__(self, *args): 
         this = _Misc.new_PositionF(*args)
         try: self.this.append(this)
@@ -400,6 +408,9 @@ class EventType(_object):
     __swig_setmethods__["Key"] = _Misc.EventType_Key_set
     __swig_getmethods__["Key"] = _Misc.EventType_Key_get
     if _newclass:Key = _swig_property(_Misc.EventType_Key_get, _Misc.EventType_Key_set)
+    __swig_setmethods__["keyDown"] = _Misc.EventType_keyDown_set
+    __swig_getmethods__["keyDown"] = _Misc.EventType_keyDown_get
+    if _newclass:keyDown = _swig_property(_Misc.EventType_keyDown_get, _Misc.EventType_keyDown_set)
     def __init__(self, *args): 
         this = _Misc.new_EventType(*args)
         try: self.this.append(this)
