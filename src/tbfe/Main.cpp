@@ -9,6 +9,7 @@ TBFE::TBFE()
   quit_=false;
   TBFE_Base::MainPlayer=createActor(1000,1000,"Player","Npc");
   addActor(TBFE_Base::MainPlayer);
+  showMouse_=true;
   SDL_GetMouseState(&mousePosition_.X,&mousePosition_.Y);
   mouseMovement_.X=mousePosition_.X;
   mouseMovement_.Y=mousePosition_.Y;
@@ -292,8 +293,13 @@ void TBFE::checkEvents()
       mouseDown_=false;
     };
 };
+bool TBFE::getShowMouse()
+{
+  return showMouse_;
+};
 void TBFE::setShowMouse(bool newState)
 {
+  showMouse_=newState;
   if (newState)
     {
       SDL_ShowCursor(SDL_ENABLE);
@@ -394,7 +400,7 @@ Direction TBFE::runEngine()
       frame_=0;
       return SECOND;
     };
-  if (mousePosition_.X!=TBFE_Base::ScreenDimensions.X/2 || mousePosition_.Y!=TBFE_Base::ScreenDimensions.Y/2)
+  if (!showMouse_ && (mousePosition_.X!=TBFE_Base::ScreenDimensions.X/2 || mousePosition_.Y!=TBFE_Base::ScreenDimensions.Y/2))
     {
       SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
       SDL_WarpMouse(TBFE_Base::ScreenDimensions.X/2,TBFE_Base::ScreenDimensions.Y/2);

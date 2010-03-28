@@ -37,24 +37,22 @@ class Console:
         self.window.getElement("txtData").setProperty("text",consoleText)
         self.window.getElement("txtData").reload()
 def mouseCamera(MouseMovement):
-    Position=engine.getCameraAngle()
-    Position.X-=MouseMovement.Y/3
-    Position.Y-=MouseMovement.X/3
-    if Position.Y>180:
-        Position.Y=180
-    if Position.Y<0:
-        Position.Y=0
-    if Position.X>90:
-        Position.X=90
-    if Position.X<0:
-        Position.X=0
-    engine.setCameraAngle(Position.X,Position.Y,Position.Z)
+    if engine.getShowMouse()!=True:
+        Rotation=Tbfe.GetMainPlayer().getRotationF()
+        Rotation.Y-=MouseMovement.X
+        Tbfe.GetMainPlayer().setRotationF(Rotation.X,Rotation.Y,Rotation.Z)
+        Position=engine.getCameraAngle()
+        Position.X-=MouseMovement.Y
+        if Position.X<0:
+            Position.X=0
+        if Position.X>90:
+            Position.X=90
+        engine.setCameraAngle(Position.X,Position.Y,Position.Z)
 def switchMouseCamera():
-    cameraEvent=engine.getEvent("MouseCamera")
-    if cameraEvent.Enabled:
-        cameraEvent.Enabled=False
+    if engine.getShowMouse():
+        engine.setShowMouse(False)
     else:
-        cameraEvent.Enabled=True
+        engine.setShowMouse(True)
 def house(newHouse):
     Body=Actor.Animation("house.dae","0,",0,0.01,1,True)
     Walk=Actor.Action("Walk","")
@@ -66,36 +64,35 @@ Tbfe.cvar.ScreenDimensions.Y=600
 engine=Tbfe.TBFE()
 Tbfe.GetMainPlayer().setPosition(100,0,400)
 engine.changeMap("test.fmm")
-print("test")
 Tbfe.cvar.CurrentMap.generateMap(25,25)
 engine.initMap()
-Tbfe.cvar.MainConsole.write("test\nbob")
 UI.loadWindows("Data/Types/Window.cfg")
 uiConsole=Console(Tbfe.cvar.MainConsole,engine)
 engine.addWindow(uiConsole.getWindow())
-uiMousePosition=UI.createWindow(0,800,"FrameRate")
+uiMousePosition=UI.createWindow(0,400,"FrameRate")
 engine.addWindow(uiMousePosition)
-uiFrameRate=UI.createWindow(0,700,"FrameRate")
+uiFrameRate=UI.createWindow(0,500,"FrameRate")
 engine.addWindow(uiFrameRate)
 engine.setShowMouse(True)
 action=5
 i=0
 randomNpc=Actor.createActor(500,200,"Npc","Npc")
 Tbfe.GetMainPlayer().setRotationF(0,180,0)
-#housing=Actor.createActor(0,0,"Npc","Npc")
-#house(housing)
-#engine.addActor(housing)
-engine.addActor(randomNpc)
+housing=Actor.createActor(0,0,"Npc","Npc")
+house(housing)
+engine.addActor(housing)
+#engine.addActor(randomNpc)
 engine.addGlobalEvent("MouseCamera",Misc.MOUSEMOVE,0,"mouseCamera(mouseMovement)")
 engine.addGlobalEvent("SwitchMouseControl",Misc.KEYPRESS,306,"switchMouseCamera()")
-engine.setShowMouse(True)
+engine.setShowMouse(False)
+engine.setCameraAngle(0,90,0)
 while action!=Misc.QUIT:
     uiConsole.refreshWindow()
     action=engine.runEngine()
     mousePosition=engine.getMousePosition()
     uiMousePosition.getElement("lblRate").setProperty("text",('%i,%i' % (mousePosition.X,mousePosition.Y)))
     uiMousePosition.getElement("lblRate").reload()
-    uiFrameRate.getElement("lblRate").setProperty("text",('%f' % (Tbfe.GetMainPlayer().getRotationF().Y)))
+    uiFrameRate.getElement("lblRate").setProperty("text",('%f' % (60/Tbfe.cvar.GameSpeed)))
     uiFrameRate.getElement("lblRate").reload()
     Tbfe.GetMainPlayer().setRotationF(0,Tbfe.GetMainPlayer().getRotationF().Y,0)
     i+=1

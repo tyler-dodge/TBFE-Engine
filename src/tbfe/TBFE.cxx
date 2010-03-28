@@ -4025,6 +4025,28 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_TBFE_getShowMouse(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  TBFE *arg1 = (TBFE *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:TBFE_getShowMouse",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TBFE, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TBFE_getShowMouse" "', argument " "1"" of type '" "TBFE *""'"); 
+  }
+  arg1 = reinterpret_cast< TBFE * >(argp1);
+  result = (bool)(arg1)->getShowMouse();
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_TBFE_setCameraAngle(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   TBFE *arg1 = (TBFE *) 0 ;
@@ -5473,6 +5495,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"TBFE_getMousePosition", _wrap_TBFE_getMousePosition, METH_VARARGS, NULL},
 	 { (char *)"TBFE_getCameraAngle", _wrap_TBFE_getCameraAngle, METH_VARARGS, NULL},
 	 { (char *)"TBFE_setShowMouse", _wrap_TBFE_setShowMouse, METH_VARARGS, NULL},
+	 { (char *)"TBFE_getShowMouse", _wrap_TBFE_getShowMouse, METH_VARARGS, NULL},
 	 { (char *)"TBFE_setCameraAngle", _wrap_TBFE_setCameraAngle, METH_VARARGS, NULL},
 	 { (char *)"TBFE_addGlobalEvent", _wrap_TBFE_addGlobalEvent, METH_VARARGS, NULL},
 	 { (char *)"delete_TBFE", _wrap_delete_TBFE, METH_VARARGS, NULL},

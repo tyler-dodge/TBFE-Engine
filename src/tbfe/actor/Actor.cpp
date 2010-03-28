@@ -50,9 +50,33 @@ CollisionBox Actor::getCollisionBox(int num)
 };
 void Actor::setRotationF(float x,float y, float z)
 {
+  PositionF oldRotation=rotation_;
   rotation_.X=x;
   rotation_.Y=y;
   rotation_.Z=z;
+  vector<CollidedTile> collisionTest=TBFE_Base::CurrentMap.collisionTest((int)position_.X,
+									 (int)position_.Y);
+  if (collisionTest.size()>0)
+    {
+      for (int i=0;i<collisionTest.size();i++)
+	{
+	  bool AdvancedCollision=false;
+	  if (AdvancedCollision)
+	    {
+	      switch(collisionTest.at(i).Passability)
+		{
+		case 255:
+		  rotation_=oldRotation;
+		  break;
+		};
+	    };
+	};
+    };
+  int ncollisionTest=checkActorCollision(position_.X,position_.Y,position_.Z);
+  if (ncollisionTest!=-1)
+    {
+      rotation_=oldRotation;
+    };
 };
 string Actor::getProperty(string propertyName)
 {

@@ -93,6 +93,7 @@ class TBFE(_object):
     def getMousePosition(*args): return _TBFE.TBFE_getMousePosition(*args)
     def getCameraAngle(*args): return _TBFE.TBFE_getCameraAngle(*args)
     def setShowMouse(*args): return _TBFE.TBFE_setShowMouse(*args)
+    def getShowMouse(*args): return _TBFE.TBFE_getShowMouse(*args)
     def setCameraAngle(*args): return _TBFE.TBFE_setCameraAngle(*args)
     def addGlobalEvent(*args): return _TBFE.TBFE_addGlobalEvent(*args)
     __swig_destroy__ = _TBFE.delete_TBFE

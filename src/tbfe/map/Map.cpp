@@ -86,6 +86,7 @@ bool Map::dumpMap(string filename)
 vector<CollidedTile> Map::collisionTest(int x,int y)
 {
   vector<CollidedTile> tiles;
+  tiles.clear();
   CollidedTile newTile;
   int tile;
   if ((tile=getTile(x/100,y/100,0).Passability)!=0)
@@ -143,7 +144,7 @@ Position Map::getDimensions()
 };
 Tile Map::getTile(int x,int y, int Layer)
 {
-  if (layers_.size()<Layer)
+  if (layers_.size()<=Layer)
     {
       Tile blankTile;
       return blankTile;

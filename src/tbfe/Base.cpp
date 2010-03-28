@@ -124,7 +124,7 @@ namespace TBFE_Base
 	      {
 		AnimationSheets.at(i).Texture=bindImage(AnimationSheets.at(i).Data);
 	      };
-	    return AnimationSheets.at(0).Texture;
+	    return AnimationSheets.at(i).Texture;
 	  };
       };
     AnimationSheet tempSheet;

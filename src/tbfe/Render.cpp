@@ -137,13 +137,15 @@ void TBFE_Render::finalRender(bool doFlip)
   glTranslatef(-TBFE_Base::MainPlayer->getPositionF().X/20,0,-TBFE_Base::MainPlayer->getPositionF().Z/20);
   renderActors();
   renderMapLayer(0,0,0);
-  renderWindowList();
+  // renderWindowList();
   SDL_GL_SwapBuffers();
   TBFE_Base::DeleteTempSheets();
   int Error=glGetError();
   if(Error != GL_NO_ERROR )
     {
-      TBFE_Base::MainConsole.write("OpenGl failed to load");
+      stringstream errorString;
+      errorString << "OpenGl eror:" << hex << Error << dec;
+      TBFE_Base::MainConsole.write(errorString.str());
     }
 };
 PositionF TBFE_Render::getCameraAngle()

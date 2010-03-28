@@ -51,7 +51,6 @@ GLuint bindImage(SDL_Surface * textureSource)
     };
   glGenTextures(1,&texture);
   glBindTexture(GL_TEXTURE_2D,texture);
-  glActiveTexture(texture);
   glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
   glTexImage2D(GL_TEXTURE_2D,0,colors,textureSource->w,textureSource->h,0,format,
@@ -74,8 +73,8 @@ void applyImage(int x,int y,SDL_Surface* source, SDL_Rect* clip)
     glOrtho(0,TBFE_Base::ScreenDimensions.X,TBFE_Base::ScreenDimensions.Y,0,1,10);
     glMatrixMode(GL_MODELVIEW);
     {
-      glLoadIdentity();
       glPushMatrix();
+      glLoadIdentity();
       glTranslatef(x,y,-2);
       Position dimensions;
       PositionF start;
@@ -104,7 +103,6 @@ void applyImage(int x,int y,SDL_Surface* source, SDL_Rect* clip)
 	  GLuint texture=TBFE_Base::GetTexture(source);
 	  glEnable(GL_TEXTURE_2D);
 	  glBindTexture(GL_TEXTURE_2D,texture);
-	  glDisable(GL_DEPTH_TEST);
 	  glDisable(GL_LIGHTING);
 	  glBegin(GL_QUADS);
 	  glTexCoord2f(start.X,start.Y);glVertex3f(0,0,0);
@@ -114,7 +112,6 @@ void applyImage(int x,int y,SDL_Surface* source, SDL_Rect* clip)
 	  glEnd();
 	  glDisable(GL_TEXTURE_2D);
 	  glEnable(GL_LIGHTING);
-	  glEnable(GL_DEPTH_TEST);
 	};
       glPopMatrix();
     };
@@ -126,7 +123,7 @@ void applyImage(int x,int y,SDL_Surface* source, SDL_Rect* clip)
 aiScene * loadModel(string model)
 {
   Assimp::Importer importer;
-  const aiScene * test=importer.ReadFile(model.c_str(),aiProcess_CalcTangentSpace | aiProcess_JoinIdenticalVertices | aiProcess_Triangulate);
+  const aiScene * test=importer.ReadFile(model.c_str(),aiProcess_CalcTangentSpace | aiProcess_JoinIdenticalVertices);
   aiScene * newModel=importer.GetOrphanedScene();
   return newModel;
 };
@@ -220,9 +217,19 @@ void applyMaterial(const struct aiMaterial *mtl)
 	if((AI_SUCCESS == aiGetMaterialIntegerArray(mtl, AI_MATKEY_TWOSIDED, &two_sided, (unsigned int *)&max)) && two_sided)
 		glEnable(GL_CULL_FACE);
 	else 
-		glDisable(GL_CULL_FACE);
-	
-}
+	  glDisable(GL_CULL_FACE);
+	    if (mtl->GetTextureCount(aiTextureType_DIFFUSE))
+	      {
+		aiString newString;
+		mtl->GetTexture(aiTextureType_DIFFUSE,0,&newString,NULL,NULL,NULL,NULL,NULL);
+		glBindTexture(GL_TEXTURE_2D,TBFE_Base::GetTexture(TBFE_Base::CheckSheets(newString.data)));      
+		glEnable(GL_TEXTURE_2D);
+  	      }
+	    else
+	      {
+		glDisable(GL_TEXTURE_2D);
+	      };
+};
 void drawNodes( aiScene * scene, aiNode * currentNode, aiVector3D position,aiVector3D rotation, aiVector3D scale)
 {
   if (currentNode==NULL || scene==NULL)
@@ -249,19 +256,27 @@ void drawNodes( aiScene * scene, aiNode * currentNode, aiVector3D position,aiVec
       glEnableClientState(GL_TEXTURE_COORD_ARRAY);
       glVertexPointer(3,GL_FLOAT,0,currentMesh->mVertices);
       glNormalPointer(GL_FLOAT,0,currentMesh->mNormals);
-      glTexCoordPointer(2,GL_FLOAT,0,currentMesh->mTextureCoords);
+      glTexCoordPointer(3,GL_FLOAT,0,currentMesh->mTextureCoords);
+      glDisable(GL_TEXTURE_2D);
       applyMaterial(scene->mMaterials[currentMesh->mMaterialIndex]);
+      glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
+      glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
       for (int face=0;face<currentMesh->mNumFaces;face++)
 	{
 	  for (int indice=0;indice<3;indice++)
 	    {
 	      indices.push_back(currentMesh->mFaces[face].mIndices[indice]);
+	      if (currentMesh->mTextureCoords!=NULL)
+		{
+		  cout << currentMesh->mTextureCoords[0]->y << '\n';
+		};
 	    };
 	};
       glDrawElements(GL_TRIANGLES,indices.size(),GL_UNSIGNED_INT,&indices[0]);
       glDisableClientState(GL_TEXTURE_COORD_ARRAY);
       glDisableClientState(GL_NORMAL_ARRAY);
       glDisableClientState(GL_VERTEX_ARRAY);
+      glDisable(GL_TEXTURE_2D);
     };
   for (int i=0;i<currentNode->mNumChildren;i++)
     {

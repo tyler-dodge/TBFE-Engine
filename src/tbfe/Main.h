@@ -21,6 +21,7 @@ class TBFE
  private:
   float frame_;  
   bool mouseDown_;
+  bool showMouse_;
   bool quit_;
   Timer frameRate_;
   Position mouseMovement_;
@@ -48,6 +49,7 @@ class TBFE
   Position getMousePosition();
   PositionF getCameraAngle();
   void setShowMouse(bool);
+  bool getShowMouse();
   void setCameraAngle(float,float,float);
   void addGlobalEvent(std::string,Event, int,std::string);
   ~TBFE();
