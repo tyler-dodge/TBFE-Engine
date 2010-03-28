@@ -60,7 +60,7 @@ namespace TBFE_Base
   {
     CollisionTile=newTile;
   };
-  aiScene * CheckModels(string source)
+  ModelData * CheckModels(string source)
   {
     for (int i=0;i<ModelList.size();i++)
       {

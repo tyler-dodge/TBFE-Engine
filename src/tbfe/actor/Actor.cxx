@@ -2508,12 +2508,12 @@ SWIG_Python_MustGetPtr(PyObject *obj, swig_type_info *ty, int argnum, int flags)
 #define SWIGTYPE_p_Building swig_types[4]
 #define SWIGTYPE_p_CollisionBox swig_types[5]
 #define SWIGTYPE_p_Inventory swig_types[6]
-#define SWIGTYPE_p_NonLiving swig_types[7]
-#define SWIGTYPE_p_Npc swig_types[8]
-#define SWIGTYPE_p_Position swig_types[9]
-#define SWIGTYPE_p_PositionF swig_types[10]
-#define SWIGTYPE_p_Tile swig_types[11]
-#define SWIGTYPE_p_aiScene swig_types[12]
+#define SWIGTYPE_p_ModelData swig_types[7]
+#define SWIGTYPE_p_NonLiving swig_types[8]
+#define SWIGTYPE_p_Npc swig_types[9]
+#define SWIGTYPE_p_Position swig_types[10]
+#define SWIGTYPE_p_PositionF swig_types[11]
+#define SWIGTYPE_p_Tile swig_types[12]
 #define SWIGTYPE_p_char swig_types[13]
 #define SWIGTYPE_p_vectorT_ActorType_t swig_types[14]
 #define SWIGTYPE_p_vectorT_PositionF_t swig_types[15]
@@ -7182,7 +7182,7 @@ SWIGINTERN PyObject *_wrap_Animation_getModel(PyObject *SWIGUNUSEDPARM(self), Py
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  aiScene *result = 0 ;
+  ModelData *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Animation_getModel",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Animation, 0 |  0 );
@@ -7190,8 +7190,8 @@ SWIGINTERN PyObject *_wrap_Animation_getModel(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Animation_getModel" "', argument " "1"" of type '" "Animation *""'"); 
   }
   arg1 = reinterpret_cast< Animation * >(argp1);
-  result = (aiScene *)(arg1)->getModel();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_aiScene, 0 |  0 );
+  result = (ModelData *)(arg1)->getModel();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_ModelData, 0 |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -8538,12 +8538,12 @@ static swig_type_info _swigt__p_Animation = {"_p_Animation", "Animation *", 0, 0
 static swig_type_info _swigt__p_Building = {"_p_Building", "Building *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_CollisionBox = {"_p_CollisionBox", "CollisionBox *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Inventory = {"_p_Inventory", "Inventory *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_ModelData = {"_p_ModelData", "ModelData *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_NonLiving = {"_p_NonLiving", "NonLiving *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Npc = {"_p_Npc", "Npc *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Position = {"_p_Position", "Position *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_PositionF = {"_p_PositionF", "PositionF *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Tile = {"_p_Tile", "Tile *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_aiScene = {"_p_aiScene", "aiScene *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_vectorT_ActorType_t = {"_p_vectorT_ActorType_t", "vector< ActorType > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_vectorT_PositionF_t = {"_p_vectorT_PositionF_t", "vector< PositionF > *", 0, 0, (void*)0, 0};
@@ -8556,12 +8556,12 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_Building,
   &_swigt__p_CollisionBox,
   &_swigt__p_Inventory,
+  &_swigt__p_ModelData,
   &_swigt__p_NonLiving,
   &_swigt__p_Npc,
   &_swigt__p_Position,
   &_swigt__p_PositionF,
   &_swigt__p_Tile,
-  &_swigt__p_aiScene,
   &_swigt__p_char,
   &_swigt__p_vectorT_ActorType_t,
   &_swigt__p_vectorT_PositionF_t,
@@ -8574,12 +8574,12 @@ static swig_cast_info _swigc__p_Animation[] = {  {&_swigt__p_Animation, 0, 0, 0}
 static swig_cast_info _swigc__p_Building[] = {  {&_swigt__p_Building, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CollisionBox[] = {  {&_swigt__p_CollisionBox, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Inventory[] = {  {&_swigt__p_Inventory, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_ModelData[] = {  {&_swigt__p_ModelData, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_NonLiving[] = {  {&_swigt__p_NonLiving, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Npc[] = {  {&_swigt__p_Npc, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Position[] = {  {&_swigt__p_Position, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_PositionF[] = {  {&_swigt__p_PositionF, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Tile[] = {  {&_swigt__p_Tile, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_aiScene[] = {  {&_swigt__p_aiScene, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_vectorT_ActorType_t[] = {  {&_swigt__p_vectorT_ActorType_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_vectorT_PositionF_t[] = {  {&_swigt__p_vectorT_PositionF_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -8592,12 +8592,12 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_Building,
   _swigc__p_CollisionBox,
   _swigc__p_Inventory,
+  _swigc__p_ModelData,
   _swigc__p_NonLiving,
   _swigc__p_Npc,
   _swigc__p_Position,
   _swigc__p_PositionF,
   _swigc__p_Tile,
-  _swigc__p_aiScene,
   _swigc__p_char,
   _swigc__p_vectorT_ActorType_t,
   _swigc__p_vectorT_PositionF_t,

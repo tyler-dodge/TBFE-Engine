@@ -147,6 +147,10 @@ Tile Map::getTile(int x,int y, int Layer)
   if (layers_.size()<=Layer)
     {
       Tile blankTile;
+      blankTile.Type=(TileType)0;
+      blankTile.TileSet=0;
+      blankTile.Passability=0;
+      blankTile.isChanged=false;
       return blankTile;
     };
   return layers_.at(Layer).getTile(x,y);

@@ -2508,19 +2508,19 @@ SWIG_Python_MustGetPtr(PyObject *obj, swig_type_info *ty, int argnum, int flags)
 #define SWIGTYPE_p_EventType swig_types[4]
 #define SWIGTYPE_p_GLuint swig_types[5]
 #define SWIGTYPE_p_Map swig_types[6]
-#define SWIGTYPE_p_NonLiving swig_types[7]
-#define SWIGTYPE_p_Npc swig_types[8]
-#define SWIGTYPE_p_Position swig_types[9]
-#define SWIGTYPE_p_PositionF swig_types[10]
-#define SWIGTYPE_p_SDL_Event swig_types[11]
-#define SWIGTYPE_p_SDL_Surface swig_types[12]
-#define SWIGTYPE_p_SunVector swig_types[13]
-#define SWIGTYPE_p_TBFE swig_types[14]
-#define SWIGTYPE_p_TBFE_Logic swig_types[15]
-#define SWIGTYPE_p_TBFE_Render swig_types[16]
-#define SWIGTYPE_p_TTF_Font swig_types[17]
-#define SWIGTYPE_p_Window swig_types[18]
-#define SWIGTYPE_p_aiScene swig_types[19]
+#define SWIGTYPE_p_ModelData swig_types[7]
+#define SWIGTYPE_p_NonLiving swig_types[8]
+#define SWIGTYPE_p_Npc swig_types[9]
+#define SWIGTYPE_p_Position swig_types[10]
+#define SWIGTYPE_p_PositionF swig_types[11]
+#define SWIGTYPE_p_SDL_Event swig_types[12]
+#define SWIGTYPE_p_SDL_Surface swig_types[13]
+#define SWIGTYPE_p_SunVector swig_types[14]
+#define SWIGTYPE_p_TBFE swig_types[15]
+#define SWIGTYPE_p_TBFE_Logic swig_types[16]
+#define SWIGTYPE_p_TBFE_Render swig_types[17]
+#define SWIGTYPE_p_TTF_Font swig_types[18]
+#define SWIGTYPE_p_Window swig_types[19]
 #define SWIGTYPE_p_char swig_types[20]
 #define SWIGTYPE_p_vectorT_Actor_p_t swig_types[21]
 #define SWIGTYPE_p_vectorT_Window_p_t swig_types[22]
@@ -3297,7 +3297,7 @@ SWIGINTERN PyObject *_wrap_CheckModels(PyObject *SWIGUNUSEDPARM(self), PyObject 
   PyObject *resultobj = 0;
   std::string arg1 ;
   PyObject * obj0 = 0 ;
-  aiScene *result = 0 ;
+  ModelData *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:CheckModels",&obj0)) SWIG_fail;
   {
@@ -3309,8 +3309,8 @@ SWIGINTERN PyObject *_wrap_CheckModels(PyObject *SWIGUNUSEDPARM(self), PyObject 
     arg1 = *ptr;
     if (SWIG_IsNewObj(res)) delete ptr;
   }
-  result = (aiScene *)TBFE_Base::CheckModels(arg1);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_aiScene, 0 |  0 );
+  result = (ModelData *)TBFE_Base::CheckModels(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_ModelData, 0 |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -5569,6 +5569,7 @@ static swig_type_info _swigt__p_Element = {"_p_Element", "Element *", 0, 0, (voi
 static swig_type_info _swigt__p_EventType = {"_p_EventType", "EventType *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GLuint = {"_p_GLuint", "GLuint *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Map = {"_p_Map", "Map *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_ModelData = {"_p_ModelData", "ModelData *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Position = {"_p_Position", "Position *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_PositionF = {"_p_PositionF", "PositionF *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_SDL_Event = {"_p_SDL_Event", "SDL_Event *", 0, 0, (void*)0, 0};
@@ -5579,7 +5580,6 @@ static swig_type_info _swigt__p_TBFE_Logic = {"_p_TBFE_Logic", "TBFE_Logic *", 0
 static swig_type_info _swigt__p_TBFE_Render = {"_p_TBFE_Render", "TBFE_Render *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_TTF_Font = {"_p_TTF_Font", "TTF_Font *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Window = {"_p_Window", "Window *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_aiScene = {"_p_aiScene", "aiScene *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_vectorT_Actor_p_t = {"_p_vectorT_Actor_p_t", "vector< Actor * > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_vectorT_Window_p_t = {"_p_vectorT_Window_p_t", "vector< Window * > *", 0, 0, (void*)0, 0};
@@ -5592,6 +5592,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_EventType,
   &_swigt__p_GLuint,
   &_swigt__p_Map,
+  &_swigt__p_ModelData,
   &_swigt__p_NonLiving,
   &_swigt__p_Npc,
   &_swigt__p_Position,
@@ -5604,7 +5605,6 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_TBFE_Render,
   &_swigt__p_TTF_Font,
   &_swigt__p_Window,
-  &_swigt__p_aiScene,
   &_swigt__p_char,
   &_swigt__p_vectorT_Actor_p_t,
   &_swigt__p_vectorT_Window_p_t,
@@ -5619,6 +5619,7 @@ static swig_cast_info _swigc__p_Element[] = {  {&_swigt__p_Element, 0, 0, 0},{0,
 static swig_cast_info _swigc__p_EventType[] = {  {&_swigt__p_EventType, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GLuint[] = {  {&_swigt__p_GLuint, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Map[] = {  {&_swigt__p_Map, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_ModelData[] = {  {&_swigt__p_ModelData, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Position[] = {  {&_swigt__p_Position, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_PositionF[] = {  {&_swigt__p_PositionF, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_SDL_Event[] = {  {&_swigt__p_SDL_Event, 0, 0, 0},{0, 0, 0, 0}};
@@ -5629,7 +5630,6 @@ static swig_cast_info _swigc__p_TBFE_Logic[] = {  {&_swigt__p_TBFE_Logic, 0, 0, 
 static swig_cast_info _swigc__p_TBFE_Render[] = {  {&_swigt__p_TBFE_Render, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_TTF_Font[] = {  {&_swigt__p_TTF_Font, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Window[] = {  {&_swigt__p_Window, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_aiScene[] = {  {&_swigt__p_aiScene, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_vectorT_Actor_p_t[] = {  {&_swigt__p_vectorT_Actor_p_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_vectorT_Window_p_t[] = {  {&_swigt__p_vectorT_Window_p_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -5642,6 +5642,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_EventType,
   _swigc__p_GLuint,
   _swigc__p_Map,
+  _swigc__p_ModelData,
   _swigc__p_NonLiving,
   _swigc__p_Npc,
   _swigc__p_Position,
@@ -5654,7 +5655,6 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_TBFE_Render,
   _swigc__p_TTF_Font,
   _swigc__p_Window,
-  _swigc__p_aiScene,
   _swigc__p_char,
   _swigc__p_vectorT_Actor_p_t,
   _swigc__p_vectorT_Window_p_t,

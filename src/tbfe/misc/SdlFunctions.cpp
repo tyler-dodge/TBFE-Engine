@@ -28,6 +28,10 @@ SDL_Surface *loadImage(std::string filename,bool UseA)
 };
 GLuint bindImage(SDL_Surface * textureSource)
 {
+  if (textureSource==NULL)
+    {
+      return 0;
+    };
   GLuint texture;
   GLint colors;
   GLenum format;
@@ -120,12 +124,43 @@ void applyImage(int x,int y,SDL_Surface* source, SDL_Rect* clip)
   glPopMatrix();
   glMatrixMode(GL_MODELVIEW);
 };
-aiScene * loadModel(string model)
+ModelData * loadModel(string model)
 {
   Assimp::Importer importer;
-  const aiScene * test=importer.ReadFile(model.c_str(),aiProcess_CalcTangentSpace | aiProcess_JoinIdenticalVertices);
-  aiScene * newModel=importer.GetOrphanedScene();
-  return newModel;
+  const aiScene * loadScene=importer.ReadFile(model.c_str(),aiProcess_CalcTangentSpace | aiProcess_JoinIdenticalVertices);
+  aiScene * scene=importer.GetOrphanedScene();
+  ModelData * data=new ModelData();
+  for (int i=0;i<scene->mNumMaterials;i++)
+    {
+      data->materials.push_back(scene->mMaterials[i]);
+    };
+  for (int i=0;i<scene->mNumMeshes;i++)
+    {
+      aiMesh * currentMesh=scene->mMeshes[0];
+      MeshData * newMesh=new MeshData();
+      for (int face=0;face<currentMesh->mNumFaces;face++)
+	{
+	  newMesh->indices.push_back(currentMesh->mFaces[face].mIndices[0]);
+	  newMesh->indices.push_back(currentMesh->mFaces[face].mIndices[1]);
+	  newMesh->indices.push_back(currentMesh->mFaces[face].mIndices[2]);
+	};
+      for (int i=0;i<currentMesh->mNumVertices;i++)
+	{
+	  newMesh->vertices.push_back(currentMesh->mVertices[i].x);
+	  newMesh->vertices.push_back(currentMesh->mVertices[i].y);
+	  newMesh->vertices.push_back(currentMesh->mVertices[i].z);
+	  if (currentMesh->HasTextureCoords(0))
+	    {
+	      //newMesh->texCoords.push_back(currentMesh->mTextureCoords[i]->x);
+	      //newMesh->texCoords.push_back(currentMesh->mTextureCoords[i]->y);
+	    };
+	  newMesh->normals.push_back(currentMesh->mNormals[i].x);
+	  newMesh->normals.push_back(currentMesh->mNormals[i].y);
+	  newMesh->normals.push_back(currentMesh->mNormals[i].z);
+	};
+      data->meshes.push_back(newMesh);
+    };
+  return data;
 };
 Uint32 getPixel( SDL_Surface *surface, int x, int y )
 {
@@ -230,63 +265,34 @@ void applyMaterial(const struct aiMaterial *mtl)
 		glDisable(GL_TEXTURE_2D);
 	      };
 };
-void drawNodes( aiScene * scene, aiNode * currentNode, aiVector3D position,aiVector3D rotation, aiVector3D scale)
+void drawNodes(ModelData * model, aiVector3D position,aiVector3D rotation, aiVector3D scale)
 {
-  if (currentNode==NULL || scene==NULL)
-    {
-      return;
-    };
-  if (currentNode==scene->mRootNode)
-    {
-      glPushMatrix();
-      //glTranslatef(position[0],position[1],-position[2]);
-      glTranslatef(position[0],position[1],position[2]);
-      glRotatef(rotation[1],0,1,0);
-      glRotatef(rotation[0],1,0,0);
-      glRotatef(rotation[2],0,0,1);
-    };
   glPushMatrix();
-  for (int i=0;i<currentNode->mNumMeshes;i++)
+  //glTranslatef(position[0],position[1],-position[2]);
+  glTranslatef(position[0],position[1],position[2]);
+  glRotatef(rotation[1],0,1,0);
+  glRotatef(rotation[0],1,0,0);
+  glRotatef(rotation[2],0,0,1);
+  for (int i=0;i<model->meshes.size();i++)
     {
-      vector<GLuint> indices;
-      indices.resize(0);
-      aiMesh * currentMesh=scene->mMeshes[currentNode->mMeshes[i]];
+      MeshData * currentMesh=model->meshes.at(i);
       glEnableClientState(GL_VERTEX_ARRAY);
       glEnableClientState(GL_NORMAL_ARRAY);
       glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-      glVertexPointer(3,GL_FLOAT,0,currentMesh->mVertices);
-      glNormalPointer(GL_FLOAT,0,currentMesh->mNormals);
-      glTexCoordPointer(3,GL_FLOAT,0,currentMesh->mTextureCoords);
+      glVertexPointer(3,GL_FLOAT,0,&currentMesh->vertices[0]);
+      glNormalPointer(GL_FLOAT,0,&currentMesh->normals[0]);
+      glTexCoordPointer(3,GL_FLOAT,sizeof(aiVector3D),&currentMesh->texCoords[0]);
       glDisable(GL_TEXTURE_2D);
-      applyMaterial(scene->mMaterials[currentMesh->mMaterialIndex]);
+      applyMaterial(model->materials[currentMesh->material]);
       glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
       glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
-      for (int face=0;face<currentMesh->mNumFaces;face++)
-	{
-	  for (int indice=0;indice<3;indice++)
-	    {
-	      indices.push_back(currentMesh->mFaces[face].mIndices[indice]);
-	      if (currentMesh->mTextureCoords!=NULL)
-		{
-		  cout << currentMesh->mTextureCoords[0]->y << '\n';
-		};
-	    };
-	};
-      glDrawElements(GL_TRIANGLES,indices.size(),GL_UNSIGNED_INT,&indices[0]);
+      glDrawElements(GL_TRIANGLES,currentMesh->indices.size(),GL_UNSIGNED_INT,&currentMesh->indices[0]);
       glDisableClientState(GL_TEXTURE_COORD_ARRAY);
       glDisableClientState(GL_NORMAL_ARRAY);
       glDisableClientState(GL_VERTEX_ARRAY);
       glDisable(GL_TEXTURE_2D);
     };
-  for (int i=0;i<currentNode->mNumChildren;i++)
-    {
-      drawNodes(scene,currentNode->mChildren[i],position,rotation,scale);
-    };
   glPopMatrix();
-  if (currentNode==scene->mRootNode)
-    {
-      glPopMatrix();
-    };
 };
 
 float roundDown(float num,int place)

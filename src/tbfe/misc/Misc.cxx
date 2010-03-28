@@ -2508,31 +2508,32 @@ SWIG_Python_MustGetPtr(PyObject *obj, swig_type_info *ty, int argnum, int flags)
 #define SWIGTYPE_p_ElementList swig_types[4]
 #define SWIGTYPE_p_EventType swig_types[5]
 #define SWIGTYPE_p_GLuint swig_types[6]
-#define SWIGTYPE_p_Model swig_types[7]
-#define SWIGTYPE_p_ModelData swig_types[8]
-#define SWIGTYPE_p_Position swig_types[9]
-#define SWIGTYPE_p_PositionF swig_types[10]
-#define SWIGTYPE_p_Property swig_types[11]
-#define SWIGTYPE_p_SDL_Rect swig_types[12]
-#define SWIGTYPE_p_SDL_Surface swig_types[13]
-#define SWIGTYPE_p_Tile swig_types[14]
-#define SWIGTYPE_p_TileSheet swig_types[15]
-#define SWIGTYPE_p_Timer swig_types[16]
-#define SWIGTYPE_p_Uint32 swig_types[17]
-#define SWIGTYPE_p_Window swig_types[18]
-#define SWIGTYPE_p_WindowType swig_types[19]
-#define SWIGTYPE_p_aiMaterial swig_types[20]
-#define SWIGTYPE_p_aiNode swig_types[21]
-#define SWIGTYPE_p_aiScene swig_types[22]
-#define SWIGTYPE_p_aiVector3D swig_types[23]
-#define SWIGTYPE_p_char swig_types[24]
-#define SWIGTYPE_p_ifstream swig_types[25]
-#define SWIGTYPE_p_std__string swig_types[26]
-#define SWIGTYPE_p_vectorT_ElementList_t swig_types[27]
-#define SWIGTYPE_p_vectorT_GLfloat_t swig_types[28]
-#define SWIGTYPE_p_vectorT_GLuint_t swig_types[29]
-static swig_type_info *swig_types[31];
-static swig_module_info swig_module = {swig_types, 30, 0, 0, 0, 0};
+#define SWIGTYPE_p_MeshData swig_types[7]
+#define SWIGTYPE_p_Model swig_types[8]
+#define SWIGTYPE_p_ModelData swig_types[9]
+#define SWIGTYPE_p_Position swig_types[10]
+#define SWIGTYPE_p_PositionF swig_types[11]
+#define SWIGTYPE_p_Property swig_types[12]
+#define SWIGTYPE_p_SDL_Rect swig_types[13]
+#define SWIGTYPE_p_SDL_Surface swig_types[14]
+#define SWIGTYPE_p_Tile swig_types[15]
+#define SWIGTYPE_p_TileSheet swig_types[16]
+#define SWIGTYPE_p_Timer swig_types[17]
+#define SWIGTYPE_p_Uint32 swig_types[18]
+#define SWIGTYPE_p_Window swig_types[19]
+#define SWIGTYPE_p_WindowType swig_types[20]
+#define SWIGTYPE_p_aiMaterial swig_types[21]
+#define SWIGTYPE_p_aiVector3D swig_types[22]
+#define SWIGTYPE_p_char swig_types[23]
+#define SWIGTYPE_p_ifstream swig_types[24]
+#define SWIGTYPE_p_std__string swig_types[25]
+#define SWIGTYPE_p_vectorT_ElementList_t swig_types[26]
+#define SWIGTYPE_p_vectorT_GLfloat_t swig_types[27]
+#define SWIGTYPE_p_vectorT_GLuint_t swig_types[28]
+#define SWIGTYPE_p_vectorT_MeshData_p_t swig_types[29]
+#define SWIGTYPE_p_vectorT_aiMaterial_p_t swig_types[30]
+static swig_type_info *swig_types[32];
+static swig_module_info swig_module = {swig_types, 31, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -3200,7 +3201,7 @@ SWIGINTERN PyObject *_wrap_loadModel(PyObject *SWIGUNUSEDPARM(self), PyObject *a
   PyObject *resultobj = 0;
   std::string arg1 ;
   PyObject * obj0 = 0 ;
-  aiScene *result = 0 ;
+  ModelData *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:loadModel",&obj0)) SWIG_fail;
   {
@@ -3212,8 +3213,8 @@ SWIGINTERN PyObject *_wrap_loadModel(PyObject *SWIGUNUSEDPARM(self), PyObject *a
     arg1 = *ptr;
     if (SWIG_IsNewObj(res)) delete ptr;
   }
-  result = (aiScene *)loadModel(arg1);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_aiScene, 0 |  0 );
+  result = (ModelData *)loadModel(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_ModelData, 0 |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -3222,38 +3223,42 @@ fail:
 
 SWIGINTERN PyObject *_wrap_drawNodes(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  aiScene *arg1 = (aiScene *) 0 ;
-  aiNode *arg2 = (aiNode *) 0 ;
+  ModelData *arg1 = (ModelData *) 0 ;
+  aiVector3D arg2 ;
   aiVector3D arg3 ;
   aiVector3D arg4 ;
-  aiVector3D arg5 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  void *argp2 = 0 ;
+  void *argp2 ;
   int res2 = 0 ;
   void *argp3 ;
   int res3 = 0 ;
   void *argp4 ;
   int res4 = 0 ;
-  void *argp5 ;
-  int res5 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
   PyObject * obj3 = 0 ;
-  PyObject * obj4 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OOOOO:drawNodes",&obj0,&obj1,&obj2,&obj3,&obj4)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_aiScene, 0 |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"OOOO:drawNodes",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ModelData, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "drawNodes" "', argument " "1"" of type '" "aiScene *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "drawNodes" "', argument " "1"" of type '" "ModelData *""'"); 
   }
-  arg1 = reinterpret_cast< aiScene * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_aiNode, 0 |  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "drawNodes" "', argument " "2"" of type '" "aiNode *""'"); 
+  arg1 = reinterpret_cast< ModelData * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_aiVector3D,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "drawNodes" "', argument " "2"" of type '" "aiVector3D""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "drawNodes" "', argument " "2"" of type '" "aiVector3D""'");
+    } else {
+      aiVector3D * temp = reinterpret_cast< aiVector3D * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
   }
-  arg2 = reinterpret_cast< aiNode * >(argp2);
   {
     res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_aiVector3D,  0  | 0);
     if (!SWIG_IsOK(res3)) {
@@ -3280,20 +3285,7 @@ SWIGINTERN PyObject *_wrap_drawNodes(PyObject *SWIGUNUSEDPARM(self), PyObject *a
       if (SWIG_IsNewObj(res4)) delete temp;
     }
   }
-  {
-    res5 = SWIG_ConvertPtr(obj4, &argp5, SWIGTYPE_p_aiVector3D,  0  | 0);
-    if (!SWIG_IsOK(res5)) {
-      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "drawNodes" "', argument " "5"" of type '" "aiVector3D""'"); 
-    }  
-    if (!argp5) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "drawNodes" "', argument " "5"" of type '" "aiVector3D""'");
-    } else {
-      aiVector3D * temp = reinterpret_cast< aiVector3D * >(argp5);
-      arg5 = *temp;
-      if (SWIG_IsNewObj(res5)) delete temp;
-    }
-  }
-  drawNodes(arg1,arg2,arg3,arg4,arg5);
+  drawNodes(arg1,arg2,arg3,arg4);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -3856,10 +3848,496 @@ SWIGINTERN PyObject *AnimationSheet_swigregister(PyObject *SWIGUNUSEDPARM(self),
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *_wrap_MeshData_indices_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MeshData *arg1 = (MeshData *) 0 ;
+  vector< GLuint > arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:MeshData_indices_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_MeshData, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MeshData_indices_set" "', argument " "1"" of type '" "MeshData *""'"); 
+  }
+  arg1 = reinterpret_cast< MeshData * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_vectorT_GLuint_t,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "MeshData_indices_set" "', argument " "2"" of type '" "vector< GLuint >""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MeshData_indices_set" "', argument " "2"" of type '" "vector< GLuint >""'");
+    } else {
+      vector< GLuint > * temp = reinterpret_cast< vector< GLuint > * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  if (arg1) (arg1)->indices = arg2;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MeshData_indices_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MeshData *arg1 = (MeshData *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  vector< GLuint > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MeshData_indices_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_MeshData, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MeshData_indices_get" "', argument " "1"" of type '" "MeshData *""'"); 
+  }
+  arg1 = reinterpret_cast< MeshData * >(argp1);
+  result =  ((arg1)->indices);
+  resultobj = SWIG_NewPointerObj((new vector< GLuint >(static_cast< const vector< GLuint >& >(result))), SWIGTYPE_p_vectorT_GLuint_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MeshData_vertices_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MeshData *arg1 = (MeshData *) 0 ;
+  vector< GLfloat > arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:MeshData_vertices_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_MeshData, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MeshData_vertices_set" "', argument " "1"" of type '" "MeshData *""'"); 
+  }
+  arg1 = reinterpret_cast< MeshData * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_vectorT_GLfloat_t,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "MeshData_vertices_set" "', argument " "2"" of type '" "vector< GLfloat >""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MeshData_vertices_set" "', argument " "2"" of type '" "vector< GLfloat >""'");
+    } else {
+      vector< GLfloat > * temp = reinterpret_cast< vector< GLfloat > * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  if (arg1) (arg1)->vertices = arg2;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MeshData_vertices_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MeshData *arg1 = (MeshData *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  vector< GLfloat > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MeshData_vertices_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_MeshData, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MeshData_vertices_get" "', argument " "1"" of type '" "MeshData *""'"); 
+  }
+  arg1 = reinterpret_cast< MeshData * >(argp1);
+  result =  ((arg1)->vertices);
+  resultobj = SWIG_NewPointerObj((new vector< GLfloat >(static_cast< const vector< GLfloat >& >(result))), SWIGTYPE_p_vectorT_GLfloat_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MeshData_texCoords_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MeshData *arg1 = (MeshData *) 0 ;
+  vector< GLfloat > arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:MeshData_texCoords_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_MeshData, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MeshData_texCoords_set" "', argument " "1"" of type '" "MeshData *""'"); 
+  }
+  arg1 = reinterpret_cast< MeshData * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_vectorT_GLfloat_t,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "MeshData_texCoords_set" "', argument " "2"" of type '" "vector< GLfloat >""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MeshData_texCoords_set" "', argument " "2"" of type '" "vector< GLfloat >""'");
+    } else {
+      vector< GLfloat > * temp = reinterpret_cast< vector< GLfloat > * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  if (arg1) (arg1)->texCoords = arg2;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MeshData_texCoords_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MeshData *arg1 = (MeshData *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  vector< GLfloat > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MeshData_texCoords_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_MeshData, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MeshData_texCoords_get" "', argument " "1"" of type '" "MeshData *""'"); 
+  }
+  arg1 = reinterpret_cast< MeshData * >(argp1);
+  result =  ((arg1)->texCoords);
+  resultobj = SWIG_NewPointerObj((new vector< GLfloat >(static_cast< const vector< GLfloat >& >(result))), SWIGTYPE_p_vectorT_GLfloat_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MeshData_normals_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MeshData *arg1 = (MeshData *) 0 ;
+  vector< GLfloat > arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:MeshData_normals_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_MeshData, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MeshData_normals_set" "', argument " "1"" of type '" "MeshData *""'"); 
+  }
+  arg1 = reinterpret_cast< MeshData * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_vectorT_GLfloat_t,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "MeshData_normals_set" "', argument " "2"" of type '" "vector< GLfloat >""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MeshData_normals_set" "', argument " "2"" of type '" "vector< GLfloat >""'");
+    } else {
+      vector< GLfloat > * temp = reinterpret_cast< vector< GLfloat > * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  if (arg1) (arg1)->normals = arg2;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MeshData_normals_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MeshData *arg1 = (MeshData *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  vector< GLfloat > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MeshData_normals_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_MeshData, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MeshData_normals_get" "', argument " "1"" of type '" "MeshData *""'"); 
+  }
+  arg1 = reinterpret_cast< MeshData * >(argp1);
+  result =  ((arg1)->normals);
+  resultobj = SWIG_NewPointerObj((new vector< GLfloat >(static_cast< const vector< GLfloat >& >(result))), SWIGTYPE_p_vectorT_GLfloat_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MeshData_material_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MeshData *arg1 = (MeshData *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:MeshData_material_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_MeshData, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MeshData_material_set" "', argument " "1"" of type '" "MeshData *""'"); 
+  }
+  arg1 = reinterpret_cast< MeshData * >(argp1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "MeshData_material_set" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  if (arg1) (arg1)->material = arg2;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MeshData_material_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MeshData *arg1 = (MeshData *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  int result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MeshData_material_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_MeshData, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MeshData_material_get" "', argument " "1"" of type '" "MeshData *""'"); 
+  }
+  arg1 = reinterpret_cast< MeshData * >(argp1);
+  result = (int) ((arg1)->material);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_MeshData(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MeshData *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":new_MeshData")) SWIG_fail;
+  result = (MeshData *)new MeshData();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_MeshData, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_MeshData(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MeshData *arg1 = (MeshData *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_MeshData",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_MeshData, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_MeshData" "', argument " "1"" of type '" "MeshData *""'"); 
+  }
+  arg1 = reinterpret_cast< MeshData * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *MeshData_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_MeshData, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *_wrap_ModelData_materials_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ModelData *arg1 = (ModelData *) 0 ;
+  vector< aiMaterial * > arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:ModelData_materials_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ModelData, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ModelData_materials_set" "', argument " "1"" of type '" "ModelData *""'"); 
+  }
+  arg1 = reinterpret_cast< ModelData * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_vectorT_aiMaterial_p_t,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ModelData_materials_set" "', argument " "2"" of type '" "vector< aiMaterial * >""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ModelData_materials_set" "', argument " "2"" of type '" "vector< aiMaterial * >""'");
+    } else {
+      vector< aiMaterial * > * temp = reinterpret_cast< vector< aiMaterial * > * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  if (arg1) (arg1)->materials = arg2;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ModelData_materials_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ModelData *arg1 = (ModelData *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  vector< aiMaterial * > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:ModelData_materials_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ModelData, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ModelData_materials_get" "', argument " "1"" of type '" "ModelData *""'"); 
+  }
+  arg1 = reinterpret_cast< ModelData * >(argp1);
+  result =  ((arg1)->materials);
+  resultobj = SWIG_NewPointerObj((new vector< aiMaterial * >(static_cast< const vector< aiMaterial * >& >(result))), SWIGTYPE_p_vectorT_aiMaterial_p_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ModelData_meshes_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ModelData *arg1 = (ModelData *) 0 ;
+  vector< MeshData * > *arg2 = (vector< MeshData * > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:ModelData_meshes_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ModelData, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ModelData_meshes_set" "', argument " "1"" of type '" "ModelData *""'"); 
+  }
+  arg1 = reinterpret_cast< ModelData * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_vectorT_MeshData_p_t, 0 |  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ModelData_meshes_set" "', argument " "2"" of type '" "vector< MeshData * > *""'"); 
+  }
+  arg2 = reinterpret_cast< vector< MeshData * > * >(argp2);
+  if (arg1) (arg1)->meshes = *arg2;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ModelData_meshes_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ModelData *arg1 = (ModelData *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  vector< MeshData * > *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:ModelData_meshes_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ModelData, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ModelData_meshes_get" "', argument " "1"" of type '" "ModelData *""'"); 
+  }
+  arg1 = reinterpret_cast< ModelData * >(argp1);
+  result = (vector< MeshData * > *)& ((arg1)->meshes);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_vectorT_MeshData_p_t, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_ModelData(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ModelData *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":new_ModelData")) SWIG_fail;
+  result = (ModelData *)new ModelData();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_ModelData, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_ModelData(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ModelData *arg1 = (ModelData *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_ModelData",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ModelData, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ModelData" "', argument " "1"" of type '" "ModelData *""'"); 
+  }
+  arg1 = reinterpret_cast< ModelData * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *ModelData_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_ModelData, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
 SWIGINTERN PyObject *_wrap_Model_Data_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Model *arg1 = (Model *) 0 ;
-  aiScene *arg2 = (aiScene *) 0 ;
+  ModelData *arg2 = (ModelData *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
@@ -3873,11 +4351,11 @@ SWIGINTERN PyObject *_wrap_Model_Data_set(PyObject *SWIGUNUSEDPARM(self), PyObje
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Model_Data_set" "', argument " "1"" of type '" "Model *""'"); 
   }
   arg1 = reinterpret_cast< Model * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_aiScene, SWIG_POINTER_DISOWN |  0 );
+  res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_ModelData, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Model_Data_set" "', argument " "2"" of type '" "aiScene *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Model_Data_set" "', argument " "2"" of type '" "ModelData *""'"); 
   }
-  arg2 = reinterpret_cast< aiScene * >(argp2);
+  arg2 = reinterpret_cast< ModelData * >(argp2);
   if (arg1) (arg1)->Data = arg2;
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -3892,7 +4370,7 @@ SWIGINTERN PyObject *_wrap_Model_Data_get(PyObject *SWIGUNUSEDPARM(self), PyObje
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  aiScene *result = 0 ;
+  ModelData *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Model_Data_get",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Model, 0 |  0 );
@@ -3900,8 +4378,8 @@ SWIGINTERN PyObject *_wrap_Model_Data_get(PyObject *SWIGUNUSEDPARM(self), PyObje
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Model_Data_get" "', argument " "1"" of type '" "Model *""'"); 
   }
   arg1 = reinterpret_cast< Model * >(argp1);
-  result = (aiScene *) ((arg1)->Data);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_aiScene, 0 |  0 );
+  result = (ModelData *) ((arg1)->Data);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_ModelData, 0 |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -4060,287 +4538,6 @@ SWIGINTERN PyObject *Model_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
   SWIG_TypeNewClientData(SWIGTYPE_p_Model, SWIG_NewClientData(obj));
-  return SWIG_Py_Void();
-}
-
-SWIGINTERN PyObject *_wrap_ModelData_indices_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  ModelData *arg1 = (ModelData *) 0 ;
-  vector< GLuint > arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:ModelData_indices_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ModelData, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ModelData_indices_set" "', argument " "1"" of type '" "ModelData *""'"); 
-  }
-  arg1 = reinterpret_cast< ModelData * >(argp1);
-  {
-    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_vectorT_GLuint_t,  0  | 0);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ModelData_indices_set" "', argument " "2"" of type '" "vector< GLuint >""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ModelData_indices_set" "', argument " "2"" of type '" "vector< GLuint >""'");
-    } else {
-      vector< GLuint > * temp = reinterpret_cast< vector< GLuint > * >(argp2);
-      arg2 = *temp;
-      if (SWIG_IsNewObj(res2)) delete temp;
-    }
-  }
-  if (arg1) (arg1)->indices = arg2;
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_ModelData_indices_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  ModelData *arg1 = (ModelData *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  vector< GLuint > result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:ModelData_indices_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ModelData, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ModelData_indices_get" "', argument " "1"" of type '" "ModelData *""'"); 
-  }
-  arg1 = reinterpret_cast< ModelData * >(argp1);
-  result =  ((arg1)->indices);
-  resultobj = SWIG_NewPointerObj((new vector< GLuint >(static_cast< const vector< GLuint >& >(result))), SWIGTYPE_p_vectorT_GLuint_t, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_ModelData_vertices_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  ModelData *arg1 = (ModelData *) 0 ;
-  vector< GLfloat > arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:ModelData_vertices_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ModelData, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ModelData_vertices_set" "', argument " "1"" of type '" "ModelData *""'"); 
-  }
-  arg1 = reinterpret_cast< ModelData * >(argp1);
-  {
-    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_vectorT_GLfloat_t,  0  | 0);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ModelData_vertices_set" "', argument " "2"" of type '" "vector< GLfloat >""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ModelData_vertices_set" "', argument " "2"" of type '" "vector< GLfloat >""'");
-    } else {
-      vector< GLfloat > * temp = reinterpret_cast< vector< GLfloat > * >(argp2);
-      arg2 = *temp;
-      if (SWIG_IsNewObj(res2)) delete temp;
-    }
-  }
-  if (arg1) (arg1)->vertices = arg2;
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_ModelData_vertices_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  ModelData *arg1 = (ModelData *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  vector< GLfloat > result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:ModelData_vertices_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ModelData, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ModelData_vertices_get" "', argument " "1"" of type '" "ModelData *""'"); 
-  }
-  arg1 = reinterpret_cast< ModelData * >(argp1);
-  result =  ((arg1)->vertices);
-  resultobj = SWIG_NewPointerObj((new vector< GLfloat >(static_cast< const vector< GLfloat >& >(result))), SWIGTYPE_p_vectorT_GLfloat_t, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_ModelData_texCoords_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  ModelData *arg1 = (ModelData *) 0 ;
-  vector< GLfloat > arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:ModelData_texCoords_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ModelData, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ModelData_texCoords_set" "', argument " "1"" of type '" "ModelData *""'"); 
-  }
-  arg1 = reinterpret_cast< ModelData * >(argp1);
-  {
-    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_vectorT_GLfloat_t,  0  | 0);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ModelData_texCoords_set" "', argument " "2"" of type '" "vector< GLfloat >""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ModelData_texCoords_set" "', argument " "2"" of type '" "vector< GLfloat >""'");
-    } else {
-      vector< GLfloat > * temp = reinterpret_cast< vector< GLfloat > * >(argp2);
-      arg2 = *temp;
-      if (SWIG_IsNewObj(res2)) delete temp;
-    }
-  }
-  if (arg1) (arg1)->texCoords = arg2;
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_ModelData_texCoords_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  ModelData *arg1 = (ModelData *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  vector< GLfloat > result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:ModelData_texCoords_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ModelData, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ModelData_texCoords_get" "', argument " "1"" of type '" "ModelData *""'"); 
-  }
-  arg1 = reinterpret_cast< ModelData * >(argp1);
-  result =  ((arg1)->texCoords);
-  resultobj = SWIG_NewPointerObj((new vector< GLfloat >(static_cast< const vector< GLfloat >& >(result))), SWIGTYPE_p_vectorT_GLfloat_t, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_ModelData_normals_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  ModelData *arg1 = (ModelData *) 0 ;
-  vector< GLfloat > arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:ModelData_normals_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ModelData, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ModelData_normals_set" "', argument " "1"" of type '" "ModelData *""'"); 
-  }
-  arg1 = reinterpret_cast< ModelData * >(argp1);
-  {
-    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_vectorT_GLfloat_t,  0  | 0);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ModelData_normals_set" "', argument " "2"" of type '" "vector< GLfloat >""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ModelData_normals_set" "', argument " "2"" of type '" "vector< GLfloat >""'");
-    } else {
-      vector< GLfloat > * temp = reinterpret_cast< vector< GLfloat > * >(argp2);
-      arg2 = *temp;
-      if (SWIG_IsNewObj(res2)) delete temp;
-    }
-  }
-  if (arg1) (arg1)->normals = arg2;
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_ModelData_normals_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  ModelData *arg1 = (ModelData *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  vector< GLfloat > result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:ModelData_normals_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ModelData, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ModelData_normals_get" "', argument " "1"" of type '" "ModelData *""'"); 
-  }
-  arg1 = reinterpret_cast< ModelData * >(argp1);
-  result =  ((arg1)->normals);
-  resultobj = SWIG_NewPointerObj((new vector< GLfloat >(static_cast< const vector< GLfloat >& >(result))), SWIGTYPE_p_vectorT_GLfloat_t, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_ModelData(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  ModelData *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)":new_ModelData")) SWIG_fail;
-  result = (ModelData *)new ModelData();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_ModelData, SWIG_POINTER_NEW |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_delete_ModelData(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  ModelData *arg1 = (ModelData *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:delete_ModelData",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ModelData, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ModelData" "', argument " "1"" of type '" "ModelData *""'"); 
-  }
-  arg1 = reinterpret_cast< ModelData * >(argp1);
-  delete arg1;
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *ModelData_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *obj;
-  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_ModelData, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
@@ -7052,6 +7249,26 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_AnimationSheet", _wrap_new_AnimationSheet, METH_VARARGS, NULL},
 	 { (char *)"delete_AnimationSheet", _wrap_delete_AnimationSheet, METH_VARARGS, NULL},
 	 { (char *)"AnimationSheet_swigregister", AnimationSheet_swigregister, METH_VARARGS, NULL},
+	 { (char *)"MeshData_indices_set", _wrap_MeshData_indices_set, METH_VARARGS, NULL},
+	 { (char *)"MeshData_indices_get", _wrap_MeshData_indices_get, METH_VARARGS, NULL},
+	 { (char *)"MeshData_vertices_set", _wrap_MeshData_vertices_set, METH_VARARGS, NULL},
+	 { (char *)"MeshData_vertices_get", _wrap_MeshData_vertices_get, METH_VARARGS, NULL},
+	 { (char *)"MeshData_texCoords_set", _wrap_MeshData_texCoords_set, METH_VARARGS, NULL},
+	 { (char *)"MeshData_texCoords_get", _wrap_MeshData_texCoords_get, METH_VARARGS, NULL},
+	 { (char *)"MeshData_normals_set", _wrap_MeshData_normals_set, METH_VARARGS, NULL},
+	 { (char *)"MeshData_normals_get", _wrap_MeshData_normals_get, METH_VARARGS, NULL},
+	 { (char *)"MeshData_material_set", _wrap_MeshData_material_set, METH_VARARGS, NULL},
+	 { (char *)"MeshData_material_get", _wrap_MeshData_material_get, METH_VARARGS, NULL},
+	 { (char *)"new_MeshData", _wrap_new_MeshData, METH_VARARGS, NULL},
+	 { (char *)"delete_MeshData", _wrap_delete_MeshData, METH_VARARGS, NULL},
+	 { (char *)"MeshData_swigregister", MeshData_swigregister, METH_VARARGS, NULL},
+	 { (char *)"ModelData_materials_set", _wrap_ModelData_materials_set, METH_VARARGS, NULL},
+	 { (char *)"ModelData_materials_get", _wrap_ModelData_materials_get, METH_VARARGS, NULL},
+	 { (char *)"ModelData_meshes_set", _wrap_ModelData_meshes_set, METH_VARARGS, NULL},
+	 { (char *)"ModelData_meshes_get", _wrap_ModelData_meshes_get, METH_VARARGS, NULL},
+	 { (char *)"new_ModelData", _wrap_new_ModelData, METH_VARARGS, NULL},
+	 { (char *)"delete_ModelData", _wrap_delete_ModelData, METH_VARARGS, NULL},
+	 { (char *)"ModelData_swigregister", ModelData_swigregister, METH_VARARGS, NULL},
 	 { (char *)"Model_Data_set", _wrap_Model_Data_set, METH_VARARGS, NULL},
 	 { (char *)"Model_Data_get", _wrap_Model_Data_get, METH_VARARGS, NULL},
 	 { (char *)"Model_Source_set", _wrap_Model_Source_set, METH_VARARGS, NULL},
@@ -7061,17 +7278,6 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_Model", _wrap_new_Model, METH_VARARGS, NULL},
 	 { (char *)"delete_Model", _wrap_delete_Model, METH_VARARGS, NULL},
 	 { (char *)"Model_swigregister", Model_swigregister, METH_VARARGS, NULL},
-	 { (char *)"ModelData_indices_set", _wrap_ModelData_indices_set, METH_VARARGS, NULL},
-	 { (char *)"ModelData_indices_get", _wrap_ModelData_indices_get, METH_VARARGS, NULL},
-	 { (char *)"ModelData_vertices_set", _wrap_ModelData_vertices_set, METH_VARARGS, NULL},
-	 { (char *)"ModelData_vertices_get", _wrap_ModelData_vertices_get, METH_VARARGS, NULL},
-	 { (char *)"ModelData_texCoords_set", _wrap_ModelData_texCoords_set, METH_VARARGS, NULL},
-	 { (char *)"ModelData_texCoords_get", _wrap_ModelData_texCoords_get, METH_VARARGS, NULL},
-	 { (char *)"ModelData_normals_set", _wrap_ModelData_normals_set, METH_VARARGS, NULL},
-	 { (char *)"ModelData_normals_get", _wrap_ModelData_normals_get, METH_VARARGS, NULL},
-	 { (char *)"new_ModelData", _wrap_new_ModelData, METH_VARARGS, NULL},
-	 { (char *)"delete_ModelData", _wrap_delete_ModelData, METH_VARARGS, NULL},
-	 { (char *)"ModelData_swigregister", ModelData_swigregister, METH_VARARGS, NULL},
 	 { (char *)"Tile_Type_set", _wrap_Tile_Type_set, METH_VARARGS, NULL},
 	 { (char *)"Tile_Type_get", _wrap_Tile_Type_get, METH_VARARGS, NULL},
 	 { (char *)"Tile_TileSet_set", _wrap_Tile_TileSet_set, METH_VARARGS, NULL},
@@ -7195,6 +7401,7 @@ static swig_type_info _swigt__p_Element = {"_p_Element", "Element *", 0, 0, (voi
 static swig_type_info _swigt__p_ElementList = {"_p_ElementList", "ElementList *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_EventType = {"_p_EventType", "EventType *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GLuint = {"_p_GLuint", "GLuint *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_MeshData = {"_p_MeshData", "MeshData *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Model = {"_p_Model", "Model *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_ModelData = {"_p_ModelData", "ModelData *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Position = {"_p_Position", "Position *", 0, 0, (void*)0, 0};
@@ -7209,8 +7416,6 @@ static swig_type_info _swigt__p_Uint32 = {"_p_Uint32", "Uint32 *", 0, 0, (void*)
 static swig_type_info _swigt__p_Window = {"_p_Window", "Window *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_WindowType = {"_p_WindowType", "WindowType *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_aiMaterial = {"_p_aiMaterial", "aiMaterial *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_aiNode = {"_p_aiNode", "aiNode *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_aiScene = {"_p_aiScene", "aiScene *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_aiVector3D = {"_p_aiVector3D", "aiVector3D *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_ifstream = {"_p_ifstream", "ifstream *", 0, 0, (void*)0, 0};
@@ -7218,6 +7423,8 @@ static swig_type_info _swigt__p_std__string = {"_p_std__string", "std::string *"
 static swig_type_info _swigt__p_vectorT_ElementList_t = {"_p_vectorT_ElementList_t", "vector< ElementList > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_vectorT_GLfloat_t = {"_p_vectorT_GLfloat_t", "vector< GLfloat > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_vectorT_GLuint_t = {"_p_vectorT_GLuint_t", "vector< GLuint > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_vectorT_MeshData_p_t = {"_p_vectorT_MeshData_p_t", "vector< MeshData * > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_vectorT_aiMaterial_p_t = {"_p_vectorT_aiMaterial_p_t", "vector< aiMaterial * > *", 0, 0, (void*)0, 0};
 
 static swig_type_info *swig_type_initial[] = {
   &_swigt__p_ActorType,
@@ -7227,6 +7434,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_ElementList,
   &_swigt__p_EventType,
   &_swigt__p_GLuint,
+  &_swigt__p_MeshData,
   &_swigt__p_Model,
   &_swigt__p_ModelData,
   &_swigt__p_Position,
@@ -7241,8 +7449,6 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_Window,
   &_swigt__p_WindowType,
   &_swigt__p_aiMaterial,
-  &_swigt__p_aiNode,
-  &_swigt__p_aiScene,
   &_swigt__p_aiVector3D,
   &_swigt__p_char,
   &_swigt__p_ifstream,
@@ -7250,6 +7456,8 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_vectorT_ElementList_t,
   &_swigt__p_vectorT_GLfloat_t,
   &_swigt__p_vectorT_GLuint_t,
+  &_swigt__p_vectorT_MeshData_p_t,
+  &_swigt__p_vectorT_aiMaterial_p_t,
 };
 
 static swig_cast_info _swigc__p_ActorType[] = {  {&_swigt__p_ActorType, 0, 0, 0},{0, 0, 0, 0}};
@@ -7259,6 +7467,7 @@ static swig_cast_info _swigc__p_Element[] = {  {&_swigt__p_Element, 0, 0, 0},{0,
 static swig_cast_info _swigc__p_ElementList[] = {  {&_swigt__p_ElementList, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_EventType[] = {  {&_swigt__p_EventType, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GLuint[] = {  {&_swigt__p_GLuint, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_MeshData[] = {  {&_swigt__p_MeshData, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Model[] = {  {&_swigt__p_Model, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_ModelData[] = {  {&_swigt__p_ModelData, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Position[] = {  {&_swigt__p_Position, 0, 0, 0},{0, 0, 0, 0}};
@@ -7273,8 +7482,6 @@ static swig_cast_info _swigc__p_Uint32[] = {  {&_swigt__p_Uint32, 0, 0, 0},{0, 0
 static swig_cast_info _swigc__p_Window[] = {  {&_swigt__p_Window, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_WindowType[] = {  {&_swigt__p_WindowType, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_aiMaterial[] = {  {&_swigt__p_aiMaterial, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_aiNode[] = {  {&_swigt__p_aiNode, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_aiScene[] = {  {&_swigt__p_aiScene, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_aiVector3D[] = {  {&_swigt__p_aiVector3D, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_ifstream[] = {  {&_swigt__p_ifstream, 0, 0, 0},{0, 0, 0, 0}};
@@ -7282,6 +7489,8 @@ static swig_cast_info _swigc__p_std__string[] = {  {&_swigt__p_std__string, 0, 0
 static swig_cast_info _swigc__p_vectorT_ElementList_t[] = {  {&_swigt__p_vectorT_ElementList_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_vectorT_GLfloat_t[] = {  {&_swigt__p_vectorT_GLfloat_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_vectorT_GLuint_t[] = {  {&_swigt__p_vectorT_GLuint_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_vectorT_MeshData_p_t[] = {  {&_swigt__p_vectorT_MeshData_p_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_vectorT_aiMaterial_p_t[] = {  {&_swigt__p_vectorT_aiMaterial_p_t, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_ActorType,
@@ -7291,6 +7500,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_ElementList,
   _swigc__p_EventType,
   _swigc__p_GLuint,
+  _swigc__p_MeshData,
   _swigc__p_Model,
   _swigc__p_ModelData,
   _swigc__p_Position,
@@ -7305,8 +7515,6 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_Window,
   _swigc__p_WindowType,
   _swigc__p_aiMaterial,
-  _swigc__p_aiNode,
-  _swigc__p_aiScene,
   _swigc__p_aiVector3D,
   _swigc__p_char,
   _swigc__p_ifstream,
@@ -7314,6 +7522,8 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_vectorT_ElementList_t,
   _swigc__p_vectorT_GLfloat_t,
   _swigc__p_vectorT_GLuint_t,
+  _swigc__p_vectorT_MeshData_p_t,
+  _swigc__p_vectorT_aiMaterial_p_t,
 };
 
 

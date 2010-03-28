@@ -32,7 +32,7 @@ class TBFE_Render
   int renderMapLayer(int,int,int);
   void renderForeground(int,int,bool);
   GLfloat lightPosition_[4];
-  ModelData map_;
+  MeshData map_;
   PositionF cameraAngle_;
  public:
   void refreshMapLayer(int);

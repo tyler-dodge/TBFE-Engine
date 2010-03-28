@@ -18,18 +18,24 @@ struct AnimationSheet
   GLuint Texture;
   bool isLoaded;
 };
-struct Model
-{
-  aiScene * Data;
-  std::string Source;
-  bool isLoaded;
-};
-struct ModelData
+struct MeshData
 {
   vector<GLuint> indices;
   vector<GLfloat> vertices;
   vector<GLfloat> texCoords;
   vector<GLfloat> normals;
+  int material;
+};
+struct ModelData
+{
+  vector<aiMaterial *> materials;
+  vector<MeshData *> meshes;
+};
+struct Model
+{
+  ModelData * Data;
+  std::string Source;
+  bool isLoaded;
 };
 struct Tile
 {

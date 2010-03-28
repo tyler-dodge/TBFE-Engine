@@ -64,7 +64,7 @@ bool Animation::currentFramePlus()
     };
   return true;
 };
-aiScene * Animation::getModel()
+ModelData * Animation::getModel()
 {
   loadModel();
   return model_.Data;

@@ -20,7 +20,7 @@ class Animation
   bool currentFramePlus();
   bool loadModel();
   void setModelSource(string);
-  aiScene * getModel();
+  ModelData * getModel();
   void reset();
   float getCurrentFrame();
   void setCurrentFrame(float);

@@ -22,7 +22,7 @@ namespace TBFE_Base
   extern void DeleteTempSheets();
   extern int GetActorNum(Actor *);
   extern Actor * GetActorByNum(int);
-  extern aiScene * CheckModels(string);
+  extern ModelData * CheckModels(string);
   extern SDL_Surface * CheckSheets(string);
   extern string GetSheetName(SDL_Surface *);
   extern GLuint GetTexture(SDL_Surface *);

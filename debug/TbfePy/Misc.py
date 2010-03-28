@@ -123,6 +123,57 @@ class AnimationSheet(_object):
 AnimationSheet_swigregister = _Misc.AnimationSheet_swigregister
 AnimationSheet_swigregister(AnimationSheet)
 
+class MeshData(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, MeshData, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, MeshData, name)
+    __repr__ = _swig_repr
+    __swig_setmethods__["indices"] = _Misc.MeshData_indices_set
+    __swig_getmethods__["indices"] = _Misc.MeshData_indices_get
+    if _newclass:indices = _swig_property(_Misc.MeshData_indices_get, _Misc.MeshData_indices_set)
+    __swig_setmethods__["vertices"] = _Misc.MeshData_vertices_set
+    __swig_getmethods__["vertices"] = _Misc.MeshData_vertices_get
+    if _newclass:vertices = _swig_property(_Misc.MeshData_vertices_get, _Misc.MeshData_vertices_set)
+    __swig_setmethods__["texCoords"] = _Misc.MeshData_texCoords_set
+    __swig_getmethods__["texCoords"] = _Misc.MeshData_texCoords_get
+    if _newclass:texCoords = _swig_property(_Misc.MeshData_texCoords_get, _Misc.MeshData_texCoords_set)
+    __swig_setmethods__["normals"] = _Misc.MeshData_normals_set
+    __swig_getmethods__["normals"] = _Misc.MeshData_normals_get
+    if _newclass:normals = _swig_property(_Misc.MeshData_normals_get, _Misc.MeshData_normals_set)
+    __swig_setmethods__["material"] = _Misc.MeshData_material_set
+    __swig_getmethods__["material"] = _Misc.MeshData_material_get
+    if _newclass:material = _swig_property(_Misc.MeshData_material_get, _Misc.MeshData_material_set)
+    def __init__(self, *args): 
+        this = _Misc.new_MeshData(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    __swig_destroy__ = _Misc.delete_MeshData
+    __del__ = lambda self : None;
+MeshData_swigregister = _Misc.MeshData_swigregister
+MeshData_swigregister(MeshData)
+
+class ModelData(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, ModelData, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, ModelData, name)
+    __repr__ = _swig_repr
+    __swig_setmethods__["materials"] = _Misc.ModelData_materials_set
+    __swig_getmethods__["materials"] = _Misc.ModelData_materials_get
+    if _newclass:materials = _swig_property(_Misc.ModelData_materials_get, _Misc.ModelData_materials_set)
+    __swig_setmethods__["meshes"] = _Misc.ModelData_meshes_set
+    __swig_getmethods__["meshes"] = _Misc.ModelData_meshes_get
+    if _newclass:meshes = _swig_property(_Misc.ModelData_meshes_get, _Misc.ModelData_meshes_set)
+    def __init__(self, *args): 
+        this = _Misc.new_ModelData(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    __swig_destroy__ = _Misc.delete_ModelData
+    __del__ = lambda self : None;
+ModelData_swigregister = _Misc.ModelData_swigregister
+ModelData_swigregister(ModelData)
+
 class Model(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, Model, name, value)
@@ -146,33 +197,6 @@ class Model(_object):
     __del__ = lambda self : None;
 Model_swigregister = _Misc.Model_swigregister
 Model_swigregister(Model)
-
-class ModelData(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, ModelData, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, ModelData, name)
-    __repr__ = _swig_repr
-    __swig_setmethods__["indices"] = _Misc.ModelData_indices_set
-    __swig_getmethods__["indices"] = _Misc.ModelData_indices_get
-    if _newclass:indices = _swig_property(_Misc.ModelData_indices_get, _Misc.ModelData_indices_set)
-    __swig_setmethods__["vertices"] = _Misc.ModelData_vertices_set
-    __swig_getmethods__["vertices"] = _Misc.ModelData_vertices_get
-    if _newclass:vertices = _swig_property(_Misc.ModelData_vertices_get, _Misc.ModelData_vertices_set)
-    __swig_setmethods__["texCoords"] = _Misc.ModelData_texCoords_set
-    __swig_getmethods__["texCoords"] = _Misc.ModelData_texCoords_get
-    if _newclass:texCoords = _swig_property(_Misc.ModelData_texCoords_get, _Misc.ModelData_texCoords_set)
-    __swig_setmethods__["normals"] = _Misc.ModelData_normals_set
-    __swig_getmethods__["normals"] = _Misc.ModelData_normals_get
-    if _newclass:normals = _swig_property(_Misc.ModelData_normals_get, _Misc.ModelData_normals_set)
-    def __init__(self, *args): 
-        this = _Misc.new_ModelData(*args)
-        try: self.this.append(this)
-        except: self.this = this
-    __swig_destroy__ = _Misc.delete_ModelData
-    __del__ = lambda self : None;
-ModelData_swigregister = _Misc.ModelData_swigregister
-ModelData_swigregister(ModelData)
 
 class Tile(_object):
     __swig_setmethods__ = {}
