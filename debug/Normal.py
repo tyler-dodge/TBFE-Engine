@@ -43,10 +43,10 @@ def mouseCamera(MouseMovement):
         Tbfe.GetMainPlayer().setRotationF(Rotation.X,Rotation.Y,Rotation.Z)
         Position=engine.getCameraAngle()
         Position.X-=MouseMovement.Y
-        #if Position.X<0:
-        #    Position.X=0
-        #if Position.X>90:
-        #    Position.X=90
+        if Position.X<0:
+            Position.X=0
+        if Position.X>90:
+            Position.X=90
         engine.setCameraAngle(Position.X,Position.Y,Position.Z)
 def switchMouseCamera():
     if engine.getShowMouse():

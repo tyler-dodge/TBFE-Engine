@@ -154,8 +154,7 @@ ModelData * loadModel(string model)
 	  newMesh->vertices.push_back(currentMesh->mVertices[i].z);
 	  if (currentMesh->HasTextureCoords(0))
 	    {
-	      //newMesh->texCoords.push_back(currentMesh->mTextureCoords[i]->x);
-	      //newMesh->texCoords.push_back(currentMesh->mTextureCoords[i]->y);
+	      newMesh->texCoords.push_back(currentMesh->mTextureCoords[0][i]);
 	    };
 	  newMesh->normals.push_back(currentMesh->mNormals[i].x);
 	  newMesh->normals.push_back(currentMesh->mNormals[i].y);
@@ -283,10 +282,10 @@ void drawNodes(ModelData * model, aiVector3D position,aiVector3D rotation, aiVec
       MeshData * currentMesh=model->meshes.at(i);
       glEnableClientState(GL_VERTEX_ARRAY);
       glEnableClientState(GL_NORMAL_ARRAY);
-      //glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+      glEnableClientState(GL_TEXTURE_COORD_ARRAY);
       glVertexPointer(3,GL_FLOAT,0,&currentMesh->vertices[0]);
       glNormalPointer(GL_FLOAT,0,&currentMesh->normals[0]);
-      //glTexCoordPointer(3,GL_FLOAT,sizeof(aiVector3D),&currentMesh->texCoords[0]);
+      glTexCoordPointer(3,GL_FLOAT,sizeof(aiVector3D),&currentMesh->texCoords[0]);
       glDisable(GL_TEXTURE_2D);
       applyMaterial(model->materials[currentMesh->material]);
       glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );

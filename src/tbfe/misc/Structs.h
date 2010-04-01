@@ -22,7 +22,7 @@ struct MeshData
 {
   vector<GLuint> indices;
   vector<GLfloat> vertices;
-  vector<GLfloat> texCoords;
+  vector<aiVector3D> texCoords;
   vector<GLfloat> normals;
   int material;
 };

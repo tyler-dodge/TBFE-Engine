@@ -2532,8 +2532,9 @@ SWIG_Python_MustGetPtr(PyObject *obj, swig_type_info *ty, int argnum, int flags)
 #define SWIGTYPE_p_vectorT_GLuint_t swig_types[28]
 #define SWIGTYPE_p_vectorT_MeshData_p_t swig_types[29]
 #define SWIGTYPE_p_vectorT_aiMaterial_p_t swig_types[30]
-static swig_type_info *swig_types[32];
-static swig_module_info swig_module = {swig_types, 31, 0, 0, 0, 0};
+#define SWIGTYPE_p_vectorT_aiVector3D_t swig_types[31]
+static swig_type_info *swig_types[33];
+static swig_module_info swig_module = {swig_types, 32, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -3971,7 +3972,7 @@ fail:
 SWIGINTERN PyObject *_wrap_MeshData_texCoords_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   MeshData *arg1 = (MeshData *) 0 ;
-  vector< GLfloat > arg2 ;
+  vector< aiVector3D > arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 ;
@@ -3986,14 +3987,14 @@ SWIGINTERN PyObject *_wrap_MeshData_texCoords_set(PyObject *SWIGUNUSEDPARM(self)
   }
   arg1 = reinterpret_cast< MeshData * >(argp1);
   {
-    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_vectorT_GLfloat_t,  0  | 0);
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_vectorT_aiVector3D_t,  0  | 0);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "MeshData_texCoords_set" "', argument " "2"" of type '" "vector< GLfloat >""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "MeshData_texCoords_set" "', argument " "2"" of type '" "vector< aiVector3D >""'"); 
     }  
     if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MeshData_texCoords_set" "', argument " "2"" of type '" "vector< GLfloat >""'");
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MeshData_texCoords_set" "', argument " "2"" of type '" "vector< aiVector3D >""'");
     } else {
-      vector< GLfloat > * temp = reinterpret_cast< vector< GLfloat > * >(argp2);
+      vector< aiVector3D > * temp = reinterpret_cast< vector< aiVector3D > * >(argp2);
       arg2 = *temp;
       if (SWIG_IsNewObj(res2)) delete temp;
     }
@@ -4012,7 +4013,7 @@ SWIGINTERN PyObject *_wrap_MeshData_texCoords_get(PyObject *SWIGUNUSEDPARM(self)
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  vector< GLfloat > result;
+  vector< aiVector3D > result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:MeshData_texCoords_get",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_MeshData, 0 |  0 );
@@ -4021,7 +4022,7 @@ SWIGINTERN PyObject *_wrap_MeshData_texCoords_get(PyObject *SWIGUNUSEDPARM(self)
   }
   arg1 = reinterpret_cast< MeshData * >(argp1);
   result =  ((arg1)->texCoords);
-  resultobj = SWIG_NewPointerObj((new vector< GLfloat >(static_cast< const vector< GLfloat >& >(result))), SWIGTYPE_p_vectorT_GLfloat_t, SWIG_POINTER_OWN |  0 );
+  resultobj = SWIG_NewPointerObj((new vector< aiVector3D >(static_cast< const vector< aiVector3D >& >(result))), SWIGTYPE_p_vectorT_aiVector3D_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -7425,6 +7426,7 @@ static swig_type_info _swigt__p_vectorT_GLfloat_t = {"_p_vectorT_GLfloat_t", "ve
 static swig_type_info _swigt__p_vectorT_GLuint_t = {"_p_vectorT_GLuint_t", "vector< GLuint > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_vectorT_MeshData_p_t = {"_p_vectorT_MeshData_p_t", "vector< MeshData * > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_vectorT_aiMaterial_p_t = {"_p_vectorT_aiMaterial_p_t", "vector< aiMaterial * > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_vectorT_aiVector3D_t = {"_p_vectorT_aiVector3D_t", "vector< aiVector3D > *", 0, 0, (void*)0, 0};
 
 static swig_type_info *swig_type_initial[] = {
   &_swigt__p_ActorType,
@@ -7458,6 +7460,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_vectorT_GLuint_t,
   &_swigt__p_vectorT_MeshData_p_t,
   &_swigt__p_vectorT_aiMaterial_p_t,
+  &_swigt__p_vectorT_aiVector3D_t,
 };
 
 static swig_cast_info _swigc__p_ActorType[] = {  {&_swigt__p_ActorType, 0, 0, 0},{0, 0, 0, 0}};
@@ -7491,6 +7494,7 @@ static swig_cast_info _swigc__p_vectorT_GLfloat_t[] = {  {&_swigt__p_vectorT_GLf
 static swig_cast_info _swigc__p_vectorT_GLuint_t[] = {  {&_swigt__p_vectorT_GLuint_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_vectorT_MeshData_p_t[] = {  {&_swigt__p_vectorT_MeshData_p_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_vectorT_aiMaterial_p_t[] = {  {&_swigt__p_vectorT_aiMaterial_p_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_vectorT_aiVector3D_t[] = {  {&_swigt__p_vectorT_aiVector3D_t, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_ActorType,
@@ -7524,6 +7528,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_vectorT_GLuint_t,
   _swigc__p_vectorT_MeshData_p_t,
   _swigc__p_vectorT_aiMaterial_p_t,
+  _swigc__p_vectorT_aiVector3D_t,
 };
 
 

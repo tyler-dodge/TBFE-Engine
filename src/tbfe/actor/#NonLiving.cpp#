@@ -1,9 +1,9 @@
 #include "NonLiving.h"
 NonLiving::NonLiving(int x, int y, ActorType NewType):Actor(x,y)
 {  
-  setDirection(UP);
+  Action newAction("Walk","");
+  Animation newAnimation(NewType.source,"0,:");
   setConversation(NewType.Conversation);
-  setCollisionMap(NewType.Collision);
   setScriptSource(NewType.Script);
 };
 NonLiving::~NonLiving()
@@ -17,4 +17,3 @@ string NonLiving::getConversation(bool PlayerCheck)
     };
   return conversation_;
 };
-
