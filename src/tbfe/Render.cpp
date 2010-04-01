@@ -46,6 +46,7 @@ void TBFE_Render::initGl()
   GLfloat global_ambient[]={0.1f,0.1f,0.1f,1.0f};
   glLightModelfv(GL_LIGHT_MODEL_AMBIENT,global_ambient);
   glLightModelf(GL_LIGHT_MODEL_LOCAL_VIEWER,GL_TRUE);
+  glEnable(GL_LIGHT0);
   GLfloat specular[3];
   specular[0]=0.3f;
   specular[1]=0.3f;
@@ -57,7 +58,6 @@ void TBFE_Render::initGl()
   specular[1]=0.0f;
   specular[2]=0.0f;
   glLightfv(GL_LIGHT0,GL_AMBIENT,specular);
-  glEnable(GL_LIGHT0);
   int Error=glGetError();
   //If there was any errors
   if(Error != GL_NO_ERROR )
@@ -136,8 +136,8 @@ void TBFE_Render::finalRender(bool doFlip)
   glRotatef(-TBFE_Base::MainPlayer->getRotationF().Y,0,1,0);
   glTranslatef(-TBFE_Base::MainPlayer->getPositionF().X/20,0,-TBFE_Base::MainPlayer->getPositionF().Z/20);
   renderActors();
-  renderMapLayer(0,0,0);
-  // renderWindowList();
+  //renderMapLayer(0,0,0);
+  renderWindowList();
   SDL_GL_SwapBuffers();
   TBFE_Base::DeleteTempSheets();
   int Error=glGetError();
@@ -268,7 +268,7 @@ int TBFE_Render::renderMapLayer(int x,int y, int Layer)
   glNormalPointer(GL_FLOAT,0,&map_.normals[0]);
   glTexCoordPointer(2,GL_FLOAT,0,&map_.texCoords[0]);
   GLfloat color[]={1.0f,1.0f,1.0f};
-  glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,color);
+  glMaterialfv(GL_FRONT,GL_AMBIENT_AND_DIFFUSE,color);
   glDrawElements(GL_QUADS,map_.indices.size(),GL_UNSIGNED_INT,&map_.indices[0]);
   glDisableClientState(GL_VERTEX_ARRAY);
   glDisableClientState(GL_TEXTURE_COORD_ARRAY);

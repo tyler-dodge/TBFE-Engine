@@ -53,12 +53,15 @@ GLuint bindImage(SDL_Surface * textureSource)
     {
       TBFE_Base::MainConsole.write("texture fail");
     };
+  glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
   glGenTextures(1,&texture);
   glBindTexture(GL_TEXTURE_2D,texture);
   glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+  SDL_LockSurface(textureSource);
   glTexImage2D(GL_TEXTURE_2D,0,colors,textureSource->w,textureSource->h,0,format,
 	       GL_UNSIGNED_BYTE,textureSource->pixels);
+  SDL_UnlockSurface(textureSource);
   return texture;
 };
 void applyImage(int x,int y,SDL_Surface* source, SDL_Rect* clip)
@@ -136,7 +139,7 @@ ModelData * loadModel(string model)
     };
   for (int i=0;i<scene->mNumMeshes;i++)
     {
-      aiMesh * currentMesh=scene->mMeshes[0];
+      aiMesh * currentMesh=scene->mMeshes[i];
       MeshData * newMesh=new MeshData();
       for (int face=0;face<currentMesh->mNumFaces;face++)
 	{
@@ -158,6 +161,7 @@ ModelData * loadModel(string model)
 	  newMesh->normals.push_back(currentMesh->mNormals[i].y);
 	  newMesh->normals.push_back(currentMesh->mNormals[i].z);
 	};
+      newMesh->material=currentMesh->mMaterialIndex;
       data->meshes.push_back(newMesh);
     };
   return data;
@@ -275,22 +279,25 @@ void drawNodes(ModelData * model, aiVector3D position,aiVector3D rotation, aiVec
   glRotatef(rotation[2],0,0,1);
   for (int i=0;i<model->meshes.size();i++)
     {
+      glPushMatrix();
+      cout << model->meshes.size() <<'\n';
       MeshData * currentMesh=model->meshes.at(i);
       glEnableClientState(GL_VERTEX_ARRAY);
       glEnableClientState(GL_NORMAL_ARRAY);
-      glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+      //glEnableClientState(GL_TEXTURE_COORD_ARRAY);
       glVertexPointer(3,GL_FLOAT,0,&currentMesh->vertices[0]);
       glNormalPointer(GL_FLOAT,0,&currentMesh->normals[0]);
-      glTexCoordPointer(3,GL_FLOAT,sizeof(aiVector3D),&currentMesh->texCoords[0]);
+      //glTexCoordPointer(3,GL_FLOAT,sizeof(aiVector3D),&currentMesh->texCoords[0]);
       glDisable(GL_TEXTURE_2D);
       applyMaterial(model->materials[currentMesh->material]);
       glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
       glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
       glDrawElements(GL_TRIANGLES,currentMesh->indices.size(),GL_UNSIGNED_INT,&currentMesh->indices[0]);
-      glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+      //glDisableClientState(GL_TEXTURE_COORD_ARRAY);
       glDisableClientState(GL_NORMAL_ARRAY);
       glDisableClientState(GL_VERTEX_ARRAY);
       glDisable(GL_TEXTURE_2D);
+      glPopMatrix();
     };
   glPopMatrix();
 };
