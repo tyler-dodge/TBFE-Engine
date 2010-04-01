@@ -280,7 +280,6 @@ void drawNodes(ModelData * model, aiVector3D position,aiVector3D rotation, aiVec
   for (int i=0;i<model->meshes.size();i++)
     {
       glPushMatrix();
-      cout << model->meshes.size() <<'\n';
       MeshData * currentMesh=model->meshes.at(i);
       glEnableClientState(GL_VERTEX_ARRAY);
       glEnableClientState(GL_NORMAL_ARRAY);

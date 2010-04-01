@@ -136,7 +136,7 @@ void TBFE_Render::finalRender(bool doFlip)
   glRotatef(-TBFE_Base::MainPlayer->getRotationF().Y,0,1,0);
   glTranslatef(-TBFE_Base::MainPlayer->getPositionF().X/20,0,-TBFE_Base::MainPlayer->getPositionF().Z/20);
   renderActors();
-  //renderMapLayer(0,0,0);
+  renderMapLayer(0,0,0);
   renderWindowList();
   SDL_GL_SwapBuffers();
   TBFE_Base::DeleteTempSheets();
@@ -304,7 +304,6 @@ void TBFE_Render::renderActors()
 	      aiVector3D trotation(rotation.X+layerRotation.X,rotation.Y+layerRotation.Y,rotation.Z+layerRotation.Z);
 	      aiVector3D tscale(0,0,0);
 	      drawNodes(model,tposition,trotation,tscale);
-	      cout << "test\n";
 	      glPushMatrix();
 	      glTranslatef(ActorPosition.X/20,ActorPosition.Y/20,ActorPosition.Z/20);
 	      PositionF dimensions;
@@ -324,7 +323,6 @@ void TBFE_Render::renderActors()
 	      glEnable(GL_CULL_FACE);
 	      glPopMatrix();
 	    };
-	  cout << "testing\n";
 	};
       if (currentActor->getWalking())
 	{

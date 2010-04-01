@@ -98,8 +98,6 @@ namespace TBFE_Base
       {
 	return NULL;
       };
-    cout << source << '\n';
-    cout << AnimationSheets.size() << '\n';
     sheet.Texture=bindImage(sheet.Data);
     sheet.Source=source;
     AnimationSheets.push_back(sheet);
