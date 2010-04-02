@@ -23,6 +23,7 @@ int main(int argc,char* args[])
   init_Misc();
   init_UI();
   FILE * newFile=fopen(args[1],"r");
+  PyRun_SimpleString("import sys;sys.path.append('./')");
   PyRun_SimpleFile(newFile,args[1]);
   Py_Finalize();
   return 0;

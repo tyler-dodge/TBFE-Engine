@@ -10,25 +10,9 @@ Actor::Actor (int PositionX,int PositionY)
       setName("None");
       setSpeed(5);
       setRotationF(0,0,0);
-      string WalkAnimationBody="0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,";
-      string WalkHeads="0,";
-      Action Walk("Walk","");
-      Animation Body("test.dae",WalkAnimationBody,
-		     0,0,1,true);
-      Body.setRotation(270,90,0);
-      Walk.addAnimation(Body);
-      Walk.setMainAnimation(0);
-      addAction(Walk);
-      PositionF position;
-      position.X=-0.6;
-      position.Y=0;
-      position.Z=-2;
-      PositionF dimensions;
-      dimensions.X=1.2;
-      dimensions.Y=2;
-      dimensions.Z=2;
-      addCollisionBox(position,dimensions);
-      setBaseAction("Walk");
+      Action Stand("Stand","");
+      addAction(Stand);
+      setBaseAction("Stand");
     };
 PositionF Actor::getRotationF()
 {
@@ -39,14 +23,31 @@ void Actor::addCollisionBox(PositionF position,PositionF dimensions)
   CollisionBox newCollision(position,dimensions);
   collisionMaps_.push_back(newCollision);
 };
-CollisionBox Actor::getCollisionBox(int num)
+int Actor::getNumCollisionBox()
 {
-  if (num>collisionMaps_.size() || num<0)
+  return collisionMaps_.size();
+};
+CollisionBox * Actor::getCollisionBox(int num)
+{
+  if (num>=collisionMaps_.size() || num<0)
     {
-      cout << "collision Map goes past bounds\n";
-      return collisionMaps_.at(0);
+      TBFE_Base::MainConsole.write("collision number goes past array size");
+      if (num==0)
+	{
+	  TBFE_Base::MainConsole.write("new collision box created at 0");
+	  PositionF collPos;
+	  collPos.X=0;
+	  collPos.Y=0;
+	  collPos.Z=0;
+	  PositionF collSize;
+	  collSize.X=1;
+	  collSize.Y=1;
+	  collSize.Z=1;
+	  addCollisionBox(collPos,collSize);
+	};
+      return &collisionMaps_.at(0);
     };
-  return collisionMaps_.at(num);
+  return &collisionMaps_.at(num);
 };
 void Actor::setRotationF(float x,float y, float z)
 {
@@ -283,7 +284,7 @@ int Actor::checkActorCollision(float offsetX,float offsetY,float offsetZ)
   for (int i=0;i<TBFE_Base::ActorList.size();i++)
     {
       Actor * targetActor=TBFE_Base::ActorList.at(i);
-      CollisionBox targetCollision=targetActor->getCollisionBox(0);
+      CollisionBox targetCollision=*targetActor->getCollisionBox(0);
       if (targetActor!=this)
 	{
 	  for (int a=0;a<collisionMaps_.size();a++)

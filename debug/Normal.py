@@ -1,9 +1,4 @@
-import sys
-sys.path.append("TbfePy/")
-import Tbfe
-import Misc
-import UI
-import Actor
+from TbfePy import Tbfe, Misc, UI, Actor
 class Console:
     def __init__(self,targetConsole,engine):
         self.window=UI.createWindow(0,0,"Console")
@@ -45,28 +40,23 @@ def mouseCamera(MouseMovement):
         Position.X-=MouseMovement.Y
         if Position.X<0:
             Position.X=0
-        if Position.X>90:
-            Position.X=90
+        if Position.X>55:
+            Position.X=55
         engine.setCameraAngle(Position.X,Position.Y,Position.Z)
 def switchMouseCamera():
     if engine.getShowMouse():
         engine.setShowMouse(False)
     else:
         engine.setShowMouse(True)
-def house(newHouse):
-    Body=Actor.Animation("house.dae","0,",0,0.01,1,True)
-    Walk=Actor.Action("Walk","")
-    Body.setRotation(-90,0,0)
-    Walk.addAnimation(Body)
-    newHouse.addAction(Walk)
 Tbfe.cvar.ScreenDimensions.X=1024
 Tbfe.cvar.ScreenDimensions.Y=600
 engine=Tbfe.TBFE()
-Tbfe.GetMainPlayer().setPosition(100,0,400)
+Tbfe.GetMainPlayer().setPosition(100,0,1000)
 engine.changeMap("test.fmm")
 Tbfe.cvar.CurrentMap.generateMap(25,25)
 engine.initMap()
 UI.loadWindows("Data/Types/Window.cfg")
+Actor.loadActors("Data/Types/Actor.cfg")
 uiConsole=Console(Tbfe.cvar.MainConsole,engine)
 engine.addWindow(uiConsole.getWindow())
 uiMousePosition=UI.createWindow(0,400,"FrameRate")
@@ -78,8 +68,7 @@ action=5
 i=0
 randomNpc=Actor.createActor(500,200,"Npc","Npc")
 Tbfe.GetMainPlayer().setRotationF(0,180,0)
-housing=Actor.createActor(0,0,"Npc","Npc")
-house(housing)
+housing=Actor.createActor(0,400,"House","House")
 engine.addActor(housing)
 #engine.addActor(randomNpc)
 engine.addGlobalEvent("MouseCamera",Misc.MOUSEMOVE,0,"mouseCamera(mouseMovement)")

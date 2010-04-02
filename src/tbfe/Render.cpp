@@ -128,7 +128,7 @@ void TBFE_Render::finalRender(bool doFlip)
   glLightfv(GL_LIGHT0,GL_POSITION,lightPosition_);
   glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
   glLoadIdentity();
-  glTranslatef(0,0,-12);
+  glTranslatef(-1,-2.5,-4);
   glRotatef(cameraAngle_.X,1,0,0);
   glRotatef(cameraAngle_.Y,0,1,0);
   glRotatef(cameraAngle_.Z,0,0,1);
@@ -184,13 +184,14 @@ void TBFE_Render::refreshMapLayer(int Layer)
 	      map_.normals.push_back(0);
 	    };
 	  //bottom Right
-	  GLfloat coords[]={start.X,start.Y};
+	  aiVector3D newCoord;
 	  GLfloat vertex[]={tileSize*mapX,0,tileSize*mapY};
 	  map_.vertices.push_back(vertex[0]);
 	  map_.vertices.push_back(vertex[1]);
 	  map_.vertices.push_back(vertex[2]);
-	  map_.texCoords.push_back(coords[0]);
-	  map_.texCoords.push_back(coords[1]);
+	  newCoord.x=start.X;
+	  newCoord.y=start.Y;
+	  map_.texCoords.push_back(newCoord);
 	  //top right
 	  if (mapY==0)
 	    {
@@ -206,10 +207,9 @@ void TBFE_Render::refreshMapLayer(int Layer)
 	  map_.vertices.push_back(vertex[0]); 
 	  map_.vertices.push_back(vertex[1]); 
 	  map_.vertices.push_back(vertex[2]);
-	  coords[0]=start.X+end.X;
-	  coords[1]=start.Y;
-	  map_.texCoords.push_back(coords[0]);
-	  map_.texCoords.push_back(coords[1]);
+	  newCoord.x=start.X+end.X;
+	  newCoord.y=start.Y;
+	  map_.texCoords.push_back(newCoord);
 	  //Top Left
 	  if (mapX==0 || mapY==0)
 	    {
@@ -225,10 +225,9 @@ void TBFE_Render::refreshMapLayer(int Layer)
 	  map_.vertices.push_back(vertex[0]); 
 	  map_.vertices.push_back(vertex[1]); 
 	  map_.vertices.push_back(vertex[2]);
-	  coords[0]=start.X+end.X;
-	  coords[1]=start.Y+end.Y;
-	  map_.texCoords.push_back(coords[0]);
-	  map_.texCoords.push_back(coords[1]);
+	  newCoord.x=start.X+end.X;
+	  newCoord.y=start.Y+end.Y;
+	  map_.texCoords.push_back(newCoord);
 	  //Bottom Left
 	  if (mapX==0)
 	    {
@@ -244,10 +243,9 @@ void TBFE_Render::refreshMapLayer(int Layer)
 	  map_.vertices.push_back(vertex[0]); 
 	  map_.vertices.push_back(vertex[1]); 
 	  map_.vertices.push_back(vertex[2]);
-	  coords[0]=start.X;
-	  coords[1]=start.Y+end.Y;
-	  map_.texCoords.push_back(coords[0]);
-	  map_.texCoords.push_back(coords[1]);
+	  newCoord.x=start.X;
+	  newCoord.y=start.Y+end.Y;
+	  map_.texCoords.push_back(newCoord);
 	};
     };
   for (int i=0;i<dimensions.X*dimensions.Y*4;i++)
@@ -259,14 +257,13 @@ int TBFE_Render::renderMapLayer(int x,int y, int Layer)
 {
   glEnable(GL_TEXTURE_2D);
   glEnable(GL_CULL_FACE);
-  glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
   glEnableClientState(GL_VERTEX_ARRAY);
   glEnableClientState(GL_TEXTURE_COORD_ARRAY);
   glEnableClientState(GL_NORMAL_ARRAY);
   glBindTexture(GL_TEXTURE_2D,tileSet_.at(0).texture);
   glVertexPointer(3,GL_FLOAT,0,&map_.vertices[0]);
   glNormalPointer(GL_FLOAT,0,&map_.normals[0]);
-  glTexCoordPointer(2,GL_FLOAT,0,&map_.texCoords[0]);
+  glTexCoordPointer(3,GL_FLOAT,sizeof(aiVector3D),&map_.texCoords[0]);
   GLfloat color[]={1.0f,1.0f,1.0f};
   glMaterialfv(GL_FRONT,GL_AMBIENT_AND_DIFFUSE,color);
   glDrawElements(GL_QUADS,map_.indices.size(),GL_UNSIGNED_INT,&map_.indices[0]);
@@ -308,19 +305,22 @@ void TBFE_Render::renderActors()
 	      glTranslatef(ActorPosition.X/20,ActorPosition.Y/20,ActorPosition.Z/20);
 	      PositionF dimensions;
 	      PositionF offset;
-	      CollisionBox actorCollision=currentActor->getCollisionBox(0);
-	      dimensions=actorCollision.getDimensions();
-	      offset=actorCollision.getPosition();
-	      actorCollision.setRotation(rotation.X,-rotation.Y,rotation.Z);   
-	      vector<PositionF> points=actorCollision.generatePoints(actorCollision.getPosition(),actorCollision.getDimensions());
-	      glDisable(GL_CULL_FACE);
-	      glBegin(GL_QUADS);
-	      glVertex3f(points[0].X,points[0].Y+7,points[0].Z);
-	      glVertex3f(points[1].X,points[1].Y+7,points[1].Z);
-	      glVertex3f(points[2].X,points[2].Y+7,points[2].Z);
-	      glVertex3f(points[3].X,points[3].Y+7,points[3].Z);
-	      glEnd();
-	      glEnable(GL_CULL_FACE);
+	      for (int i=0;i<currentActor->getNumCollisionBox();i++)
+		{
+		  CollisionBox actorCollision=*currentActor->getCollisionBox(i);
+		  dimensions=actorCollision.getDimensions();
+		  offset=actorCollision.getPosition();
+		  actorCollision.setRotation(rotation.X,-rotation.Y,rotation.Z);   
+		  vector<PositionF> points=actorCollision.generatePoints(actorCollision.getPosition(),actorCollision.getDimensions());
+		  glDisable(GL_CULL_FACE);
+		  glBegin(GL_QUADS);
+		  glVertex3f(points[0].X,points[0].Y+7,points[0].Z);
+		  glVertex3f(points[1].X,points[1].Y+7,points[1].Z);
+		  glVertex3f(points[2].X,points[2].Y+7,points[2].Z);
+		  glVertex3f(points[3].X,points[3].Y+7,points[3].Z);
+		  glEnd();
+		  glEnable(GL_CULL_FACE);
+		};
 	      glPopMatrix();
 	    };
 	};

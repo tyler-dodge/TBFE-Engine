@@ -43,11 +43,9 @@ void Console::runLine(string Line)
     };
 };
 void Console::execute(string filename)
-{  
-  //FILE * newFile=fopen(args[1],"r");
-  //if (PyRun_SimpleFile(newFile,filename.c_str())==1)
-  //  {  
-  //  };
+{ 
+  FILE * newFile=fopen(filename.c_str(),"r");
+  PyRun_SimpleFile(newFile,filename.c_str());
 };
 string Console::getLine(int lineNum)
 {

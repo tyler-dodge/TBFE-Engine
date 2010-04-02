@@ -133,6 +133,10 @@ ModelData * loadModel(string model)
   const aiScene * loadScene=importer.ReadFile(model.c_str(),aiProcess_CalcTangentSpace | aiProcess_JoinIdenticalVertices);
   aiScene * scene=importer.GetOrphanedScene();
   ModelData * data=new ModelData();
+  if (scene==NULL)
+    {
+      return NULL;
+    };
   for (int i=0;i<scene->mNumMaterials;i++)
     {
       data->materials.push_back(scene->mMaterials[i]);
@@ -291,7 +295,7 @@ void drawNodes(ModelData * model, aiVector3D position,aiVector3D rotation, aiVec
       glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
       glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
       glDrawElements(GL_TRIANGLES,currentMesh->indices.size(),GL_UNSIGNED_INT,&currentMesh->indices[0]);
-      //glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+      glDisableClientState(GL_TEXTURE_COORD_ARRAY);
       glDisableClientState(GL_NORMAL_ARRAY);
       glDisableClientState(GL_VERTEX_ARRAY);
       glDisable(GL_TEXTURE_2D);

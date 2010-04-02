@@ -318,7 +318,7 @@ Direction TBFE::runEngine()
       SDL_Event currentSdlEvent=logic_.getEvent();
       checkEvents();
       //Normal KeyBoard Events
-      if (currentSdlEvent.type==SDL_KEYDOWN)
+      if (currentSdlEvent.type==SDL_KEYDOWN && logic_.isEventNew())
 	{	  
 	  if (TBFE_Base::KeyTarget!=NULL)
 	    {
@@ -345,18 +345,10 @@ Direction TBFE::runEngine()
 	      TBFE_Base::KeyTarget->setProperty("text",text);
 	      TBFE_Base::KeyTarget->reload();  
 	    };
-	  if (currentSdlEvent.key.keysym.sym<315 && currentSdlEvent.key.keysym.sym>=0)
-	    {
-	      logic_.setKeyDown(currentSdlEvent.key.keysym.sym,true);
-	    };
 	  if (logic_.checkKeyDown(27))
 	    {
 	      quit_=true;
-	    };	      
-	};
-      if (currentSdlEvent.type==SDL_KEYUP)
-	{
-	  logic_.setKeyDown(currentSdlEvent.key.keysym.sym,false);
+	    };
 	};
       checkOnce=true;
     };
@@ -398,14 +390,14 @@ Direction TBFE::runEngine()
 	  time_=0;
 	};
       frame_=0;
+      if (!showMouse_ && (mousePosition_.X!=TBFE_Base::ScreenDimensions.X/2 || mousePosition_.Y!=TBFE_Base::ScreenDimensions.Y/2))
+	{
+	  SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
+	  SDL_WarpMouse(TBFE_Base::ScreenDimensions.X/2,TBFE_Base::ScreenDimensions.Y/2);
+	  SDL_WM_GrabInput( SDL_GRAB_ON );
+	  SDL_EventState(SDL_MOUSEMOTION, SDL_ENABLE);
+	};
       return SECOND;
-    };
-  if (!showMouse_ && (mousePosition_.X!=TBFE_Base::ScreenDimensions.X/2 || mousePosition_.Y!=TBFE_Base::ScreenDimensions.Y/2))
-    {
-      SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
-      SDL_WarpMouse(TBFE_Base::ScreenDimensions.X/2,TBFE_Base::ScreenDimensions.Y/2);
-      SDL_WM_GrabInput( SDL_GRAB_ON );
-      SDL_EventState(SDL_MOUSEMOTION, SDL_ENABLE);
     };
   TBFE_Base::GameSpeed=60/(frame_*1000/frameRate_.GetTicks());
   if (TBFE_Base::GameSpeed>3)

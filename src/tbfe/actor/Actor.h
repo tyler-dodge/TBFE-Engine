@@ -46,7 +46,8 @@ class Actor
   bool addAction(Action);
   Action getCurrentAction();
   void addCollisionBox(PositionF,PositionF);
-  CollisionBox getCollisionBox(int);
+  CollisionBox * getCollisionBox(int);
+  int getNumCollisionBox();
   //Changes actorPosition relatively using direction
   string getProperty(string);
   void setProperty(string,string);

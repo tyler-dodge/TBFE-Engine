@@ -69,6 +69,7 @@ class Actor(_object):
     def getCurrentAction(*args): return _Actor.Actor_getCurrentAction(*args)
     def addCollisionBox(*args): return _Actor.Actor_addCollisionBox(*args)
     def getCollisionBox(*args): return _Actor.Actor_getCollisionBox(*args)
+    def getNumCollisionBox(*args): return _Actor.Actor_getNumCollisionBox(*args)
     def getProperty(*args): return _Actor.Actor_getProperty(*args)
     def setProperty(*args): return _Actor.Actor_setProperty(*args)
     def changePosition(*args): return _Actor.Actor_changePosition(*args)

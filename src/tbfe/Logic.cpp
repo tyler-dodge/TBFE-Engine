@@ -169,6 +169,17 @@ char TBFE_Logic::textInput(int KeyPress,bool ShiftDown)
 bool TBFE_Logic::pollEvent()
 {
   newEvent_=SDL_PollEvent(&event_);
+  if (newEvent_)
+    {
+      if (event_.type==SDL_KEYDOWN)
+	{
+	  setKeyDown(event_.key.keysym.sym,true);
+	};
+      if (event_.type==SDL_KEYUP)
+	{
+	  setKeyDown(event_.key.keysym.sym,false);
+	};
+    };
   return newEvent_;
 };
 bool TBFE_Logic::isEventNew()

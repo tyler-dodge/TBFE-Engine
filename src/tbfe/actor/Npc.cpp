@@ -9,7 +9,15 @@ Npc::Npc(int PositionX,int PositionY,string PlayerConversation)
 :Actor(PositionX,PositionY)
 {
   setConversation(PlayerConversation);
-  setScriptSource("Actors/Npc/Npc.lua");
+  setScriptSource("Actors/Npc/Npc.py");
+  string StandAnimation="0,";
+  Action Stand("Stand","");
+  Animation Body("test.dae",StandAnimation,
+		 0,0,1,true);
+  Body.setRotation(270,90,0);
+  Stand.addAnimation(Body);
+  Stand.setMainAnimation(0);
+  addAction(Stand);
 };
 Npc::~Npc()
 {

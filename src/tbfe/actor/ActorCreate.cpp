@@ -109,11 +109,9 @@ Actor * createActor(int PositionX,int PositionY, std::string ConversationText, s
   TempActor->setName(ActorName);
   CreatedActorList.push_back(TempActor);
   stringstream ActorSelf;
-  ActorSelf << "Caller=Actor.getActor(" << CreatedActorList.size()-1 <<")";
-  //TBFE_Base::MainConsole.runLine(ActorSelf.str());
-  //TBFE_Base::MainConsole.execute(TempActor->getScriptSource());
-  //TBFE_Base::MainConsole.runLine("StartAction()");
-  //TBFE_Base::MainConsole.runLine("StartAction=None");
+  ActorSelf << "Actor.getActor(" << CreatedActorList.size()-1 <<")";
+  TBFE_Base::MainConsole.runLine("import Actors."+ActorTypeName+".main");
+  TBFE_Base::MainConsole.runLine("Actors."+ActorTypeName+".main.StartAction("+ActorSelf.str()+")");
   return TempActor;
 };
 void deleteCreatedActorList(bool deleteMainPlayer)

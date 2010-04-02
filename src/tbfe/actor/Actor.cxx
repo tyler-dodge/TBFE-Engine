@@ -3691,7 +3691,7 @@ SWIGINTERN PyObject *_wrap_Actor_getCollisionBox(PyObject *SWIGUNUSEDPARM(self),
   int ecode2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  SwigValueWrapper< CollisionBox > result;
+  CollisionBox *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Actor_getCollisionBox",&obj0,&obj1)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
@@ -3704,8 +3704,30 @@ SWIGINTERN PyObject *_wrap_Actor_getCollisionBox(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Actor_getCollisionBox" "', argument " "2"" of type '" "int""'");
   } 
   arg2 = static_cast< int >(val2);
-  result = (arg1)->getCollisionBox(arg2);
-  resultobj = SWIG_NewPointerObj((new CollisionBox(static_cast< const CollisionBox& >(result))), SWIGTYPE_p_CollisionBox, SWIG_POINTER_OWN |  0 );
+  result = (CollisionBox *)(arg1)->getCollisionBox(arg2);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CollisionBox, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Actor_getNumCollisionBox(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Actor *arg1 = (Actor *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  int result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Actor_getNumCollisionBox",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_getNumCollisionBox" "', argument " "1"" of type '" "Actor *""'"); 
+  }
+  arg1 = reinterpret_cast< Actor * >(argp1);
+  result = (int)(arg1)->getNumCollisionBox();
+  resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
   return NULL;
@@ -8412,6 +8434,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Actor_getCurrentAction", _wrap_Actor_getCurrentAction, METH_VARARGS, NULL},
 	 { (char *)"Actor_addCollisionBox", _wrap_Actor_addCollisionBox, METH_VARARGS, NULL},
 	 { (char *)"Actor_getCollisionBox", _wrap_Actor_getCollisionBox, METH_VARARGS, NULL},
+	 { (char *)"Actor_getNumCollisionBox", _wrap_Actor_getNumCollisionBox, METH_VARARGS, NULL},
 	 { (char *)"Actor_getProperty", _wrap_Actor_getProperty, METH_VARARGS, NULL},
 	 { (char *)"Actor_setProperty", _wrap_Actor_setProperty, METH_VARARGS, NULL},
 	 { (char *)"Actor_changePosition", _wrap_Actor_changePosition, METH_VARARGS, NULL},
