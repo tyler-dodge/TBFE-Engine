@@ -1,0 +1,2 @@
+def Npc.StartAction():
+    return
