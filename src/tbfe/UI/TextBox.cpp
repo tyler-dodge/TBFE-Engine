@@ -75,7 +75,9 @@ void TextBox::wordWrap()
 	};
       if (reloadLine)
 	{
-	  text_.at(lineNum)=TTF_RenderText_Blended(TBFE_Base::GetFont(),textSegment.str().c_str(),textColor_);
+	  SDL_Surface * text=TTF_RenderText_Blended(TBFE_Base::GetFont(),textSegment.str().c_str(),textColor_);
+	  text_.at(lineNum)=SDL_DisplayFormatAlpha(text);
+	  SDL_FreeSurface(text);
 	};
       lineNum++;
     };
@@ -97,6 +99,7 @@ void TextBox::reload()
 {
   wordWrap();
   isReloaded=true;
+  setProperty("reload","1");
 };
 SDL_Surface * TextBox::renderElement()
 {
@@ -118,6 +121,7 @@ SDL_Surface * TextBox::renderElement()
 	};
       intermediary_ = SDL_CreateRGBSurface(0, getDimensions().X, getDimensions().Y, 32, 
 					   0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
+      SDL_FillRect(intermediary_,NULL,0xff000000);
       if (scrollY/text_.at(0)->h>=text_.size()-1)
 	{
 	  scrollY=text_.at(0)->h*(text_.size()-1);
@@ -130,6 +134,10 @@ SDL_Surface * TextBox::renderElement()
 	{
 	  if (lastLine)
 	    {
+	      if (getProperty("border")=="1")
+		{
+		  drawBorders();
+		};
 	      return intermediary_;
 	    };
 	  textDimensions.x=0;
@@ -146,6 +154,10 @@ SDL_Surface * TextBox::renderElement()
 	      textDimensions.h+=getDimensions().Y-(text_.at(i)->h*(i+1)-scrollY);
 	      if (textDimensions.h<0)
 		{
+		  if (getProperty("border")=="1")
+		    {
+		      drawBorders();
+		    };
 		  return intermediary_;
 		};
 	    };
@@ -153,6 +165,11 @@ SDL_Surface * TextBox::renderElement()
 	  position.x=0;
 	  position.y=text_.at(i)->h*i-scrollY;
 	  SDL_BlitSurface(text_.at(i),NULL,intermediary_,&position);
+	};
+      
+      if (getProperty("border")=="1")
+	{
+	  drawBorders();
 	};
     };
   return intermediary_;

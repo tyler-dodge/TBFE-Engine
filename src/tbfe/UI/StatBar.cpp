@@ -40,6 +40,7 @@ void StatBar::reload()
   position.x=0;
   position.y=1;
   SDL_BlitSurface(intermediary_,&bar_,statBarSurface_,&position);
+  setProperty("reload","1");
 };
 StatBar::~StatBar()
 {

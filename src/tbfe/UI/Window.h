@@ -14,12 +14,13 @@ class Window
   Position screenPosition_;
   bool showBackground_;
   bool isVisible_;
-  SDL_Surface * border_;
+  SDL_Surface * background_;
+  SDL_Surface * image_;
  protected:
  public:
   Window(int,int,int,int,std::string ImageSource="");
   ~Window();
-  void renderElements(SDL_Surface *);
+  SDL_Surface * renderElements(SDL_Surface *);
   void addElement(Element *);
   Element * getElement(std::string);
   Position getDimensions();

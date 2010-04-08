@@ -76,3 +76,21 @@ void Element::setProperty(string propertyName,string newValue)
   newProperty.Value=newValue;
   propertyList_.push_back(newProperty);
 };
+void Element::drawBorders()
+{  
+  SDL_Surface * border = SDL_CreateRGBSurface(0, dimensions_.X+2,dimensions_.Y+2, 32, 
+					      0x00ff0000,0x0000ff00,0x000000ff,0xff000000);
+  SDL_FillRect(border,NULL,0xffffffff);
+  SDL_Rect rect;					
+  rect.x=1;
+  rect.y=1;
+  rect.w=dimensions_.X;
+  rect.h=dimensions_.Y;
+  SDL_FillRect(border,&rect,0xff000000);
+  if (intermediary_!=NULL)
+    {      
+      SDL_BlitSurface(intermediary_,NULL,border,&rect);
+    };
+  SDL_FreeSurface(intermediary_);
+  intermediary_=border;
+};

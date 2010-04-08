@@ -3419,6 +3419,29 @@ fail:
 }
 
 
+SWIGINTERN int Swig_var_showCollision_set(PyObject *_val) {
+  {
+    bool val;
+    int res = SWIG_AsVal_bool(_val, &val);
+    if (!SWIG_IsOK(res)) {
+      SWIG_exception_fail(SWIG_ArgError(res), "in variable '""TBFE_Base::showCollision""' of type '""bool""'");
+    }
+    TBFE_Base::showCollision = static_cast< bool >(val);
+  }
+  return 0;
+fail:
+  return 1;
+}
+
+
+SWIGINTERN PyObject *Swig_var_showCollision_get(void) {
+  PyObject *pyobj = 0;
+  
+  pyobj = SWIG_From_bool(static_cast< bool >(TBFE_Base::showCollision));
+  return pyobj;
+}
+
+
 SWIGINTERN PyObject *_wrap_GetCollisionTile(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   SDL_Surface *result = 0 ;
@@ -6198,5 +6221,6 @@ SWIGEXPORT void SWIG_init(void) {
   SWIG_addvarlink(SWIG_globals(),(char*)"Time",Swig_var_Time_get, Swig_var_Time_set);
   SWIG_addvarlink(SWIG_globals(),(char*)"GameSpeed",Swig_var_GameSpeed_get, Swig_var_GameSpeed_set);
   SWIG_addvarlink(SWIG_globals(),(char*)"ScreenDimensions",Swig_var_ScreenDimensions_get, Swig_var_ScreenDimensions_set);
+  SWIG_addvarlink(SWIG_globals(),(char*)"showCollision",Swig_var_showCollision_get, Swig_var_showCollision_set);
 }
 

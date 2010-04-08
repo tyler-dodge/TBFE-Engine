@@ -10,7 +10,8 @@ Window::Window(int width, int height, int positionX, int positionY, string Image
   setDimensions(width,height);
   setScreenPosition(positionX,positionY);
   setShowBackground(true);
-  border_=TBFE_Base::CheckSheets("border.png");
+  image_=NULL;
+  background_=NULL;
 };
 Window::~Window()
 {
@@ -26,99 +27,61 @@ Element * Window::getElement(std::string Name)
     };
   return NULL;
 };
-void Window::renderElements(SDL_Surface * screen)
+SDL_Surface * Window::renderElements(SDL_Surface * screen)
 {
+  bool reload=false;
   for(int i=0;i<elements_.size();i++)
     {
       if (elements_.at(i)!=NULL)
 	{
 	  SDL_Surface * element=elements_.at(i)->renderElement();
-	  if (elements_.at(i)->getProperty("border")=="1")
+	  if (element!=NULL)
 	    {
-	      Position elementDimensions=elements_.at(i)->getDimensions();
-	      Position elementPosition=elements_.at(i)->getPosition();
-	      SDL_Surface * border = SDL_CreateRGBSurface(0, elementDimensions.X+4,elementDimensions.Y+4, 32, 
-							  0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
-	      if (border_!=NULL)
+	      if (elements_.at(i)->getProperty("reload")=="1")
 		{
-		  for (int x=0;x<elementDimensions.X+4;x+=border_->w)
-		    {
-		      SDL_Rect rect;
-		      rect.x=0;
-		      rect.y=0;
-		      if (elementDimensions.X+4-x<border_->w)
-			{
-			  rect.w=elementDimensions.X+4-x;
-			}
-		      else
-			{
-			  rect.w=border_->w;
-			};
-		      rect.h=1;
-		      //if (elementDimensions.Y-y<border_->h)
-		      //	{
-		      //	  rect.h=elementDimensions.Y-y;
-		      //	}
-		      //else
-		      //	{
-		      //	  rect.h=border_->h;
-		      //	};
-		      SDL_Rect pos;
-		      pos.x=x;
-		      pos.y=0;
-		      SDL_BlitSurface(border_,&rect,border,&pos);
-
-		      pos.x=x;
-		      pos.y=elementDimensions.Y+3;
-		      SDL_BlitSurface(border_,&rect,border,&pos);
-		    };
-		  for (int y=0;y<elementDimensions.Y+4;y+=border_->h)
-		    {
-		      SDL_Rect rect;
-		      rect.x=0;
-		      rect.y=0;
-		      if (elementDimensions.Y+4-y<border_->h)
-			{
-			  rect.h=elementDimensions.Y+4-y;
-			}
-		      else
-			{
-			  rect.h=border_->h;
-			};
-		      rect.w=1;
-		      SDL_Rect pos;
-		      pos.x=0;
-		      pos.y=y;
-		      SDL_BlitSurface(border_,&rect,border,&pos);
-
-		      pos.x=elementDimensions.X+3;
-		      pos.y=y;
-		      SDL_BlitSurface(border_,&rect,border,&pos);
-		    };
-		};
-	      SDL_Rect pos;
-	      pos.x=2;
-	      pos.y=2;
-	      SDL_BlitSurface(element,NULL,border,&pos);
-	      if (elements_.at(i)->getVisibility()==true)
-		{
-		  applyImage(getScreenPosition().X+elements_.at(i)->getPosition().X,
-			     getScreenPosition().Y+elements_.at(i)->getPosition().Y,border,NULL);
-		  applyImage(getScreenPosition().X+elements_.at(i)->getPosition().X+2,
-			     getScreenPosition().Y+elements_.at(i)->getPosition().Y+2,element,NULL);
-		};
-	      SDL_FreeSurface(border);
-	    }     
-	  else if (element!=NULL)
-	    {
-	      if (elements_.at(i)->getVisibility()==true)
-		{
-		  applyImage(getScreenPosition().X+elements_.at(i)->getPosition().X,
-			     getScreenPosition().Y+elements_.at(i)->getPosition().Y,element,NULL);
+		  elements_.at(i)->setProperty("reload","0");
+		  reload=true;
 		};
 	    };
 	};
     };
+  if (reload || image_==NULL)
+    {
+      if (background_==NULL)
+	{
+	  background_=SDL_CreateRGBSurface(0,dimensions_.X,dimensions_.Y,32,
+					   0x00ff0000,0x0000ff00,0x000000ff,0xff000000);
+	  SDL_FillRect(background_,NULL,0xff000000);
+	}
+      else if (background_->w!=dimensions_.X || background_->h!=dimensions_.Y)
+	{
+	  if (background_!=NULL)
+	    {
+	      SDL_FreeSurface(background_);
+	    };
+	  background_=SDL_CreateRGBSurface(0,dimensions_.X,dimensions_.Y,32,
+					   0x00ff0000,0x0000ff00,0x000000ff,0xff000000);
+	  SDL_FillRect(background_,NULL,0xff000000);
+	};
+      if (image_!=NULL)
+	{
+	  SDL_FreeSurface(image_);
+	};
+      image_=SDL_DisplayFormatAlpha(background_);
+      for (int i=0;i<elements_.size();i++)
+	{
+	  if (elements_.at(i)!=NULL)
+	    {
+	      Position elementPosition=elements_.at(i)->getPosition();
+	      SDL_Rect rect;
+	      rect.x=elementPosition.X;
+	      rect.y=elementPosition.Y;
+	      SDL_Surface * element=elements_.at(i)->renderElement();
+	      SDL_BlitSurface(element,NULL,image_,&rect);
+	    };
+	};
+    };
+  return image_;
 };
 bool Window::getVisibility()
 {

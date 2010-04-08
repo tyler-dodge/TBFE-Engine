@@ -6,7 +6,6 @@ class ImageBox:public Element
 {
  private:
   SDL_Surface * image_;
-  SDL_Surface * intermediary_;
  public:
   SDL_Surface * renderElement();
   ImageBox(int,int,string);

@@ -92,6 +92,7 @@ void ImageBox::reload()
     };
   Position CurrentPosition=getPosition();
   SDL_BlitSurface(intermediary_,&Clip,image_,NULL);
+  setProperty("reload","1");
 };
 SDL_Surface * ImageBox::renderElement()
 {

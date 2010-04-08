@@ -94,6 +94,7 @@ class Element(_object):
     def setProperty(*args): return _UI.Element_setProperty(*args)
     def getVisibility(*args): return _UI.Element_getVisibility(*args)
     def setVisibility(*args): return _UI.Element_setVisibility(*args)
+    def drawBorders(*args): return _UI.Element_drawBorders(*args)
     def renderElement(*args): return _UI.Element_renderElement(*args)
     def reload(*args): return _UI.Element_reload(*args)
     __swig_destroy__ = _UI.delete_Element

@@ -3136,6 +3136,7 @@ SWIGINTERN PyObject *_wrap_Window_renderElements(PyObject *SWIGUNUSEDPARM(self),
   int res2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
+  SDL_Surface *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Window_renderElements",&obj0,&obj1)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Window, 0 |  0 );
@@ -3148,8 +3149,8 @@ SWIGINTERN PyObject *_wrap_Window_renderElements(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Window_renderElements" "', argument " "2"" of type '" "SDL_Surface *""'"); 
   }
   arg2 = reinterpret_cast< SDL_Surface * >(argp2);
-  (arg1)->renderElements(arg2);
-  resultobj = SWIG_Py_Void();
+  result = (SDL_Surface *)(arg1)->renderElements(arg2);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_SDL_Surface, 0 |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -3803,6 +3804,27 @@ SWIGINTERN PyObject *_wrap_Element_setVisibility(PyObject *SWIGUNUSEDPARM(self),
   } 
   arg2 = static_cast< bool >(val2);
   (arg1)->setVisibility(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Element_drawBorders(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Element *arg1 = (Element *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Element_drawBorders",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Element, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Element_drawBorders" "', argument " "1"" of type '" "Element *""'"); 
+  }
+  arg1 = reinterpret_cast< Element * >(argp1);
+  (arg1)->drawBorders();
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -4567,6 +4589,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Element_setProperty", _wrap_Element_setProperty, METH_VARARGS, NULL},
 	 { (char *)"Element_getVisibility", _wrap_Element_getVisibility, METH_VARARGS, NULL},
 	 { (char *)"Element_setVisibility", _wrap_Element_setVisibility, METH_VARARGS, NULL},
+	 { (char *)"Element_drawBorders", _wrap_Element_drawBorders, METH_VARARGS, NULL},
 	 { (char *)"Element_renderElement", _wrap_Element_renderElement, METH_VARARGS, NULL},
 	 { (char *)"Element_reload", _wrap_Element_reload, METH_VARARGS, NULL},
 	 { (char *)"delete_Element", _wrap_delete_Element, METH_VARARGS, NULL},

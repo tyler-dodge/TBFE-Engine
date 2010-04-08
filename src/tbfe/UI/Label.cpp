@@ -48,12 +48,25 @@ void Label::reload()
 	{
 	  intermediary_=SDL_CreateRGBSurface(0, text_->w, text_->h, 32, 
 					     0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
+	  SDL_FillRect(intermediary_,NULL,0xff000000);
 	  SDL_BlitSurface(text_,NULL,intermediary_,NULL);
 	};
+      if (getProperty("border")=="1")
+	{
+	  drawBorders();
+	};
+      setProperty("reload","1");
     };
   if (getProperty("width")!="")
     {
-      setDimensions(atoi(getProperty("width").c_str()),getDimensions().Y);
+      if (getDimensions().X!=atoi(getProperty("width").c_str()))
+	{
+	  SDL_FreeSurface(intermediary_);
+	  intermediary_=SDL_DisplayFormatAlpha(text_);
+	  setDimensions(atoi(getProperty("width").c_str()),getDimensions().Y);
+	  drawBorders();
+	};
+      setProperty("reload","1");
     };
 };
 SDL_Surface * Label::renderElement()

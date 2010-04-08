@@ -138,6 +138,7 @@ void TBFE_Render::finalRender(bool doFlip)
   renderActors();
   renderMapLayer(0,0,0);
   renderWindowList();
+  applyImage(TBFE_Base::ScreenDimensions.X/2-25,TBFE_Base::ScreenDimensions.Y/2-25,TBFE_Base::CheckSheets("Images/UI/cursor.png"),NULL);
   SDL_GL_SwapBuffers();
   TBFE_Base::DeleteTempSheets();
   int Error=glGetError();
@@ -301,27 +302,34 @@ void TBFE_Render::renderActors()
 	      aiVector3D trotation(rotation.X+layerRotation.X,rotation.Y+layerRotation.Y,rotation.Z+layerRotation.Z);
 	      aiVector3D tscale(0,0,0);
 	      drawNodes(model,tposition,trotation,tscale);
-	      glPushMatrix();
-	      glTranslatef(ActorPosition.X/20,ActorPosition.Y/20,ActorPosition.Z/20);
-	      PositionF dimensions;
-	      PositionF offset;
-	      for (int i=0;i<currentActor->getNumCollisionBox();i++)
+	      if (TBFE_Base::showCollision)
 		{
-		  CollisionBox actorCollision=*currentActor->getCollisionBox(i);
-		  dimensions=actorCollision.getDimensions();
-		  offset=actorCollision.getPosition();
-		  actorCollision.setRotation(rotation.X,-rotation.Y,rotation.Z);   
-		  vector<PositionF> points=actorCollision.generatePoints(actorCollision.getPosition(),actorCollision.getDimensions());
-		  glDisable(GL_CULL_FACE);
-		  glBegin(GL_QUADS);
-		  glVertex3f(points[0].X,points[0].Y+7,points[0].Z);
-		  glVertex3f(points[1].X,points[1].Y+7,points[1].Z);
-		  glVertex3f(points[2].X,points[2].Y+7,points[2].Z);
-		  glVertex3f(points[3].X,points[3].Y+7,points[3].Z);
-		  glEnd();
-		  glEnable(GL_CULL_FACE);
+		  glPushMatrix();
+		  glTranslatef(ActorPosition.X/20,ActorPosition.Y/20,ActorPosition.Z/20);
+		  PositionF dimensions;
+		  PositionF offset;
+		  for (int i=0;i<currentActor->getNumCollisionBox();i++)
+		    {
+		      CollisionBox actorCollision=*currentActor->getCollisionBox(i);
+		      dimensions=actorCollision.getDimensions();
+		      offset=actorCollision.getPosition();
+		      actorCollision.setRotation(rotation.X,-rotation.Y,rotation.Z);   
+		      vector<PositionF> points=actorCollision.generatePoints(actorCollision.getPosition(),actorCollision.getDimensions());
+		      glDisable(GL_CULL_FACE);
+		      glEnableClientState(GL_VERTEX_ARRAY);
+		      glVertexPointer(3,GL_FLOAT,0,&points[0]);
+		      GLuint indices[24]={0,1,2,3,
+					  0,1,5,4,
+					  2,3,7,6,
+					  1,2,6,5,
+					  3,0,4,7,
+					  4,5,6,7};  
+		      glDrawElements(GL_QUADS,24,GL_UNSIGNED_INT,&indices);
+		      glDisableClientState(GL_VERTEX_ARRAY);
+		      glEnable(GL_CULL_FACE);
+		    };
+		  glPopMatrix();
 		};
-	      glPopMatrix();
 	    };
 	};
       if (currentActor->getWalking())
@@ -343,33 +351,11 @@ void TBFE_Render::renderWindowList()
       if (window->getVisibility())
 	{
 	  Position windowPosition=window->getScreenPosition();
-	  NewWindow.x=0;
-	  NewWindow.y=0;
-	  NewWindow.w=window->getDimensions().X;
-	  NewWindow.h=window->getDimensions().Y;
-	  int segmentX=NewWindow.w/window_->w+1;
-	  int segmentY=NewWindow.h/window_->h+1;
-	  if (window->getShowBackground())
+	  SDL_Surface * windowSurface=window->renderElements(screen_);
+	  if (windowSurface!=NULL)
 	    {
-	      for (int y=0;y<segmentY;y++)
-		{
-		  for (int x=0;x<segmentX;x++)
-		    {
-		      NewWindow.w=window->getDimensions().X-x*window_->w;
-		      NewWindow.h=window->getDimensions().Y-y*window_->h;
-		      if (NewWindow.w>window_->w)
-			{
-			  NewWindow.w=window_->w;
-			};
-		      if (NewWindow.h>window_->h)
-			{
-			  NewWindow.h=window_->h;
-			};
-		      applyImage(windowPosition.X+x*window_->w,windowPosition.Y+y*window_->h,window_,&NewWindow);
-		    };
-		};
+	      applyImage(windowPosition.X,windowPosition.Y,windowSurface,NULL);
 	    };
-	  window->renderElements(screen_);
 	};
     };
 };

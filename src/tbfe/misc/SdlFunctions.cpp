@@ -109,6 +109,21 @@ void applyImage(int x,int y,SDL_Surface* source, SDL_Rect* clip)
 	{
 	  GLuint texture=TBFE_Base::GetTexture(source);
 	  glEnable(GL_TEXTURE_2D);
+	  glDepthFunc(GL_ALWAYS);
+	  if (source->format->BytesPerPixel==4)
+	    {
+	      glEnable(GL_BLEND);
+	      glEnable(GL_ALPHA_TEST);
+	      glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+	      glAlphaFunc(GL_GREATER,0.1f);
+	      glColor4f(1.0f,1.0f,1.0f,1.0f);
+	    }
+	  else
+	    {
+	      glDisable(GL_BLEND);
+	      glDisable(GL_ALPHA_TEST);
+	      cout << "test\n";
+	    };
 	  glBindTexture(GL_TEXTURE_2D,texture);
 	  glDisable(GL_LIGHTING);
 	  glBegin(GL_QUADS);
@@ -117,8 +132,11 @@ void applyImage(int x,int y,SDL_Surface* source, SDL_Rect* clip)
 	  glTexCoord2f(start.X+end.X,start.Y+end.Y);glVertex3f(dimensions.X,dimensions.Y,0);
 	  glTexCoord2f(start.X+end.X,start.Y);glVertex3f(dimensions.X,0,0);
 	  glEnd();
+	  glDisable(GL_ALPHA_TEST);
+	  glDisable(GL_BLEND);
 	  glDisable(GL_TEXTURE_2D);
 	  glEnable(GL_LIGHTING);
+	  glDepthFunc(GL_LEQUAL);
 	};
       glPopMatrix();
     };
@@ -256,11 +274,8 @@ void applyMaterial(const struct aiMaterial *mtl)
 	glPolygonMode(GL_FRONT_AND_BACK, fill_mode);
 
 	max = 1;
-	if((AI_SUCCESS == aiGetMaterialIntegerArray(mtl, AI_MATKEY_TWOSIDED, &two_sided, (unsigned int *)&max)) && two_sided)
-		glEnable(GL_CULL_FACE);
-	else 
-	  glDisable(GL_CULL_FACE);
-	    if (mtl->GetTextureCount(aiTextureType_DIFFUSE))
+	glEnable(GL_CULL_FACE);
+	if (mtl->GetTextureCount(aiTextureType_DIFFUSE))
 	      {
 		aiString newString;
 		mtl->GetTexture(aiTextureType_DIFFUSE,0,&newString,NULL,NULL,NULL,NULL,NULL);

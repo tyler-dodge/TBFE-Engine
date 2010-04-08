@@ -13,6 +13,8 @@ class Element
   std::string special_;
   bool isVisible_;
   vector<Property> propertyList_;
+ protected:
+  SDL_Surface * intermediary_;
  public:
   SDL_Surface * getBackground();
   void setBackground(string);
@@ -30,6 +32,7 @@ class Element
   void setProperty(string,string);
   bool getVisibility();
   void setVisibility(bool);
+  void drawBorders();
   virtual SDL_Surface * renderElement()=0;
   virtual void reload()=0;
   Element(int,int);

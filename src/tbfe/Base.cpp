@@ -7,6 +7,7 @@
    extern TTF_Font *font;*/
 namespace TBFE_Base
 {
+  bool showCollision=false;
   SDL_Surface * CollisionTile=NULL;
   Console MainConsole;
   vector<Actor *> ActorList;

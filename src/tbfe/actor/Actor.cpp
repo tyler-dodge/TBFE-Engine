@@ -284,22 +284,25 @@ int Actor::checkActorCollision(float offsetX,float offsetY,float offsetZ)
   for (int i=0;i<TBFE_Base::ActorList.size();i++)
     {
       Actor * targetActor=TBFE_Base::ActorList.at(i);
-      CollisionBox targetCollision=*targetActor->getCollisionBox(0);
-      if (targetActor!=this)
+      for (int targetA=0;targetA<targetActor->getNumCollisionBox();targetA++)
 	{
-	  for (int a=0;a<collisionMaps_.size();a++)
+	  CollisionBox targetCollision=*targetActor->getCollisionBox(targetA);
+	  if (targetActor!=this)
 	    {
-	      PositionF targetPosition=targetActor->getPositionF();
-	      PositionF offset;
-	      offset.X=offsetX-targetPosition.X;
-	      offset.Y=offsetY-targetPosition.Y;
-	      offset.Z=offsetZ-targetPosition.Z;
-	      PositionF targetRotation=targetActor->getRotationF();
-	      targetCollision.setRotation(targetRotation.X,targetRotation.Y,targetRotation.Z);
-	      collisionMaps_.at(a).setRotation(rotation_.X,-rotation_.Y,rotation_.Z);
-	      if (collisionMaps_.at(a).checkCollision(targetCollision,offset))
+	      for (int a=0;a<collisionMaps_.size();a++)
 		{
-		  return a;
+		  PositionF targetPosition=targetActor->getPositionF();
+		  PositionF offset;
+		  offset.X=offsetX-targetPosition.X;
+		  offset.Y=offsetY-targetPosition.Y;
+		  offset.Z=offsetZ-targetPosition.Z;
+		  PositionF targetRotation=targetActor->getRotationF();
+		  targetCollision.setRotation(targetRotation.X,targetRotation.Y,targetRotation.Z);
+		  collisionMaps_.at(a).setRotation(rotation_.X,-rotation_.Y,rotation_.Z);
+		  if (collisionMaps_.at(a).checkCollision(targetCollision,offset))
+		    {
+		      return a;
+		    };
 		};
 	    };
 	};

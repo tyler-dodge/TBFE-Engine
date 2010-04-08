@@ -28,7 +28,7 @@ namespace TBFE_Base
   extern GLuint GetTexture(SDL_Surface *);
   extern TTF_Font * GetFont();
   extern void SetFont(TTF_Font *);
-
+  extern bool showCollision;
   extern SDL_Surface * GetCollisionTile();
   extern void SetCollisionTile(SDL_Surface *);
   extern Actor * GetMainPlayer();
