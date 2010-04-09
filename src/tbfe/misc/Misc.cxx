@@ -4947,6 +4947,104 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_new_PositionF__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  PositionF *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":new_PositionF")) SWIG_fail;
+  result = (PositionF *)new PositionF();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_PositionF, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_PositionF__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  float arg1 ;
+  float arg2 ;
+  float arg3 ;
+  float val1 ;
+  int ecode1 = 0 ;
+  float val2 ;
+  int ecode2 = 0 ;
+  float val3 ;
+  int ecode3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  PositionF *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:new_PositionF",&obj0,&obj1,&obj2)) SWIG_fail;
+  ecode1 = SWIG_AsVal_float(obj0, &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_PositionF" "', argument " "1"" of type '" "float""'");
+  } 
+  arg1 = static_cast< float >(val1);
+  ecode2 = SWIG_AsVal_float(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_PositionF" "', argument " "2"" of type '" "float""'");
+  } 
+  arg2 = static_cast< float >(val2);
+  ecode3 = SWIG_AsVal_float(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_PositionF" "', argument " "3"" of type '" "float""'");
+  } 
+  arg3 = static_cast< float >(val3);
+  result = (PositionF *)new PositionF(arg1,arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_PositionF, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_PositionF(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[4];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = (int)PyObject_Length(args);
+  for (ii = 0; (ii < argc) && (ii < 3); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 0) {
+    return _wrap_new_PositionF__SWIG_0(self, args);
+  }
+  if (argc == 3) {
+    int _v;
+    {
+      int res = SWIG_AsVal_float(argv[0], NULL);
+      _v = SWIG_CheckState(res);
+    }
+    if (_v) {
+      {
+        int res = SWIG_AsVal_float(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        {
+          int res = SWIG_AsVal_float(argv[2], NULL);
+          _v = SWIG_CheckState(res);
+        }
+        if (_v) {
+          return _wrap_new_PositionF__SWIG_1(self, args);
+        }
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number of arguments for overloaded function 'new_PositionF'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    PositionF()\n"
+    "    PositionF(float,float,float)\n");
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_PositionF___add__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   PositionF *arg1 = (PositionF *) 0 ;
@@ -5101,6 +5199,37 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_PositionF___mul__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  PositionF *arg1 = (PositionF *) 0 ;
+  float arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  float val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PositionF result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:PositionF___mul__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_PositionF, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PositionF___mul__" "', argument " "1"" of type '" "PositionF *""'"); 
+  }
+  arg1 = reinterpret_cast< PositionF * >(argp1);
+  ecode2 = SWIG_AsVal_float(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "PositionF___mul__" "', argument " "2"" of type '" "float""'");
+  } 
+  arg2 = static_cast< float >(val2);
+  result = (arg1)->operator *(arg2);
+  resultobj = SWIG_NewPointerObj((new PositionF(static_cast< const PositionF& >(result))), SWIGTYPE_p_PositionF, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_PositionF___div__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   PositionF *arg1 = (PositionF *) 0 ;
@@ -5148,19 +5277,6 @@ SWIGINTERN PyObject *_wrap_PositionF_dumpString(PyObject *SWIGUNUSEDPARM(self), 
   arg1 = reinterpret_cast< PositionF * >(argp1);
   result = (arg1)->dumpString();
   resultobj = SWIG_From_std_string(static_cast< std::string >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_PositionF(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  PositionF *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)":new_PositionF")) SWIG_fail;
-  result = (PositionF *)new PositionF();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_PositionF, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -7296,13 +7412,14 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"PositionF_Y_get", _wrap_PositionF_Y_get, METH_VARARGS, NULL},
 	 { (char *)"PositionF_Z_set", _wrap_PositionF_Z_set, METH_VARARGS, NULL},
 	 { (char *)"PositionF_Z_get", _wrap_PositionF_Z_get, METH_VARARGS, NULL},
+	 { (char *)"new_PositionF", _wrap_new_PositionF, METH_VARARGS, NULL},
 	 { (char *)"PositionF___add__", _wrap_PositionF___add__, METH_VARARGS, NULL},
 	 { (char *)"PositionF___sub__", _wrap_PositionF___sub__, METH_VARARGS, NULL},
 	 { (char *)"PositionF___iadd__", _wrap_PositionF___iadd__, METH_VARARGS, NULL},
 	 { (char *)"PositionF___isub__", _wrap_PositionF___isub__, METH_VARARGS, NULL},
+	 { (char *)"PositionF___mul__", _wrap_PositionF___mul__, METH_VARARGS, NULL},
 	 { (char *)"PositionF___div__", _wrap_PositionF___div__, METH_VARARGS, NULL},
 	 { (char *)"PositionF_dumpString", _wrap_PositionF_dumpString, METH_VARARGS, NULL},
-	 { (char *)"new_PositionF", _wrap_new_PositionF, METH_VARARGS, NULL},
 	 { (char *)"delete_PositionF", _wrap_delete_PositionF, METH_VARARGS, NULL},
 	 { (char *)"PositionF_swigregister", PositionF_swigregister, METH_VARARGS, NULL},
 	 { (char *)"Position_X_set", _wrap_Position_X_set, METH_VARARGS, NULL},

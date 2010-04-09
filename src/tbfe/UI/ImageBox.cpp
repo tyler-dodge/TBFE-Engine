@@ -44,7 +44,7 @@ ImageBox::ImageBox(int x,int y,string Source):Element(x,y)
       setDimensions(w,h);
     }
   setProperty("imageSource",ImageSource);
-  image_=loadImage(ImageSource.c_str());
+  image_=TBFE_Base::CheckSheets(ImageSource.c_str());
   if (image_!=NULL)
     {
       setDimensions(image_->w,image_->h);
@@ -59,18 +59,21 @@ ImageBox::~ImageBox()
 };
 void ImageBox::reload()
 {
-  SDL_FreeSurface(image_);
   image_=TBFE_Base::CheckSheets(getProperty("imageSource").c_str());
-
+  if (image_==NULL)
+    {
+      intermediary_=NULL;
+      return;
+    };
   SDL_Rect Clip;
   Position dimensions=getDimensions();
+  Clip.x=0;
+  Clip.y=0;
+  Clip.w=dimensions.X;
+  Clip.h=dimensions.Y;
   if (getProperty("clipX")!="")
     {
       Clip.x=atoi(getProperty("clipX").c_str());
-    }
-  else
-    {
-      Clip.x=0;
     };
   if (getProperty("clipY")!="")
     {
@@ -91,7 +94,14 @@ void ImageBox::reload()
       setDimensions(Clip.w,Clip.h);
     };
   Position CurrentPosition=getPosition();
-  SDL_BlitSurface(intermediary_,&Clip,image_,NULL);
+  if (intermediary_!=NULL)
+    {
+      SDL_FreeSurface(intermediary_);
+    };
+  intermediary_=SDL_CreateRGBSurface(0,image_->w,image_->h,32,
+				     0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
+  SDL_SetAlpha(image_,0,0);
+  SDL_BlitSurface(image_,&Clip,intermediary_,NULL);
   setProperty("reload","1");
 };
 SDL_Surface * ImageBox::renderElement()

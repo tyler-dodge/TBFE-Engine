@@ -13,6 +13,8 @@ TBFE::TBFE()
   SDL_GetMouseState(&mousePosition_.X,&mousePosition_.Y);
   mouseMovement_.X=mousePosition_.X;
   mouseMovement_.Y=mousePosition_.Y;
+  mouseCenter_.X=TBFE_Base::ScreenDimensions.X/2;
+  mouseCenter_.Y=TBFE_Base::ScreenDimensions.Y/2;
   return;
 };
 TBFE::~TBFE()
@@ -20,6 +22,15 @@ TBFE::~TBFE()
   deleteWindowList();
   deleteCreatedActorList();
   TBFE_Base::DeleteAnimationSheets();
+};
+Position TBFE::getMouseCenter()
+{
+  return mouseCenter_;
+};
+void TBFE::setMouseCenter(int x,int y)
+{
+  mouseCenter_.X=x;
+  mouseCenter_.Y=y;
 };
 bool TBFE::createFile(string name)
 {  
@@ -393,7 +404,7 @@ Direction TBFE::runEngine()
       if (!showMouse_ && (mousePosition_.X!=TBFE_Base::ScreenDimensions.X/2 || mousePosition_.Y!=TBFE_Base::ScreenDimensions.Y/2))
 	{
 	  SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
-	  SDL_WarpMouse(TBFE_Base::ScreenDimensions.X/2,TBFE_Base::ScreenDimensions.Y/2);
+	  SDL_WarpMouse(mouseCenter_.X,mouseCenter_.Y);
 	  SDL_WM_GrabInput( SDL_GRAB_ON );
 	  SDL_EventState(SDL_MOUSEMOTION, SDL_ENABLE);
 	};

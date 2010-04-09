@@ -4018,6 +4018,67 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_TBFE_getMouseCenter(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  TBFE *arg1 = (TBFE *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  Position result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:TBFE_getMouseCenter",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TBFE, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TBFE_getMouseCenter" "', argument " "1"" of type '" "TBFE *""'"); 
+  }
+  arg1 = reinterpret_cast< TBFE * >(argp1);
+  result = (arg1)->getMouseCenter();
+  resultobj = SWIG_NewPointerObj((new Position(static_cast< const Position& >(result))), SWIGTYPE_p_Position, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TBFE_setMouseCenter(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  TBFE *arg1 = (TBFE *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:TBFE_setMouseCenter",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TBFE, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TBFE_setMouseCenter" "', argument " "1"" of type '" "TBFE *""'"); 
+  }
+  arg1 = reinterpret_cast< TBFE * >(argp1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "TBFE_setMouseCenter" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "TBFE_setMouseCenter" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  (arg1)->setMouseCenter(arg2,arg3);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_TBFE_setShowMouse(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   TBFE *arg1 = (TBFE *) 0 ;
@@ -5517,6 +5578,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"TBFE_getEvent", _wrap_TBFE_getEvent, METH_VARARGS, NULL},
 	 { (char *)"TBFE_getMousePosition", _wrap_TBFE_getMousePosition, METH_VARARGS, NULL},
 	 { (char *)"TBFE_getCameraAngle", _wrap_TBFE_getCameraAngle, METH_VARARGS, NULL},
+	 { (char *)"TBFE_getMouseCenter", _wrap_TBFE_getMouseCenter, METH_VARARGS, NULL},
+	 { (char *)"TBFE_setMouseCenter", _wrap_TBFE_setMouseCenter, METH_VARARGS, NULL},
 	 { (char *)"TBFE_setShowMouse", _wrap_TBFE_setShowMouse, METH_VARARGS, NULL},
 	 { (char *)"TBFE_getShowMouse", _wrap_TBFE_getShowMouse, METH_VARARGS, NULL},
 	 { (char *)"TBFE_setCameraAngle", _wrap_TBFE_setCameraAngle, METH_VARARGS, NULL},

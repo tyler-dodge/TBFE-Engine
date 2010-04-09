@@ -48,7 +48,7 @@ void Label::reload()
 	{
 	  intermediary_=SDL_CreateRGBSurface(0, text_->w, text_->h, 32, 
 					     0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
-	  SDL_FillRect(intermediary_,NULL,0xff000000);
+	  SDL_SetAlpha(text_,0,0);
 	  SDL_BlitSurface(text_,NULL,intermediary_,NULL);
 	};
       if (getProperty("border")=="1")

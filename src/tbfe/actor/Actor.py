@@ -270,5 +270,24 @@ class CollisionBox(_object):
 CollisionBox_swigregister = _Actor.CollisionBox_swigregister
 CollisionBox_swigregister(CollisionBox)
 
+class Pulse(Actor):
+    __swig_setmethods__ = {}
+    for _s in [Actor]: __swig_setmethods__.update(getattr(_s,'__swig_setmethods__',{}))
+    __setattr__ = lambda self, name, value: _swig_setattr(self, Pulse, name, value)
+    __swig_getmethods__ = {}
+    for _s in [Actor]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
+    __getattr__ = lambda self, name: _swig_getattr(self, Pulse, name)
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        this = _Actor.new_Pulse(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    __swig_destroy__ = _Actor.delete_Pulse
+    __del__ = lambda self : None;
+    def collisionPulse(*args): return _Actor.Pulse_collisionPulse(*args)
+    def getConversation(*args): return _Actor.Pulse_getConversation(*args)
+Pulse_swigregister = _Actor.Pulse_swigregister
+Pulse_swigregister(Pulse)
+
 
 

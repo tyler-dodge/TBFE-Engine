@@ -138,7 +138,6 @@ void TBFE_Render::finalRender(bool doFlip)
   renderActors();
   renderMapLayer(0,0,0);
   renderWindowList();
-  applyImage(TBFE_Base::ScreenDimensions.X/2-25,TBFE_Base::ScreenDimensions.Y/2-25,TBFE_Base::CheckSheets("Images/UI/cursor.png"),NULL);
   SDL_GL_SwapBuffers();
   TBFE_Base::DeleteTempSheets();
   int Error=glGetError();

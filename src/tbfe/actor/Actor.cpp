@@ -301,7 +301,7 @@ int Actor::checkActorCollision(float offsetX,float offsetY,float offsetZ)
 		  collisionMaps_.at(a).setRotation(rotation_.X,-rotation_.Y,rotation_.Z);
 		  if (collisionMaps_.at(a).checkCollision(targetCollision,offset))
 		    {
-		      return a;
+		      return i;
 		    };
 		};
 	    };

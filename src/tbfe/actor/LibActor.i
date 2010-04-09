@@ -11,6 +11,7 @@
 #include "Action.cpp"
 #include "Animation.cpp"
 #include "CollisionBox.cpp"
+#include "Pulse.cpp"
 %}
 %include "ActorCreate.h"
 %include "Actor.h"
@@ -21,3 +22,4 @@
 %include "Action.h"
 %include "Animation.h"
 %include "CollisionBox.h"
+%include "Pulse.h"

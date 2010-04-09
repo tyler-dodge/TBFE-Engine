@@ -47,11 +47,10 @@ SDL_Surface * Window::renderElements(SDL_Surface * screen)
     };
   if (reload || image_==NULL)
     {
+      bool reloadBackground=false;
       if (background_==NULL)
 	{
-	  background_=SDL_CreateRGBSurface(0,dimensions_.X,dimensions_.Y,32,
-					   0x00ff0000,0x0000ff00,0x000000ff,0xff000000);
-	  SDL_FillRect(background_,NULL,0xff000000);
+	  reloadBackground=true;
 	}
       else if (background_->w!=dimensions_.X || background_->h!=dimensions_.Y)
 	{
@@ -59,9 +58,13 @@ SDL_Surface * Window::renderElements(SDL_Surface * screen)
 	    {
 	      SDL_FreeSurface(background_);
 	    };
+	  reloadBackground=true;
+	};
+      if (reloadBackground)
+	{
 	  background_=SDL_CreateRGBSurface(0,dimensions_.X,dimensions_.Y,32,
 					   0x00ff0000,0x0000ff00,0x000000ff,0xff000000);
-	  SDL_FillRect(background_,NULL,0xff000000);
+	  SDL_FillRect(background_,NULL,0x00000000);
 	};
       if (image_!=NULL)
 	{
@@ -77,7 +80,11 @@ SDL_Surface * Window::renderElements(SDL_Surface * screen)
 	      rect.x=elementPosition.X;
 	      rect.y=elementPosition.Y;
 	      SDL_Surface * element=elements_.at(i)->renderElement();
-	      SDL_BlitSurface(element,NULL,image_,&rect);
+	      SDL_SetAlpha(element,0,0);
+	      if (element!=NULL)
+		{
+		  SDL_BlitSurface(element,NULL,image_,&rect);
+		};
 	    };
 	};
     };

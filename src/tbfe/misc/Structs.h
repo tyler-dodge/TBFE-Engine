@@ -49,6 +49,18 @@ struct PositionF
   float X;
   float Y;
   float Z;
+  PositionF()
+  {
+    X=0;
+    Y=0;
+    Z=0;
+  };
+  PositionF(float x,float y,float z)
+  {
+    X=x;
+    Y=y;
+    Z=z;
+  };
   PositionF operator+(PositionF newPosition)
   {
     newPosition.X+=X;
@@ -74,6 +86,14 @@ struct PositionF
     X-=newPosition.X;
     Y-=newPosition.Y;
     Z-=newPosition.Z;
+  };
+  PositionF operator*(float num)
+  {
+    PositionF newPosition;
+    newPosition.X=X*num;
+    newPosition.Y=Y*num;
+    newPosition.Z=Z*num;
+    return newPosition;
   };
   PositionF operator/(float num)
   {

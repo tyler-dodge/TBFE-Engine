@@ -26,6 +26,7 @@ class TBFE
   Timer frameRate_;
   Position mouseMovement_;
   Position mousePosition_;
+  Position mouseCenter_;
   int time_;
   void checkEvents();
   vector<EventType> eventList_;
@@ -48,6 +49,8 @@ class TBFE
   EventType * getEvent(std::string);
   Position getMousePosition();
   PositionF getCameraAngle();
+  Position getMouseCenter();
+  void setMouseCenter(int,int);
   void setShowMouse(bool);
   bool getShowMouse();
   void setCameraAngle(float,float,float);

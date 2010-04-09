@@ -92,6 +92,8 @@ class TBFE(_object):
     def getEvent(*args): return _TBFE.TBFE_getEvent(*args)
     def getMousePosition(*args): return _TBFE.TBFE_getMousePosition(*args)
     def getCameraAngle(*args): return _TBFE.TBFE_getCameraAngle(*args)
+    def getMouseCenter(*args): return _TBFE.TBFE_getMouseCenter(*args)
+    def setMouseCenter(*args): return _TBFE.TBFE_setMouseCenter(*args)
     def setShowMouse(*args): return _TBFE.TBFE_setShowMouse(*args)
     def getShowMouse(*args): return _TBFE.TBFE_getShowMouse(*args)
     def setCameraAngle(*args): return _TBFE.TBFE_setCameraAngle(*args)

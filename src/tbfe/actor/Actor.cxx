@@ -2513,12 +2513,13 @@ SWIG_Python_MustGetPtr(PyObject *obj, swig_type_info *ty, int argnum, int flags)
 #define SWIGTYPE_p_Npc swig_types[9]
 #define SWIGTYPE_p_Position swig_types[10]
 #define SWIGTYPE_p_PositionF swig_types[11]
-#define SWIGTYPE_p_Tile swig_types[12]
-#define SWIGTYPE_p_char swig_types[13]
-#define SWIGTYPE_p_vectorT_ActorType_t swig_types[14]
-#define SWIGTYPE_p_vectorT_PositionF_t swig_types[15]
-static swig_type_info *swig_types[17];
-static swig_module_info swig_module = {swig_types, 16, 0, 0, 0, 0};
+#define SWIGTYPE_p_Pulse swig_types[12]
+#define SWIGTYPE_p_Tile swig_types[13]
+#define SWIGTYPE_p_char swig_types[14]
+#define SWIGTYPE_p_vectorT_ActorType_t swig_types[15]
+#define SWIGTYPE_p_vectorT_PositionF_t swig_types[16]
+static swig_type_info *swig_types[18];
+static swig_module_info swig_module = {swig_types, 17, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -2622,6 +2623,7 @@ namespace swig {
 #include "Action.cpp"
 #include "Animation.cpp"
 #include "CollisionBox.cpp"
+#include "Pulse.cpp"
 
 
 #include <limits.h>
@@ -8419,6 +8421,162 @@ SWIGINTERN PyObject *CollisionBox_swigregister(PyObject *SWIGUNUSEDPARM(self), P
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *_wrap_new_Pulse(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  float arg4 ;
+  PositionF arg5 ;
+  float arg6 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  float val4 ;
+  int ecode4 = 0 ;
+  void *argp5 ;
+  int res5 = 0 ;
+  float val6 ;
+  int ecode6 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
+  PyObject * obj4 = 0 ;
+  PyObject * obj5 = 0 ;
+  Pulse *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOOOOO:new_Pulse",&obj0,&obj1,&obj2,&obj3,&obj4,&obj5)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(obj0, &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_Pulse" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_Pulse" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_Pulse" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_float(obj3, &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_Pulse" "', argument " "4"" of type '" "float""'");
+  } 
+  arg4 = static_cast< float >(val4);
+  {
+    res5 = SWIG_ConvertPtr(obj4, &argp5, SWIGTYPE_p_PositionF,  0  | 0);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_Pulse" "', argument " "5"" of type '" "PositionF""'"); 
+    }  
+    if (!argp5) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Pulse" "', argument " "5"" of type '" "PositionF""'");
+    } else {
+      PositionF * temp = reinterpret_cast< PositionF * >(argp5);
+      arg5 = *temp;
+      if (SWIG_IsNewObj(res5)) delete temp;
+    }
+  }
+  ecode6 = SWIG_AsVal_float(obj5, &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_Pulse" "', argument " "6"" of type '" "float""'");
+  } 
+  arg6 = static_cast< float >(val6);
+  result = (Pulse *)new Pulse(arg1,arg2,arg3,arg4,arg5,arg6);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Pulse, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_Pulse(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Pulse *arg1 = (Pulse *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_Pulse",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Pulse, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Pulse" "', argument " "1"" of type '" "Pulse *""'"); 
+  }
+  arg1 = reinterpret_cast< Pulse * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Pulse_collisionPulse(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Pulse *arg1 = (Pulse *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  int result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Pulse_collisionPulse",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Pulse, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Pulse_collisionPulse" "', argument " "1"" of type '" "Pulse *""'"); 
+  }
+  arg1 = reinterpret_cast< Pulse * >(argp1);
+  result = (int)(arg1)->collisionPulse();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Pulse_getConversation(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Pulse *arg1 = (Pulse *) 0 ;
+  bool arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  bool val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  std::string result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Pulse_getConversation",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Pulse, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Pulse_getConversation" "', argument " "1"" of type '" "Pulse *""'"); 
+  }
+  arg1 = reinterpret_cast< Pulse * >(argp1);
+  ecode2 = SWIG_AsVal_bool(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Pulse_getConversation" "', argument " "2"" of type '" "bool""'");
+  } 
+  arg2 = static_cast< bool >(val2);
+  result = (arg1)->getConversation(arg2);
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *Pulse_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_Pulse, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"createActor", _wrap_createActor, METH_VARARGS, NULL},
 	 { (char *)"loadActors", _wrap_loadActors, METH_VARARGS, NULL},
@@ -8542,6 +8700,11 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"CollisionBox_checkCollision", _wrap_CollisionBox_checkCollision, METH_VARARGS, NULL},
 	 { (char *)"delete_CollisionBox", _wrap_delete_CollisionBox, METH_VARARGS, NULL},
 	 { (char *)"CollisionBox_swigregister", CollisionBox_swigregister, METH_VARARGS, NULL},
+	 { (char *)"new_Pulse", _wrap_new_Pulse, METH_VARARGS, NULL},
+	 { (char *)"delete_Pulse", _wrap_delete_Pulse, METH_VARARGS, NULL},
+	 { (char *)"Pulse_collisionPulse", _wrap_Pulse_collisionPulse, METH_VARARGS, NULL},
+	 { (char *)"Pulse_getConversation", _wrap_Pulse_getConversation, METH_VARARGS, NULL},
+	 { (char *)"Pulse_swigregister", Pulse_swigregister, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
@@ -8550,6 +8713,9 @@ static PyMethodDef SwigMethods[] = {
 
 static void *_p_NpcTo_p_Actor(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((Actor *)  ((Npc *) x));
+}
+static void *_p_PulseTo_p_Actor(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((Actor *)  ((Pulse *) x));
 }
 static void *_p_NonLivingTo_p_Actor(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((Actor *)  ((NonLiving *) x));
@@ -8566,6 +8732,7 @@ static swig_type_info _swigt__p_NonLiving = {"_p_NonLiving", "NonLiving *", 0, 0
 static swig_type_info _swigt__p_Npc = {"_p_Npc", "Npc *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Position = {"_p_Position", "Position *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_PositionF = {"_p_PositionF", "PositionF *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_Pulse = {"_p_Pulse", "Pulse *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Tile = {"_p_Tile", "Tile *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_vectorT_ActorType_t = {"_p_vectorT_ActorType_t", "vector< ActorType > *", 0, 0, (void*)0, 0};
@@ -8584,6 +8751,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_Npc,
   &_swigt__p_Position,
   &_swigt__p_PositionF,
+  &_swigt__p_Pulse,
   &_swigt__p_Tile,
   &_swigt__p_char,
   &_swigt__p_vectorT_ActorType_t,
@@ -8591,7 +8759,7 @@ static swig_type_info *swig_type_initial[] = {
 };
 
 static swig_cast_info _swigc__p_Action[] = {  {&_swigt__p_Action, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_Actor[] = {  {&_swigt__p_Actor, 0, 0, 0},  {&_swigt__p_Npc, _p_NpcTo_p_Actor, 0, 0},  {&_swigt__p_NonLiving, _p_NonLivingTo_p_Actor, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Actor[] = {  {&_swigt__p_Actor, 0, 0, 0},  {&_swigt__p_Pulse, _p_PulseTo_p_Actor, 0, 0},  {&_swigt__p_Npc, _p_NpcTo_p_Actor, 0, 0},  {&_swigt__p_NonLiving, _p_NonLivingTo_p_Actor, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_ActorType[] = {  {&_swigt__p_ActorType, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Animation[] = {  {&_swigt__p_Animation, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Building[] = {  {&_swigt__p_Building, 0, 0, 0},{0, 0, 0, 0}};
@@ -8602,6 +8770,7 @@ static swig_cast_info _swigc__p_NonLiving[] = {  {&_swigt__p_NonLiving, 0, 0, 0}
 static swig_cast_info _swigc__p_Npc[] = {  {&_swigt__p_Npc, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Position[] = {  {&_swigt__p_Position, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_PositionF[] = {  {&_swigt__p_PositionF, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Pulse[] = {  {&_swigt__p_Pulse, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Tile[] = {  {&_swigt__p_Tile, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_vectorT_ActorType_t[] = {  {&_swigt__p_vectorT_ActorType_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -8620,6 +8789,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_Npc,
   _swigc__p_Position,
   _swigc__p_PositionF,
+  _swigc__p_Pulse,
   _swigc__p_Tile,
   _swigc__p_char,
   _swigc__p_vectorT_ActorType_t,

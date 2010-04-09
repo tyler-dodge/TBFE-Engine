@@ -240,16 +240,17 @@ class PositionF(_object):
     __swig_setmethods__["Z"] = _Misc.PositionF_Z_set
     __swig_getmethods__["Z"] = _Misc.PositionF_Z_get
     if _newclass:Z = _swig_property(_Misc.PositionF_Z_get, _Misc.PositionF_Z_set)
-    def __add__(*args): return _Misc.PositionF___add__(*args)
-    def __sub__(*args): return _Misc.PositionF___sub__(*args)
-    def __iadd__(*args): return _Misc.PositionF___iadd__(*args)
-    def __isub__(*args): return _Misc.PositionF___isub__(*args)
-    def __div__(*args): return _Misc.PositionF___div__(*args)
-    def dumpString(*args): return _Misc.PositionF_dumpString(*args)
     def __init__(self, *args): 
         this = _Misc.new_PositionF(*args)
         try: self.this.append(this)
         except: self.this = this
+    def __add__(*args): return _Misc.PositionF___add__(*args)
+    def __sub__(*args): return _Misc.PositionF___sub__(*args)
+    def __iadd__(*args): return _Misc.PositionF___iadd__(*args)
+    def __isub__(*args): return _Misc.PositionF___isub__(*args)
+    def __mul__(*args): return _Misc.PositionF___mul__(*args)
+    def __div__(*args): return _Misc.PositionF___div__(*args)
+    def dumpString(*args): return _Misc.PositionF_dumpString(*args)
     __swig_destroy__ = _Misc.delete_PositionF
     __del__ = lambda self : None;
 PositionF_swigregister = _Misc.PositionF_swigregister
