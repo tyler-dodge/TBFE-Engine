@@ -260,6 +260,7 @@ class CollisionBox(_object):
     def checkLine(*args): return _Actor.CollisionBox_checkLine(*args)
     def getPosition(*args): return _Actor.CollisionBox_getPosition(*args)
     def setPosition(*args): return _Actor.CollisionBox_setPosition(*args)
+    def getCenter(*args): return _Actor.CollisionBox_getCenter(*args)
     def getRotation(*args): return _Actor.CollisionBox_getRotation(*args)
     def setRotation(*args): return _Actor.CollisionBox_setRotation(*args)
     def checkCollision(*args): return _Actor.CollisionBox_checkCollision(*args)

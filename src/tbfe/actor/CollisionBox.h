@@ -19,7 +19,7 @@ class CollisionBox
   bool checkLine(float,float,float,float,float,float,float,float);
   PositionF getPosition();
   void setPosition(float,float,float);
-
+  PositionF getCenter();
   PositionF getRotation();
   void setRotation(float,float,float);
 

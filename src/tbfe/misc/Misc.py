@@ -59,6 +59,7 @@ applyRotations = _Misc.applyRotations
 convertToAngle = _Misc.convertToAngle
 normalize = _Misc.normalize
 absVal = _Misc.absVal
+addNormals = _Misc.addNormals
 loadString = _Misc.loadString
 nextSet = _Misc.nextSet
 nextChar = _Misc.nextChar

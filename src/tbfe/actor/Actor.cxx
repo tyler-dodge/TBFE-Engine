@@ -8338,6 +8338,28 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_CollisionBox_getCenter(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CollisionBox *arg1 = (CollisionBox *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PositionF result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CollisionBox_getCenter",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CollisionBox, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CollisionBox_getCenter" "', argument " "1"" of type '" "CollisionBox *""'"); 
+  }
+  arg1 = reinterpret_cast< CollisionBox * >(argp1);
+  result = (arg1)->getCenter();
+  resultobj = SWIG_NewPointerObj((new PositionF(static_cast< const PositionF& >(result))), SWIGTYPE_p_PositionF, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_CollisionBox_getRotation(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   CollisionBox *arg1 = (CollisionBox *) 0 ;
@@ -8931,6 +8953,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"CollisionBox_checkLine", _wrap_CollisionBox_checkLine, METH_VARARGS, NULL},
 	 { (char *)"CollisionBox_getPosition", _wrap_CollisionBox_getPosition, METH_VARARGS, NULL},
 	 { (char *)"CollisionBox_setPosition", _wrap_CollisionBox_setPosition, METH_VARARGS, NULL},
+	 { (char *)"CollisionBox_getCenter", _wrap_CollisionBox_getCenter, METH_VARARGS, NULL},
 	 { (char *)"CollisionBox_getRotation", _wrap_CollisionBox_getRotation, METH_VARARGS, NULL},
 	 { (char *)"CollisionBox_setRotation", _wrap_CollisionBox_setRotation, METH_VARARGS, NULL},
 	 { (char *)"CollisionBox_checkCollision", _wrap_CollisionBox_checkCollision, METH_VARARGS, NULL},

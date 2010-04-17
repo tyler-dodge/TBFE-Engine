@@ -318,6 +318,7 @@ void TBFE_Render::renderActors()
 		  vector<PositionF> points=actorCollision.generatePoints(actorCollision.getPosition(),actorCollision.getDimensions());
 		  glDisable(GL_CULL_FACE);
 		  glEnableClientState(GL_VERTEX_ARRAY);
+		  glEnableClientState(GL_NORMAL_ARRAY);
 		  glVertexPointer(3,GL_FLOAT,0,&points[0]);
 		  GLuint indices[24]={0,1,2,3,
 				      0,1,5,4,
@@ -325,6 +326,23 @@ void TBFE_Render::renderActors()
 				      1,2,6,5,
 				      3,0,4,7,
 				      4,5,6,7};
+		  PositionF normals[8];
+		  PositionF center=actorCollision.getCenter();
+		  for (int i=0;i<6;i++)
+		    {
+		      Quad face;
+		      PositionF iNormal;
+		      face.points[0]=points.at(indices[i*4]);
+		      face.points[1]=points.at(indices[i*4+1]);
+		      face.points[2]=points.at(indices[i*4+2]);
+		      face.points[3]=points.at(indices[i*4+3]);
+		      iNormal=normalize(face,center);
+		      for (int b=0;b<4;b++)
+			{
+			  normals[indices[i*4+b]]=addNormals(normals[indices[i*4+b]],iNormal);
+			};
+		    };
+		  glNormalPointer(GL_FLOAT,0,&normals[0]);
 		  glDrawElements(GL_QUADS,24,GL_UNSIGNED_INT,&indices);
 		  glDisableClientState(GL_VERTEX_ARRAY);
 		  glEnable(GL_CULL_FACE);
