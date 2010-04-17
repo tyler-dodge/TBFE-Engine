@@ -1,8 +1,8 @@
 #include "Pulse.h"
-Pulse::Pulse(int x, int y,int z, float size, PositionF angle, float distance):Actor(x,y)
+Pulse::Pulse(PositionF position, float size, PositionF angle, float distance):Actor(position.X,position.Z)
 {
-  addCollisionBox(PositionF(0.0f,0.0f,0.0f),PositionF(size,size,size));
-  setPosition(x,y,z);
+  addCollisionBox(PositionF(0.1f,0.0f,0.0f),PositionF(size,size,size));
+  setPosition(position.X,position.Y,position.Z);
   setRotationF(angle.X,angle.Y,angle.Z);
   distance_=distance;
 };
@@ -15,20 +15,27 @@ int Pulse::collisionPulse()
   PositionF direction;
   PositionF rotation=getRotationF();
   float size=collision->getDimensions().X;
-  direction.X=size;
+  direction.X=size*20;
   direction.Y=0;
   direction.Z=0;
   collision->setRotation(rotation.X,rotation.Y,rotation.Z);
-  direction=collision->applyRotations(direction);
-  for(int i=0;i<distance_/size;i++)
+  direction=applyRotations(direction,rotation);
+  PositionF tempDirection;
+  //tempDirection.X=direction.Z;
+  //tempDirection.Y=direction.Y;
+  //tempDirection.Z=direction.X;
+  //direction=tempDirection;
+  cout << direction.dumpString() << '\n';
+  vector<int> ignore;
+  ignore.push_back(0);
+  for(int i=0;i<distance_/(size*20);i++)
     {      
       PositionF position=getPositionF();
       position+=direction*i;
-      cout << position.dumpString() << '\n';
-      int actor=checkActorCollision(position.X,position.Y,position.Z);  
+      int actor=checkActorCollision(position.X,position.Y,position.Z,&ignore);  
       if (actor!=-1)
 	{
-	  cout << "Position: " << position.dumpString() << ':' << actor << '\n';
+	  return actor;
 	};
     };
   return -1;

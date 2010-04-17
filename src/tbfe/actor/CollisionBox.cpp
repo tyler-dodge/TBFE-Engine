@@ -4,6 +4,7 @@ CollisionBox::CollisionBox(PositionF offset,PositionF dimensions)
   position_=offset;
   dimensions_=dimensions;
   setRotation(0,0,0);
+  isEnabled_=true;
 };
 PositionF CollisionBox::getDimensions()
 {
@@ -36,73 +37,6 @@ void CollisionBox::setRotation(float x,float y,float z)
   rotation_.X=x;
   rotation_.Y=y;
   rotation_.Z=z;
-};
-float CollisionBox::convertToAngle(float x,float y)
-{
-  float addAngle=0;
-  if (x==0 && y>0)
-    {
-      return PI/2;
-    }
-  else if (x==0 && y<0)
-    {
-      return 3*PI/2;
-    };
-  float absX=x;
-  float absY=y;
-  if (x<0)
-    {
-      absX*=-1;
-    };
-  if (y<0)
-    {
-      absY*=-1;
-    };
-  float angle=atan(absY/absX);
-  if (y>=0 && x<0)
-    {
-      angle=PI-angle;
-    }
-  else if (y<0 && x<0)
-    {
-      angle=PI+angle;
-    }
-  else if (y<0 && x>=0)
-    {
-      angle=2*PI-angle;
-    }
-  else
-    {
-    };
-  return angle;
-};
-PositionF CollisionBox::applyRotations(PositionF position)
-{
-  float magnitude=sqrt(pow(position.Y,2)+pow(position.Z,2));
-  PositionF tempPosition=position;
-  //X rotation
-  if (position.Y!=0)
-    {
-      position.Y=cos(convertToAngle(position.Y,position.Z)+rotation_.X*PI/180)*magnitude;
-      position.Z=sin(convertToAngle(position.Y,position.Z)+rotation_.X*PI/180)*magnitude;
-    };
-  tempPosition=position;
-  magnitude=sqrt(pow(position.X,2)+pow(position.Z,2));
-  //Y rotation
-  if (position.X!=0)
-    {
-      position.X=cos(convertToAngle(tempPosition.X,tempPosition.Z)+rotation_.Y*PI/180)*magnitude;
-      position.Z=sin(convertToAngle(tempPosition.X,tempPosition.Z)+rotation_.Y*PI/180)*magnitude;
-    };
-  tempPosition=position;
-  magnitude=sqrt(pow(position.X,2)+pow(position.Y,2));
-  //Z rotation
-   if (position.X!=0)
-    {
-      position.X=cos(convertToAngle(position.X,position.Y)+rotation_.Z*PI/180)*magnitude;
-      position.Y=sin(convertToAngle(position.X,position.Y)+rotation_.Z*PI/180)*magnitude;
-   };
-  return position;
 };
 bool CollisionBox::checkLine(float x1,float y1,float x2,float y2,float checkX,float checkY,float centerX,float centerY)
 {
@@ -175,7 +109,7 @@ vector<PositionF> CollisionBox::generatePoints(PositionF position,PositionF dime
   thisPoint[7].Y+=dimensions.Y;
   for (int i=0;i<8;i++)
     {
-      thisPoint[i]=applyRotations(thisPoint[i]);
+      thisPoint[i]=applyRotations(thisPoint[i],rotation_);
     };			
   return thisPoint;
 };
@@ -199,12 +133,12 @@ bool CollisionBox::checkCollision(CollisionBox target,PositionF targetOffset,boo
   centerPoint.Y=0;
   centerPoint.Z=0;
   centerPoint=(thisPoint[0]+thisPoint[2])/2;
-  // cout << "set\n";
-  for (int currentPoint=0;currentPoint<4;currentPoint++)
+  //cout << "set\n";
+  for (int currentPoint=0;currentPoint<8;currentPoint++)
     {
       //cout << targetPoint.at(currentPoint).dumpString() << "  pointset\n";
       bool collision=true;
-      for (int i=0;i<4;i++)
+      for (int i=0;i<8;i++)
 	{
 	  int a=i+1;
 	  bool isGreater=false;
@@ -234,4 +168,12 @@ bool CollisionBox::checkCollision(CollisionBox target,PositionF targetOffset,boo
       return target.checkCollision(*this,targetOffset,false);
     };
   return false;
+};
+bool CollisionBox::checkEnabled()
+{
+  return isEnabled_;
+};
+void CollisionBox::setEnabled(bool newEnabled)
+{
+  isEnabled_=newEnabled;
 };

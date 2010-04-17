@@ -2513,19 +2513,20 @@ SWIG_Python_MustGetPtr(PyObject *obj, swig_type_info *ty, int argnum, int flags)
 #define SWIGTYPE_p_Npc swig_types[9]
 #define SWIGTYPE_p_Position swig_types[10]
 #define SWIGTYPE_p_PositionF swig_types[11]
-#define SWIGTYPE_p_SDL_Event swig_types[12]
-#define SWIGTYPE_p_SDL_Surface swig_types[13]
-#define SWIGTYPE_p_SunVector swig_types[14]
-#define SWIGTYPE_p_TBFE swig_types[15]
-#define SWIGTYPE_p_TBFE_Logic swig_types[16]
-#define SWIGTYPE_p_TBFE_Render swig_types[17]
-#define SWIGTYPE_p_TTF_Font swig_types[18]
-#define SWIGTYPE_p_Window swig_types[19]
-#define SWIGTYPE_p_char swig_types[20]
-#define SWIGTYPE_p_vectorT_Actor_p_t swig_types[21]
-#define SWIGTYPE_p_vectorT_Window_p_t swig_types[22]
-static swig_type_info *swig_types[24];
-static swig_module_info swig_module = {swig_types, 23, 0, 0, 0, 0};
+#define SWIGTYPE_p_Pulse swig_types[12]
+#define SWIGTYPE_p_SDL_Event swig_types[13]
+#define SWIGTYPE_p_SDL_Surface swig_types[14]
+#define SWIGTYPE_p_SunVector swig_types[15]
+#define SWIGTYPE_p_TBFE swig_types[16]
+#define SWIGTYPE_p_TBFE_Logic swig_types[17]
+#define SWIGTYPE_p_TBFE_Render swig_types[18]
+#define SWIGTYPE_p_TTF_Font swig_types[19]
+#define SWIGTYPE_p_Window swig_types[20]
+#define SWIGTYPE_p_char swig_types[21]
+#define SWIGTYPE_p_vectorT_Actor_p_t swig_types[22]
+#define SWIGTYPE_p_vectorT_Window_p_t swig_types[23]
+static swig_type_info *swig_types[25];
+static swig_module_info swig_module = {swig_types, 24, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -3588,6 +3589,123 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_getCameraAngle(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  PositionF result;
+  
+  if (!PyArg_ParseTuple(args,(char *)":getCameraAngle")) SWIG_fail;
+  result = TBFE_Base::getCameraAngle();
+  resultobj = SWIG_NewPointerObj((new PositionF(static_cast< const PositionF& >(result))), SWIGTYPE_p_PositionF, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_setCameraAngle(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  float arg1 ;
+  float arg2 ;
+  float arg3 ;
+  float val1 ;
+  int ecode1 = 0 ;
+  float val2 ;
+  int ecode2 = 0 ;
+  float val3 ;
+  int ecode3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:setCameraAngle",&obj0,&obj1,&obj2)) SWIG_fail;
+  ecode1 = SWIG_AsVal_float(obj0, &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "setCameraAngle" "', argument " "1"" of type '" "float""'");
+  } 
+  arg1 = static_cast< float >(val1);
+  ecode2 = SWIG_AsVal_float(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "setCameraAngle" "', argument " "2"" of type '" "float""'");
+  } 
+  arg2 = static_cast< float >(val2);
+  ecode3 = SWIG_AsVal_float(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "setCameraAngle" "', argument " "3"" of type '" "float""'");
+  } 
+  arg3 = static_cast< float >(val3);
+  TBFE_Base::setCameraAngle(arg1,arg2,arg3);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_getCameraFollowOffset(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  PositionF result;
+  
+  if (!PyArg_ParseTuple(args,(char *)":getCameraFollowOffset")) SWIG_fail;
+  result = TBFE_Base::getCameraFollowOffset();
+  resultobj = SWIG_NewPointerObj((new PositionF(static_cast< const PositionF& >(result))), SWIGTYPE_p_PositionF, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_setCameraFollowOffset(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  float arg1 ;
+  float arg2 ;
+  float arg3 ;
+  float val1 ;
+  int ecode1 = 0 ;
+  float val2 ;
+  int ecode2 = 0 ;
+  float val3 ;
+  int ecode3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:setCameraFollowOffset",&obj0,&obj1,&obj2)) SWIG_fail;
+  ecode1 = SWIG_AsVal_float(obj0, &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "setCameraFollowOffset" "', argument " "1"" of type '" "float""'");
+  } 
+  arg1 = static_cast< float >(val1);
+  ecode2 = SWIG_AsVal_float(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "setCameraFollowOffset" "', argument " "2"" of type '" "float""'");
+  } 
+  arg2 = static_cast< float >(val2);
+  ecode3 = SWIG_AsVal_float(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "setCameraFollowOffset" "', argument " "3"" of type '" "float""'");
+  } 
+  arg3 = static_cast< float >(val3);
+  TBFE_Base::setCameraFollowOffset(arg1,arg2,arg3);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_getCameraOffset(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  PositionF result;
+  
+  if (!PyArg_ParseTuple(args,(char *)":getCameraOffset")) SWIG_fail;
+  result = TBFE_Base::getCameraOffset();
+  resultobj = SWIG_NewPointerObj((new PositionF(static_cast< const PositionF& >(result))), SWIGTYPE_p_PositionF, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_TBFE_createFile(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   TBFE *arg1 = (TBFE *) 0 ;
@@ -3996,28 +4114,6 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_TBFE_getCameraAngle(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  TBFE *arg1 = (TBFE *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  PositionF result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:TBFE_getCameraAngle",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TBFE, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TBFE_getCameraAngle" "', argument " "1"" of type '" "TBFE *""'"); 
-  }
-  arg1 = reinterpret_cast< TBFE * >(argp1);
-  result = (arg1)->getCameraAngle();
-  resultobj = SWIG_NewPointerObj((new PositionF(static_cast< const PositionF& >(result))), SWIGTYPE_p_PositionF, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_TBFE_getMouseCenter(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   TBFE *arg1 = (TBFE *) 0 ;
@@ -4131,48 +4227,22 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_TBFE_setCameraAngle(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_TBFE_getCameraPosition(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   TBFE *arg1 = (TBFE *) 0 ;
-  float arg2 ;
-  float arg3 ;
-  float arg4 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  float val2 ;
-  int ecode2 = 0 ;
-  float val3 ;
-  int ecode3 = 0 ;
-  float val4 ;
-  int ecode4 = 0 ;
   PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  PyObject * obj2 = 0 ;
-  PyObject * obj3 = 0 ;
+  PositionF result;
   
-  if (!PyArg_ParseTuple(args,(char *)"OOOO:TBFE_setCameraAngle",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"O:TBFE_getCameraPosition",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TBFE, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TBFE_setCameraAngle" "', argument " "1"" of type '" "TBFE *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TBFE_getCameraPosition" "', argument " "1"" of type '" "TBFE *""'"); 
   }
   arg1 = reinterpret_cast< TBFE * >(argp1);
-  ecode2 = SWIG_AsVal_float(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "TBFE_setCameraAngle" "', argument " "2"" of type '" "float""'");
-  } 
-  arg2 = static_cast< float >(val2);
-  ecode3 = SWIG_AsVal_float(obj2, &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "TBFE_setCameraAngle" "', argument " "3"" of type '" "float""'");
-  } 
-  arg3 = static_cast< float >(val3);
-  ecode4 = SWIG_AsVal_float(obj3, &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "TBFE_setCameraAngle" "', argument " "4"" of type '" "float""'");
-  } 
-  arg4 = static_cast< float >(val4);
-  (arg1)->setCameraAngle(arg2,arg3,arg4);
-  resultobj = SWIG_Py_Void();
+  result = (arg1)->getCameraPosition();
+  resultobj = SWIG_NewPointerObj((new PositionF(static_cast< const PositionF& >(result))), SWIGTYPE_p_PositionF, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -4451,76 +4521,6 @@ SWIGINTERN PyObject *_wrap_TBFE_Render_initGl(PyObject *SWIGUNUSEDPARM(self), Py
   }
   arg1 = reinterpret_cast< TBFE_Render * >(argp1);
   (arg1)->initGl();
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_TBFE_Render_getCameraAngle(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  TBFE_Render *arg1 = (TBFE_Render *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  PositionF result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:TBFE_Render_getCameraAngle",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TBFE_Render, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TBFE_Render_getCameraAngle" "', argument " "1"" of type '" "TBFE_Render *""'"); 
-  }
-  arg1 = reinterpret_cast< TBFE_Render * >(argp1);
-  result = (arg1)->getCameraAngle();
-  resultobj = SWIG_NewPointerObj((new PositionF(static_cast< const PositionF& >(result))), SWIGTYPE_p_PositionF, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_TBFE_Render_setCameraAngle(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  TBFE_Render *arg1 = (TBFE_Render *) 0 ;
-  float arg2 ;
-  float arg3 ;
-  float arg4 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  float val2 ;
-  int ecode2 = 0 ;
-  float val3 ;
-  int ecode3 = 0 ;
-  float val4 ;
-  int ecode4 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  PyObject * obj2 = 0 ;
-  PyObject * obj3 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OOOO:TBFE_Render_setCameraAngle",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TBFE_Render, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TBFE_Render_setCameraAngle" "', argument " "1"" of type '" "TBFE_Render *""'"); 
-  }
-  arg1 = reinterpret_cast< TBFE_Render * >(argp1);
-  ecode2 = SWIG_AsVal_float(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "TBFE_Render_setCameraAngle" "', argument " "2"" of type '" "float""'");
-  } 
-  arg2 = static_cast< float >(val2);
-  ecode3 = SWIG_AsVal_float(obj2, &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "TBFE_Render_setCameraAngle" "', argument " "3"" of type '" "float""'");
-  } 
-  arg3 = static_cast< float >(val3);
-  ecode4 = SWIG_AsVal_float(obj3, &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "TBFE_Render_setCameraAngle" "', argument " "4"" of type '" "float""'");
-  } 
-  arg4 = static_cast< float >(val4);
-  (arg1)->setCameraAngle(arg2,arg3,arg4);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -5564,6 +5564,11 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SetKeyTarget", _wrap_SetKeyTarget, METH_VARARGS, NULL},
 	 { (char *)"getWindowByNum", _wrap_getWindowByNum, METH_VARARGS, NULL},
 	 { (char *)"getWindowNum", _wrap_getWindowNum, METH_VARARGS, NULL},
+	 { (char *)"getCameraAngle", _wrap_getCameraAngle, METH_VARARGS, NULL},
+	 { (char *)"setCameraAngle", _wrap_setCameraAngle, METH_VARARGS, NULL},
+	 { (char *)"getCameraFollowOffset", _wrap_getCameraFollowOffset, METH_VARARGS, NULL},
+	 { (char *)"setCameraFollowOffset", _wrap_setCameraFollowOffset, METH_VARARGS, NULL},
+	 { (char *)"getCameraOffset", _wrap_getCameraOffset, METH_VARARGS, NULL},
 	 { (char *)"TBFE_createFile", _wrap_TBFE_createFile, METH_VARARGS, NULL},
 	 { (char *)"new_TBFE", _wrap_new_TBFE, METH_VARARGS, NULL},
 	 { (char *)"TBFE_changeMap", _wrap_TBFE_changeMap, METH_VARARGS, NULL},
@@ -5577,12 +5582,11 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"TBFE_addEvent", _wrap_TBFE_addEvent, METH_VARARGS, NULL},
 	 { (char *)"TBFE_getEvent", _wrap_TBFE_getEvent, METH_VARARGS, NULL},
 	 { (char *)"TBFE_getMousePosition", _wrap_TBFE_getMousePosition, METH_VARARGS, NULL},
-	 { (char *)"TBFE_getCameraAngle", _wrap_TBFE_getCameraAngle, METH_VARARGS, NULL},
 	 { (char *)"TBFE_getMouseCenter", _wrap_TBFE_getMouseCenter, METH_VARARGS, NULL},
 	 { (char *)"TBFE_setMouseCenter", _wrap_TBFE_setMouseCenter, METH_VARARGS, NULL},
 	 { (char *)"TBFE_setShowMouse", _wrap_TBFE_setShowMouse, METH_VARARGS, NULL},
 	 { (char *)"TBFE_getShowMouse", _wrap_TBFE_getShowMouse, METH_VARARGS, NULL},
-	 { (char *)"TBFE_setCameraAngle", _wrap_TBFE_setCameraAngle, METH_VARARGS, NULL},
+	 { (char *)"TBFE_getCameraPosition", _wrap_TBFE_getCameraPosition, METH_VARARGS, NULL},
 	 { (char *)"TBFE_addGlobalEvent", _wrap_TBFE_addGlobalEvent, METH_VARARGS, NULL},
 	 { (char *)"delete_TBFE", _wrap_delete_TBFE, METH_VARARGS, NULL},
 	 { (char *)"TBFE_swigregister", TBFE_swigregister, METH_VARARGS, NULL},
@@ -5594,8 +5598,6 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"TBFE_Render_changeLighting", _wrap_TBFE_Render_changeLighting, METH_VARARGS, NULL},
 	 { (char *)"TBFE_Render_init", _wrap_TBFE_Render_init, METH_VARARGS, NULL},
 	 { (char *)"TBFE_Render_initGl", _wrap_TBFE_Render_initGl, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Render_getCameraAngle", _wrap_TBFE_Render_getCameraAngle, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Render_setCameraAngle", _wrap_TBFE_Render_setCameraAngle, METH_VARARGS, NULL},
 	 { (char *)"TBFE_Render_setLightPosition", _wrap_TBFE_Render_setLightPosition, METH_VARARGS, NULL},
 	 { (char *)"TBFE_Render_finalRender", _wrap_TBFE_Render_finalRender, METH_VARARGS, NULL},
 	 { (char *)"TBFE_Render_swigregister", TBFE_Render_swigregister, METH_VARARGS, NULL},
@@ -5643,10 +5645,14 @@ static PyMethodDef SwigMethods[] = {
 static void *_p_NpcTo_p_Actor(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((Actor *)  ((Npc *) x));
 }
+static void *_p_PulseTo_p_Actor(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((Actor *)  ((Pulse *) x));
+}
 static void *_p_NonLivingTo_p_Actor(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((Actor *)  ((NonLiving *) x));
 }
 static swig_type_info _swigt__p_Actor = {"_p_Actor", "Actor *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_Pulse = {"_p_Pulse", 0, 0, 0, 0, 0};
 static swig_type_info _swigt__p_Npc = {"_p_Npc", 0, 0, 0, 0, 0};
 static swig_type_info _swigt__p_NonLiving = {"_p_NonLiving", 0, 0, 0, 0, 0};
 static swig_type_info _swigt__p_Building = {"_p_Building", "Building *", 0, 0, (void*)0, 0};
@@ -5683,6 +5689,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_Npc,
   &_swigt__p_Position,
   &_swigt__p_PositionF,
+  &_swigt__p_Pulse,
   &_swigt__p_SDL_Event,
   &_swigt__p_SDL_Surface,
   &_swigt__p_SunVector,
@@ -5696,9 +5703,10 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_vectorT_Window_p_t,
 };
 
+static swig_cast_info _swigc__p_Pulse[] = {{&_swigt__p_Pulse, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Npc[] = {{&_swigt__p_Npc, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_NonLiving[] = {{&_swigt__p_NonLiving, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_Actor[] = {  {&_swigt__p_Actor, 0, 0, 0},  {&_swigt__p_Npc, _p_NpcTo_p_Actor, 0, 0},  {&_swigt__p_NonLiving, _p_NonLivingTo_p_Actor, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Actor[] = {  {&_swigt__p_Actor, 0, 0, 0},  {&_swigt__p_Pulse, _p_PulseTo_p_Actor, 0, 0},  {&_swigt__p_Npc, _p_NpcTo_p_Actor, 0, 0},  {&_swigt__p_NonLiving, _p_NonLivingTo_p_Actor, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Building[] = {  {&_swigt__p_Building, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Console[] = {  {&_swigt__p_Console, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Element[] = {  {&_swigt__p_Element, 0, 0, 0},{0, 0, 0, 0}};
@@ -5733,6 +5741,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_Npc,
   _swigc__p_Position,
   _swigc__p_PositionF,
+  _swigc__p_Pulse,
   _swigc__p_SDL_Event,
   _swigc__p_SDL_Surface,
   _swigc__p_SunVector,

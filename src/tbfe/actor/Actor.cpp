@@ -1,5 +1,4 @@
 #include "Actor.h"
-#define PI 3.14159265
 Actor::Actor (int PositionX,int PositionY)
     {
       currentAction_=NULL;
@@ -49,34 +48,37 @@ CollisionBox * Actor::getCollisionBox(int num)
     };
   return &collisionMaps_.at(num);
 };
-void Actor::setRotationF(float x,float y, float z)
+void Actor::setRotationF(float x,float y, float z,bool doCollisionTest)
 {
   PositionF oldRotation=rotation_;
   rotation_.X=x;
   rotation_.Y=y;
   rotation_.Z=z;
-  vector<CollidedTile> collisionTest=TBFE_Base::CurrentMap.collisionTest((int)position_.X,
-									 (int)position_.Y);
-  if (collisionTest.size()>0)
+  if (doCollisionTest)
     {
-      for (int i=0;i<collisionTest.size();i++)
+      vector<CollidedTile> collisionTest=TBFE_Base::CurrentMap.collisionTest((int)position_.X,
+									     (int)position_.Y);
+      if (collisionTest.size()>0)
 	{
-	  bool AdvancedCollision=false;
-	  if (AdvancedCollision)
+	  for (int i=0;i<collisionTest.size();i++)
 	    {
-	      switch(collisionTest.at(i).Passability)
+	      bool AdvancedCollision=false;
+	      if (AdvancedCollision)
 		{
-		case 255:
-		  rotation_=oldRotation;
-		  break;
+		  switch(collisionTest.at(i).Passability)
+		    {
+		    case 255:
+		      rotation_=oldRotation;
+		      break;
+		    };
 		};
 	    };
 	};
-    };
-  int ncollisionTest=checkActorCollision(position_.X,position_.Y,position_.Z);
-  if (ncollisionTest!=-1)
-    {
-      rotation_=oldRotation;
+      int ncollisionTest=checkActorCollision(position_.X,position_.Y,position_.Z);
+      if (ncollisionTest!=-1)
+	{
+	  rotation_=oldRotation;
+	};
     };
 };
 string Actor::getProperty(string propertyName)
@@ -279,7 +281,7 @@ void Actor::setPositionF(float x,float y,float z)
   position_.Y=y;
   position_.Z=z;
 };
-int Actor::checkActorCollision(float offsetX,float offsetY,float offsetZ)
+int Actor::checkActorCollision(float offsetX,float offsetY,float offsetZ,vector<int> * ignore)
 {
   for (int i=0;i<TBFE_Base::ActorList.size();i++)
     {
@@ -287,7 +289,7 @@ int Actor::checkActorCollision(float offsetX,float offsetY,float offsetZ)
       for (int targetA=0;targetA<targetActor->getNumCollisionBox();targetA++)
 	{
 	  CollisionBox targetCollision=*targetActor->getCollisionBox(targetA);
-	  if (targetActor!=this)
+	  if (targetActor!=this && targetCollision.checkEnabled())
 	    {
 	      for (int a=0;a<collisionMaps_.size();a++)
 		{
@@ -301,7 +303,21 @@ int Actor::checkActorCollision(float offsetX,float offsetY,float offsetZ)
 		  collisionMaps_.at(a).setRotation(rotation_.X,-rotation_.Y,rotation_.Z);
 		  if (collisionMaps_.at(a).checkCollision(targetCollision,offset))
 		    {
-		      return i;
+		      bool isIgnored=false;
+		      if (ignore!=NULL)
+			{
+			  for (int checkIgnore=0;checkIgnore<ignore->size();checkIgnore++)
+			    {	
+			      if (ignore->at(checkIgnore)==i)
+				{
+				  isIgnored=true;
+				};
+			    };
+			};
+		      if (!isIgnored)
+			{
+			  return i;
+			};
 		    };
 		};
 	    };

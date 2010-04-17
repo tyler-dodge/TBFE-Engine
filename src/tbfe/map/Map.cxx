@@ -3240,6 +3240,58 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_Map_checkChanged(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Map *arg1 = (Map *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Map_checkChanged",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Map, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Map_checkChanged" "', argument " "1"" of type '" "Map *""'"); 
+  }
+  arg1 = reinterpret_cast< Map * >(argp1);
+  result = (bool)(arg1)->checkChanged();
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Map_setChanged(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Map *arg1 = (Map *) 0 ;
+  bool arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  bool val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Map_setChanged",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Map, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Map_setChanged" "', argument " "1"" of type '" "Map *""'"); 
+  }
+  arg1 = reinterpret_cast< Map * >(argp1);
+  ecode2 = SWIG_AsVal_bool(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Map_setChanged" "', argument " "2"" of type '" "bool""'");
+  } 
+  arg2 = static_cast< bool >(val2);
+  (arg1)->setChanged(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_Map_changeTile(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Map *arg1 = (Map *) 0 ;
@@ -4132,6 +4184,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Map_setLayerVisibility", _wrap_Map_setLayerVisibility, METH_VARARGS, NULL},
 	 { (char *)"Map_getNumberOfLayers", _wrap_Map_getNumberOfLayers, METH_VARARGS, NULL},
 	 { (char *)"Map_getDimensions", _wrap_Map_getDimensions, METH_VARARGS, NULL},
+	 { (char *)"Map_checkChanged", _wrap_Map_checkChanged, METH_VARARGS, NULL},
+	 { (char *)"Map_setChanged", _wrap_Map_setChanged, METH_VARARGS, NULL},
 	 { (char *)"Map_changeTile", _wrap_Map_changeTile, METH_VARARGS, NULL},
 	 { (char *)"Map_getTile", _wrap_Map_getTile, METH_VARARGS, NULL},
 	 { (char *)"Map_addTileSet", _wrap_Map_addTileSet, METH_VARARGS, NULL},

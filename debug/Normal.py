@@ -1,4 +1,5 @@
 from TbfePy import Tbfe, Misc, UI, Actor
+import math
 class Console:
     def __init__(self,targetConsole,engine):
         self.window=UI.createWindow(0,0,"Console")
@@ -34,32 +35,120 @@ class Console:
 def mouseCamera(MouseMovement):
     if engine.getShowMouse()!=True:
         cursorPosition=uiCursor.getScreenPosition()
-        Position=engine.getCameraAngle()
+        Position=Tbfe.getCameraAngle()
         Position.X-=MouseMovement.Y
         Rotation=Tbfe.GetMainPlayer().getRotationF()
         Rotation.Y-=MouseMovement.X
         Tbfe.GetMainPlayer().setRotationF(Rotation.X,Rotation.Y,Rotation.Z)
-        if cursorPosition.Y<Tbfe.cvar.ScreenDimensions.Y/2 or Position.X<0:
+        if cursorPosition.Y<Tbfe.cvar.ScreenDimensions.Y/2-25 or Position.X<0:
             Position.X=0
             cursorPosition.Y-=int(MouseMovement.Y)
-            if cursorPosition.Y>Tbfe.cvar.ScreenDimensions.Y/2:
-                cursorPosition.Y=Tbfe.cvar.ScreenDimensions.Y/2
-        if cursorPosition.Y>Tbfe.cvar.ScreenDimensions.Y/2 or Position.X>55:
+            if cursorPosition.Y>Tbfe.cvar.ScreenDimensions.Y/2-25:
+                cursorPosition.Y=Tbfe.cvar.ScreenDimensions.Y/2-25
+        if cursorPosition.Y>Tbfe.cvar.ScreenDimensions.Y/2-25 or Position.X>55:
             Position.X=55
             cursorPosition.Y-=int(MouseMovement.Y)
-            if cursorPosition.Y<Tbfe.cvar.ScreenDimensions.Y/2:
-                cursorPosition.Y=Tbfe.cvar.ScreenDimensions.Y/2
+            if cursorPosition.Y<Tbfe.cvar.ScreenDimensions.Y/2-25:
+                cursorPosition.Y=Tbfe.cvar.ScreenDimensions.Y/2-25
         if cursorPosition.Y>500:
             cursorPosition.Y=500
         if cursorPosition.Y<200:
             cursorPosition.Y=200
         uiCursor.setScreenPosition(cursorPosition.X,cursorPosition.Y)
-        engine.setCameraAngle(Position.X,Position.Y,Position.Z)
+        Tbfe.setCameraAngle(Position.X,Position.Y,Position.Z)
 def switchMouseCamera():
     if engine.getShowMouse():
         engine.setShowMouse(False)
     else:
         engine.setShowMouse(True)
+def updatePulse():
+    #print("PULSING")
+    rotation=Tbfe.getCameraAngle()
+    position=engine.getCameraPosition()+Misc.applyRotations(Misc.PositionF(100,0,0),rotation)
+    pulse.setPositionF(position.X,position.Y,position.Z)
+    pulse.setRotationF(rotation.X,rotation.Y-90,rotation.Z,False)
+    #print(pulse.getPositionF().dumpString()+':'+Tbfe.GetMainPlayer().getPositionF().dumpString())
+    num=pulse.collisionPulse()
+    if num!=-1:
+        uiCursor.getElement("lblTarget").setProperty("text",Tbfe.GetActorByNum(num).getConversation(False))
+    else:
+        uiCursor.getElement("lblTarget").setProperty("text","")
+def pointer():
+    cameraAngle=Tbfe.getCameraAngle()
+    cameraPosition=engine.getCameraPosition()
+    if cameraAngle.X>0 and cameraAngle.X<90:
+        distance=(cameraPosition.Y-Tbfe.getCameraOffset().Y*20)/math.tan(cameraAngle.X*Misc.DEG_RAD)
+        cursorPos=Misc.PositionF()
+        cursorPos.X=math.sin(cameraAngle.Y*Misc.DEG_RAD)*distance
+        cursorPos.Z=-math.cos(cameraAngle.Y*Misc.DEG_RAD)*distance
+        cursorPos.X+=cameraPosition.X
+        cursorPos.Z+=cameraPosition.Z
+        #cursorPos.X=math.floor(cursorPos.X/100)*100
+        #cursorPos.Z=math.floor(cursorPos.Z/100)*100
+        #randomNpc.setPositionF(cursorPos.X,0,
+        #                       cursorPos.Z)
+        #randomNpc.getCollisionBox(0).setEnabled(False)
+        #textProp=('Cam Pos:%s, Cam A:%s, Cur Ptr:%s' % (engine.getCameraPosition().dumpString(), 
+        #                                               cameraAngle.dumpString(),
+        #                                              randomNpc.getPositionF().dumpString()))
+        #textProp=('%s, x %f, z %f, d %f' % (textProp,cursorPos.X,cursorPos.Z,distance))
+        #uiMousePosition.getElement("lblRate").setProperty("text",textProp)
+        return cursorPos
+def normalTest():
+    test=Misc.Quad()
+    test.at(0).X=1
+    test.at(0).Y=0
+    test.at(0).Z=0
+
+    test.at(1).X=1
+    test.at(1).Y=1
+    test.at(1).Z=0
+
+    test.at(2).X=1
+    test.at(2).Y=1
+    test.at(2).Z=1
+
+    test.at(3).X=1
+    test.at(3).Y=0
+    test.at(3).Z=1
+    print("1:Normal:"+Misc.normalize(test,Misc.PositionF(.5,.5,.5)).dumpString())
+    test.at(0).X=0
+    test.at(0).Y=2
+    test.at(0).Z=0
+
+    test.at(1).X=1
+    test.at(1).Y=2
+    test.at(1).Z=0
+
+    test.at(2).X=1
+    test.at(2).Y=2
+    test.at(2).Z=1
+
+    test.at(3).X=1
+    test.at(3).Y=2
+    test.at(3).Z=1
+    print("2:Normal:"+Misc.normalize(test,Misc.PositionF(.5,.5,.5)).dumpString())
+def useTile():
+    cursorPos=pointer()
+    if cursorPos==None:
+        return
+    playerPos=Tbfe.GetMainPlayer().getPositionF()
+    distance=math.pow(cursorPos.X-playerPos.X,2)
+    distance+=math.pow(cursorPos.Y-playerPos.Y,2)
+    distance+=math.pow(cursorPos.Z-playerPos.Z,2)
+    distance=math.sqrt(distance)
+    rCursorPos=Misc.PositionF()
+    rCursorPos.X=math.floor(cursorPos.X/100)
+    rCursorPos.Y=math.floor(cursorPos.Y/100)
+    rCursorPos.Z=math.floor(cursorPos.Z/100)
+    randomNpc.setPositionF(rCursorPos.X*100,rCursorPos.Y*100,rCursorPos.Z*100)
+    if distance<200:
+        newTile=Misc.Tile()
+        newTile.Type=0
+        newTile.TileSet=0
+        newTile.Passability=0
+        newTile.isChange=True
+        Tbfe.cvar.CurrentMap.changeTile(int(rCursorPos.X)+1,int(rCursorPos.Z)+1,newTile,0)
 Tbfe.cvar.ScreenDimensions.X=1024
 Tbfe.cvar.ScreenDimensions.Y=600
 engine=Tbfe.TBFE()
@@ -74,32 +163,37 @@ engine.addWindow(uiConsole.getWindow())
 uiMousePosition=UI.createWindow(0,400,"FrameRate")
 engine.addWindow(uiMousePosition)
 uiFrameRate=UI.createWindow(0,500,"FrameRate")
-uiCursor=UI.createWindow(Tbfe.cvar.ScreenDimensions.X/2,Tbfe.cvar.ScreenDimensions.Y/2,"Cursor")
+uiCursor=UI.createWindow(Tbfe.cvar.ScreenDimensions.X/2-25,Tbfe.cvar.ScreenDimensions.Y/2-25,"Cursor")
+uiCursor.setShowBackground(False)
 engine.addWindow(uiCursor)
 engine.addWindow(uiFrameRate)
 engine.setShowMouse(True)
 action=5
 i=0
-randomNpc=Actor.createActor(500,200,"Npc","Npc")
-Tbfe.GetMainPlayer().setRotationF(0,180,0)
+randomNpc=Actor.createActor(20,1020,"Bed","Bed")
 housing=Actor.createActor(0,400,"House","House")
 engine.addActor(housing)
-#engine.addActor(randomNpc)
+engine.addActor(randomNpc)
 engine.addGlobalEvent("MouseCamera",Misc.MOUSEMOVE,0,"mouseCamera(mouseMovement)")
 engine.addGlobalEvent("SwitchMouseControl",Misc.KEYPRESS,306,"switchMouseCamera()")
+engine.addGlobalEvent("Action",Misc.KEYPRESS,32,"useTile()")
 engine.setShowMouse(False)
-engine.setCameraAngle(0,90,0)
-pulse=Actor.Pulse(0,0,200,5,Misc.PositionF(0,0,0),400)
-num=pulse.collisionPulse()
-print(Tbfe.GetActorByNum(num).getConversation(False))
-print(Tbfe.GetActorByNum(num).getPositionF().dumpString())
+Tbfe.setCameraAngle(0,90,0)
+pulse=Actor.Pulse(Misc.PositionF(0,0,10),4,Misc.PositionF(0,0,0),400)
+Tbfe.cvar.showCollision=True
 while action!=Misc.QUIT:
     uiConsole.refreshWindow()
     action=engine.runEngine()
     mousePosition=engine.getMousePosition()
-    uiMousePosition.getElement("lblRate").setProperty("text",('%i,%i' % (mousePosition.X,mousePosition.Y)))
+    
     uiMousePosition.getElement("lblRate").reload()
     uiFrameRate.getElement("lblRate").setProperty("text",('%f' % (60/Tbfe.cvar.GameSpeed)))
     uiFrameRate.getElement("lblRate").reload()
     Tbfe.GetMainPlayer().setRotationF(0,Tbfe.GetMainPlayer().getRotationF().Y,0)
+    Tbfe.setCameraAngle(Tbfe.getCameraAngle().X,-Tbfe.GetMainPlayer().getRotationF().Y+90,Tbfe.getCameraAngle().Z)
     i+=1
+    #randomNpc.setPositionF(engine.getCameraPosition().X,engine.getCameraPosition().Y,engine.getCameraPosition().Z)
+    #randomNpc.setRotationF(Tbfe.getCameraAngle().X,-Tbfe.getCameraAngle().Y,Tbfe.getCameraAngle().Z)
+    normalTest()
+    updatePulse()
+    

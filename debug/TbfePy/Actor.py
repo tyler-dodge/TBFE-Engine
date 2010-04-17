@@ -258,13 +258,13 @@ class CollisionBox(_object):
     def generatePoints(*args): return _Actor.CollisionBox_generatePoints(*args)
     def setDimensions(*args): return _Actor.CollisionBox_setDimensions(*args)
     def checkLine(*args): return _Actor.CollisionBox_checkLine(*args)
-    def convertToAngle(*args): return _Actor.CollisionBox_convertToAngle(*args)
     def getPosition(*args): return _Actor.CollisionBox_getPosition(*args)
     def setPosition(*args): return _Actor.CollisionBox_setPosition(*args)
     def getRotation(*args): return _Actor.CollisionBox_getRotation(*args)
     def setRotation(*args): return _Actor.CollisionBox_setRotation(*args)
-    def applyRotations(*args): return _Actor.CollisionBox_applyRotations(*args)
     def checkCollision(*args): return _Actor.CollisionBox_checkCollision(*args)
+    def checkEnabled(*args): return _Actor.CollisionBox_checkEnabled(*args)
+    def setEnabled(*args): return _Actor.CollisionBox_setEnabled(*args)
     __swig_destroy__ = _Actor.delete_CollisionBox
     __del__ = lambda self : None;
 CollisionBox_swigregister = _Actor.CollisionBox_swigregister

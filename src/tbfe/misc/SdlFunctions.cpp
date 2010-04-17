@@ -325,3 +325,152 @@ float roundDown(float num,int place)
   newNum/=pow(10,place);
   return newNum;
 };
+PositionF applyRotations(PositionF position,PositionF rotation)
+{
+  float magnitude=sqrt(pow(position.Y,2)+pow(position.Z,2));
+  PositionF tempPosition=position;
+  //X rotation
+  if (position.Y!=0)
+    {
+      position.Y=cos(convertToAngle(tempPosition.Y,tempPosition.Z)+rotation.X*PI/180)*magnitude;
+      position.Z=sin(convertToAngle(tempPosition.Y,tempPosition.Z)+rotation.X*PI/180)*magnitude;
+    }
+  else
+    {
+      float angle;
+      if (position.Z>0)
+	{
+	  angle=PI/2;
+	}
+      else
+	{
+	  angle=-PI/2;
+	};
+      position.Y=cos(angle+rotation.X*PI/180)*magnitude;
+      position.Z=sin(angle+rotation.X*PI/180)*magnitude;
+    };
+  tempPosition=position;
+  magnitude=sqrt(pow(position.X,2)+pow(position.Z,2));
+  //Y rotation
+  if (position.X!=0)
+    {
+      position.X=cos(convertToAngle(tempPosition.X,tempPosition.Z)+rotation.Y*PI/180)*magnitude;
+      position.Z=sin(convertToAngle(tempPosition.X,tempPosition.Z)+rotation.Y*PI/180)*magnitude;
+    }
+  else
+    {
+      float angle;
+      if (position.Z>0)
+	{
+	  angle=PI/2;
+	}
+      else
+	{
+	  angle=-PI/2;
+	};
+      position.X=cos(angle+rotation.Y*PI/180)*magnitude;
+      position.Z=sin(angle+rotation.Y*PI/180)*magnitude;
+    };
+  tempPosition=position;
+  magnitude=sqrt(pow(position.X,2)+pow(position.Y,2));
+  //Z rotation
+   if (position.X!=0)
+    {
+      position.X=cos(convertToAngle(tempPosition.X,tempPosition.Y)+rotation.Z*PI/180)*magnitude;
+      position.Y=sin(convertToAngle(tempPosition.X,tempPosition.Y)+rotation.Z*PI/180)*magnitude;
+   }
+  else
+    {
+      float angle;
+      if (position.Y>0)
+	{
+	  angle=PI/2;
+	}
+      else
+	{
+	  angle=-PI/2;
+	};
+      position.X=cos(angle+rotation.Z*PI/180)*magnitude;
+      position.Y=sin(angle+rotation.Z*PI/180)*magnitude;
+    };
+  return position;
+};
+//Radians
+float convertToAngle(float x,float y)
+{
+  float addAngle=0;
+  if (x==0 && y>0)
+    {
+      return PI/2;
+    }
+  else if (x==0 && y<0)
+    {
+      return 3*PI/2;
+    }
+  else if (x==0 && y==0)
+    {
+      return 0;
+    };
+  float absX=x;
+  float absY=y;
+  if (x<0)
+    {
+      absX*=-1;
+    };
+  if (y<0)
+    {
+      absY*=-1;
+    };
+  float angle=atan(absY/absX);
+  if (y>=0 && x<0)
+    {
+      angle=PI-angle;
+    }
+  else if (y<0 && x<0)
+    {
+      angle=PI+angle;
+    }
+  else if (y<0 && x>=0)
+    {
+      angle=2*PI-angle;
+    }
+  else
+    {
+    };
+  return angle;
+};
+PositionF normalize(Quad face, PositionF center)
+{
+  PositionF faceCenter=((face.points[0]+face.points[2])/2+(face.points[1]+face.points[3])/2)/2;
+  PositionF xyNormal;
+  PositionF zyNormal;
+  PositionF normal;
+  PositionF finalNormal;
+  PositionF faceDiff=center-faceCenter;
+  float a=convertToAngle(faceDiff.Z,
+			 faceDiff.Y);
+  zyNormal.Z=cos(a);
+  zyNormal.Y=sin(a);
+
+  a=convertToAngle(faceDiff.X,
+		   faceDiff.Y);
+  xyNormal.X=cos(a);
+  xyNormal.Y=sin(a);
+  
+  normal=xyNormal+zyNormal;
+  a=convertToAngle(normal.Z,normal.Y);
+  finalNormal.Z=cos(a);
+  finalNormal.Y=sin(a);
+  float baseAngle=convertToAngle(normal.X,normal.Z);
+
+  finalNormal=applyRotations(finalNormal,PositionF(0,baseAngle,0));
+  return finalNormal;
+};
+float absVal(float num)
+{
+  if (num<0)
+    {
+      num*=-1;
+    };
+  return num;
+};

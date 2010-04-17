@@ -26,6 +26,9 @@ namespace TBFE_Base
   vector<Model> ModelList;
   vector<AnimationSheet> AnimationSheets;
   vector<AnimationSheet> TempSheets;
+  PositionF cameraAngle_(0,0,0);
+  PositionF cameraOffset_(0,-6,0);
+  PositionF cameraFollowOffset_(-1,-2.5,-4);
   int GetActorNum(Actor *actorPtr)
   {  
     for (int i=0;i<ActorList.size();i++)
@@ -200,5 +203,35 @@ namespace TBFE_Base
 	  };
       };
     return -1;
+  };
+  PositionF getCameraAngle()
+  {
+    return cameraAngle_;
+  };
+  void setCameraAngle(float x, float y, float z)
+  {
+    cameraAngle_.X=x;
+    cameraAngle_.Y=y;
+    cameraAngle_.Z=z;
+  };
+  PositionF getCameraFollowOffset()
+  {
+    return cameraFollowOffset_;
+  };
+  void setCameraFollowOffset(float x,float y,float z)
+  {
+    cameraFollowOffset_.X=x;
+    cameraFollowOffset_.Y=y;
+    cameraFollowOffset_.Z=z;
+  };
+  PositionF getCameraOffset()
+  {
+    return cameraOffset_;
+  };
+  void setCameraOffset(float x,float y,float z)
+  {
+    cameraOffset_.X=x;
+    cameraOffset_.Y=y;
+    cameraOffset_.Z=z;
   };
 };

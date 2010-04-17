@@ -1,5 +1,8 @@
 #ifndef Enums_L
 #define Enums_L
+#define PI 3.14159265
+#define DEG_RAD PI/180
+#define RAD_DEG 180/PI
 //only applies to Farm tiles
 enum TileType
   {

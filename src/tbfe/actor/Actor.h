@@ -53,7 +53,7 @@ class Actor
   void setProperty(string,string);
   int changePosition(float,bool);
 
-  int checkActorCollision(float,float,float);
+  int checkActorCollision(float,float,float,vector<int> * ignore=NULL);
 
   Position getPosition();
   void setPosition(int,int,int Z=0);
@@ -62,7 +62,7 @@ class Actor
   void setPositionF(float,float,float);
 
   PositionF getRotationF();
-  void setRotationF(float,float,float);
+  void setRotationF(float,float,float,bool doCollisionTest=true);
   virtual string getConversation(bool)=0;
   void setConversation(string);
   

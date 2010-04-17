@@ -14,9 +14,6 @@ TBFE_Render::TBFE_Render()
   window_=TBFE_Base::CheckSheets("Images/UI/Window.png");
   TBFE_Base::CollisionTile=TBFE_Base::CheckSheets("Tile.png");
   setLightPosition(0,0,0);
-  cameraAngle_.X=0;
-  cameraAngle_.Y=0;
-  cameraAngle_.Z=0;
 };
 void TBFE_Render::setLightPosition(float x,float y,float z)
 {
@@ -119,6 +116,11 @@ inline void TBFE_Render::initializeTileSets()
 };
 void TBFE_Render::finalRender(bool doFlip)
 {  
+  if (TBFE_Base::CurrentMap.checkChanged())
+    {
+      TBFE_Base::CurrentMap.setChanged(false);
+      refreshMapLayer(0);
+    };
   Position mapDimensions=TBFE_Base::CurrentMap.getDimensions();
   lightPosition_[0]=0.0f;
   lightPosition_[1]=1.0f;
@@ -128,12 +130,16 @@ void TBFE_Render::finalRender(bool doFlip)
   glLightfv(GL_LIGHT0,GL_POSITION,lightPosition_);
   glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
   glLoadIdentity();
-  glTranslatef(-1,-2.5,-4);
-  glRotatef(cameraAngle_.X,1,0,0);
-  glRotatef(cameraAngle_.Y,0,1,0);
-  glRotatef(cameraAngle_.Z,0,0,1);
-  glTranslatef(0,-6,0);
-  glRotatef(-TBFE_Base::MainPlayer->getRotationF().Y,0,1,0);
+  PositionF cameraOffset=TBFE_Base::getCameraOffset();
+  PositionF cameraFollowOffset=TBFE_Base::getCameraFollowOffset();
+  PositionF cameraAngle=TBFE_Base::getCameraAngle();
+  glTranslatef(cameraFollowOffset.X,cameraFollowOffset.Y,cameraFollowOffset.Z);
+ 
+  glRotatef(cameraAngle.X,1,0,0);
+  glRotatef(cameraAngle.Y,0,1,0);
+  glRotatef(cameraAngle.Z,0,0,1);
+  glTranslatef(cameraOffset.X,cameraOffset.Y,cameraOffset.Z);
+  //glRotatef(-TBFE_Base::MainPlayer->getRotationF().Y,0,1,0);
   glTranslatef(-TBFE_Base::MainPlayer->getPositionF().X/20,0,-TBFE_Base::MainPlayer->getPositionF().Z/20);
   renderActors();
   renderMapLayer(0,0,0);
@@ -148,18 +154,13 @@ void TBFE_Render::finalRender(bool doFlip)
       TBFE_Base::MainConsole.write(errorString.str());
     }
 };
-PositionF TBFE_Render::getCameraAngle()
-{
-  return cameraAngle_;
-};
-void TBFE_Render::setCameraAngle(float x,float y,float z)
-{
-  cameraAngle_.X=x;
-  cameraAngle_.Y=y;
-  cameraAngle_.Z=z;
-};
 void TBFE_Render::refreshMapLayer(int Layer)
 {
+  TBFE_Base::MainConsole.write("Map refreshed");
+  map_.indices.clear();
+  map_.vertices.clear();
+  map_.texCoords.clear();
+  map_.normals.clear();
   Position dimensions=TBFE_Base::CurrentMap.getDimensions();
   int tileSize=5;
   for (int mapY=0;mapY<dimensions.Y;mapY++)
@@ -301,34 +302,34 @@ void TBFE_Render::renderActors()
 	      aiVector3D trotation(rotation.X+layerRotation.X,rotation.Y+layerRotation.Y,rotation.Z+layerRotation.Z);
 	      aiVector3D tscale(0,0,0);
 	      drawNodes(model,tposition,trotation,tscale);
-	      if (TBFE_Base::showCollision)
+	    };
+	  if (TBFE_Base::showCollision)
+	    {
+	      glPushMatrix();
+	      glTranslatef(ActorPosition.X/20,ActorPosition.Y/20,ActorPosition.Z/20);
+	      PositionF dimensions;
+	      PositionF offset;
+	      for (int i=0;i<currentActor->getNumCollisionBox();i++)
 		{
-		  glPushMatrix();
-		  glTranslatef(ActorPosition.X/20,ActorPosition.Y/20,ActorPosition.Z/20);
-		  PositionF dimensions;
-		  PositionF offset;
-		  for (int i=0;i<currentActor->getNumCollisionBox();i++)
-		    {
-		      CollisionBox actorCollision=*currentActor->getCollisionBox(i);
-		      dimensions=actorCollision.getDimensions();
-		      offset=actorCollision.getPosition();
-		      actorCollision.setRotation(rotation.X,-rotation.Y,rotation.Z);   
-		      vector<PositionF> points=actorCollision.generatePoints(actorCollision.getPosition(),actorCollision.getDimensions());
-		      glDisable(GL_CULL_FACE);
-		      glEnableClientState(GL_VERTEX_ARRAY);
-		      glVertexPointer(3,GL_FLOAT,0,&points[0]);
-		      GLuint indices[24]={0,1,2,3,
-					  0,1,5,4,
-					  2,3,7,6,
-					  1,2,6,5,
-					  3,0,4,7,
-					  4,5,6,7};  
-		      glDrawElements(GL_QUADS,24,GL_UNSIGNED_INT,&indices);
-		      glDisableClientState(GL_VERTEX_ARRAY);
-		      glEnable(GL_CULL_FACE);
-		    };
-		  glPopMatrix();
+		  CollisionBox actorCollision=*currentActor->getCollisionBox(i);
+		  dimensions=actorCollision.getDimensions();
+		  offset=actorCollision.getPosition();
+		  actorCollision.setRotation(rotation.X,-rotation.Y,rotation.Z);   
+		  vector<PositionF> points=actorCollision.generatePoints(actorCollision.getPosition(),actorCollision.getDimensions());
+		  glDisable(GL_CULL_FACE);
+		  glEnableClientState(GL_VERTEX_ARRAY);
+		  glVertexPointer(3,GL_FLOAT,0,&points[0]);
+		  GLuint indices[24]={0,1,2,3,
+				      0,1,5,4,
+				      2,3,7,6,
+				      1,2,6,5,
+				      3,0,4,7,
+				      4,5,6,7};
+		  glDrawElements(GL_QUADS,24,GL_UNSIGNED_INT,&indices);
+		  glDisableClientState(GL_VERTEX_ARRAY);
+		  glEnable(GL_CULL_FACE);
 		};
+	      glPopMatrix();
 	    };
 	};
       if (currentActor->getWalking())

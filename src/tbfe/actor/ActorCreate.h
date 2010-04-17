@@ -4,6 +4,7 @@
 #include "Actor.h"
 #include "Npc.h"
 #include "NonLiving.h"
+#include "Pulse.h"
 #include <vector>
 #ifndef ActorCreate_L
 #define ActorCreate_L

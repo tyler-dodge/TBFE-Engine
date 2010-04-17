@@ -17,6 +17,7 @@ class Map
   vector<TileLayer> layers_;
   vector<string> tileSetNames_;
   string scriptFile_;
+  bool isChanged_;
  public:
 
   //Constructor, Creates pointer to the console
@@ -37,7 +38,8 @@ class Map
   void setLayerVisibility(int,bool);
   int getNumberOfLayers();
   Position getDimensions();
-
+  bool checkChanged();
+  void setChanged(bool);
   void changeTile(int,int,Tile,int);
   Tile getTile(int,int,int);
 

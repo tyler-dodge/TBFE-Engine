@@ -7,7 +7,7 @@ class Pulse:public Actor
  private:
   float distance_;
  public:
-  Pulse(int, int,int,float,PositionF, float);
+  Pulse(PositionF,float,PositionF, float);
   ~Pulse();
   int collisionPulse();
   string getConversation(bool);

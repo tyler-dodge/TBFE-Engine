@@ -70,6 +70,8 @@ class Map(_object):
     def setLayerVisibility(*args): return _Map.Map_setLayerVisibility(*args)
     def getNumberOfLayers(*args): return _Map.Map_getNumberOfLayers(*args)
     def getDimensions(*args): return _Map.Map_getDimensions(*args)
+    def checkChanged(*args): return _Map.Map_checkChanged(*args)
+    def setChanged(*args): return _Map.Map_setChanged(*args)
     def changeTile(*args): return _Map.Map_changeTile(*args)
     def getTile(*args): return _Map.Map_getTile(*args)
     def addTileSet(*args): return _Map.Map_addTileSet(*args)

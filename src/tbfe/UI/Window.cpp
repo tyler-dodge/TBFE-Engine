@@ -64,7 +64,14 @@ SDL_Surface * Window::renderElements(SDL_Surface * screen)
 	{
 	  background_=SDL_CreateRGBSurface(0,dimensions_.X,dimensions_.Y,32,
 					   0x00ff0000,0x0000ff00,0x000000ff,0xff000000);
-	  SDL_FillRect(background_,NULL,0x00000000);
+	  if (showBackground_)
+	    {
+	      SDL_FillRect(background_,NULL,0xff000000);
+	    }
+	  else
+	    {
+	      SDL_FillRect(background_,NULL,0x00000000);
+	    };
 	};
       if (image_!=NULL)
 	{
@@ -80,9 +87,16 @@ SDL_Surface * Window::renderElements(SDL_Surface * screen)
 	      rect.x=elementPosition.X;
 	      rect.y=elementPosition.Y;
 	      SDL_Surface * element=elements_.at(i)->renderElement();
-	      SDL_SetAlpha(element,0,0);
 	      if (element!=NULL)
 		{
+		  if (showBackground_)
+		    {
+		      SDL_SetAlpha(element,SDL_SRCALPHA,0);
+		    }
+		  else
+		    {
+		      SDL_SetAlpha(element,0,0);
+		    };
 		  SDL_BlitSurface(element,NULL,image_,&rect);
 		};
 	    };

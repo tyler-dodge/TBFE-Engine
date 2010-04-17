@@ -69,6 +69,11 @@ GetKeyTarget = _TBFE.GetKeyTarget
 SetKeyTarget = _TBFE.SetKeyTarget
 getWindowByNum = _TBFE.getWindowByNum
 getWindowNum = _TBFE.getWindowNum
+getCameraAngle = _TBFE.getCameraAngle
+setCameraAngle = _TBFE.setCameraAngle
+getCameraFollowOffset = _TBFE.getCameraFollowOffset
+setCameraFollowOffset = _TBFE.setCameraFollowOffset
+getCameraOffset = _TBFE.getCameraOffset
 class TBFE(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, TBFE, name, value)
@@ -91,12 +96,11 @@ class TBFE(_object):
     def addEvent(*args): return _TBFE.TBFE_addEvent(*args)
     def getEvent(*args): return _TBFE.TBFE_getEvent(*args)
     def getMousePosition(*args): return _TBFE.TBFE_getMousePosition(*args)
-    def getCameraAngle(*args): return _TBFE.TBFE_getCameraAngle(*args)
     def getMouseCenter(*args): return _TBFE.TBFE_getMouseCenter(*args)
     def setMouseCenter(*args): return _TBFE.TBFE_setMouseCenter(*args)
     def setShowMouse(*args): return _TBFE.TBFE_setShowMouse(*args)
     def getShowMouse(*args): return _TBFE.TBFE_getShowMouse(*args)
-    def setCameraAngle(*args): return _TBFE.TBFE_setCameraAngle(*args)
+    def getCameraPosition(*args): return _TBFE.TBFE_getCameraPosition(*args)
     def addGlobalEvent(*args): return _TBFE.TBFE_addGlobalEvent(*args)
     __swig_destroy__ = _TBFE.delete_TBFE
     __del__ = lambda self : None;
@@ -122,8 +126,6 @@ class TBFE_Render(_object):
     def changeLighting(*args): return _TBFE.TBFE_Render_changeLighting(*args)
     def init(*args): return _TBFE.TBFE_Render_init(*args)
     def initGl(*args): return _TBFE.TBFE_Render_initGl(*args)
-    def getCameraAngle(*args): return _TBFE.TBFE_Render_getCameraAngle(*args)
-    def setCameraAngle(*args): return _TBFE.TBFE_Render_setCameraAngle(*args)
     def setLightPosition(*args): return _TBFE.TBFE_Render_setLightPosition(*args)
     def finalRender(*args): return _TBFE.TBFE_Render_finalRender(*args)
 TBFE_Render_swigregister = _TBFE.TBFE_Render_swigregister

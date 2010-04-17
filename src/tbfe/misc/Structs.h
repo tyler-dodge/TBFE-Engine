@@ -68,6 +68,14 @@ struct PositionF
     newPosition.Z+=Z;
     return newPosition;
   };
+  PositionF operator+(float a)
+  {
+    PositionF newPosition;
+    newPosition.X=X+a;
+    newPosition.Y=Y+a;
+    newPosition.Z=Z+a;
+    return newPosition;
+  };
   PositionF operator-(PositionF newPosition)
   {
     newPosition.X-=X;
@@ -163,5 +171,21 @@ struct TileSheet
 {
   GLuint texture;
   Position dimensions;
+};
+struct Quad
+{
+  PositionF points[4];
+  PositionF * at(int num)
+  {
+    if (num<4)
+      {
+	return &points[num];
+      }
+    else
+      {
+	PositionF fail(-1,-1,-1);
+	return NULL;
+      };
+  };
 };
 #endif

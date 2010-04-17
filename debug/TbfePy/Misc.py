@@ -55,6 +55,10 @@ drawNodes = _Misc.drawNodes
 applyMaterial = _Misc.applyMaterial
 bindImage = _Misc.bindImage
 roundDown = _Misc.roundDown
+applyRotations = _Misc.applyRotations
+convertToAngle = _Misc.convertToAngle
+normalize = _Misc.normalize
+absVal = _Misc.absVal
 loadString = _Misc.loadString
 nextSet = _Misc.nextSet
 nextChar = _Misc.nextChar
@@ -77,6 +81,9 @@ Timer_swigregister = _Misc.Timer_swigregister
 Timer_swigregister(Timer)
 loadImage = _Misc.loadImage
 
+PI = _Misc.PI
+DEG_RAD = _Misc.DEG_RAD
+RAD_DEG = _Misc.RAD_DEG
 NONE = _Misc.NONE
 GRASS = _Misc.GRASS
 DIRT = _Misc.DIRT
@@ -465,6 +472,25 @@ class TileSheet(_object):
     __del__ = lambda self : None;
 TileSheet_swigregister = _Misc.TileSheet_swigregister
 TileSheet_swigregister(TileSheet)
+
+class Quad(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, Quad, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, Quad, name)
+    __repr__ = _swig_repr
+    __swig_setmethods__["points"] = _Misc.Quad_points_set
+    __swig_getmethods__["points"] = _Misc.Quad_points_get
+    if _newclass:points = _swig_property(_Misc.Quad_points_get, _Misc.Quad_points_set)
+    def at(*args): return _Misc.Quad_at(*args)
+    def __init__(self, *args): 
+        this = _Misc.new_Quad(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    __swig_destroy__ = _Misc.delete_Quad
+    __del__ = lambda self : None;
+Quad_swigregister = _Misc.Quad_swigregister
+Quad_swigregister(Quad)
 
 
 

@@ -2,6 +2,7 @@
 Map::Map()
 {
   layers_.resize(0);
+  isChanged_=false;
 };
 Map::~Map()
 {
@@ -126,6 +127,7 @@ void Map::changeTile(int x,int y, Tile newTile,int Layer)
       return;
     };
   layers_.at(Layer).changeTile(x,y,newTile);
+  isChanged_=true;
 };
 void Map::addTileSet(string newTileSet)
 {
@@ -186,4 +188,12 @@ string Map::getTileSet(int tileSetNum)
 int Map::getNumberOfTileSets()
 {
   return tileSetNames_.size();
+};
+bool Map::checkChanged()
+{
+  return isChanged_;
+};
+void Map::setChanged(bool newChanged)
+{
+  isChanged_=newChanged;
 };

@@ -37,14 +37,6 @@ bool TBFE::createFile(string name)
   ofstream NewFile(name.c_str(),ofstream::binary);
   return true;
 };
-PositionF TBFE::getCameraAngle()
-{
-  return renderWindow_.getCameraAngle();
-};
-void TBFE::setCameraAngle(float x,float y,float z)
-{
-  renderWindow_.setCameraAngle(x,y,z);
-};
 void TBFE::addEvent(std::string Target,Element * element,Window * Parent,std::string Function,Event TargetEvent)
 {
   EventType NewEvent;
@@ -424,4 +416,13 @@ Direction TBFE::runEngine()
 Position TBFE::getMousePosition()
 {
   return mousePosition_;
+};
+PositionF TBFE::getCameraPosition()
+{
+  PositionF cameraOffset=TBFE_Base::getCameraOffset()*20;
+  PositionF cameraFollowOffset=TBFE_Base::getCameraFollowOffset()*20;
+  PositionF cameraAngle=TBFE_Base::getCameraAngle();
+  PositionF tempAngle=(applyRotations(cameraFollowOffset,cameraAngle)+cameraOffset);
+  tempAngle=TBFE_Base::MainPlayer->getPositionF()-tempAngle;
+  return tempAngle*-1;
 };

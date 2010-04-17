@@ -2514,27 +2514,28 @@ SWIG_Python_MustGetPtr(PyObject *obj, swig_type_info *ty, int argnum, int flags)
 #define SWIGTYPE_p_Position swig_types[10]
 #define SWIGTYPE_p_PositionF swig_types[11]
 #define SWIGTYPE_p_Property swig_types[12]
-#define SWIGTYPE_p_SDL_Rect swig_types[13]
-#define SWIGTYPE_p_SDL_Surface swig_types[14]
-#define SWIGTYPE_p_Tile swig_types[15]
-#define SWIGTYPE_p_TileSheet swig_types[16]
-#define SWIGTYPE_p_Timer swig_types[17]
-#define SWIGTYPE_p_Uint32 swig_types[18]
-#define SWIGTYPE_p_Window swig_types[19]
-#define SWIGTYPE_p_WindowType swig_types[20]
-#define SWIGTYPE_p_aiMaterial swig_types[21]
-#define SWIGTYPE_p_aiVector3D swig_types[22]
-#define SWIGTYPE_p_char swig_types[23]
-#define SWIGTYPE_p_ifstream swig_types[24]
-#define SWIGTYPE_p_std__string swig_types[25]
-#define SWIGTYPE_p_vectorT_ElementList_t swig_types[26]
-#define SWIGTYPE_p_vectorT_GLfloat_t swig_types[27]
-#define SWIGTYPE_p_vectorT_GLuint_t swig_types[28]
-#define SWIGTYPE_p_vectorT_MeshData_p_t swig_types[29]
-#define SWIGTYPE_p_vectorT_aiMaterial_p_t swig_types[30]
-#define SWIGTYPE_p_vectorT_aiVector3D_t swig_types[31]
-static swig_type_info *swig_types[33];
-static swig_module_info swig_module = {swig_types, 32, 0, 0, 0, 0};
+#define SWIGTYPE_p_Quad swig_types[13]
+#define SWIGTYPE_p_SDL_Rect swig_types[14]
+#define SWIGTYPE_p_SDL_Surface swig_types[15]
+#define SWIGTYPE_p_Tile swig_types[16]
+#define SWIGTYPE_p_TileSheet swig_types[17]
+#define SWIGTYPE_p_Timer swig_types[18]
+#define SWIGTYPE_p_Uint32 swig_types[19]
+#define SWIGTYPE_p_Window swig_types[20]
+#define SWIGTYPE_p_WindowType swig_types[21]
+#define SWIGTYPE_p_aiMaterial swig_types[22]
+#define SWIGTYPE_p_aiVector3D swig_types[23]
+#define SWIGTYPE_p_char swig_types[24]
+#define SWIGTYPE_p_ifstream swig_types[25]
+#define SWIGTYPE_p_std__string swig_types[26]
+#define SWIGTYPE_p_vectorT_ElementList_t swig_types[27]
+#define SWIGTYPE_p_vectorT_GLfloat_t swig_types[28]
+#define SWIGTYPE_p_vectorT_GLuint_t swig_types[29]
+#define SWIGTYPE_p_vectorT_MeshData_p_t swig_types[30]
+#define SWIGTYPE_p_vectorT_aiMaterial_p_t swig_types[31]
+#define SWIGTYPE_p_vectorT_aiVector3D_t swig_types[32]
+static swig_type_info *swig_types[34];
+static swig_module_info swig_module = {swig_types, 33, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -3361,6 +3362,153 @@ SWIGINTERN PyObject *_wrap_roundDown(PyObject *SWIGUNUSEDPARM(self), PyObject *a
   } 
   arg2 = static_cast< int >(val2);
   result = (float)roundDown(arg1,arg2);
+  resultobj = SWIG_From_float(static_cast< float >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_applyRotations(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  PositionF arg1 ;
+  PositionF arg2 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PositionF result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:applyRotations",&obj0,&obj1)) SWIG_fail;
+  {
+    res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_PositionF,  0  | 0);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "applyRotations" "', argument " "1"" of type '" "PositionF""'"); 
+    }  
+    if (!argp1) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "applyRotations" "', argument " "1"" of type '" "PositionF""'");
+    } else {
+      PositionF * temp = reinterpret_cast< PositionF * >(argp1);
+      arg1 = *temp;
+      if (SWIG_IsNewObj(res1)) delete temp;
+    }
+  }
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_PositionF,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "applyRotations" "', argument " "2"" of type '" "PositionF""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "applyRotations" "', argument " "2"" of type '" "PositionF""'");
+    } else {
+      PositionF * temp = reinterpret_cast< PositionF * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  result = applyRotations(arg1,arg2);
+  resultobj = SWIG_NewPointerObj((new PositionF(static_cast< const PositionF& >(result))), SWIGTYPE_p_PositionF, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_convertToAngle(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  float arg1 ;
+  float arg2 ;
+  float val1 ;
+  int ecode1 = 0 ;
+  float val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  float result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:convertToAngle",&obj0,&obj1)) SWIG_fail;
+  ecode1 = SWIG_AsVal_float(obj0, &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "convertToAngle" "', argument " "1"" of type '" "float""'");
+  } 
+  arg1 = static_cast< float >(val1);
+  ecode2 = SWIG_AsVal_float(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "convertToAngle" "', argument " "2"" of type '" "float""'");
+  } 
+  arg2 = static_cast< float >(val2);
+  result = (float)convertToAngle(arg1,arg2);
+  resultobj = SWIG_From_float(static_cast< float >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_normalize(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Quad arg1 ;
+  PositionF arg2 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PositionF result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:normalize",&obj0,&obj1)) SWIG_fail;
+  {
+    res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_Quad,  0  | 0);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "normalize" "', argument " "1"" of type '" "Quad""'"); 
+    }  
+    if (!argp1) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "normalize" "', argument " "1"" of type '" "Quad""'");
+    } else {
+      Quad * temp = reinterpret_cast< Quad * >(argp1);
+      arg1 = *temp;
+      if (SWIG_IsNewObj(res1)) delete temp;
+    }
+  }
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_PositionF,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "normalize" "', argument " "2"" of type '" "PositionF""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "normalize" "', argument " "2"" of type '" "PositionF""'");
+    } else {
+      PositionF * temp = reinterpret_cast< PositionF * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  result = normalize(arg1,arg2);
+  resultobj = SWIG_NewPointerObj((new PositionF(static_cast< const PositionF& >(result))), SWIGTYPE_p_PositionF, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_absVal(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  float arg1 ;
+  float val1 ;
+  int ecode1 = 0 ;
+  PyObject * obj0 = 0 ;
+  float result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:absVal",&obj0)) SWIG_fail;
+  ecode1 = SWIG_AsVal_float(obj0, &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "absVal" "', argument " "1"" of type '" "float""'");
+  } 
+  arg1 = static_cast< float >(val1);
+  result = (float)absVal(arg1);
   resultobj = SWIG_From_float(static_cast< float >(result));
   return resultobj;
 fail:
@@ -5045,7 +5193,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_PositionF___add__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_PositionF___add____SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   PositionF *arg1 = (PositionF *) 0 ;
   PositionF arg2 ;
@@ -5081,6 +5229,82 @@ SWIGINTERN PyObject *_wrap_PositionF___add__(PyObject *SWIGUNUSEDPARM(self), PyO
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_PositionF___add____SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  PositionF *arg1 = (PositionF *) 0 ;
+  float arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  float val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PositionF result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:PositionF___add__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_PositionF, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PositionF___add__" "', argument " "1"" of type '" "PositionF *""'"); 
+  }
+  arg1 = reinterpret_cast< PositionF * >(argp1);
+  ecode2 = SWIG_AsVal_float(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "PositionF___add__" "', argument " "2"" of type '" "float""'");
+  } 
+  arg2 = static_cast< float >(val2);
+  result = (arg1)->operator +(arg2);
+  resultobj = SWIG_NewPointerObj((new PositionF(static_cast< const PositionF& >(result))), SWIGTYPE_p_PositionF, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_PositionF___add__(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = (int)PyObject_Length(args);
+  for (ii = 0; (ii < argc) && (ii < 2); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_PositionF, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_PositionF, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_PositionF___add____SWIG_0(self, args);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_PositionF, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_float(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        return _wrap_PositionF___add____SWIG_1(self, args);
+      }
+    }
+  }
+  
+fail:
+  Py_INCREF(Py_NotImplemented);
+  return Py_NotImplemented;
 }
 
 
@@ -7337,6 +7561,137 @@ SWIGINTERN PyObject *TileSheet_swigregister(PyObject *SWIGUNUSEDPARM(self), PyOb
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *_wrap_Quad_points_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Quad *arg1 = (Quad *) 0 ;
+  PositionF *arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Quad_points_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Quad, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Quad_points_set" "', argument " "1"" of type '" "Quad *""'"); 
+  }
+  arg1 = reinterpret_cast< Quad * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_PositionF, 0 |  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Quad_points_set" "', argument " "2"" of type '" "PositionF [4]""'"); 
+  } 
+  arg2 = reinterpret_cast< PositionF * >(argp2);
+  {
+    if (arg2) {
+      size_t ii = 0;
+      for (; ii < (size_t)4; ++ii) arg1->points[ii] = arg2[ii];
+    } else {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in variable '""points""' of type '""PositionF [4]""'");
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Quad_points_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Quad *arg1 = (Quad *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PositionF *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Quad_points_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Quad, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Quad_points_get" "', argument " "1"" of type '" "Quad *""'"); 
+  }
+  arg1 = reinterpret_cast< Quad * >(argp1);
+  result = (PositionF *)(PositionF *) ((arg1)->points);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_PositionF, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Quad_at(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Quad *arg1 = (Quad *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PositionF *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Quad_at",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Quad, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Quad_at" "', argument " "1"" of type '" "Quad *""'"); 
+  }
+  arg1 = reinterpret_cast< Quad * >(argp1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Quad_at" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (PositionF *)(arg1)->at(arg2);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_PositionF, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_Quad(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Quad *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":new_Quad")) SWIG_fail;
+  result = (Quad *)new Quad();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Quad, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_Quad(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Quad *arg1 = (Quad *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_Quad",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Quad, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Quad" "', argument " "1"" of type '" "Quad *""'"); 
+  }
+  arg1 = reinterpret_cast< Quad * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *Quad_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_Quad, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"loadImage", _wrap_loadImage, METH_VARARGS, NULL},
 	 { (char *)"applyImage", _wrap_applyImage, METH_VARARGS, NULL},
@@ -7346,6 +7701,10 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"applyMaterial", _wrap_applyMaterial, METH_VARARGS, NULL},
 	 { (char *)"bindImage", _wrap_bindImage, METH_VARARGS, NULL},
 	 { (char *)"roundDown", _wrap_roundDown, METH_VARARGS, NULL},
+	 { (char *)"applyRotations", _wrap_applyRotations, METH_VARARGS, NULL},
+	 { (char *)"convertToAngle", _wrap_convertToAngle, METH_VARARGS, NULL},
+	 { (char *)"normalize", _wrap_normalize, METH_VARARGS, NULL},
+	 { (char *)"absVal", _wrap_absVal, METH_VARARGS, NULL},
 	 { (char *)"loadString", _wrap_loadString, METH_VARARGS, NULL},
 	 { (char *)"nextSet", _wrap_nextSet, METH_VARARGS, NULL},
 	 { (char *)"nextChar", _wrap_nextChar, METH_VARARGS, NULL},
@@ -7506,6 +7865,12 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_TileSheet", _wrap_new_TileSheet, METH_VARARGS, NULL},
 	 { (char *)"delete_TileSheet", _wrap_delete_TileSheet, METH_VARARGS, NULL},
 	 { (char *)"TileSheet_swigregister", TileSheet_swigregister, METH_VARARGS, NULL},
+	 { (char *)"Quad_points_set", _wrap_Quad_points_set, METH_VARARGS, NULL},
+	 { (char *)"Quad_points_get", _wrap_Quad_points_get, METH_VARARGS, NULL},
+	 { (char *)"Quad_at", _wrap_Quad_at, METH_VARARGS, NULL},
+	 { (char *)"new_Quad", _wrap_new_Quad, METH_VARARGS, NULL},
+	 { (char *)"delete_Quad", _wrap_delete_Quad, METH_VARARGS, NULL},
+	 { (char *)"Quad_swigregister", Quad_swigregister, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
@@ -7525,6 +7890,7 @@ static swig_type_info _swigt__p_ModelData = {"_p_ModelData", "ModelData *", 0, 0
 static swig_type_info _swigt__p_Position = {"_p_Position", "Position *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_PositionF = {"_p_PositionF", "PositionF *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Property = {"_p_Property", "Property *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_Quad = {"_p_Quad", "Quad *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_SDL_Rect = {"_p_SDL_Rect", "SDL_Rect *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_SDL_Surface = {"_p_SDL_Surface", "SDL_Surface *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Tile = {"_p_Tile", "Tile *", 0, 0, (void*)0, 0};
@@ -7559,6 +7925,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_Position,
   &_swigt__p_PositionF,
   &_swigt__p_Property,
+  &_swigt__p_Quad,
   &_swigt__p_SDL_Rect,
   &_swigt__p_SDL_Surface,
   &_swigt__p_Tile,
@@ -7593,6 +7960,7 @@ static swig_cast_info _swigc__p_ModelData[] = {  {&_swigt__p_ModelData, 0, 0, 0}
 static swig_cast_info _swigc__p_Position[] = {  {&_swigt__p_Position, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_PositionF[] = {  {&_swigt__p_PositionF, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Property[] = {  {&_swigt__p_Property, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Quad[] = {  {&_swigt__p_Quad, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_SDL_Rect[] = {  {&_swigt__p_SDL_Rect, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_SDL_Surface[] = {  {&_swigt__p_SDL_Surface, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Tile[] = {  {&_swigt__p_Tile, 0, 0, 0},{0, 0, 0, 0}};
@@ -7627,6 +7995,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_Position,
   _swigc__p_PositionF,
   _swigc__p_Property,
+  _swigc__p_Quad,
   _swigc__p_SDL_Rect,
   _swigc__p_SDL_Surface,
   _swigc__p_Tile,
@@ -8175,6 +8544,9 @@ SWIGEXPORT void SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
+  SWIG_Python_SetConstant(d, "PI",SWIG_From_double(static_cast< double >(3.14159265)));
+  SWIG_Python_SetConstant(d, "DEG_RAD",SWIG_From_double(static_cast< double >(3.14159265/180)));
+  SWIG_Python_SetConstant(d, "RAD_DEG",SWIG_From_double(static_cast< double >(180/3.14159265)));
   SWIG_Python_SetConstant(d, "NONE",SWIG_From_int(static_cast< int >(NONE)));
   SWIG_Python_SetConstant(d, "GRASS",SWIG_From_int(static_cast< int >(GRASS)));
   SWIG_Python_SetConstant(d, "DIRT",SWIG_From_int(static_cast< int >(DIRT)));

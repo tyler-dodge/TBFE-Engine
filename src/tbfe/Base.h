@@ -37,5 +37,14 @@ namespace TBFE_Base
   extern void SetKeyTarget(Element *);
   extern Window * getWindowByNum(int);
   extern int getWindowNum(Window *);
+  
+  extern PositionF getCameraAngle();
+  extern void setCameraAngle(float,float,float);
+  
+  extern PositionF getCameraFollowOffset();
+  extern void setCameraFollowOffset(float,float,float);
+
+  extern PositionF getCameraOffset();
+  extern void setCameraFollowOffset(float,float,float);
 }
 #endif

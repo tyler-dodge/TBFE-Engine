@@ -48,12 +48,11 @@ class TBFE
   void addEvent(std::string,Element *, Window *,std::string,Event);
   EventType * getEvent(std::string);
   Position getMousePosition();
-  PositionF getCameraAngle();
   Position getMouseCenter();
   void setMouseCenter(int,int);
   void setShowMouse(bool);
   bool getShowMouse();
-  void setCameraAngle(float,float,float);
+  PositionF getCameraPosition();
   void addGlobalEvent(std::string,Event, int,std::string);
   ~TBFE();
 };
