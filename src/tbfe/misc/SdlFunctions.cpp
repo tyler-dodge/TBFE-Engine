@@ -439,6 +439,18 @@ float convertToAngle(float x,float y)
     };
   return angle;
 };
+PositionF addNormals(PositionF normal1,PositionF normal2)
+{
+  PositionF normal=normal1+normal2;
+  PositionF finalNormal;
+  float a=convertToAngle(normal.Z,normal.Y);
+  finalNormal.Z=cos(a);
+  finalNormal.Y=sin(a);
+  float baseAngle=convertToAngle(normal.X,normal.Z);
+
+  finalNormal=applyRotations(finalNormal,PositionF(0,baseAngle,0));
+  return finalNormal;
+};
 PositionF normalize(Quad face, PositionF center)
 {
   PositionF faceCenter=((face.points[0]+face.points[2])/2+(face.points[1]+face.points[3])/2)/2;
@@ -456,15 +468,7 @@ PositionF normalize(Quad face, PositionF center)
 		   faceDiff.Y);
   xyNormal.X=cos(a);
   xyNormal.Y=sin(a);
-  
-  normal=xyNormal+zyNormal;
-  a=convertToAngle(normal.Z,normal.Y);
-  finalNormal.Z=cos(a);
-  finalNormal.Y=sin(a);
-  float baseAngle=convertToAngle(normal.X,normal.Z);
-
-  finalNormal=applyRotations(finalNormal,PositionF(0,baseAngle,0));
-  return finalNormal;
+  return addNormals(xyNormal,zyNormal);
 };
 float absVal(float num)
 {
