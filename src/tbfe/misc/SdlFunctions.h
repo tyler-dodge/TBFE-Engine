@@ -26,4 +26,5 @@ extern PositionF applyRotations(PositionF,PositionF);
 extern float convertToAngle(float,float);
 extern PositionF normalize(Quad,PositionF);
 extern float absVal(float);
+extern PositionF addNormals(PositionF,PositionF);
 #endif
