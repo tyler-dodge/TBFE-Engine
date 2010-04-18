@@ -24,7 +24,7 @@ extern GLuint bindImage(SDL_Surface*);
 extern float roundDown(float,int);
 extern PositionF applyRotations(PositionF,PositionF);
 extern float convertToAngle(float,float);
-extern PositionF normalize(Quad,PositionF);
+extern PositionF normalize(Quad);
 extern float absVal(float);
 extern PositionF addNormals(PositionF,PositionF);
 #endif

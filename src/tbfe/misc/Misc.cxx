@@ -3450,16 +3450,12 @@ fail:
 SWIGINTERN PyObject *_wrap_normalize(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Quad arg1 ;
-  PositionF arg2 ;
   void *argp1 ;
   int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
   PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
   PositionF result;
   
-  if (!PyArg_ParseTuple(args,(char *)"OO:normalize",&obj0,&obj1)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"O:normalize",&obj0)) SWIG_fail;
   {
     res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_Quad,  0  | 0);
     if (!SWIG_IsOK(res1)) {
@@ -3473,20 +3469,7 @@ SWIGINTERN PyObject *_wrap_normalize(PyObject *SWIGUNUSEDPARM(self), PyObject *a
       if (SWIG_IsNewObj(res1)) delete temp;
     }
   }
-  {
-    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_PositionF,  0  | 0);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "normalize" "', argument " "2"" of type '" "PositionF""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "normalize" "', argument " "2"" of type '" "PositionF""'");
-    } else {
-      PositionF * temp = reinterpret_cast< PositionF * >(argp2);
-      arg2 = *temp;
-      if (SWIG_IsNewObj(res2)) delete temp;
-    }
-  }
-  result = normalize(arg1,arg2);
+  result = normalize(arg1);
   resultobj = SWIG_NewPointerObj((new PositionF(static_cast< const PositionF& >(result))), SWIGTYPE_p_PositionF, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:

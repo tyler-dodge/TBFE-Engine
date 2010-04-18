@@ -316,16 +316,15 @@ void TBFE_Render::renderActors()
 		  offset=actorCollision.getPosition();
 		  actorCollision.setRotation(rotation.X,-rotation.Y,rotation.Z);   
 		  vector<PositionF> points=actorCollision.generatePoints(actorCollision.getPosition(),actorCollision.getDimensions());
-		  glDisable(GL_CULL_FACE);
 		  glEnableClientState(GL_VERTEX_ARRAY);
 		  glEnableClientState(GL_NORMAL_ARRAY);
 		  glVertexPointer(3,GL_FLOAT,0,&points[0]);
-		  GLuint indices[24]={0,1,2,3,
-				      0,1,5,4,
-				      2,3,7,6,
-				      1,2,6,5,
-				      3,0,4,7,
-				      4,5,6,7};
+		  GLuint indices[24]={0,3,2,1,
+				      0,4,5,1,
+				      2,6,7,3,
+				      1,5,6,2,
+				      3,7,4,0,
+				      4,7,6,5};
 		  PositionF normals[8];
 		  PositionF center=actorCollision.getCenter();
 		  for (int i=0;i<6;i++)
@@ -336,14 +335,14 @@ void TBFE_Render::renderActors()
 		      face.points[1]=points.at(indices[i*4+1]);
 		      face.points[2]=points.at(indices[i*4+2]);
 		      face.points[3]=points.at(indices[i*4+3]);
-		      iNormal=normalize(face,center);
+		      iNormal=normalize(face);
 		      for (int b=0;b<4;b++)
 			{
 			  normals[indices[i*4+b]]=addNormals(normals[indices[i*4+b]],iNormal);
 			};
 		    };
 		  glNormalPointer(GL_FLOAT,0,&normals[0]);
-		  glShadeModel(GL_FLAT);
+		  glShadeModel(GL_SMOOTH);
 		  glDrawElements(GL_QUADS,24,GL_UNSIGNED_INT,&indices);
 		  glShadeModel(GL_SMOOTH);
 		  glDisableClientState(GL_VERTEX_ARRAY);

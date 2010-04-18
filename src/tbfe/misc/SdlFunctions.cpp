@@ -94,7 +94,6 @@ void applyImage(int x,int y,SDL_Surface* source, SDL_Rect* clip)
 	  start.Y=(float)clip->y/(float)source->h;
 	  end.X=(float)clip->w/(float)source->w;
 	  end.Y=(float)clip->h/(float)source->h;
-	  //cout << start.X << "," << start.Y << ":" << end.X << "," << end.Y << "\n";
 	}
       else
 	{
@@ -328,19 +327,35 @@ PositionF applyRotations(PositionF position,PositionF rotation)
 {
   float magnitude=sqrt(pow(position.Y,2)+pow(position.Z,2));
   PositionF tempPosition=position;
+  rotation=rotation*DEG_RAD;
+  rotation.X*=-1;
+  rotation.Y*=-1;
+  position.X=tempPosition.X;
+  position.Y=tempPosition.Y*cos(rotation.X)-tempPosition.Z*sin(rotation.X);
+  position.Z=tempPosition.Z*cos(rotation.X)+tempPosition.Y*sin(rotation.X);
+  
+  tempPosition=position;
+  position.X=tempPosition.X*cos(rotation.Y)+tempPosition.Z*sin(rotation.Y);
+  position.Y=tempPosition.Y;
+  position.Z=-tempPosition.X*sin(rotation.Y)+tempPosition.Z*cos(rotation.Y);
+
+  tempPosition=position;
+  position.X=tempPosition.X*cos(rotation.Z)-tempPosition.Y*sin(rotation.Z);
+  position.Y=tempPosition.Y*cos(rotation.Z)+tempPosition.X*sin(rotation.Z);
+  position.Z=tempPosition.Z;
   //X rotation
-  position.Y=cos(convertToAngle(tempPosition.Y,tempPosition.Z)+rotation.X*PI/180)*magnitude;
-  position.Z=sin(convertToAngle(tempPosition.Y,tempPosition.Z)+rotation.X*PI/180)*magnitude;
-  tempPosition=position;
-  magnitude=sqrt(pow(position.X,2)+pow(position.Z,2));
+  //position.Y=cos(convertToAngle(tempPosition.Y,tempPosition.Z)+rotation.X*PI/180)*magnitude;
+  //position.Z=sin(convertToAngle(tempPosition.Y,tempPosition.Z)+rotation.X*PI/180)*magnitude;
+  //tempPosition=position;
+  //magnitude=sqrt(pow(position.X,2)+pow(position.Z,2));
   //Y rotation
-  position.X=cos(convertToAngle(tempPosition.X,tempPosition.Z)+rotation.Y*PI/180)*magnitude;
-  position.Z=sin(convertToAngle(tempPosition.X,tempPosition.Z)+rotation.Y*PI/180)*magnitude;
-  tempPosition=position;
-  magnitude=sqrt(pow(position.X,2)+pow(position.Y,2));
+  //position.X=cos(convertToAngle(tempPosition.X,tempPosition.Z)+rotation.Y*PI/180)*magnitude;
+  //position.Z=sin(convertToAngle(tempPosition.X,tempPosition.Z)+rotation.Y*PI/180)*magnitude;
+  //tempPosition=position;
+  //magnitude=sqrt(pow(position.X,2)+pow(position.Y,2));
   //Z rotation
-  position.X=cos(convertToAngle(tempPosition.X,tempPosition.Y)+rotation.Z*PI/180)*magnitude;
-  position.Y=sin(convertToAngle(tempPosition.X,tempPosition.Y)+rotation.Z*PI/180)*magnitude;
+  //position.X=cos(convertToAngle(tempPosition.X,tempPosition.Y)+rotation.Z*PI/180)*magnitude;
+  //position.Y=sin(convertToAngle(tempPosition.X,tempPosition.Y)+rotation.Z*PI/180)*magnitude;
    
   return position;
 };
@@ -393,35 +408,18 @@ float convertToAngle(float x,float y)
 PositionF addNormals(PositionF normal1,PositionF normal2)
 {
   PositionF normal=normal1+normal2;
-  PositionF finalNormal;
-  
-  finalNormal.X=cos(convertToAngle(normal.X,normal.Y));
-  finalNormal.Y=sin(convertToAngle(normal.X,normal.Y));
-  float baseAngle=convertToAngle(normal.X,normal.Z)*RAD_DEG;
-  float secondAngle=convertToAngle(normal.Z,normal.Y)*RAD_DEG;
-  cout << baseAngle << ':' << secondAngle << '\n';
-  finalNormal=applyRotations(finalNormal,PositionF(secondAngle,baseAngle,0));
-  return finalNormal;
+  float magnitude=sqrt(pow(normal.X,2)+pow(normal.Y,2)+pow(normal.Z,2));
+  return normal/magnitude;
 };
-PositionF normalize(Quad face, PositionF center)
+PositionF normalize(Quad face)
 {
-  PositionF faceCenter=((face.points[0]+face.points[2])/2+(face.points[1]+face.points[3])/2)/2;
-  PositionF xyNormal;
-  PositionF zyNormal;
-  PositionF normal;
-  PositionF finalNormal;
-  PositionF faceDiff=center-faceCenter;
-  float a=convertToAngle(faceDiff.Z,
-			 faceDiff.Y);
-  zyNormal.Z=cos(a);
-  zyNormal.Y=sin(a);
-
-  a=convertToAngle(faceDiff.X,
-		   faceDiff.Y);
-  xyNormal.X=cos(a);
-  xyNormal.Y=sin(a);
-  return xyNormal;
-  return addNormals(xyNormal,zyNormal);
+  PositionF vector1=face.points[1]-face.points[0];
+  PositionF vector2=face.points[3]-face.points[0];
+  PositionF normal(vector1.Y*vector2.Z-vector1.Z*vector2.Y,
+		   vector1.Z*vector2.X-vector1.X*vector2.Z, 
+		   vector1.X*vector2.Y-vector1.Y*vector2.X);
+  float magnitude=sqrt(pow(normal.X,2)+pow(normal.Y,2)+pow(normal.Z,2));
+  return normal/magnitude;
 };
 float absVal(float num)
 {

@@ -54,7 +54,7 @@ def mouseCamera(MouseMovement):
             cursorPosition.Y=500
         if cursorPosition.Y<200:
             cursorPosition.Y=200
-        uiCursor.setScreenPosition(cursorPosition.X,cursorPosition.Y)
+        #uiCursor.setScreenPosition(cursorPosition.X,cursorPosition.Y)
         Tbfe.setCameraAngle(Position.X,Position.Y,Position.Z)
 def switchMouseCamera():
     if engine.getShowMouse():
@@ -62,17 +62,21 @@ def switchMouseCamera():
     else:
         engine.setShowMouse(True)
 def updatePulse():
-    #print("PULSING")
+    print("PULSING")
     rotation=Tbfe.getCameraAngle()
-    position=engine.getCameraPosition()+Misc.applyRotations(Misc.PositionF(100,0,0),rotation)
+    magnitudePos=100
+    position=engine.getCameraPosition()+Misc.applyRotations(Misc.PositionF(11,-10,75),rotation)
     pulse.setPositionF(position.X,position.Y,position.Z)
-    pulse.setRotationF(rotation.X,rotation.Y-90,rotation.Z,False)
-    #print(pulse.getPositionF().dumpString()+':'+Tbfe.GetMainPlayer().getPositionF().dumpString())
+    pulse.setRotationF(-rotation.X,rotation.Y+180,rotation.Z,False)
+    print("rotation:"+rotation.dumpString())
+    #print("start:"+pulse.getPositionF().dumpString()+':'+engine.getCameraPosition().dumpString())
     num=pulse.collisionPulse()
     if num!=-1:
         uiCursor.getElement("lblTarget").setProperty("text",Tbfe.GetActorByNum(num).getConversation(False))
     else:
         uiCursor.getElement("lblTarget").setProperty("text","")
+    pulseActor.setPositionF(pulsePosition.X,pulsePosition.Y,pulsePosition.Z)
+    pulseActor.setRotationF(-rotation.X,-rotation.Y+180,-rotation.Z)
 def pointer():
     cameraAngle=Tbfe.getCameraAngle()
     cameraPosition=engine.getCameraPosition()
@@ -105,14 +109,12 @@ def normalTest():
     test.at(1).Z=0
 
     test.at(2).X=1
-    test.at(2).Y=2
+    test.at(2).Y=0
     test.at(2).Z=1
 
     test.at(3).X=1
-    test.at(3).Y=2
+    test.at(3).Y=0
     test.at(3).Z=1
-    print("normal test:"+Misc.addNormals(Misc.PositionF(0,1,0),Misc.PositionF(0,0,1)).dumpString())
-    #print("2:Normal:"+Misc.normalize(test,Misc.PositionF(.5,.5,.5)).dumpString())
 def useTile():
     cursorPos=pointer()
     if cursorPos==None:
@@ -134,6 +136,14 @@ def useTile():
         newTile.Passability=0
         newTile.isChange=True
         Tbfe.cvar.CurrentMap.changeTile(int(rCursorPos.X)+1,int(rCursorPos.Z)+1,newTile,0)
+def rotationTest():
+    #180 225 180
+    #270 180 225
+    #270 0 315
+    num=Misc.applyRotations(Misc.PositionF(0,0,1),
+                            Misc.PositionF(0,-270,0))
+    print(num.dumpString())
+rotationTest()
 Tbfe.cvar.ScreenDimensions.X=1024
 Tbfe.cvar.ScreenDimensions.Y=600
 engine=Tbfe.TBFE()
@@ -144,7 +154,7 @@ engine.initMap()
 UI.loadWindows("Data/Types/Window.cfg")
 Actor.loadActors("Data/Types/Actor.cfg")
 uiConsole=Console(Tbfe.cvar.MainConsole,engine)
-engine.addWindow(uiConsole.getWindow())
+#engine.addWindow(uiConsole.getWindow())
 uiMousePosition=UI.createWindow(0,400,"FrameRate")
 engine.addWindow(uiMousePosition)
 uiFrameRate=UI.createWindow(0,500,"FrameRate")
@@ -157,6 +167,8 @@ action=5
 i=0
 randomNpc=Actor.createActor(20,1020,"Bed","Bed")
 housing=Actor.createActor(0,400,"House","House")
+pulseActor=Actor.createActor(0,0,"Bed","Bed")
+engine.addActor(pulseActor)
 engine.addActor(housing)
 engine.addActor(randomNpc)
 engine.addGlobalEvent("MouseCamera",Misc.MOUSEMOVE,0,"mouseCamera(mouseMovement)")
@@ -164,7 +176,7 @@ engine.addGlobalEvent("SwitchMouseControl",Misc.KEYPRESS,306,"switchMouseCamera(
 engine.addGlobalEvent("Action",Misc.KEYPRESS,32,"useTile()")
 engine.setShowMouse(False)
 Tbfe.setCameraAngle(0,90,0)
-pulse=Actor.Pulse(Misc.PositionF(0,0,10),4,Misc.PositionF(0,0,0),400)
+pulse=Actor.Pulse(Misc.PositionF(0,0,10),3,Misc.PositionF(0,0,0),400)
 Tbfe.cvar.showCollision=True
 while action!=Misc.QUIT:
     uiConsole.refreshWindow()
@@ -181,4 +193,3 @@ while action!=Misc.QUIT:
     #randomNpc.setRotationF(Tbfe.getCameraAngle().X,-Tbfe.getCameraAngle().Y,Tbfe.getCameraAngle().Z)
     normalTest()
     updatePulse()
-    
