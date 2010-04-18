@@ -167,7 +167,7 @@ action=5
 i=0
 randomNpc=Actor.createActor(20,1020,"Bed","Bed")
 housing=Actor.createActor(0,400,"House","House")
-pulseActor=Actor.createActor(0,0,"Bed","Bed")
+pulseActor=Actor.createActor(0,0,"3dCursor","3dCursor")
 engine.addActor(pulseActor)
 engine.addActor(housing)
 engine.addActor(randomNpc)
