@@ -343,8 +343,11 @@ void TBFE_Render::renderActors()
 			};
 		    };
 		  glNormalPointer(GL_FLOAT,0,&normals[0]);
+		  glShadeModel(GL_FLAT);
 		  glDrawElements(GL_QUADS,24,GL_UNSIGNED_INT,&indices);
+		  glShadeModel(GL_SMOOTH);
 		  glDisableClientState(GL_VERTEX_ARRAY);
+		  glDisableClientState(GL_NORMAL_ARRAY);
 		  glEnable(GL_CULL_FACE);
 		};
 	      glPopMatrix();

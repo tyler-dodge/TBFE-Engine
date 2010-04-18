@@ -122,7 +122,6 @@ void applyImage(int x,int y,SDL_Surface* source, SDL_Rect* clip)
 	    {
 	      glDisable(GL_BLEND);
 	      glDisable(GL_ALPHA_TEST);
-	      cout << "test\n";
 	    };
 	  glBindTexture(GL_TEXTURE_2D,texture);
 	  glDisable(GL_LIGHTING);
@@ -330,74 +329,26 @@ PositionF applyRotations(PositionF position,PositionF rotation)
   float magnitude=sqrt(pow(position.Y,2)+pow(position.Z,2));
   PositionF tempPosition=position;
   //X rotation
-  if (position.Y!=0)
-    {
-      position.Y=cos(convertToAngle(tempPosition.Y,tempPosition.Z)+rotation.X*PI/180)*magnitude;
-      position.Z=sin(convertToAngle(tempPosition.Y,tempPosition.Z)+rotation.X*PI/180)*magnitude;
-    }
-  else
-    {
-      float angle;
-      if (position.Z>0)
-	{
-	  angle=PI/2;
-	}
-      else
-	{
-	  angle=-PI/2;
-	};
-      position.Y=cos(angle+rotation.X*PI/180)*magnitude;
-      position.Z=sin(angle+rotation.X*PI/180)*magnitude;
-    };
+  position.Y=cos(convertToAngle(tempPosition.Y,tempPosition.Z)+rotation.X*PI/180)*magnitude;
+  position.Z=sin(convertToAngle(tempPosition.Y,tempPosition.Z)+rotation.X*PI/180)*magnitude;
   tempPosition=position;
   magnitude=sqrt(pow(position.X,2)+pow(position.Z,2));
   //Y rotation
-  if (position.X!=0)
-    {
-      position.X=cos(convertToAngle(tempPosition.X,tempPosition.Z)+rotation.Y*PI/180)*magnitude;
-      position.Z=sin(convertToAngle(tempPosition.X,tempPosition.Z)+rotation.Y*PI/180)*magnitude;
-    }
-  else
-    {
-      float angle;
-      if (position.Z>0)
-	{
-	  angle=PI/2;
-	}
-      else
-	{
-	  angle=-PI/2;
-	};
-      position.X=cos(angle+rotation.Y*PI/180)*magnitude;
-      position.Z=sin(angle+rotation.Y*PI/180)*magnitude;
-    };
+  position.X=cos(convertToAngle(tempPosition.X,tempPosition.Z)+rotation.Y*PI/180)*magnitude;
+  position.Z=sin(convertToAngle(tempPosition.X,tempPosition.Z)+rotation.Y*PI/180)*magnitude;
   tempPosition=position;
   magnitude=sqrt(pow(position.X,2)+pow(position.Y,2));
   //Z rotation
-   if (position.X!=0)
-    {
-      position.X=cos(convertToAngle(tempPosition.X,tempPosition.Y)+rotation.Z*PI/180)*magnitude;
-      position.Y=sin(convertToAngle(tempPosition.X,tempPosition.Y)+rotation.Z*PI/180)*magnitude;
-   }
-  else
-    {
-      float angle;
-      if (position.Y>0)
-	{
-	  angle=PI/2;
-	}
-      else
-	{
-	  angle=-PI/2;
-	};
-      position.X=cos(angle+rotation.Z*PI/180)*magnitude;
-      position.Y=sin(angle+rotation.Z*PI/180)*magnitude;
-    };
+  position.X=cos(convertToAngle(tempPosition.X,tempPosition.Y)+rotation.Z*PI/180)*magnitude;
+  position.Y=sin(convertToAngle(tempPosition.X,tempPosition.Y)+rotation.Z*PI/180)*magnitude;
+   
   return position;
 };
 //Radians
 float convertToAngle(float x,float y)
 {
+  x=roundDown(x,5);
+  y=roundDown(y,5);
   float addAngle=0;
   if (x==0 && y>0)
     {
@@ -443,12 +394,13 @@ PositionF addNormals(PositionF normal1,PositionF normal2)
 {
   PositionF normal=normal1+normal2;
   PositionF finalNormal;
-  float a=convertToAngle(normal.Z,normal.Y);
-  finalNormal.Z=cos(a);
-  finalNormal.Y=sin(a);
-  float baseAngle=convertToAngle(normal.X,normal.Z);
-
-  finalNormal=applyRotations(finalNormal,PositionF(0,baseAngle,0));
+  
+  finalNormal.X=cos(convertToAngle(normal.X,normal.Y));
+  finalNormal.Y=sin(convertToAngle(normal.X,normal.Y));
+  float baseAngle=convertToAngle(normal.X,normal.Z)*RAD_DEG;
+  float secondAngle=convertToAngle(normal.Z,normal.Y)*RAD_DEG;
+  cout << baseAngle << ':' << secondAngle << '\n';
+  finalNormal=applyRotations(finalNormal,PositionF(secondAngle,baseAngle,0));
   return finalNormal;
 };
 PositionF normalize(Quad face, PositionF center)
@@ -468,6 +420,7 @@ PositionF normalize(Quad face, PositionF center)
 		   faceDiff.Y);
   xyNormal.X=cos(a);
   xyNormal.Y=sin(a);
+  return xyNormal;
   return addNormals(xyNormal,zyNormal);
 };
 float absVal(float num)

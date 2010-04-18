@@ -180,5 +180,6 @@ void CollisionBox::setEnabled(bool newEnabled)
 PositionF CollisionBox::getCenter()
 {
   vector<PositionF> points=generatePoints(position_,dimensions_);
-  return (points.at(0)+points.at(7))/2;
+  cout << ((points.at(0)+points.at(6))/2).dumpString() << '\n';
+  return (points.at(0)+points.at(6))/2;
 };

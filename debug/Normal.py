@@ -96,28 +96,12 @@ def pointer():
         return cursorPos
 def normalTest():
     test=Misc.Quad()
-    test.at(0).X=1
+    test.at(0).X=0
     test.at(0).Y=0
     test.at(0).Z=0
 
     test.at(1).X=1
-    test.at(1).Y=1
-    test.at(1).Z=0
-
-    test.at(2).X=1
-    test.at(2).Y=1
-    test.at(2).Z=1
-
-    test.at(3).X=1
-    test.at(3).Y=0
-    test.at(3).Z=1
-    print("1:Normal:"+Misc.normalize(test,Misc.PositionF(.5,.5,.5)).dumpString())
-    test.at(0).X=0
-    test.at(0).Y=2
-    test.at(0).Z=0
-
-    test.at(1).X=1
-    test.at(1).Y=2
+    test.at(1).Y=0
     test.at(1).Z=0
 
     test.at(2).X=1
@@ -127,7 +111,8 @@ def normalTest():
     test.at(3).X=1
     test.at(3).Y=2
     test.at(3).Z=1
-    print("2:Normal:"+Misc.normalize(test,Misc.PositionF(.5,.5,.5)).dumpString())
+    print("normal test:"+Misc.addNormals(Misc.PositionF(0,1,0),Misc.PositionF(0,0,1)).dumpString())
+    #print("2:Normal:"+Misc.normalize(test,Misc.PositionF(.5,.5,.5)).dumpString())
 def useTile():
     cursorPos=pointer()
     if cursorPos==None:
