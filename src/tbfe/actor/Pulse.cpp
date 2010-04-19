@@ -19,7 +19,7 @@ int Pulse::collisionPulse()
   direction.Y=0;
   direction.Z=size*20;
   collision->setRotation(rotation.X,-rotation.Y,rotation.Z);
-  cout << rotation.dumpString() << '\n';
+  //cout << rotation.dumpString() << '\n';
   direction=applyRotations(direction,rotation);
   PositionF tempDirection;
   //tempDirection.X=direction.Z;
@@ -27,13 +27,13 @@ int Pulse::collisionPulse()
   //tempDirection.Z=direction.X;
   //direction=tempDirection;
   vector<int> ignore;
-  cout << direction.dumpString() << '\n';
+  //cout << direction.dumpString() << '\n';
   ignore.push_back(0);
   for(int i=0;i<distance_/(size*20);i++)
     {      
       PositionF position=getPositionF();
       position+=direction*i;
-      cout << position.dumpString() << '\n';
+      //cout << position.dumpString() << '\n';
       int actor=checkActorCollision(position.X,position.Y,position.Z,&ignore);  
       stringstream evalText;
       evalText << "pulsePosition=Misc.PositionF();pulsePosition.X=" << position.X;

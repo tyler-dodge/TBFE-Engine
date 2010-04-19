@@ -127,6 +127,7 @@ void TBFE::addWindow(Window *NewWindow)
 {
   if (NewWindow!=NULL)
     {
+      TBFE_Base::MainConsole.write("New Window added");
       TBFE_Base::WindowList.push_back(NewWindow);
     }
   else
