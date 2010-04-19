@@ -1,0 +1,30 @@
+from TbfePy import Tbfe, Misc, UI, Actor
+import math
+
+def updatePulse():
+    #print("PULSING")
+    rotation=Tbfe.getCameraAngle()
+    magnitudePos=100
+    position=engine.getCameraPosition()+Misc.applyRotations(Misc.PositionF(11,-10,80),rotation)
+    pulse.setPositionF(position.X,position.Y,position.Z)
+    pulse.setRotationF(-rotation.X,rotation.Y+180,rotation.Z,False)
+    #print("rotation:"+rotation.dumpString())
+    #print("start:"+pulse.getPositionF().dumpString()+':'+engine.getCameraPosition().dumpString())
+    num=pulse.collisionPulse()
+    if num!=-1:
+        uiCursor.getElement("lblTarget").setProperty("text",Tbfe.GetActorByNum(num).getConversation(False))
+    else:
+        uiCursor.getElement("lblTarget").setProperty("text","")
+    pulseActor.setPositionF(pulsePosition.X,pulsePosition.Y,pulsePosition.Z)
+    pulseActor.setRotationF(-rotation.X,-rotation.Y+180,-rotation.Z)
+def pointer():
+    cameraAngle=Tbfe.getCameraAngle()
+    cameraPosition=engine.getCameraPosition()
+    if cameraAngle.X>0 and cameraAngle.X<90:
+        distance=(cameraPosition.Y)/math.tan(cameraAngle.X*Misc.DEG_RAD)
+        cursorPos=Misc.PositionF()
+        cursorPos.X=math.sin(cameraAngle.Y*Misc.DEG_RAD)*distance
+        cursorPos.Z=-math.cos(cameraAngle.Y*Misc.DEG_RAD)*distance
+        cursorPos.X+=cameraPosition.X
+        cursorPos.Z+=cameraPosition.Z
+        return cursorPos
