@@ -18,27 +18,15 @@ bool loadWindows(std::string FileName)
   int i=0;
   while (i<100)
     {
-      i++;
       WindowType NewWindow;
-      NewWindow.Name=loadString(&WindowData,':');
+      NewWindow.Name=loadString(&WindowData,":");
       if (NewWindow.Name=="")
 	{	   
 	  return true;
 	}
       string Data;
-      Data=loadString(&WindowData,'(');
-      if (Data=="")
-	{
-	  TBFE_Base::MainConsole.errorMessage(1,FileName);
-	  if (debug)
-	    {
-	      cout << NewWindow.Name << "Failed at (\n";
-	    };
-	  return false;
-	};
-      int ElementNumber=atoi(Data.c_str());
-
-      Data=loadString(&WindowData,',');
+      loadString(&WindowData,'(');
+      Data=loadString(&WindowData,",");
       if (Data=="")
 	{
 	  TBFE_Base::MainConsole.errorMessage(1,FileName); 
@@ -50,7 +38,7 @@ bool loadWindows(std::string FileName)
 	};
       NewWindow.Width=TBFE_Base::MainConsole.evalExpression(Data);
       
-      Data=loadString(&WindowData,')');
+      Data=loadString(&WindowData,")");
       if (Data=="")
 	{
 	  TBFE_Base::MainConsole.errorMessage(1,FileName); 
@@ -61,17 +49,18 @@ bool loadWindows(std::string FileName)
 	  return false;
 	};
       NewWindow.Height=TBFE_Base::MainConsole.evalExpression(Data);
-
-      NewWindow.Elements.resize(ElementNumber); 
-      for (int i=0;i<ElementNumber;i++)
+      NewWindow.Elements.resize(0);
+      bool windowDone=false;
+      int element=0;
+      while(!windowDone)
 	{
+	  NewWindow.Elements.resize(NewWindow.Elements.size()+1);
 	  string ElementData;
-	  loadString(&WindowData,';');
+	  loadString(&WindowData,";");
 	  std::string ElementName;
 	  std::string ElementSpecial;
 	  Position ElementPosition;
-	  
-	  ElementData=loadString(&WindowData,':');
+	  ElementData=loadString(&WindowData,":");
 	  if (ElementData=="")
 	    {
 	      TBFE_Base::MainConsole.errorMessage(1,FileName+".Name");
@@ -81,9 +70,8 @@ bool loadWindows(std::string FileName)
 		};
 	      return false;
 	    };
-	  NewWindow.Elements[i].Name=ElementData;
-	  
-	  ElementData=loadString(&WindowData,'(');
+	  NewWindow.Elements[element].Name=ElementData;
+	  ElementData=loadString(&WindowData,"(");
 	  if (ElementData=="")
 	    {
 	      TBFE_Base::MainConsole.errorMessage(1,FileName+".Name"); 	   
@@ -93,9 +81,9 @@ bool loadWindows(std::string FileName)
 		};
 	      return false;
 	    };
-	  NewWindow.Elements[i].Type=ElementData;
+	  NewWindow.Elements[element].Type=ElementData;
 
-	  ElementData=loadString(&WindowData,',');
+	  ElementData=loadString(&WindowData,",");
 	  if (ElementData=="")
 	    {
 	      TBFE_Base::MainConsole.errorMessage(1,FileName+".Type"); 	      
@@ -105,9 +93,9 @@ bool loadWindows(std::string FileName)
 		};
 	      return false;
 	    };
-	  NewWindow.Elements[i].ElementPosition.X=TBFE_Base::MainConsole.evalExpression(ElementData);
+	  NewWindow.Elements[element].ElementPosition.X=TBFE_Base::MainConsole.evalExpression(ElementData);
 	  
-	  ElementData=loadString(&WindowData,')');
+	  ElementData=loadString(&WindowData,")");
 	  if (ElementData=="")
 	    {
 	      TBFE_Base::MainConsole.errorMessage(1,FileName+".ElementPosition.X"); 	      
@@ -117,13 +105,19 @@ bool loadWindows(std::string FileName)
 		};
 	      return false;
 	    };
-	  NewWindow.Elements[i].ElementPosition.Y=TBFE_Base::MainConsole.evalExpression(ElementData);
-	  
-	  ElementData=loadString(&WindowData,',');
-	  NewWindow.Elements[i].Special=ElementData;
+	  NewWindow.Elements[element].ElementPosition.Y=TBFE_Base::MainConsole.evalExpression(ElementData);
+	  char checkEndChar;
+	  ElementData=loadString(&WindowData,",|",&checkEndChar);
+	  if (checkEndChar=='|')
+	    {
+	      windowDone=true;
+	    };
+	  NewWindow.Elements[element].Special=ElementData;
+	  element++;
 	}; 
-      loadString(&WindowData,'\n');
+      loadString(&WindowData,"\n");
       addWindowType(NewWindow);
+      i++;
     };
 };
 void addWindowType(WindowType NewType)

@@ -285,14 +285,13 @@ void applyMaterial(const struct aiMaterial *mtl)
 		glDisable(GL_TEXTURE_2D);
 	      };
 };
-void drawNodes(ModelData * model, aiVector3D position,aiVector3D rotation, aiVector3D scale)
-{
+void drawNodes(ModelData * model, aiVector3D position,aiVector3D rotation,aiVector3D scale)
+{ 
   glPushMatrix();
   //glTranslatef(position[0],position[1],-position[2]);
   glTranslatef(position[0],position[1],position[2]);
-  glRotatef(rotation[1],0,1,0);
-  glRotatef(rotation[0],1,0,0);
-  glRotatef(rotation[2],0,0,1);
+  Matrix rotMatrix(rotation.x,rotation.y,rotation.z);
+  glMultMatrixf(rotMatrix.dataPointer());
   for (int i=0;i<model->meshes.size();i++)
     {
       glPushMatrix();
@@ -325,39 +324,19 @@ float roundDown(float num,int place)
 };
 PositionF applyRotations(PositionF position,PositionF rotation)
 {
-  float magnitude=sqrt(pow(position.Y,2)+pow(position.Z,2));
-  PositionF tempPosition=position;
-  rotation=rotation*DEG_RAD;
-  rotation.X*=-1;
-  rotation.Y*=-1;
-  position.X=tempPosition.X;
-  position.Y=tempPosition.Y*cos(rotation.X)-tempPosition.Z*sin(rotation.X);
-  position.Z=tempPosition.Z*cos(rotation.X)+tempPosition.Y*sin(rotation.X);
-  
-  tempPosition=position;
-  position.X=tempPosition.X*cos(rotation.Y)+tempPosition.Z*sin(rotation.Y);
-  position.Y=tempPosition.Y;
-  position.Z=-tempPosition.X*sin(rotation.Y)+tempPosition.Z*cos(rotation.Y);
+  Matrix rotMatrix(rotation.X,rotation.Y,rotation.Z);
+  Matrix idMatrix(1,0,0,0,
+		  0,1,0,0,
+		  0,0,1,0,
+		  0,0,0,1);
+  PositionF newPosition;
+  rotMatrix=rotMatrix*idMatrix;
+  newPosition.X=(rotMatrix[0]*position.X+rotMatrix[1]*position.Y+rotMatrix[2]*position.Z);
 
-  tempPosition=position;
-  position.X=tempPosition.X*cos(rotation.Z)-tempPosition.Y*sin(rotation.Z);
-  position.Y=tempPosition.Y*cos(rotation.Z)+tempPosition.X*sin(rotation.Z);
-  position.Z=tempPosition.Z;
-  //X rotation
-  //position.Y=cos(convertToAngle(tempPosition.Y,tempPosition.Z)+rotation.X*PI/180)*magnitude;
-  //position.Z=sin(convertToAngle(tempPosition.Y,tempPosition.Z)+rotation.X*PI/180)*magnitude;
-  //tempPosition=position;
-  //magnitude=sqrt(pow(position.X,2)+pow(position.Z,2));
-  //Y rotation
-  //position.X=cos(convertToAngle(tempPosition.X,tempPosition.Z)+rotation.Y*PI/180)*magnitude;
-  //position.Z=sin(convertToAngle(tempPosition.X,tempPosition.Z)+rotation.Y*PI/180)*magnitude;
-  //tempPosition=position;
-  //magnitude=sqrt(pow(position.X,2)+pow(position.Y,2));
-  //Z rotation
-  //position.X=cos(convertToAngle(tempPosition.X,tempPosition.Y)+rotation.Z*PI/180)*magnitude;
-  //position.Y=sin(convertToAngle(tempPosition.X,tempPosition.Y)+rotation.Z*PI/180)*magnitude;
-   
-  return position;
+  newPosition.Y=(rotMatrix[4]*position.X+rotMatrix[5]*position.Y+rotMatrix[6]*position.Z);
+
+  newPosition.Z=(rotMatrix[8]*position.X+rotMatrix[9]*position.Y+rotMatrix[10]*position.Z);
+  return newPosition;
 };
 //Radians
 float convertToAngle(float x,float y)
@@ -428,4 +407,12 @@ float absVal(float num)
       num*=-1;
     };
   return num;
+};
+PositionF crossProduct(PositionF v1,PositionF v2)
+{
+  PositionF final;
+  final.X=v1.Y*v2.Z-v2.Y*v1.Z;
+  final.Y=v1.Z*v2.X-v2.Z*v1.X;
+  final.Z=v1.X*v2.Y-v2.X*v1.Y;
+  return final;
 };

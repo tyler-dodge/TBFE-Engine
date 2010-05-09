@@ -18,7 +18,7 @@ int Pulse::collisionPulse()
   direction.X=0;
   direction.Y=0;
   direction.Z=size*20;
-  collision->setRotation(rotation.X,-rotation.Y,rotation.Z);
+  collision->setRotation(rotation.X,rotation.Y-45,rotation.Z-45);
   //cout << rotation.dumpString() << '\n';
   direction=applyRotations(direction,rotation);
   PositionF tempDirection;
@@ -26,23 +26,38 @@ int Pulse::collisionPulse()
   //tempDirection.Y=direction.Y;
   //tempDirection.Z=direction.X;
   //direction=tempDirection;
-  vector<int> ignore;
   //cout << direction.dumpString() << '\n';
-  ignore.push_back(0);
   for(int i=0;i<distance_/(size*20);i++)
     {      
       PositionF position=getPositionF();
       position+=direction*i;
       //cout << position.dumpString() << '\n';
-      int actor=checkActorCollision(position.X,position.Y,position.Z,&ignore);  
+      vector<int> actor=checkActorCollision(position.X,position.Y,position.Z);  
+      int currentActor=-1;
+      float currentDistance=0;
+      for (int i=0;i<actor.size();i++)
+	{
+	  Actor * targetActor=TBFE_Base::GetActorByNum(actor.at(i));
+	  if (targetActor!=NULL && targetActor!=TBFE_Base::GetMainPlayer())
+	    {
+	      PositionF targetActorPos=targetActor->getPositionF();
+	      PositionF startPos=getPositionF();
+	      PositionF difference=targetActorPos-startPos;
+	      float distance=sqrt(pow(difference.X,2)+pow(difference.Y,2)+pow(difference.Z,2));
+	      if (distance>currentDistance)
+		{
+		  currentActor=actor.at(i);
+		};
+	    };
+	};
       stringstream evalText;
       evalText << "pulsePosition=Misc.PositionF();pulsePosition.X=" << position.X;
       evalText << ";pulsePosition.Y=" << position.Y;
       evalText << ";pulsePosition.Z=" << position.Z;
       TBFE_Base::MainConsole.runLine(evalText.str());
-      if (actor!=-1)
+      if (actor.size()!=0)
 	{
-	  return actor;
+	  return currentActor;
 	};
     };
   return -1;

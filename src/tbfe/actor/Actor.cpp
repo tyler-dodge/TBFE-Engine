@@ -74,8 +74,8 @@ void Actor::setRotationF(float x,float y, float z,bool doCollisionTest)
 		};
 	    };
 	};
-      int ncollisionTest=checkActorCollision(position_.X,position_.Y,position_.Z);
-      if (ncollisionTest!=-1)
+      vector<int> ncollisionTest=checkActorCollision(position_.X,position_.Y,position_.Z);
+      if (ncollisionTest.size()!=0)
 	{
 	  rotation_=oldRotation;
 	};
@@ -251,13 +251,13 @@ int Actor::changePosition(float newAngle,bool ChangeDirection)
 	    };
 	};
     };
-  int ncollisionTest=checkActorCollision(position.X,position.Y,position.Z);
-  if (ncollisionTest!=-1)
+  vector<int> ncollisionTest=checkActorCollision(position.X,position.Y,position.Z);
+  if (ncollisionTest.size()!=0)
     {
       position.X-=(float)getSpeed()*TBFE_Base::GameSpeed*cos(newAngle*PI/180);
       position.Z+=(float)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*PI/180);
       setPositionF(position.X,position.Y,position.Z);
-      return ncollisionTest;
+      return -2;
     };
   return -1;
 };
@@ -281,8 +281,9 @@ void Actor::setPositionF(float x,float y,float z)
   position_.Y=y;
   position_.Z=z;
 };
-int Actor::checkActorCollision(float offsetX,float offsetY,float offsetZ,vector<int> * ignore)
+vector<int> Actor::checkActorCollision(float offsetX,float offsetY,float offsetZ)
 {
+  vector<int> collisions;
   for (int i=0;i<TBFE_Base::ActorList.size();i++)
     {
       Actor * targetActor=TBFE_Base::ActorList.at(i);
@@ -303,27 +304,13 @@ int Actor::checkActorCollision(float offsetX,float offsetY,float offsetZ,vector<
 		  collisionMaps_.at(a).setRotation(rotation_.X,-rotation_.Y,rotation_.Z);
 		  if (collisionMaps_.at(a).checkCollision(targetCollision,offset))
 		    {
-		      bool isIgnored=false;
-		      if (ignore!=NULL)
-			{
-			  for (int checkIgnore=0;checkIgnore<ignore->size();checkIgnore++)
-			    {	
-			      if (ignore->at(checkIgnore)==i)
-				{
-				  isIgnored=true;
-				};
-			    };
-			};
-		      if (!isIgnored)
-			{
-			  return i;
-			};
+		      collisions.push_back(i);
 		    };
 		};
 	    };
 	};
     };
-  return -1;
+  return collisions;
 };
 int Actor::getSpeed()
 {

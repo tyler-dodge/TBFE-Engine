@@ -27,7 +27,7 @@ def mouseCamera(MouseMovement,cursor):
         if cursorPosition.Y<200:
             cursorPosition.Y=200
         #cursor.setScreenPosition(cursorPosition.X,cursorPosition.Y)
-        Tbfe.setCameraAngle(Position.X,Position.Y,Position.Z)
+            Tbfe.setCameraAngle(Position.X,Position.Y,Position.Z)
 def switchMouseCamera():
     if Init.getEngine().getShowMouse():
         Init.getEngine().setShowMouse(False)

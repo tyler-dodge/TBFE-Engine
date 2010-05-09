@@ -12,11 +12,7 @@ TBFE_Logic::~TBFE_Logic()
 
 int TBFE_Logic::checkTalker()
 {
-  int NPC_Exists=-1;  
-  int PlayerNumber=TBFE_Base::GetActorNum(TBFE_Base::MainPlayer);
-  NPC_Exists=TBFE_Base::MainPlayer->checkActorCollision(true,50*cos(TBFE_Base::MainPlayer->getRotationF().Y)*3.14/180,50*sin(TBFE_Base::MainPlayer->getRotationF().Y)*3.14/180);
-  
-  return NPC_Exists;
+  //DEPRECATED
 };
 void TBFE_Logic::playerMovement()
 {

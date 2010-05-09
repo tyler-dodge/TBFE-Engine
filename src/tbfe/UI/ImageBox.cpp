@@ -7,7 +7,10 @@ ImageBox::ImageBox(int x,int y,string Source):Element(x,y)
   if (ImageSource.find('(')<ImageSource.size())
     {
       ImageSource=ImageSource.substr(0,ImageSource.find('('));
-    };
+    };  
+  setProperty("imageSource",ImageSource);
+  image_=TBFE_Base::CheckSheets(ImageSource.c_str());
+
   if (Special.find('(')<Special.length())
     {
       string Box;
@@ -42,9 +45,8 @@ ImageBox::ImageBox(int x,int y,string Source):Element(x,y)
       Data=Box.substr(0,StringPos);
       h=atoi(Data.c_str());
       setDimensions(w,h);
+      return;
     }
-  setProperty("imageSource",ImageSource);
-  image_=TBFE_Base::CheckSheets(ImageSource.c_str());
   if (image_!=NULL)
     {
       setDimensions(image_->w,image_->h);
@@ -98,7 +100,7 @@ void ImageBox::reload()
     {
       SDL_FreeSurface(intermediary_);
     };
-  intermediary_=SDL_CreateRGBSurface(0,image_->w,image_->h,32,
+  intermediary_=SDL_CreateRGBSurface(0,Clip.w,Clip.h,32,
 				     0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
   SDL_SetAlpha(image_,0,0);
   SDL_BlitSurface(image_,&Clip,intermediary_,NULL);

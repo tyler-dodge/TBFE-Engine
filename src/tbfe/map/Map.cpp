@@ -10,10 +10,11 @@ Map::~Map()
 void Map::generateMap(int x,int y)
 {
   tileSetNames_.resize(0);
+  layers_.resize(0);
   tileSetNames_.push_back("FarmTiles.png");
   TileLayer newLayer(x,y);
   Tile newTile;
-  newTile.Type=DIRT;
+  newTile.Type=2;
   newTile.TileSet=0;
   newTile.Passability=0;
   newLayer.generateMap(x,y,newTile);
@@ -35,7 +36,7 @@ bool Map::loadMap(string filename)
     {
       tileSetNames_.at(TileSetsNum)=loadString(&NewMapData,(char)3);
     };
-  string LayerString=loadString(&NewMapData,'|');
+  string LayerString=loadString(&NewMapData,"|");
   do
     {
       TileLayer newLayer(dimensions.X,dimensions.Y);

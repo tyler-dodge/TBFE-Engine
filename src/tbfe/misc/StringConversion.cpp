@@ -7,18 +7,55 @@ std::string toString (const T& variable)
   return tempStream.str();
 };
 
-std::string loadString(ifstream * source, char EndChar)
+std::string loadString(ifstream * source, string EndChar,char * foundChar)
 {
+  if (source==NULL)
+    {
+      return "";
+    };
   char Point;
+  bool foundEndChar=false;
   stringstream CurrentString;
   Point=source->get();
-  while (Point!=EndChar && Point!=-1)
+  while (!foundEndChar && Point!=-1)
     {
+      for (int i=0;i<EndChar.length();i++)
+	{
+	  if (EndChar[i]==Point)
+	    {
+	      if (foundChar!=NULL)
+		{
+		  *foundChar=Point;
+		};
+	      foundEndChar=true;
+	    };
+	};
+      if (!foundEndChar)
+	{
+	  CurrentString << Point;
+	  Point=source->get();
+	};
+    };
+  return CurrentString.str();
+};
+std::string loadString(ifstream * source, char endChar)
+{
+  char Point;
+  bool foundEndChar=false;
+  stringstream CurrentString;
+  Point=source->get();
+  while (Point!=-1)
+    {
+      if (Point==endChar)
+	{
+	  return CurrentString.str();
+	};
       CurrentString << Point;
       Point=source->get();
     };
   return CurrentString.str();
 };
+
 std::string nextSet(string * source, char EndChar)
 {
   char Point;

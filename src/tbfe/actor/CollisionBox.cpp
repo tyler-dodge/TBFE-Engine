@@ -59,8 +59,8 @@ bool CollisionBox::checkLine(float x1,float y1,float x2,float y2,float checkX,fl
       
       float tempX=m*(checkPoint.Y-position.Y)+position.X;
       float centerCheckX=m*(centerPoint.Y-position.Y)+position.X;
-      if ((checkPoint.X>tempX && centerPoint.X>centerCheckX) ||
-	  (checkPoint.X<tempX && centerPoint.X<centerCheckX))
+      if ((checkPoint.X>=tempX && centerPoint.X>=centerCheckX) ||
+	  (checkPoint.X<=tempX && centerPoint.X<=centerCheckX))
 	{
 	  return true;
 	};
@@ -71,8 +71,8 @@ bool CollisionBox::checkLine(float x1,float y1,float x2,float y2,float checkX,fl
   float centerCheckY=m*(centerPoint.X-position.X)+position.Y;
   //cout << "check set horizontal:";
   //cout << "tempY:" << tempY << ":" << centerPoint.Y << ":" << position.dumpString() << ":chkpt>ty:" << (checkPoint.Y>tempY) << ": cp>ty:" << (centerCheckY>tempY) << ": chkpt<ty:" << (checkPoint.Y<tempY) << ": cp<ty:" << (centerPoint.Y<centerCheckY) << ":";
-  if ((checkPoint.Y>tempY && centerPoint.Y>centerCheckY) ||
-      (checkPoint.Y<tempY && centerPoint.Y<centerCheckY))
+  if ((checkPoint.Y>=tempY && centerPoint.Y>=centerCheckY) ||
+      (checkPoint.Y<=tempY && centerPoint.Y<=centerCheckY))
     {
       return true;
     };

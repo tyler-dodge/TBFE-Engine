@@ -39,7 +39,21 @@ struct Model
 };
 struct Tile
 {
-  TileType Type;
+  Tile(int type, int tileSet,int passability)
+  {
+    Type=type;
+    TileSet=tileSet;
+    Passability=passability;
+    isChanged=false;
+  };
+  Tile()
+  {
+    Type=0;
+    TileSet=0;
+    Passability=0;
+    isChanged=false;
+  };
+  int Type;
   int TileSet;
   int Passability;
   bool isChanged;

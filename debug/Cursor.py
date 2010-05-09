@@ -11,10 +11,14 @@ class Cursor:
     def updatePulse(self):
     #print("PULSING")
         rotation=Tbfe.getCameraAngle()
+        rotation.X=-rotation.X
+        rotation.Y=rotation.Y+180
         magnitudePos=100
-        position=Init.engine.getCameraPosition()+Misc.applyRotations(Misc.PositionF(11,-10,80),rotation)
+        position=Init.engine.getCameraPosition()+Misc.applyRotations(Misc.PositionF(0,0,250),
+                                                                     Misc.PositionF(rotation.X,rotation.Y,
+                                                                                    rotation.Z))
         self.pulse.setPositionF(position.X,position.Y,position.Z)
-        self.pulse.setRotationF(-rotation.X,rotation.Y+180,rotation.Z,False)
+        self.pulse.setRotationF(rotation.X,rotation.Y,rotation.Z,False)
     #print("rotation:"+rotation.dumpString())
     #print("start:"+self.pulse.getPositionF().dumpString()+':'+Init.engine.getCameraPosition().dumpString())
         num=self.pulse.collisionPulse()

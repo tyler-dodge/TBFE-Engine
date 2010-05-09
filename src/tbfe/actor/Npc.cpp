@@ -14,7 +14,7 @@ Npc::Npc(int PositionX,int PositionY,string PlayerConversation)
   Action Stand("Stand","");
   Animation Body("test.dae",StandAnimation,
 		 0,0,1,true);
-  Body.setRotation(270,90,0);
+  Body.setRotation(0,90,0);
   Stand.addAnimation(Body);
   Stand.setMainAnimation(0);
   addAction(Stand);

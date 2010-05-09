@@ -129,20 +129,17 @@ void TBFE_Render::finalRender(bool doFlip)
   glLoadIdentity();
   glLightfv(GL_LIGHT0,GL_POSITION,lightPosition_);
   glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-  glLoadIdentity();
   PositionF cameraOffset=TBFE_Base::getCameraOffset();
   PositionF cameraFollowOffset=TBFE_Base::getCameraFollowOffset();
   PositionF cameraAngle=TBFE_Base::getCameraAngle();
   glTranslatef(cameraFollowOffset.X,cameraFollowOffset.Y,cameraFollowOffset.Z);
- 
-  glRotatef(cameraAngle.X,1,0,0);
-  glRotatef(cameraAngle.Y,0,1,0);
-  glRotatef(cameraAngle.Z,0,0,1);
+  Matrix cameraMatrix(cameraAngle.X,cameraAngle.Y,cameraAngle.Z);
+  glMultMatrixf(cameraMatrix.dataPointer());
   glTranslatef(cameraOffset.X,cameraOffset.Y,cameraOffset.Z);
   //glRotatef(-TBFE_Base::MainPlayer->getRotationF().Y,0,1,0);
   glTranslatef(-TBFE_Base::MainPlayer->getPositionF().X/20,0,-TBFE_Base::MainPlayer->getPositionF().Z/20);
   renderActors();
-  renderMapLayer(0,0,0);
+  //renderMapLayer(0,0,0);
   renderWindowList();
   SDL_GL_SwapBuffers();
   TBFE_Base::DeleteTempSheets();
@@ -170,14 +167,14 @@ void TBFE_Render::refreshMapLayer(int Layer)
 	  Tile tile=TBFE_Base::CurrentMap.getTile(mapX,mapY,Layer);
 	  Position coordPos;
 	  TileSheet currentSheet=tileSet_.at(tile.TileSet);
-	  coordPos.X=100*(tile.Type-tile.Type/2*2);
-	  coordPos.Y=100*tile.Type/2;
+	  coordPos.X=100*(tile.Type-floor(tile.Type/2)*2);
+	  coordPos.Y=100*floor(tile.Type/2);
 	  PositionF start;
 	  start.X=(float)coordPos.X/(float)currentSheet.dimensions.X;
 	  start.Y=(float)coordPos.Y/(float)currentSheet.dimensions.Y;
 	  PositionF end;
-	  end.X=100.0f/(float)currentSheet.dimensions.X;
-	  end.Y=100.0f/(float)currentSheet.dimensions.Y;
+	  end.X=99.0f/(float)currentSheet.dimensions.X;
+	  end.Y=99.0f/(float)currentSheet.dimensions.Y;
 	  for (int i=0;i<4;i++)
 	    {
 	      map_.normals.push_back(0);

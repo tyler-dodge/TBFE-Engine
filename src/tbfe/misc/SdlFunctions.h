@@ -5,6 +5,7 @@
 #include "Structs.h"
 #include <string>
 #include <sstream>
+#include "Matrix.h"
 #include <assimp.hpp>
 #include <assimp.h>
 #include <aiScene.h>
@@ -27,4 +28,5 @@ extern float convertToAngle(float,float);
 extern PositionF normalize(Quad);
 extern float absVal(float);
 extern PositionF addNormals(PositionF,PositionF);
+extern PositionF crossProduct(PositionF,PositionF);
 #endif
