@@ -104,10 +104,10 @@ inline void TBFE_Render::initializeTileSets()
   for (int i=0;i<TBFE_Base::CurrentMap.getNumberOfTileSets();i++)
     {
       string tempString="Images/TileSets/"+TBFE_Base::CurrentMap.getTileSet(i);
-      TBFE_Base::MainConsole.write(tempString); 
+      TBFE_Base::MainConsole.write(tempString);
       SDL_Surface * texture=TBFE_Base::CheckSheets(tempString);
       TileSheet newTileSheet;
-      newTileSheet.texture=bindImage(texture);
+      newTileSheet.texture=TBFE_Base::GetTexture(texture);
       newTileSheet.dimensions.X=texture->w;
       newTileSheet.dimensions.Y=texture->h;
       tileSet_.push_back(newTileSheet);
@@ -139,7 +139,7 @@ void TBFE_Render::finalRender(bool doFlip)
   //glRotatef(-TBFE_Base::MainPlayer->getRotationF().Y,0,1,0);
   glTranslatef(-TBFE_Base::MainPlayer->getPositionF().X/20,0,-TBFE_Base::MainPlayer->getPositionF().Z/20);
   renderActors();
-  //renderMapLayer(0,0,0);
+  renderMapLayer(0,0,0);
   renderWindowList();
   SDL_GL_SwapBuffers();
   TBFE_Base::DeleteTempSheets();

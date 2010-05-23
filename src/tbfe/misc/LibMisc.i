@@ -8,6 +8,7 @@
 #include "Enums.h"
 #include "Structs.h"
 #include "Quaternion.cpp"
+#include "PositionF.cpp"
   %}
 %include "SdlFunctions.h"
 %include "StringConversion.h"
@@ -16,3 +17,5 @@
 %include "Structs.h"
 %include "Matrix.h"
 %include "Quaternion.h"
+%include "Matrix.h"
+%include "PositionF.h"

@@ -102,10 +102,11 @@ namespace TBFE_Base
       {
 	return NULL;
       };
-    sheet.Texture=bindImage(sheet.Data);
-    sheet.Source=source;
     AnimationSheets.push_back(sheet);
-    return sheet.Data;
+    int animNum=AnimationSheets.size()-1;
+    AnimationSheets.at(animNum).Texture=bindImage(sheet.Data);
+    AnimationSheets.at(animNum).Source=source;
+    return AnimationSheets.at(animNum).Data;
   };
   string GetSheetName(SDL_Surface * newSheet)
   {

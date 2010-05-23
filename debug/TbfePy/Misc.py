@@ -306,37 +306,6 @@ class Tile(_object):
 Tile_swigregister = _Misc.Tile_swigregister
 Tile_swigregister(Tile)
 
-class PositionF(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, PositionF, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, PositionF, name)
-    __repr__ = _swig_repr
-    __swig_setmethods__["X"] = _Misc.PositionF_X_set
-    __swig_getmethods__["X"] = _Misc.PositionF_X_get
-    if _newclass:X = _swig_property(_Misc.PositionF_X_get, _Misc.PositionF_X_set)
-    __swig_setmethods__["Y"] = _Misc.PositionF_Y_set
-    __swig_getmethods__["Y"] = _Misc.PositionF_Y_get
-    if _newclass:Y = _swig_property(_Misc.PositionF_Y_get, _Misc.PositionF_Y_set)
-    __swig_setmethods__["Z"] = _Misc.PositionF_Z_set
-    __swig_getmethods__["Z"] = _Misc.PositionF_Z_get
-    if _newclass:Z = _swig_property(_Misc.PositionF_Z_get, _Misc.PositionF_Z_set)
-    def __init__(self, *args): 
-        this = _Misc.new_PositionF(*args)
-        try: self.this.append(this)
-        except: self.this = this
-    def __add__(self, *args): return _Misc.PositionF___add__(self, *args)
-    def __sub__(self, *args): return _Misc.PositionF___sub__(self, *args)
-    def __iadd__(self, *args): return _Misc.PositionF___iadd__(self, *args)
-    def __isub__(self, *args): return _Misc.PositionF___isub__(self, *args)
-    def __mul__(self, *args): return _Misc.PositionF___mul__(self, *args)
-    def __div__(self, *args): return _Misc.PositionF___div__(self, *args)
-    def dumpString(self): return _Misc.PositionF_dumpString(self)
-    __swig_destroy__ = _Misc.delete_PositionF
-    __del__ = lambda self : None;
-PositionF_swigregister = _Misc.PositionF_swigregister
-PositionF_swigregister(PositionF)
-
 class Position(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, Position, name, value)
@@ -576,6 +545,7 @@ class Matrix(_object):
         this = _Misc.new_Matrix(*args)
         try: self.this.append(this)
         except: self.this = this
+    def __imul__(self, *args): return _Misc.Matrix___imul__(self, *args)
     def __mul__(self, *args): return _Misc.Matrix___mul__(self, *args)
     def dataPointer(self): return _Misc.Matrix_dataPointer(self)
     def Normalize(self): return _Misc.Matrix_Normalize(self)
@@ -614,6 +584,37 @@ class Quaternion(_object):
     __del__ = lambda self : None;
 Quaternion_swigregister = _Misc.Quaternion_swigregister
 Quaternion_swigregister(Quaternion)
+
+class PositionF(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, PositionF, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, PositionF, name)
+    __repr__ = _swig_repr
+    __swig_setmethods__["X"] = _Misc.PositionF_X_set
+    __swig_getmethods__["X"] = _Misc.PositionF_X_get
+    if _newclass:X = _swig_property(_Misc.PositionF_X_get, _Misc.PositionF_X_set)
+    __swig_setmethods__["Y"] = _Misc.PositionF_Y_set
+    __swig_getmethods__["Y"] = _Misc.PositionF_Y_get
+    if _newclass:Y = _swig_property(_Misc.PositionF_Y_get, _Misc.PositionF_Y_set)
+    __swig_setmethods__["Z"] = _Misc.PositionF_Z_set
+    __swig_getmethods__["Z"] = _Misc.PositionF_Z_get
+    if _newclass:Z = _swig_property(_Misc.PositionF_Z_get, _Misc.PositionF_Z_set)
+    def __init__(self, *args): 
+        this = _Misc.new_PositionF(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    def __add__(self, *args): return _Misc.PositionF___add__(self, *args)
+    def __sub__(self, *args): return _Misc.PositionF___sub__(self, *args)
+    def __iadd__(self, *args): return _Misc.PositionF___iadd__(self, *args)
+    def __isub__(self, *args): return _Misc.PositionF___isub__(self, *args)
+    def __div__(self, *args): return _Misc.PositionF___div__(self, *args)
+    def dumpString(self): return _Misc.PositionF_dumpString(self)
+    def __mul__(self, *args): return _Misc.PositionF___mul__(self, *args)
+    __swig_destroy__ = _Misc.delete_PositionF
+    __del__ = lambda self : None;
+PositionF_swigregister = _Misc.PositionF_swigregister
+PositionF_swigregister(PositionF)
 
 
 

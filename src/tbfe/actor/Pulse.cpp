@@ -18,7 +18,7 @@ int Pulse::collisionPulse()
   direction.X=0;
   direction.Y=0;
   direction.Z=size*20;
-  collision->setRotation(rotation.X,rotation.Y-45,rotation.Z-45);
+  collision->setRotation(rotation.X,rotation.Y,rotation.Z);
   //cout << rotation.dumpString() << '\n';
   direction=applyRotations(direction,rotation);
   PositionF tempDirection;

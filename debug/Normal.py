@@ -42,18 +42,17 @@ while action!=Misc.QUIT:
     action=engine.runEngine()
 
     #uiConsole.refreshWindow()
-    Tbfe.GetMainPlayer().setRotationF(0,i,0)
-    Tbfe.setCameraAngle(Tbfe.getCameraAngle().X, -Tbfe.GetMainPlayer().getRotationF().Y+90,
+    #Tbfe.GetMainPlayer().setRotationF(0,i,0)
+    Tbfe.setCameraAngle(45, -Tbfe.GetMainPlayer().getRotationF().Y+90,
                         Tbfe.getCameraAngle().Z)
     
-    housing.setRotationF(i,0,0,False)
     
-    #    mouseCursor.updatePulse()
-    #   pulseRotation=mouseCursor.pulse.getRotationF()
+    mouseCursor.updatePulse()
+    pulseRotation=mouseCursor.pulse.getRotationF()
     #pulsePosition=mouseCursor.pulse.getPositionF()
-    #  uiFrameRate.getElement("lblRate").setProperty("text",pulsePosition.dumpString())
-    # pulseActor.setPositionF(pulsePosition.X,pulsePosition.Y,pulsePosition.Z)
-    #pulseActor.setRotationF(pulseRotation.X,pulseRotation.Y,pulseRotation.Z,False)
+    uiFrameRate.getElement("lblRate").setProperty("text",Tbfe.GetMainPlayer().getRotationF().dumpString()+pulseRotation.dumpString())
+    pulseActor.setPositionF(pulsePosition.X,pulsePosition.Y,pulsePosition.Z)
+    pulseActor.setRotationF(pulseRotation.X,-pulseRotation.Y,pulseRotation.Z,False)
     #mousePosition=mouseCursor.get3dPointer()
     #if mousePosition!=None:
     #   mousePosition=mousePosition/100

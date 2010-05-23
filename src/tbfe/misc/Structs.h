@@ -7,10 +7,11 @@
 #include "SDL/SDL.h"
 #include <aiScene.h>
 #include <sstream>
+#include "PositionF.h"
+#include "Matrix.h"
 using namespace std;
 class Window;
 class Element;
-
 struct AnimationSheet
 {
   SDL_Surface * Data;
@@ -57,80 +58,6 @@ struct Tile
   int TileSet;
   int Passability;
   bool isChanged;
-};
-struct PositionF
-{
-  float X;
-  float Y;
-  float Z;
-  PositionF()
-  {
-    X=0;
-    Y=0;
-    Z=0;
-  };
-  PositionF(float x,float y,float z)
-  {
-    X=x;
-    Y=y;
-    Z=z;
-  };
-  PositionF operator+(PositionF newPosition)
-  {
-    newPosition.X+=X;
-    newPosition.Y+=Y;
-    newPosition.Z+=Z;
-    return newPosition;
-  };
-  PositionF operator+(float a)
-  {
-    PositionF newPosition;
-    newPosition.X=X+a;
-    newPosition.Y=Y+a;
-    newPosition.Z=Z+a;
-    return newPosition;
-  };
-  PositionF operator-(PositionF newPosition)
-  {
-    newPosition.X-=X;
-    newPosition.Y-=Y;
-    newPosition.Z-=Z;
-    return newPosition;
-  };
-  void operator+=(PositionF newPosition)
-  {
-    X+=newPosition.X;
-    Y+=newPosition.Y;
-    Z+=newPosition.Z;
-  };
-  void operator-=(PositionF newPosition)
-  {
-    X-=newPosition.X;
-    Y-=newPosition.Y;
-    Z-=newPosition.Z;
-  };
-  PositionF operator*(float num)
-  {
-    PositionF newPosition;
-    newPosition.X=X*num;
-    newPosition.Y=Y*num;
-    newPosition.Z=Z*num;
-    return newPosition;
-  };
-  PositionF operator/(float num)
-  {
-    PositionF newPosition;
-    newPosition.X=X/num;
-    newPosition.Y=Y/num;
-    newPosition.Z=Z/num;
-    return newPosition;
-  };
-  string dumpString()
-  {
-    std::stringstream text;
-    text << '(' << X << ',' << Y << ',' << Z << ')';
-    return text.str();
-  };
 };
 struct Position
 {
