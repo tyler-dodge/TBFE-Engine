@@ -27,10 +27,6 @@ if version_info >= (2,6,0):
 else:
     import _Map
 del version_info
-try:
-    _swig_property = property
-except NameError:
-    pass # Python < 2.2 doesn't have 'property'.
 def _swig_setattr_nondynamic(self,class_type,name,value,static=1):
     if (name == "thisown"): return self.this.own(value)
     if (name == "this"):
@@ -58,16 +54,8 @@ def _swig_repr(self):
     except: strthis = ""
     return "<%s.%s; %s >" % (self.__class__.__module__, self.__class__.__name__, strthis,)
 
-try:
-    _object = object
-    _newclass = 1
-except AttributeError:
-    class _object : pass
-    _newclass = 0
-
-
 import Misc
-class Map(_object):
+class Map:
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, Map, name, value)
     __swig_getmethods__ = {}
@@ -98,7 +86,7 @@ class Map(_object):
 Map_swigregister = _Map.Map_swigregister
 Map_swigregister(Map)
 
-class OverMap(_object):
+class OverMap:
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, OverMap, name, value)
     __swig_getmethods__ = {}
@@ -107,7 +95,6 @@ class OverMap(_object):
     def getPoint(self, *args): return _Map.OverMap_getPoint(self, *args)
     __swig_setmethods__["MapLocations"] = _Map.OverMap_MapLocations_set
     __swig_getmethods__["MapLocations"] = _Map.OverMap_MapLocations_get
-    if _newclass:MapLocations = _swig_property(_Map.OverMap_MapLocations_get, _Map.OverMap_MapLocations_set)
     def __init__(self, *args): 
         this = _Map.new_OverMap(*args)
         try: self.this.append(this)
@@ -123,7 +110,7 @@ class OverMap(_object):
 OverMap_swigregister = _Map.OverMap_swigregister
 OverMap_swigregister(OverMap)
 
-class TileLayer(_object):
+class TileLayer:
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, TileLayer, name, value)
     __swig_getmethods__ = {}

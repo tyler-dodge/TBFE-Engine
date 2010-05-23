@@ -27,10 +27,6 @@ if version_info >= (2,6,0):
 else:
     import _TBFE
 del version_info
-try:
-    _swig_property = property
-except NameError:
-    pass # Python < 2.2 doesn't have 'property'.
 def _swig_setattr_nondynamic(self,class_type,name,value,static=1):
     if (name == "thisown"): return self.this.own(value)
     if (name == "this"):
@@ -57,14 +53,6 @@ def _swig_repr(self):
     try: strthis = "proxy of " + self.this.__repr__()
     except: strthis = ""
     return "<%s.%s; %s >" % (self.__class__.__module__, self.__class__.__name__, strthis,)
-
-try:
-    _object = object
-    _newclass = 1
-except AttributeError:
-    class _object : pass
-    _newclass = 0
-
 
 import Actor
 import Misc
@@ -161,7 +149,7 @@ setCameraFollowOffset = _TBFE.setCameraFollowOffset
 def getCameraOffset():
   return _TBFE.getCameraOffset()
 getCameraOffset = _TBFE.getCameraOffset
-class TBFE(_object):
+class TBFE:
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, TBFE, name, value)
     __swig_getmethods__ = {}
@@ -195,7 +183,7 @@ TBFE_swigregister = _TBFE.TBFE_swigregister
 TBFE_swigregister(TBFE)
 cvar = _TBFE.cvar
 
-class TBFE_Render(_object):
+class TBFE_Render:
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, TBFE_Render, name, value)
     __swig_getmethods__ = {}
@@ -218,7 +206,7 @@ class TBFE_Render(_object):
 TBFE_Render_swigregister = _TBFE.TBFE_Render_swigregister
 TBFE_Render_swigregister(TBFE_Render)
 
-class TBFE_Logic(_object):
+class TBFE_Logic:
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, TBFE_Logic, name, value)
     __swig_getmethods__ = {}
@@ -242,7 +230,7 @@ class TBFE_Logic(_object):
 TBFE_Logic_swigregister = _TBFE.TBFE_Logic_swigregister
 TBFE_Logic_swigregister(TBFE_Logic)
 
-class Console(_object):
+class Console:
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, Console, name, value)
     __swig_getmethods__ = {}
@@ -262,7 +250,6 @@ class Console(_object):
     def getLine(self, *args): return _TBFE.Console_getLine(self, *args)
     def getNumberOfLines(self): return _TBFE.Console_getNumberOfLines(self)
     __swig_getmethods__["setPyInterface"] = lambda x: _TBFE.Console_setPyInterface
-    if _newclass:setPyInterface = staticmethod(_TBFE.Console_setPyInterface)
 Console_swigregister = _TBFE.Console_swigregister
 Console_swigregister(Console)
 
@@ -270,7 +257,7 @@ def Console_setPyInterface(*args):
   return _TBFE.Console_setPyInterface(*args)
 Console_setPyInterface = _TBFE.Console_setPyInterface
 
-class SunVector(_object):
+class SunVector:
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, SunVector, name, value)
     __swig_getmethods__ = {}
@@ -278,16 +265,12 @@ class SunVector(_object):
     __repr__ = _swig_repr
     __swig_setmethods__["CurrentPositionX"] = _TBFE.SunVector_CurrentPositionX_set
     __swig_getmethods__["CurrentPositionX"] = _TBFE.SunVector_CurrentPositionX_get
-    if _newclass:CurrentPositionX = _swig_property(_TBFE.SunVector_CurrentPositionX_get, _TBFE.SunVector_CurrentPositionX_set)
     __swig_setmethods__["CurrentPositionY"] = _TBFE.SunVector_CurrentPositionY_set
     __swig_getmethods__["CurrentPositionY"] = _TBFE.SunVector_CurrentPositionY_get
-    if _newclass:CurrentPositionY = _swig_property(_TBFE.SunVector_CurrentPositionY_get, _TBFE.SunVector_CurrentPositionY_set)
     __swig_setmethods__["Angle"] = _TBFE.SunVector_Angle_set
     __swig_getmethods__["Angle"] = _TBFE.SunVector_Angle_get
-    if _newclass:Angle = _swig_property(_TBFE.SunVector_Angle_get, _TBFE.SunVector_Angle_set)
     __swig_setmethods__["Speed"] = _TBFE.SunVector_Speed_set
     __swig_getmethods__["Speed"] = _TBFE.SunVector_Speed_get
-    if _newclass:Speed = _swig_property(_TBFE.SunVector_Speed_get, _TBFE.SunVector_Speed_set)
     def __init__(self, *args): 
         this = _TBFE.new_SunVector(*args)
         try: self.this.append(this)

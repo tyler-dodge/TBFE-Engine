@@ -27,10 +27,6 @@ if version_info >= (2,6,0):
 else:
     import _UI
 del version_info
-try:
-    _swig_property = property
-except NameError:
-    pass # Python < 2.2 doesn't have 'property'.
 def _swig_setattr_nondynamic(self,class_type,name,value,static=1):
     if (name == "thisown"): return self.this.own(value)
     if (name == "this"):
@@ -58,16 +54,8 @@ def _swig_repr(self):
     except: strthis = ""
     return "<%s.%s; %s >" % (self.__class__.__module__, self.__class__.__name__, strthis,)
 
-try:
-    _object = object
-    _newclass = 1
-except AttributeError:
-    class _object : pass
-    _newclass = 0
-
-
 import Misc
-class Window(_object):
+class Window:
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, Window, name, value)
     __swig_getmethods__ = {}
@@ -93,7 +81,7 @@ class Window(_object):
 Window_swigregister = _UI.Window_swigregister
 Window_swigregister(Window)
 
-class Element(_object):
+class Element:
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, Element, name, value)
     __swig_getmethods__ = {}

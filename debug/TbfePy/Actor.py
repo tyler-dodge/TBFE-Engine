@@ -27,10 +27,6 @@ if version_info >= (2,6,0):
 else:
     import _Actor
 del version_info
-try:
-    _swig_property = property
-except NameError:
-    pass # Python < 2.2 doesn't have 'property'.
 def _swig_setattr_nondynamic(self,class_type,name,value,static=1):
     if (name == "thisown"): return self.this.own(value)
     if (name == "this"):
@@ -58,14 +54,6 @@ def _swig_repr(self):
     except: strthis = ""
     return "<%s.%s; %s >" % (self.__class__.__module__, self.__class__.__name__, strthis,)
 
-try:
-    _object = object
-    _newclass = 1
-except AttributeError:
-    class _object : pass
-    _newclass = 0
-
-
 import Misc
 
 def loadActors(*args):
@@ -83,7 +71,7 @@ getActorType = _Actor.getActorType
 def getActor(*args):
   return _Actor.getActor(*args)
 getActor = _Actor.getActor
-class Actor(_object):
+class Actor:
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, Actor, name, value)
     __swig_getmethods__ = {}
@@ -173,7 +161,7 @@ class NonLiving(Actor):
 NonLiving_swigregister = _Actor.NonLiving_swigregister
 NonLiving_swigregister(NonLiving)
 
-class Inventory(_object):
+class Inventory:
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, Inventory, name, value)
     __swig_getmethods__ = {}
@@ -195,7 +183,7 @@ class Inventory(_object):
 Inventory_swigregister = _Actor.Inventory_swigregister
 Inventory_swigregister(Inventory)
 
-class Building(_object):
+class Building:
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, Building, name, value)
     __swig_getmethods__ = {}
@@ -220,7 +208,7 @@ class Building(_object):
 Building_swigregister = _Actor.Building_swigregister
 Building_swigregister(Building)
 
-class Action(_object):
+class Action:
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, Action, name, value)
     __swig_getmethods__ = {}
@@ -247,7 +235,7 @@ class Action(_object):
 Action_swigregister = _Actor.Action_swigregister
 Action_swigregister(Action)
 
-class Animation(_object):
+class Animation:
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, Animation, name, value)
     __swig_getmethods__ = {}
@@ -280,7 +268,7 @@ class Animation(_object):
 Animation_swigregister = _Actor.Animation_swigregister
 Animation_swigregister(Animation)
 
-class CollisionBox(_object):
+class CollisionBox:
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, CollisionBox, name, value)
     __swig_getmethods__ = {}
