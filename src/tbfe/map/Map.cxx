@@ -10,7 +10,6 @@
 
 #define SWIGPYTHON
 #define SWIG_PYTHON_DIRECTOR_NO_VTABLE
-#define SWIG_PYTHON_CLASSIC
 
 
 #ifdef __cplusplus

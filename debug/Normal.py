@@ -35,13 +35,14 @@ wateringCan=Tool.Tool(Misc.Tile(3,0,0),Misc.Tile(4,0,0))
 seeds=PlantTool.PlantTool(Misc.Tile(3,0,0),"Turnip")
 currentTool=hoe
 i=0
+exit()
+
+
 while action!=Misc.QUIT:
     i=i+1
 
     #Tbfe.setCameraAngle(0,i,0)
-    action=engine.runEngine()
-
-    #uiConsole.refreshWindow()
+    action=engine.runEngine()    #uiConsole.refreshWindow()
     #Tbfe.GetMainPlayer().setRotationF(0,i,0)
     Tbfe.setCameraAngle(45, -Tbfe.GetMainPlayer().getRotationF().Y+90,
                         Tbfe.getCameraAngle().Z)
