@@ -27,7 +27,7 @@ int Console::evalExpression(string expression)
 {
   //not thread safe
   stringstream newData;
-  newData << "Tbfe.Console.setPyInterface(" << expression << ")";
+  newData << "from TbfePy import Tbfe;Tbfe.Console.setPyInterface(" << expression << ")";
   PyRun_SimpleString(newData.str().c_str());
   return pyInterface_;
 };

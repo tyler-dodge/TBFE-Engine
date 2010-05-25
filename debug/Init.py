@@ -1,6 +1,6 @@
 from TbfePy import Tbfe, Misc, UI, Actor
 Tbfe.cvar.ScreenDimensions.X=1024
-Tbfe.cvar.ScreenDimensions.Y=600
+Tbfe.cvar.ScreenDimensions.Y=768
 def getEngine():
     global engine
     return engine
