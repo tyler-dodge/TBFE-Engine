@@ -210,7 +210,6 @@ class TBFE_Render(_object):
     __del__ = lambda self : None;
     def initializeTileSets(self): return _TBFE.TBFE_Render_initializeTileSets(self)
     def addTileSet(self, *args): return _TBFE.TBFE_Render_addTileSet(self, *args)
-    def changeLighting(self, *args): return _TBFE.TBFE_Render_changeLighting(self, *args)
     def init(self): return _TBFE.TBFE_Render_init(self)
     def initGl(self): return _TBFE.TBFE_Render_initGl(self)
     def setLightPosition(self, *args): return _TBFE.TBFE_Render_setLightPosition(self, *args)

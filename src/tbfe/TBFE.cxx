@@ -4670,36 +4670,6 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_TBFE_Render_changeLighting(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  TBFE_Render *arg1 = (TBFE_Render *) 0 ;
-  int arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:TBFE_Render_changeLighting",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TBFE_Render, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TBFE_Render_changeLighting" "', argument " "1"" of type '" "TBFE_Render *""'"); 
-  }
-  arg1 = reinterpret_cast< TBFE_Render * >(argp1);
-  ecode2 = SWIG_AsVal_int(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "TBFE_Render_changeLighting" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  (arg1)->changeLighting(arg2);
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_TBFE_Render_init(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   TBFE_Render *arg1 = (TBFE_Render *) 0 ;
@@ -5810,7 +5780,6 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"delete_TBFE_Render", _wrap_delete_TBFE_Render, METH_VARARGS, NULL},
 	 { (char *)"TBFE_Render_initializeTileSets", _wrap_TBFE_Render_initializeTileSets, METH_VARARGS, NULL},
 	 { (char *)"TBFE_Render_addTileSet", _wrap_TBFE_Render_addTileSet, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Render_changeLighting", _wrap_TBFE_Render_changeLighting, METH_VARARGS, NULL},
 	 { (char *)"TBFE_Render_init", _wrap_TBFE_Render_init, METH_VARARGS, NULL},
 	 { (char *)"TBFE_Render_initGl", _wrap_TBFE_Render_initGl, METH_VARARGS, NULL},
 	 { (char *)"TBFE_Render_setLightPosition", _wrap_TBFE_Render_setLightPosition, METH_VARARGS, NULL},

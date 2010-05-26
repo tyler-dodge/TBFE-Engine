@@ -79,7 +79,7 @@ class Window(_object):
         except: self.this = this
     __swig_destroy__ = _UI.delete_Window
     __del__ = lambda self : None;
-    def renderElements(self, *args): return _UI.Window_renderElements(self, *args)
+    def renderElements(self): return _UI.Window_renderElements(self)
     def addElement(self, *args): return _UI.Window_addElement(self, *args)
     def getElement(self, *args): return _UI.Window_getElement(self, *args)
     def getDimensions(self): return _UI.Window_getDimensions(self)
