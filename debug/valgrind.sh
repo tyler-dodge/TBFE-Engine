@@ -1,1 +1,1 @@
-valgrind --suppressions=valgrind-python.supp ./Agrarious Normal.py
+valgrind --suppressions=python.supp ./Agrarious Normal.py

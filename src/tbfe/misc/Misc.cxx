@@ -8053,6 +8053,36 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_Matrix_glMatrix(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Matrix *arg1 = (Matrix *) 0 ;
+  float *arg2 = (float *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Matrix_glMatrix",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_glMatrix" "', argument " "1"" of type '" "Matrix *""'"); 
+  }
+  arg1 = reinterpret_cast< Matrix * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_float, 0 |  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Matrix_glMatrix" "', argument " "2"" of type '" "float *""'"); 
+  }
+  arg2 = reinterpret_cast< float * >(argp2);
+  (arg1)->glMatrix(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_Matrix___imul__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Matrix *arg1 = (Matrix *) 0 ;
@@ -9544,6 +9574,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"delete_Quad", _wrap_delete_Quad, METH_VARARGS, NULL},
 	 { (char *)"Quad_swigregister", Quad_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_Matrix", _wrap_new_Matrix, METH_VARARGS, NULL},
+	 { (char *)"Matrix_glMatrix", _wrap_Matrix_glMatrix, METH_VARARGS, NULL},
 	 { (char *)"Matrix___imul__", _wrap_Matrix___imul__, METH_VARARGS, NULL},
 	 { (char *)"Matrix___mul__", _wrap_Matrix___mul__, METH_VARARGS, NULL},
 	 { (char *)"Matrix_dataPointer", _wrap_Matrix_dataPointer, METH_VARARGS, NULL},

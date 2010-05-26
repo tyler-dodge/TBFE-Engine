@@ -103,9 +103,9 @@ string Matrix::dumpString()
   return newString.str();
 };
 Matrix::Matrix(float x,float y,float z)
-{
+{ 
   Matrix xMatrix(1,0,0,x);
-  Matrix oppX(1,0,0,-x);
+  Matrix oppX(1,0,-x);
   PositionF axis(0,1,0);
   
   axis=axis*oppX;
@@ -113,7 +113,7 @@ Matrix::Matrix(float x,float y,float z)
   Matrix oppY(axis.X,axis.Y,axis.Z,-y);
   PositionF outAxis(0,0,1);
   outAxis=outAxis*(oppX*oppY);
-  Matrix zMatrix(outAxis.X,outAxis.Y,outAxis.Z,z);
+  Matrix zMatrix(outAxis.X,outAxis.Y,outAxis.Z);
   xMatrix=xMatrix*yMatrix*zMatrix;
   for (int i=0;i<16;i++)
     {
@@ -124,19 +124,26 @@ float * Matrix::dataPointer()
 {
   return data_;
 };
+void Matrix::glMatrix(float * glArray)
+{
+  for (int i=0;i<16;i++)
+    {
+      data_[i]=glArray[i];
+    };
+};
 Matrix::Matrix(float x,float y,float z,float angle)
 {
   angle*=DEG_RAD;
   float c=cos(angle);
   float s=sin(angle);
-  float t=1-cos(0);
+  float t=1-cos(angle);
   data_[0]=t*pow(x,2)+c;
   data_[1]=t*x*y-s*z;
   data_[2]=t*x*z+s*y;
   data_[3]=0;
 
   data_[4]=t*x*y+s*z;
-  data_[5]=t*x*z+c;
+  data_[5]=pow(y,2)*t+c;
   data_[6]=t*y*z-s*x;
   data_[7]=0;
 
