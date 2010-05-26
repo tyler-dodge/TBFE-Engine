@@ -20,7 +20,7 @@ class Window
  public:
   Window(int,int,int,int,std::string ImageSource="");
   ~Window();
-  SDL_Surface * renderElements(SDL_Surface *);
+  SDL_Surface * renderElements();
   void addElement(Element *);
   Element * getElement(std::string);
   Position getDimensions();

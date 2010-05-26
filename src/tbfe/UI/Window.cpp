@@ -27,7 +27,7 @@ Element * Window::getElement(std::string Name)
     };
   return NULL;
 };
-SDL_Surface * Window::renderElements(SDL_Surface * screen)
+SDL_Surface * Window::renderElements()
 {
   bool reload=false;
   for(int i=0;i<elements_.size();i++)

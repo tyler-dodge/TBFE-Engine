@@ -19,11 +19,6 @@
 class TBFE_Render
 {
  private: 
-  SDL_Surface *collision_;
-  SDL_Surface *window_;
-  int lightingPercentage_;
-  SDL_Surface *darkness_;
-  SDL_Color textColor_;
   Position offset_;
   SDL_Surface * screen_;
   vector<TileSheet> tileSet_;
@@ -39,7 +34,6 @@ class TBFE_Render
   ~TBFE_Render();
   void initializeTileSets();
   bool addTileSet(string);
-  void changeLighting(int);
   void init();
   void initGl();
   void setLightPosition(float,float,float);

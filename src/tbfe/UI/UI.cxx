@@ -3343,27 +3343,18 @@ fail:
 SWIGINTERN PyObject *_wrap_Window_renderElements(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Window *arg1 = (Window *) 0 ;
-  SDL_Surface *arg2 = (SDL_Surface *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
   PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
   SDL_Surface *result = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OO:Window_renderElements",&obj0,&obj1)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"O:Window_renderElements",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Window, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Window_renderElements" "', argument " "1"" of type '" "Window *""'"); 
   }
   arg1 = reinterpret_cast< Window * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_SDL_Surface, 0 |  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Window_renderElements" "', argument " "2"" of type '" "SDL_Surface *""'"); 
-  }
-  arg2 = reinterpret_cast< SDL_Surface * >(argp2);
-  result = (SDL_Surface *)(arg1)->renderElements(arg2);
+  result = (SDL_Surface *)(arg1)->renderElements();
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_SDL_Surface, 0 |  0 );
   return resultobj;
 fail:

@@ -1,18 +1,9 @@
 #include "Render.h"
 TBFE_Render::TBFE_Render()
 {
-  screen_=NULL;
-  lightingPercentage_=20;
   TTF_Init();
   init();
   TBFE_Base::font=TTF_OpenFont("Images/UI/font.ttf",12);
-  textColor_.r=255;
-  textColor_.g=255;
-  textColor_.b=255;
-  darkness_=TBFE_Base::CheckSheets("Images/Darkness.png");
-  changeLighting(10);
-  window_=TBFE_Base::CheckSheets("Images/UI/Window.png");
-  TBFE_Base::CollisionTile=TBFE_Base::CheckSheets("Tile.png");
   setLightPosition(0,0,0);
 };
 void TBFE_Render::setLightPosition(float x,float y,float z)
@@ -70,12 +61,8 @@ void TBFE_Render::init()
     {
       SDL_Init(SDL_INIT_EVERYTHING);
     };
-  if (screen_!=NULL)
-    {
-      SDL_FreeSurface(screen_);
-    };
   SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,8);
-  screen_=SDL_SetVideoMode(TBFE_Base::ScreenDimensions.X,TBFE_Base::ScreenDimensions.Y,32,SDL_OPENGL | SDL_FULLSCREEN );
+  SDL_SetVideoMode(TBFE_Base::ScreenDimensions.X,TBFE_Base::ScreenDimensions.Y,32,SDL_OPENGL | SDL_FULLSCREEN );
   TBFE_Base::MainConsole.write("SDL initialized");
   initGl();
  };
@@ -84,13 +71,6 @@ TBFE_Render::~TBFE_Render()
   TTF_CloseFont(TBFE_Base::font);
   TTF_Quit();
   SDL_Quit();
-};
-void TBFE_Render::changeLighting(int NewValue)
-{
-  if (darkness_!=NULL)
-    {
-      SDL_SetAlpha(darkness_, SDL_SRCALPHA, NewValue);
-    };
 };
 inline void TBFE_Render::initializeTileSets()
 {
@@ -368,7 +348,7 @@ void TBFE_Render::renderWindowList()
       if (window->getVisibility())
 	{
 	  Position windowPosition=window->getScreenPosition();
-	  SDL_Surface * windowSurface=window->renderElements(screen_);
+	  SDL_Surface * windowSurface=window->renderElements();
 	  if (windowSurface!=NULL)
 	    {
 	      applyImage(windowPosition.X,windowPosition.Y,windowSurface,NULL);
