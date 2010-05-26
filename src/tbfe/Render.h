@@ -20,7 +20,6 @@ class TBFE_Render
 {
  private: 
   Position offset_;
-  SDL_Surface * screen_;
   vector<TileSheet> tileSet_;
   void renderActors();
   void renderWindowList();
