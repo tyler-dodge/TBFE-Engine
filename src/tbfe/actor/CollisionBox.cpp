@@ -134,15 +134,15 @@ bool CollisionBox::checkCollision(CollisionBox target,PositionF targetOffset,boo
   centerPoint.Z=0;
   centerPoint=(thisPoint[0]+thisPoint[2])/2;
   //cout << "set\n";
-  for (int currentPoint=0;currentPoint<8;currentPoint++)
+  for (int currentPoint=0;currentPoint<targetPoint.size();currentPoint++)
     {
       //cout << targetPoint.at(currentPoint).dumpString() << "  pointset\n";
       bool collision=true;
-      for (int i=0;i<8;i++)
+      for (int i=0;i<thisPoint.size();i++)
 	{
 	  int a=i+1;
 	  bool isGreater=false;
-	  if (i==3)
+	  if (i==thisPoint.size()-1)
 	    {
 	      a=0;
 	    };

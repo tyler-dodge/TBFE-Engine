@@ -44,7 +44,7 @@ void TBFE_Render::initGl()
   glLightModelfv(GL_LIGHT_MODEL_AMBIENT,global_ambient);
   glLightModelf(GL_LIGHT_MODEL_LOCAL_VIEWER,GL_TRUE);
   glEnable(GL_LIGHT0);
-  GLfloat specular[3];
+  GLfloat specular[4];
   specular[0]=0.3f;
   specular[1]=0.3f;
   specular[2]=0.3f;

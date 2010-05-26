@@ -545,6 +545,7 @@ class Matrix(_object):
         this = _Misc.new_Matrix(*args)
         try: self.this.append(this)
         except: self.this = this
+    def glMatrix(self, *args): return _Misc.Matrix_glMatrix(self, *args)
     def __imul__(self, *args): return _Misc.Matrix___imul__(self, *args)
     def __mul__(self, *args): return _Misc.Matrix___mul__(self, *args)
     def dataPointer(self): return _Misc.Matrix_dataPointer(self)
