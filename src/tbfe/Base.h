@@ -38,8 +38,9 @@ namespace TBFE_Base
   extern Window * getWindowByNum(int);
   extern int getWindowNum(Window *);
   
-  extern PositionF getCameraAngle();
-  extern void setCameraAngle(float,float,float);
+  extern Quaternion getCameraAngle();
+  extern void setCameraAngle(Quaternion);
+  extern void rotateCamera(Quaternion);
   
   extern PositionF getCameraFollowOffset();
   extern void setCameraFollowOffset(float,float,float);

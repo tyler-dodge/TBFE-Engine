@@ -9,7 +9,7 @@ class CollisionBox
  private:
   PositionF position_;
   PositionF dimensions_;
-  PositionF rotation_;
+  Quaternion rotation_;
   bool isEnabled_;
  public:
   CollisionBox(PositionF,PositionF);
@@ -20,7 +20,7 @@ class CollisionBox
   PositionF getPosition();
   void setPosition(float,float,float);
   PositionF getCenter();
-  PositionF getRotation();
+  Quaternion getRotation();
   void setRotation(Quaternion);
 
   bool checkCollision(CollisionBox,PositionF,bool crossCheck=true);

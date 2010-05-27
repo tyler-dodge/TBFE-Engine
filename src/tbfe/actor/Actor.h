@@ -48,7 +48,6 @@ class Actor
   string getProperty(string);
   void setProperty(string,string);
   int changePosition(float);
-
   vector<int> checkActorCollision(float,float,float);
 
   PositionF getPositionF();

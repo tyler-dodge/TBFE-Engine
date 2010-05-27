@@ -191,24 +191,19 @@ int Actor::changePosition(float newAngle)
     }
   setProperty("walk","1");
   PositionF position;
+  PositionF direction(0,0,1);
+  float magnitude;
   position=getPositionF();
-  position.X+=(float)getSpeed()*TBFE_Base::GameSpeed*cos(newAngle*PI/180);
-  position.Z-=(float)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*PI/180);
-  //switch(NewDirection)
-  // {
-  //  case UP:
-  //    position.Y-=fabs((float)getSpeed()*TBFE_Base::GameSpeed);
-  //    break;
-  // case RIGHT:
-  //    position.X+=fabs((float)getSpeed()*TBFE_Base::GameSpeed);
-  //    break;
-  //  case DOWN:
-  //   position.Y+=fabs((float)getSpeed()*TBFE_Base::GameSpeed);
-  //   break;
-  //  case LEFT:
-  //    position.X-=fabs((float)getSpeed()*TBFE_Base::GameSpeed);
-  //    break;
-  //  };
+  Quaternion rotations(0,1,0,newAngle);
+  rotations*=rotation_;
+  direction=applyRotations(direction,rotations);
+  direction.X*=-1;
+  magnitude=sqrt(pow(direction.X,2)+pow(direction.Z,2));
+  direction=direction/magnitude;
+  position.X+=speed_*direction.X;
+  position.Z+=speed_*direction.Z;
+  //position.X+=(float)getSpeed()*TBFE_Base::GameSpeed*cos(newAngle*PI/180);
+  //position.Z-=(float)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*PI/180);
   setPositionF(position.X,position.Y,position.Z);
   vector<CollidedTile> collisionTest=TBFE_Base::CurrentMap.collisionTest((int)position_.X,
 									 (int)position_.Y);
@@ -222,8 +217,10 @@ int Actor::changePosition(float newAngle)
 	      switch(collisionTest.at(i).Passability)
 		{
 		case 255:
-		  position.X-=(float)getSpeed()*TBFE_Base::GameSpeed*cos(newAngle*PI/180);
-		  position.Z+=(float)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*PI/180);
+		  position.X-=speed_*direction.X;
+		  position.Z-=speed_*direction.Z;
+		  //position.X-=(float)getSpeed()*TBFE_Base::GameSpeed*cos(newAngle*PI/180);
+		  //position.Z+=(float)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*PI/180);
 		  break;
 		};
 	      setPositionF(position.X,position.Y,position.Z);
@@ -234,8 +231,10 @@ int Actor::changePosition(float newAngle)
   vector<int> ncollisionTest=checkActorCollision(position.X,position.Y,position.Z);
   if (ncollisionTest.size()!=0)
     {
-      position.X-=(float)getSpeed()*TBFE_Base::GameSpeed*cos(newAngle*PI/180);
-      position.Z+=(float)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*PI/180);
+      position.X-=(float)getSpeed()*direction.X;
+      position.Z-=(float)getSpeed()*direction.Z;
+      //position.X-=(float)getSpeed()*TBFE_Base::GameSpeed*cos(newAngle*PI/180);
+      //position.Z+=(float)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*PI/180);
       setPositionF(position.X,position.Y,position.Z);
       return -2;
     };
@@ -266,6 +265,9 @@ vector<int> Actor::checkActorCollision(float offsetX,float offsetY,float offsetZ
 		  offset.Y=offsetY-targetPosition.Y;
 		  offset.Z=offsetZ-targetPosition.Z;
 		  Quaternion targetRotation=targetActor->getRotation();
+		  Quaternion tempRotation=rotation_;
+		  targetRotation.w*=-1;
+		  tempRotation.w*=-1;
 		  targetCollision.setRotation(targetRotation);
 		  collisionMaps_.at(a).setRotation(rotation_);
 		  if (collisionMaps_.at(a).checkCollision(targetCollision,offset))

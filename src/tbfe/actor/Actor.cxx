@@ -7535,54 +7535,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Animation_rotate__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Animation *arg1 = (Animation *) 0 ;
-  Quaternion arg2 ;
-  bool arg3 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  bool val3 ;
-  int ecode3 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  PyObject * obj2 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OOO:Animation_rotate",&obj0,&obj1,&obj2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Animation, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Animation_rotate" "', argument " "1"" of type '" "Animation *""'"); 
-  }
-  arg1 = reinterpret_cast< Animation * >(argp1);
-  {
-    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Quaternion,  0  | 0);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Animation_rotate" "', argument " "2"" of type '" "Quaternion""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Animation_rotate" "', argument " "2"" of type '" "Quaternion""'");
-    } else {
-      Quaternion * temp = reinterpret_cast< Quaternion * >(argp2);
-      arg2 = *temp;
-      if (SWIG_IsNewObj(res2)) delete temp;
-    }
-  }
-  ecode3 = SWIG_AsVal_bool(obj2, &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Animation_rotate" "', argument " "3"" of type '" "bool""'");
-  } 
-  arg3 = static_cast< bool >(val3);
-  (arg1)->rotate(arg2,arg3);
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Animation_rotate__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Animation_rotate(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Animation *arg1 = (Animation *) 0 ;
   Quaternion arg2 ;
@@ -7616,58 +7569,6 @@ SWIGINTERN PyObject *_wrap_Animation_rotate__SWIG_1(PyObject *SWIGUNUSEDPARM(sel
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Animation_rotate(PyObject *self, PyObject *args) {
-  int argc;
-  PyObject *argv[4];
-  int ii;
-  
-  if (!PyTuple_Check(args)) SWIG_fail;
-  argc = (int)PyObject_Length(args);
-  for (ii = 0; (ii < argc) && (ii < 3); ii++) {
-    argv[ii] = PyTuple_GET_ITEM(args,ii);
-  }
-  if (argc == 2) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Animation, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_Quaternion, 0);
-      _v = SWIG_CheckState(res);
-      if (_v) {
-        return _wrap_Animation_rotate__SWIG_1(self, args);
-      }
-    }
-  }
-  if (argc == 3) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Animation, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_Quaternion, 0);
-      _v = SWIG_CheckState(res);
-      if (_v) {
-        {
-          int res = SWIG_AsVal_bool(argv[2], NULL);
-          _v = SWIG_CheckState(res);
-        }
-        if (_v) {
-          return _wrap_Animation_rotate__SWIG_0(self, args);
-        }
-      }
-    }
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number of arguments for overloaded function 'Animation_rotate'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    rotate(Animation *,Quaternion,bool)\n"
-    "    rotate(Animation *,Quaternion)\n");
   return NULL;
 }
 
@@ -8155,7 +8056,7 @@ SWIGINTERN PyObject *_wrap_CollisionBox_getRotation(PyObject *SWIGUNUSEDPARM(sel
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  PositionF result;
+  Quaternion result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:CollisionBox_getRotation",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CollisionBox, 0 |  0 );
@@ -8164,7 +8065,7 @@ SWIGINTERN PyObject *_wrap_CollisionBox_getRotation(PyObject *SWIGUNUSEDPARM(sel
   }
   arg1 = reinterpret_cast< CollisionBox * >(argp1);
   result = (arg1)->getRotation();
-  resultobj = SWIG_NewPointerObj((new PositionF(static_cast< const PositionF& >(result))), SWIGTYPE_p_PositionF, SWIG_POINTER_OWN |  0 );
+  resultobj = SWIG_NewPointerObj((new Quaternion(static_cast< const Quaternion& >(result))), SWIGTYPE_p_Quaternion, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;

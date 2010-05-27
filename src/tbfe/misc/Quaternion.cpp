@@ -1,6 +1,7 @@
 #include "Quaternion.h"
 Quaternion::Quaternion(float newX,float newY,float newZ,float angle)
 {
+  angle*=DEG_RAD;
   w=cos(angle/2);
   x=newX*sin(angle/2);
   y=newY*sin(angle/2);
@@ -17,14 +18,10 @@ void Quaternion::normalize()
 Matrix Quaternion::toMatrix()
 {
   normalize();
-  float tX=x;
-  float tY=y;
-  float tZ=z;
-  float tW=-w;
-  Matrix newMatrix(1-2*pow(tY,2)-2*pow(tZ,2), 2*tX*tY-2*tW*tZ, 2*tX*tZ+2*tW*tY, 0,
-		   2*tX*tY+2*tW*tZ, 1-2*pow(tX,2)-2*pow(tZ,2), 2*tY*tZ-2*tW*tX, 0,
-		   2*tX*tZ-2*tW*tY, 2*tY*tZ-2*tW*tX, 1-2*pow(tX,2)-2*pow(tY,2), 0,
-		   0,           0,           0,                       1);
+  Matrix newMatrix(1-2*pow(y,2)-2*pow(z,2),  2*x*y+2*w*z,              2*x*z-2*w*y,             0,
+		   2*x*y-2*w*z,              1-2*pow(x,2)-2*pow(z,2),  2*y*z+2*w*x,             0,
+		   2*x*z+2*w*y,              2*y*z-2*w*x,              1-2*pow(x,2)-2*pow(y,2), 0,
+		   0,                        0,                        0,                       1);
   return newMatrix;
 };
 Quaternion::Quaternion()
@@ -37,16 +34,29 @@ Quaternion::Quaternion()
 Quaternion Quaternion::operator*(Quaternion nQ)
 {
   Quaternion finalQuaternion;
-  finalQuaternion.w=w*nQ.w-x*nQ.x-y*nQ.y-z*nQ.z;
-  finalQuaternion.x=w*nQ.x+x*nQ.w+y*nQ.z-z*nQ.y;
-  finalQuaternion.y=w*nQ.y-x*nQ.z+y*nQ.w+z*nQ.x;
-  finalQuaternion.z=w*nQ.z+x*nQ.y-y*nQ.x+z*nQ.w;
+  finalQuaternion.w = nQ.w*w - nQ.x*x - nQ.y*y - nQ.z*z;
+  finalQuaternion.x = nQ.w*x + nQ.x*w + nQ.y*z - nQ.z*y;
+  finalQuaternion.y = nQ.w*y + nQ.y*w + nQ.z*x - nQ.x*z;
+  finalQuaternion.z = nQ.w*z + nQ.z*w + nQ.x*y - nQ.y*x;
   return finalQuaternion;
+};
+PositionF Quaternion::operator*(PositionF point)
+{
+  Matrix rotations=toMatrix();
+  PositionF newPoint;
+  newPoint.X=rotations[0]*point.X+rotations[1]*point.Y+rotations[2]*point.Z;
+  newPoint.Y=rotations[4]*point.X+rotations[5]*point.Y+rotations[6]*point.Z;
+  newPoint.Z=rotations[8]*point.X+rotations[9]*point.Y+rotations[10]*point.Z;
+  return newPoint;
 };
 void Quaternion::operator*=(Quaternion nQ)
 {
-  float fw=w*nQ.w-x*nQ.x-y*nQ.y-z*nQ.z;
-  float fx=w*nQ.x+x*nQ.w+y*nQ.z-z*nQ.y;
-  float fy=w*nQ.y-x*nQ.z+y*nQ.w+z*nQ.x;
-  float fz=w*nQ.z+x*nQ.y-y*nQ.x+z*nQ.w;
+  float fw = nQ.w*w - nQ.x*x - nQ.y*y - nQ.z*z;
+  float fx = nQ.w*x + nQ.x*w + nQ.y*z - nQ.z*y;
+  float fy = nQ.w*y + nQ.y*w + nQ.z*x - nQ.x*z;
+  float fz = nQ.w*z + nQ.z*w + nQ.x*y - nQ.y*x;
+  x=fx;
+  y=fy;
+  z=fz;
+  w=fw;
 };

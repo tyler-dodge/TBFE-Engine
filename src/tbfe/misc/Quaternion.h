@@ -11,7 +11,7 @@ public:
   Matrix toMatrix();
   Quaternion operator*(Quaternion);
   void operator*=(Quaternion);
-  //PositionF operator*(PositionF);
+  PositionF operator*(PositionF);
   //Quaternion conj();
   void normalize();
 };

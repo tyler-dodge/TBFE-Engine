@@ -88,8 +88,11 @@ class Actor(_object):
     __setattr__ = lambda self, name, value: _swig_setattr(self, Actor, name, value)
     __swig_getmethods__ = {}
     __getattr__ = lambda self, name: _swig_getattr(self, Actor, name)
-    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
+    def __init__(self, *args): 
+        this = _Actor.new_Actor(*args)
+        try: self.this.append(this)
+        except: self.this = this
     __swig_destroy__ = _Actor.delete_Actor
     __del__ = lambda self : None;
     def startAction(self, *args): return _Actor.Actor_startAction(self, *args)
@@ -104,14 +107,11 @@ class Actor(_object):
     def setProperty(self, *args): return _Actor.Actor_setProperty(self, *args)
     def changePosition(self, *args): return _Actor.Actor_changePosition(self, *args)
     def checkActorCollision(self, *args): return _Actor.Actor_checkActorCollision(self, *args)
-    def getPosition(self): return _Actor.Actor_getPosition(self)
-    def setPosition(self, *args): return _Actor.Actor_setPosition(self, *args)
     def getPositionF(self): return _Actor.Actor_getPositionF(self)
     def setPositionF(self, *args): return _Actor.Actor_setPositionF(self, *args)
-    def getRotationF(self): return _Actor.Actor_getRotationF(self)
-    def setRotationF(self, *args): return _Actor.Actor_setRotationF(self, *args)
-    def getConversation(self, *args): return _Actor.Actor_getConversation(self, *args)
-    def setConversation(self, *args): return _Actor.Actor_setConversation(self, *args)
+    def getRotation(self): return _Actor.Actor_getRotation(self)
+    def setRotation(self, *args): return _Actor.Actor_setRotation(self, *args)
+    def rotate(self, *args): return _Actor.Actor_rotate(self, *args)
     def getSpeed(self): return _Actor.Actor_getSpeed(self)
     def setSpeed(self, *args): return _Actor.Actor_setSpeed(self, *args)
     def getScriptSource(self): return _Actor.Actor_getScriptSource(self)
@@ -120,11 +120,6 @@ class Actor(_object):
     def setName(self, *args): return _Actor.Actor_setName(self, *args)
     def getBaseAction(self): return _Actor.Actor_getBaseAction(self)
     def setBaseAction(self, *args): return _Actor.Actor_setBaseAction(self, *args)
-    def getWalking(self): return _Actor.Actor_getWalking(self)
-    def setWalking(self, *args): return _Actor.Actor_setWalking(self, *args)
-    def getMobile(self): return _Actor.Actor_getMobile(self)
-    def setMobile(self, *args): return _Actor.Actor_setMobile(self, *args)
-    def getDirOffset(self): return _Actor.Actor_getDirOffset(self)
 Actor_swigregister = _Actor.Actor_swigregister
 Actor_swigregister(Actor)
 cvar = _Actor.cvar
@@ -151,7 +146,6 @@ class Npc(Actor):
         except: self.this = this
     __swig_destroy__ = _Actor.delete_Npc
     __del__ = lambda self : None;
-    def getConversation(self, *args): return _Actor.Npc_getConversation(self, *args)
 Npc_swigregister = _Actor.Npc_swigregister
 Npc_swigregister(Npc)
 
@@ -169,7 +163,6 @@ class NonLiving(Actor):
         except: self.this = this
     __swig_destroy__ = _Actor.delete_NonLiving
     __del__ = lambda self : None;
-    def getConversation(self, *args): return _Actor.NonLiving_getConversation(self, *args)
 NonLiving_swigregister = _Actor.NonLiving_swigregister
 NonLiving_swigregister(NonLiving)
 
@@ -272,6 +265,7 @@ class Animation(_object):
     def getOffset(self): return _Actor.Animation_getOffset(self)
     def setOffset(self, *args): return _Actor.Animation_setOffset(self, *args)
     def getRotation(self): return _Actor.Animation_getRotation(self)
+    def rotate(self, *args): return _Actor.Animation_rotate(self, *args)
     def setRotation(self, *args): return _Actor.Animation_setRotation(self, *args)
     def getRate(self): return _Actor.Animation_getRate(self)
     def setRate(self, *args): return _Actor.Animation_setRate(self, *args)
@@ -322,7 +316,6 @@ class Pulse(Actor):
     __swig_destroy__ = _Actor.delete_Pulse
     __del__ = lambda self : None;
     def collisionPulse(self): return _Actor.Pulse_collisionPulse(self)
-    def getConversation(self, *args): return _Actor.Pulse_getConversation(self, *args)
 Pulse_swigregister = _Actor.Pulse_swigregister
 Pulse_swigregister(Pulse)
 

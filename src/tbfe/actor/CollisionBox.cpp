@@ -28,7 +28,7 @@ void CollisionBox::setPosition(float x,float y,float z)
   position_.Z=z;
 };
 
-PositionF CollisionBox::getRotation()
+Quaternion CollisionBox::getRotation()
 {
   return rotation_;
 };

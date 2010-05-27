@@ -8,7 +8,7 @@ Animation::Animation(string imageSource,string frames,float OffsetX, float Offse
   setCurrentFrame(0);
   setModelSource(imageSource);
   setLoop(doesLoop);
-  setOffset(OffsetX,OffsetY,0);
+  setOffset(OffsetX,0,OffsetY);
   setFinalFrame(finalFrame);
   setRate(fps);
   //setRotation(0,0,0);
@@ -137,4 +137,8 @@ Quaternion Animation::getRotation()
 void Animation::setRotation(Quaternion rotations)
 {
   rotation_=rotations;
+};
+void Animation::rotate(Quaternion newRotation)
+{
+  rotation_*=newRotation;
 };

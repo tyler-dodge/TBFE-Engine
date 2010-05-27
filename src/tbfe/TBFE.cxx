@@ -2695,19 +2695,20 @@ SWIG_Python_MustGetPtr(PyObject *obj, swig_type_info *ty, int argnum, int flags)
 #define SWIGTYPE_p_Position swig_types[10]
 #define SWIGTYPE_p_PositionF swig_types[11]
 #define SWIGTYPE_p_Pulse swig_types[12]
-#define SWIGTYPE_p_SDL_Event swig_types[13]
-#define SWIGTYPE_p_SDL_Surface swig_types[14]
-#define SWIGTYPE_p_SunVector swig_types[15]
-#define SWIGTYPE_p_TBFE swig_types[16]
-#define SWIGTYPE_p_TBFE_Logic swig_types[17]
-#define SWIGTYPE_p_TBFE_Render swig_types[18]
-#define SWIGTYPE_p_TTF_Font swig_types[19]
-#define SWIGTYPE_p_Window swig_types[20]
-#define SWIGTYPE_p_char swig_types[21]
-#define SWIGTYPE_p_vectorT_Actor_p_t swig_types[22]
-#define SWIGTYPE_p_vectorT_Window_p_t swig_types[23]
-static swig_type_info *swig_types[25];
-static swig_module_info swig_module = {swig_types, 24, 0, 0, 0, 0};
+#define SWIGTYPE_p_Quaternion swig_types[13]
+#define SWIGTYPE_p_SDL_Event swig_types[14]
+#define SWIGTYPE_p_SDL_Surface swig_types[15]
+#define SWIGTYPE_p_SunVector swig_types[16]
+#define SWIGTYPE_p_TBFE swig_types[17]
+#define SWIGTYPE_p_TBFE_Logic swig_types[18]
+#define SWIGTYPE_p_TBFE_Render swig_types[19]
+#define SWIGTYPE_p_TTF_Font swig_types[20]
+#define SWIGTYPE_p_Window swig_types[21]
+#define SWIGTYPE_p_char swig_types[22]
+#define SWIGTYPE_p_vectorT_Actor_p_t swig_types[23]
+#define SWIGTYPE_p_vectorT_Window_p_t swig_types[24]
+static swig_type_info *swig_types[26];
+static swig_module_info swig_module = {swig_types, 25, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -3805,11 +3806,11 @@ fail:
 
 SWIGINTERN PyObject *_wrap_getCameraAngle(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  PositionF result;
+  Quaternion result;
   
   if (!PyArg_ParseTuple(args,(char *)":getCameraAngle")) SWIG_fail;
   result = TBFE_Base::getCameraAngle();
-  resultobj = SWIG_NewPointerObj((new PositionF(static_cast< const PositionF& >(result))), SWIGTYPE_p_PositionF, SWIG_POINTER_OWN |  0 );
+  resultobj = SWIG_NewPointerObj((new Quaternion(static_cast< const Quaternion& >(result))), SWIGTYPE_p_Quaternion, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -3818,36 +3819,55 @@ fail:
 
 SWIGINTERN PyObject *_wrap_setCameraAngle(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  float arg1 ;
-  float arg2 ;
-  float arg3 ;
-  float val1 ;
-  int ecode1 = 0 ;
-  float val2 ;
-  int ecode2 = 0 ;
-  float val3 ;
-  int ecode3 = 0 ;
+  Quaternion arg1 ;
+  void *argp1 ;
+  int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  PyObject * obj2 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OOO:setCameraAngle",&obj0,&obj1,&obj2)) SWIG_fail;
-  ecode1 = SWIG_AsVal_float(obj0, &val1);
-  if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "setCameraAngle" "', argument " "1"" of type '" "float""'");
-  } 
-  arg1 = static_cast< float >(val1);
-  ecode2 = SWIG_AsVal_float(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "setCameraAngle" "', argument " "2"" of type '" "float""'");
-  } 
-  arg2 = static_cast< float >(val2);
-  ecode3 = SWIG_AsVal_float(obj2, &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "setCameraAngle" "', argument " "3"" of type '" "float""'");
-  } 
-  arg3 = static_cast< float >(val3);
-  TBFE_Base::setCameraAngle(arg1,arg2,arg3);
+  if (!PyArg_ParseTuple(args,(char *)"O:setCameraAngle",&obj0)) SWIG_fail;
+  {
+    res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_Quaternion,  0  | 0);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "setCameraAngle" "', argument " "1"" of type '" "Quaternion""'"); 
+    }  
+    if (!argp1) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "setCameraAngle" "', argument " "1"" of type '" "Quaternion""'");
+    } else {
+      Quaternion * temp = reinterpret_cast< Quaternion * >(argp1);
+      arg1 = *temp;
+      if (SWIG_IsNewObj(res1)) delete temp;
+    }
+  }
+  TBFE_Base::setCameraAngle(arg1);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_rotateCamera(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Quaternion arg1 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:rotateCamera",&obj0)) SWIG_fail;
+  {
+    res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_Quaternion,  0  | 0);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "rotateCamera" "', argument " "1"" of type '" "Quaternion""'"); 
+    }  
+    if (!argp1) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "rotateCamera" "', argument " "1"" of type '" "Quaternion""'");
+    } else {
+      Quaternion * temp = reinterpret_cast< Quaternion * >(argp1);
+      arg1 = *temp;
+      if (SWIG_IsNewObj(res1)) delete temp;
+    }
+  }
+  TBFE_Base::rotateCamera(arg1);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -4954,50 +4974,6 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_TBFE_Logic_contextAction(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  TBFE_Logic *arg1 = (TBFE_Logic *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  int result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:TBFE_Logic_contextAction",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TBFE_Logic, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TBFE_Logic_contextAction" "', argument " "1"" of type '" "TBFE_Logic *""'"); 
-  }
-  arg1 = reinterpret_cast< TBFE_Logic * >(argp1);
-  result = (int)(arg1)->contextAction();
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_TBFE_Logic_checkTalker(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  TBFE_Logic *arg1 = (TBFE_Logic *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  int result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:TBFE_Logic_checkTalker",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TBFE_Logic, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TBFE_Logic_checkTalker" "', argument " "1"" of type '" "TBFE_Logic *""'"); 
-  }
-  arg1 = reinterpret_cast< TBFE_Logic * >(argp1);
-  result = (int)(arg1)->checkTalker();
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_TBFE_Logic_textInput(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   TBFE_Logic *arg1 = (TBFE_Logic *) 0 ;
@@ -5751,6 +5727,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"getWindowNum", _wrap_getWindowNum, METH_VARARGS, NULL},
 	 { (char *)"getCameraAngle", _wrap_getCameraAngle, METH_VARARGS, NULL},
 	 { (char *)"setCameraAngle", _wrap_setCameraAngle, METH_VARARGS, NULL},
+	 { (char *)"rotateCamera", _wrap_rotateCamera, METH_VARARGS, NULL},
 	 { (char *)"getCameraFollowOffset", _wrap_getCameraFollowOffset, METH_VARARGS, NULL},
 	 { (char *)"setCameraFollowOffset", _wrap_setCameraFollowOffset, METH_VARARGS, NULL},
 	 { (char *)"getCameraOffset", _wrap_getCameraOffset, METH_VARARGS, NULL},
@@ -5791,8 +5768,6 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"TBFE_Logic_checkKeyDown", _wrap_TBFE_Logic_checkKeyDown, METH_VARARGS, NULL},
 	 { (char *)"TBFE_Logic_setKeyDown", _wrap_TBFE_Logic_setKeyDown, METH_VARARGS, NULL},
 	 { (char *)"TBFE_Logic_playerMovement", _wrap_TBFE_Logic_playerMovement, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Logic_contextAction", _wrap_TBFE_Logic_contextAction, METH_VARARGS, NULL},
-	 { (char *)"TBFE_Logic_checkTalker", _wrap_TBFE_Logic_checkTalker, METH_VARARGS, NULL},
 	 { (char *)"TBFE_Logic_textInput", _wrap_TBFE_Logic_textInput, METH_VARARGS, NULL},
 	 { (char *)"new_TBFE_Logic", _wrap_new_TBFE_Logic, METH_VARARGS, NULL},
 	 { (char *)"delete_TBFE_Logic", _wrap_delete_TBFE_Logic, METH_VARARGS, NULL},
@@ -5848,6 +5823,7 @@ static swig_type_info _swigt__p_Map = {"_p_Map", "Map *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_ModelData = {"_p_ModelData", "ModelData *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Position = {"_p_Position", "Position *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_PositionF = {"_p_PositionF", "PositionF *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_Quaternion = {"_p_Quaternion", "Quaternion *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_SDL_Event = {"_p_SDL_Event", "SDL_Event *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_SDL_Surface = {"_p_SDL_Surface", "SDL_Surface *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_SunVector = {"_p_SunVector", "SunVector *", 0, 0, (void*)0, 0};
@@ -5874,6 +5850,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_Position,
   &_swigt__p_PositionF,
   &_swigt__p_Pulse,
+  &_swigt__p_Quaternion,
   &_swigt__p_SDL_Event,
   &_swigt__p_SDL_Surface,
   &_swigt__p_SunVector,
@@ -5900,6 +5877,7 @@ static swig_cast_info _swigc__p_Map[] = {  {&_swigt__p_Map, 0, 0, 0},{0, 0, 0, 0
 static swig_cast_info _swigc__p_ModelData[] = {  {&_swigt__p_ModelData, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Position[] = {  {&_swigt__p_Position, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_PositionF[] = {  {&_swigt__p_PositionF, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Quaternion[] = {  {&_swigt__p_Quaternion, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_SDL_Event[] = {  {&_swigt__p_SDL_Event, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_SDL_Surface[] = {  {&_swigt__p_SDL_Surface, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_SunVector[] = {  {&_swigt__p_SunVector, 0, 0, 0},{0, 0, 0, 0}};
@@ -5926,6 +5904,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_Position,
   _swigc__p_PositionF,
   _swigc__p_Pulse,
+  _swigc__p_Quaternion,
   _swigc__p_SDL_Event,
   _swigc__p_SDL_Surface,
   _swigc__p_SunVector,

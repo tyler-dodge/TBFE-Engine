@@ -13,12 +13,12 @@ int Pulse::collisionPulse()
 {
   CollisionBox * collision=getCollisionBox(0);
   PositionF direction;
-  PositionF rotation=getRotationF();
+  Quaternion rotation=getRotation();
   float size=collision->getDimensions().X;
   direction.X=0;
   direction.Y=0;
   direction.Z=size*20;
-  collision->setRotation(rotation.X,rotation.Y,rotation.Z);
+  collision->setRotation(rotation);
   //cout << rotation.dumpString() << '\n';
   direction=applyRotations(direction,rotation);
   PositionF tempDirection;
