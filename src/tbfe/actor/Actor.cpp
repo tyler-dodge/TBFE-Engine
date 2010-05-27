@@ -2,18 +2,16 @@
 Actor::Actor (int PositionX,int PositionY)
     {
       currentAction_=NULL;
-      setWalking(false);
-      setMobile(true);
       actionList_.resize(0);
-      setPosition(PositionX,0,PositionY);
+      setPositionF(PositionX,0,PositionY);
       setName("None");
       setSpeed(5);
-      setRotationF(0,0,0);
+      
       Action Stand("Stand","");
       addAction(Stand);
       setBaseAction("Stand");
     };
-PositionF Actor::getRotationF()
+Quaternion Actor::getRotation()
 {
   return rotation_;
 };
@@ -48,12 +46,14 @@ CollisionBox * Actor::getCollisionBox(int num)
     };
   return &collisionMaps_.at(num);
 };
-void Actor::setRotationF(float x,float y, float z,bool doCollisionTest)
+void Actor::setRotation(Quaternion rotations)
 {
-  PositionF oldRotation=rotation_;
-  rotation_.X=x;
-  rotation_.Y=y;
-  rotation_.Z=z;
+  rotation_=rotations;
+};
+void Actor::rotate(Quaternion rotations,bool doCollisionTest)
+{
+  Quaternion oldRotation=rotation_;
+  rotation_*=rotations;
   if (doCollisionTest)
     {
       vector<CollidedTile> collisionTest=TBFE_Base::CurrentMap.collisionTest((int)position_.X,
@@ -183,21 +183,13 @@ bool Actor::endCurrentAction()
 Actor::~Actor()
 {
 };
-void Actor::setConversation(string text)
+int Actor::changePosition(float newAngle)
 {
-  conversation_=text;
-};
-int Actor::changePosition(float newAngle,bool ChangeDirection)
-{
-  if (rotation_.Z!=newAngle && ChangeDirection==true)
-    {
-      rotation_.Z=newAngle;
-    };
   if (getCurrentAction().getName()!="Walk")
     {
       startAction("Walk");
     }
-  setWalking(true);
+  setProperty("walk","1");
   PositionF position;
   position=getPositionF();
   position.X+=(float)getSpeed()*TBFE_Base::GameSpeed*cos(newAngle*PI/180);
@@ -229,18 +221,6 @@ int Actor::changePosition(float newAngle,bool ChangeDirection)
 	    {
 	      switch(collisionTest.at(i).Passability)
 		{
-		case 199:
-		  if (ChangeDirection==true)
-		    {
-		      TBFE_Base::MainConsole.runLine("if ChangeForeground~=Nil then ChangeForeground(0) end");
-		    };
-		  break;
-		case 200:
-		  if (ChangeDirection==true)
-		    {
-		      TBFE_Base::MainConsole.runLine("if ChangeForeground~=Nil then ChangeForeground(1) end");
-		    };
-		  break;
 		case 255:
 		  position.X-=(float)getSpeed()*TBFE_Base::GameSpeed*cos(newAngle*PI/180);
 		  position.Z+=(float)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*PI/180);
@@ -260,20 +240,6 @@ int Actor::changePosition(float newAngle,bool ChangeDirection)
       return -2;
     };
   return -1;
-};
-Position Actor::getPosition()
-{
-  Position PlayerPosition;
-  PlayerPosition.X=(int)position_.X;
-  PlayerPosition.Y=(int)position_.Y;
-  PlayerPosition.Z=(int)position_.Z;
-  return PlayerPosition;
-};
-void Actor::setPosition(int x,int y,int z)
-{
-  position_.X=(float)x;
-  position_.Y=(float)y;
-  position_.Z=(float)z;
 };
 void Actor::setPositionF(float x,float y,float z)
 {
@@ -299,9 +265,9 @@ vector<int> Actor::checkActorCollision(float offsetX,float offsetY,float offsetZ
 		  offset.X=offsetX-targetPosition.X;
 		  offset.Y=offsetY-targetPosition.Y;
 		  offset.Z=offsetZ-targetPosition.Z;
-		  PositionF targetRotation=targetActor->getRotationF();
-		  targetCollision.setRotation(targetRotation.X,targetRotation.Y,targetRotation.Z);
-		  collisionMaps_.at(a).setRotation(rotation_.X,-rotation_.Y,rotation_.Z);
+		  Quaternion targetRotation=targetActor->getRotation();
+		  targetCollision.setRotation(targetRotation);
+		  collisionMaps_.at(a).setRotation(rotation_);
 		  if (collisionMaps_.at(a).checkCollision(targetCollision,offset))
 		    {
 		      collisions.push_back(i);
@@ -349,30 +315,7 @@ void Actor::setBaseAction(string newBaseAction)
     };
   baseAction_=newBaseAction;
 };
-bool Actor::getWalking()
-{
-  return isWalking_;
-};
-void Actor::setWalking(bool newWalking)
-{
-  isWalking_=newWalking;
-};
-bool Actor::getMobile()
-{
-  return isMobile_;
-};
-void Actor::setMobile(bool newMobility)
-{
-  isMobile_=newMobility;
-};
 
-Position Actor::getDirOffset()
-{
-  Position offset;
-  offset.X=0;
-  offset.Y=-1;
-  return offset;
-};
 PositionF Actor::getPositionF()
 {
   return position_;

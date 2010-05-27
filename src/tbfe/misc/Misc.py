@@ -119,6 +119,10 @@ def crossProduct(*args):
   return _Misc.crossProduct(*args)
 crossProduct = _Misc.crossProduct
 
+def getQuaternionXYZ(*args):
+  return _Misc.getQuaternionXYZ(*args)
+getQuaternionXYZ = _Misc.getQuaternionXYZ
+
 def nextSet(*args):
   return _Misc.nextSet(*args)
 nextSet = _Misc.nextSet
@@ -545,7 +549,7 @@ class Matrix(_object):
         this = _Misc.new_Matrix(*args)
         try: self.this.append(this)
         except: self.this = this
-    def glMatrix(self, *args): return _Misc.Matrix_glMatrix(self, *args)
+    def fromGlMatrix(self, *args): return _Misc.Matrix_fromGlMatrix(self, *args)
     def __imul__(self, *args): return _Misc.Matrix___imul__(self, *args)
     def __mul__(self, *args): return _Misc.Matrix___mul__(self, *args)
     def dataPointer(self): return _Misc.Matrix_dataPointer(self)

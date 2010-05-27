@@ -16,7 +16,7 @@ class Matrix
   Matrix(float,float,float); //from Euler angles
   Matrix(float,float,float,float); //from axis-angle
   Matrix operator*(Matrix);
-  void glMatrix(float *);
+  void fromGlMatrix(float *);
   void operator*=(Matrix);
   PositionF operator*(PositionF);
   float * dataPointer();

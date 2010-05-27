@@ -113,8 +113,8 @@ void TBFE_Render::finalRender(bool doFlip)
   PositionF cameraFollowOffset=TBFE_Base::getCameraFollowOffset();
   PositionF cameraAngle=TBFE_Base::getCameraAngle();
   glTranslatef(cameraFollowOffset.X,cameraFollowOffset.Y,cameraFollowOffset.Z);
-  Matrix cameraMatrix(cameraAngle.X,cameraAngle.Y,cameraAngle.Z);
-  glMultMatrixf(cameraMatrix.dataPointer());
+  Quaternion cameraRotations=getQuaternionXYZ(cameraAngle.X,cameraAngle.Y,cameraAngle.Z);
+  glMultMatrixf(cameraRotations.toMatrix().dataPointer());
   glTranslatef(cameraOffset.X,cameraOffset.Y,cameraOffset.Z);
   //glRotatef(-TBFE_Base::MainPlayer->getRotationF().Y,0,1,0);
   glTranslatef(-TBFE_Base::MainPlayer->getPositionF().X/20,0,-TBFE_Base::MainPlayer->getPositionF().Z/20);

@@ -11,7 +11,7 @@ Animation::Animation(string imageSource,string frames,float OffsetX, float Offse
   setOffset(OffsetX,OffsetY,0);
   setFinalFrame(finalFrame);
   setRate(fps);
-  setRotation(0,0,0);
+  //setRotation(0,0,0);
   do
     {
       string FrameSelection=nextSet(&frames,',');
@@ -130,13 +130,11 @@ void Animation::setRate(float newRate)
 {
   rate_=newRate;
 };
-PositionF Animation::getRotation()
+Quaternion Animation::getRotation()
 {
   return rotation_;
 };
-void Animation::setRotation(float x,float y,float z)
+void Animation::setRotation(Quaternion rotations)
 {
-  rotation_.X=x;
-  rotation_.Y=y;
-  rotation_.Z=z;
+  rotation_=rotations;
 };

@@ -3816,6 +3816,46 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_getQuaternionXYZ(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  float arg1 ;
+  float arg2 ;
+  float arg3 ;
+  float val1 ;
+  int ecode1 = 0 ;
+  float val2 ;
+  int ecode2 = 0 ;
+  float val3 ;
+  int ecode3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  Quaternion result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:getQuaternionXYZ",&obj0,&obj1,&obj2)) SWIG_fail;
+  ecode1 = SWIG_AsVal_float(obj0, &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "getQuaternionXYZ" "', argument " "1"" of type '" "float""'");
+  } 
+  arg1 = static_cast< float >(val1);
+  ecode2 = SWIG_AsVal_float(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "getQuaternionXYZ" "', argument " "2"" of type '" "float""'");
+  } 
+  arg2 = static_cast< float >(val2);
+  ecode3 = SWIG_AsVal_float(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "getQuaternionXYZ" "', argument " "3"" of type '" "float""'");
+  } 
+  arg3 = static_cast< float >(val3);
+  result = getQuaternionXYZ(arg1,arg2,arg3);
+  resultobj = SWIG_NewPointerObj((new Quaternion(static_cast< const Quaternion& >(result))), SWIGTYPE_p_Quaternion, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_loadString__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ifstream *arg1 = (ifstream *) 0 ;
@@ -8053,7 +8093,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Matrix_glMatrix(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Matrix_fromGlMatrix(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Matrix *arg1 = (Matrix *) 0 ;
   float *arg2 = (float *) 0 ;
@@ -8064,18 +8104,18 @@ SWIGINTERN PyObject *_wrap_Matrix_glMatrix(PyObject *SWIGUNUSEDPARM(self), PyObj
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OO:Matrix_glMatrix",&obj0,&obj1)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OO:Matrix_fromGlMatrix",&obj0,&obj1)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_glMatrix" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_fromGlMatrix" "', argument " "1"" of type '" "Matrix *""'"); 
   }
   arg1 = reinterpret_cast< Matrix * >(argp1);
   res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_float, 0 |  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Matrix_glMatrix" "', argument " "2"" of type '" "float *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Matrix_fromGlMatrix" "', argument " "2"" of type '" "float *""'"); 
   }
   arg2 = reinterpret_cast< float * >(argp2);
-  (arg1)->glMatrix(arg2);
+  (arg1)->fromGlMatrix(arg2);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -9423,6 +9463,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"absVal", _wrap_absVal, METH_VARARGS, NULL},
 	 { (char *)"addNormals", _wrap_addNormals, METH_VARARGS, NULL},
 	 { (char *)"crossProduct", _wrap_crossProduct, METH_VARARGS, NULL},
+	 { (char *)"getQuaternionXYZ", _wrap_getQuaternionXYZ, METH_VARARGS, NULL},
 	 { (char *)"loadString", _wrap_loadString, METH_VARARGS, NULL},
 	 { (char *)"nextSet", _wrap_nextSet, METH_VARARGS, NULL},
 	 { (char *)"nextChar", _wrap_nextChar, METH_VARARGS, NULL},
@@ -9574,7 +9615,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"delete_Quad", _wrap_delete_Quad, METH_VARARGS, NULL},
 	 { (char *)"Quad_swigregister", Quad_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_Matrix", _wrap_new_Matrix, METH_VARARGS, NULL},
-	 { (char *)"Matrix_glMatrix", _wrap_Matrix_glMatrix, METH_VARARGS, NULL},
+	 { (char *)"Matrix_fromGlMatrix", _wrap_Matrix_fromGlMatrix, METH_VARARGS, NULL},
 	 { (char *)"Matrix___imul__", _wrap_Matrix___imul__, METH_VARARGS, NULL},
 	 { (char *)"Matrix___mul__", _wrap_Matrix___mul__, METH_VARARGS, NULL},
 	 { (char *)"Matrix_dataPointer", _wrap_Matrix_dataPointer, METH_VARARGS, NULL},

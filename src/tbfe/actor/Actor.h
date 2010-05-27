@@ -23,18 +23,14 @@ class Actor
   vector<Action> actionList_;
   vector<Property> propertyList_;
   Action * getAction(string);
-  std::string conversation_;
  private:
   PositionF position_;
-  PositionF rotation_;
-  int angle_;
+  Quaternion rotation_;
   Action * currentAction_;
   float speed_;
   string scriptSource_;
   string name_;
   string baseAction_;
-  bool isWalking_;
-  bool isMobile_;
   vector<CollisionBox> collisionMaps_;
  public:  
   Actor(int,int);
@@ -51,20 +47,16 @@ class Actor
   //Changes actorPosition relatively using direction
   string getProperty(string);
   void setProperty(string,string);
-  int changePosition(float,bool);
+  int changePosition(float);
 
   vector<int> checkActorCollision(float,float,float);
-
-  Position getPosition();
-  void setPosition(int,int,int Z=0);
 
   PositionF getPositionF();
   void setPositionF(float,float,float);
 
-  PositionF getRotationF();
-  void setRotationF(float,float,float,bool doCollisionTest=true);
-  virtual string getConversation(bool)=0;
-  void setConversation(string);
+  Quaternion getRotation();
+  void setRotation(Quaternion);
+  void rotate(Quaternion,bool doCollisionTest=true);
   
   int getSpeed();
   void setSpeed(int);
@@ -77,14 +69,5 @@ class Actor
 
   string getBaseAction();
   void setBaseAction(string);
-
-  bool getWalking();
-  void setWalking(bool);
-
-  bool getMobile();
-  void setMobile(bool);
-
-  Position getDirOffset();
-
 };
 #endif

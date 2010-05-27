@@ -23,10 +23,11 @@ extern void drawNodes(ModelData *, aiVector3D,aiVector3D,aiVector3D);
 extern void applyMaterial(const struct aiMaterial *);
 extern GLuint bindImage(SDL_Surface*);
 extern float roundDown(float,int);
-extern PositionF applyRotations(PositionF,PositionF);
+extern PositionF applyRotations(PositionF,Quaternion);
 extern float convertToAngle(float,float);
 extern PositionF normalize(Quad);
 extern float absVal(float);
 extern PositionF addNormals(PositionF,PositionF);
 extern PositionF crossProduct(PositionF,PositionF);
+extern Quaternion getQuaternionXYZ(float,float,float);
 #endif
