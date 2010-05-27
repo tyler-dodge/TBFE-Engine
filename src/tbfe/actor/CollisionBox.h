@@ -21,7 +21,7 @@ class CollisionBox
   void setPosition(float,float,float);
   PositionF getCenter();
   PositionF getRotation();
-  void setRotation(float,float,float);
+  void setRotation(Quaternion);
 
   bool checkCollision(CollisionBox,PositionF,bool crossCheck=true);
   bool checkEnabled();

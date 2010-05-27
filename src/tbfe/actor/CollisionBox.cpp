@@ -3,7 +3,7 @@ CollisionBox::CollisionBox(PositionF offset,PositionF dimensions)
 {
   position_=offset;
   dimensions_=dimensions;
-  setRotation(0,0,0);
+  //setRotation(0,0,0);
   isEnabled_=true;
 };
 PositionF CollisionBox::getDimensions()
@@ -32,11 +32,9 @@ PositionF CollisionBox::getRotation()
 {
   return rotation_;
 };
-void CollisionBox::setRotation(float x,float y,float z)
+void CollisionBox::setRotation(Quaternion rotations)
 {
-  rotation_.X=x;
-  rotation_.Y=y;
-  rotation_.Z=z;
+  rotation_=rotations;
 };
 bool CollisionBox::checkLine(float x1,float y1,float x2,float y2,float checkX,float checkY,float centerX,float centerY)
 {

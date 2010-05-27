@@ -7,7 +7,7 @@ class Animation
   vector<int> frames_;
   Model model_;
   PositionF offset_;
-  PositionF rotation_;
+  Quaternion rotation_;
   float rate_;
   bool loop_;
   int finalFrame_;
@@ -35,9 +35,9 @@ class Animation
   
   PositionF getOffset();
   void setOffset(float,float,float z=0);
-  PositionF getRotation();
-  void setRotation(float,float,float);
-
+  Quaternion getRotation();
+  void rotate(Quaternion, bool doCollisionTest=true);
+  void setRotation(Quaternion);
   
   float getRate();
   void setRate(float);

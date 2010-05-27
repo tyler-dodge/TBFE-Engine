@@ -2695,13 +2695,14 @@ SWIG_Python_MustGetPtr(PyObject *obj, swig_type_info *ty, int argnum, int flags)
 #define SWIGTYPE_p_Position swig_types[10]
 #define SWIGTYPE_p_PositionF swig_types[11]
 #define SWIGTYPE_p_Pulse swig_types[12]
-#define SWIGTYPE_p_Tile swig_types[13]
-#define SWIGTYPE_p_char swig_types[14]
-#define SWIGTYPE_p_vectorT_ActorType_t swig_types[15]
-#define SWIGTYPE_p_vectorT_PositionF_t swig_types[16]
-#define SWIGTYPE_p_vectorT_int_t swig_types[17]
-static swig_type_info *swig_types[19];
-static swig_module_info swig_module = {swig_types, 18, 0, 0, 0, 0};
+#define SWIGTYPE_p_Quaternion swig_types[13]
+#define SWIGTYPE_p_Tile swig_types[14]
+#define SWIGTYPE_p_char swig_types[15]
+#define SWIGTYPE_p_vectorT_ActorType_t swig_types[16]
+#define SWIGTYPE_p_vectorT_PositionF_t swig_types[17]
+#define SWIGTYPE_p_vectorT_int_t swig_types[18]
+static swig_type_info *swig_types[20];
+static swig_module_info swig_module = {swig_types, 19, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -3684,6 +3685,37 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_new_Actor(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  Actor *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:new_Actor",&obj0,&obj1)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(obj0, &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_Actor" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_Actor" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (Actor *)new Actor(arg1,arg2);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Actor, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_Actor(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Actor *arg1 = (Actor *) 0 ;
@@ -4031,19 +4063,15 @@ SWIGINTERN PyObject *_wrap_Actor_changePosition(PyObject *SWIGUNUSEDPARM(self), 
   PyObject *resultobj = 0;
   Actor *arg1 = (Actor *) 0 ;
   float arg2 ;
-  bool arg3 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   float val2 ;
   int ecode2 = 0 ;
-  bool val3 ;
-  int ecode3 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  PyObject * obj2 = 0 ;
   int result;
   
-  if (!PyArg_ParseTuple(args,(char *)"OOO:Actor_changePosition",&obj0,&obj1,&obj2)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OO:Actor_changePosition",&obj0,&obj1)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_changePosition" "', argument " "1"" of type '" "Actor *""'"); 
@@ -4054,12 +4082,7 @@ SWIGINTERN PyObject *_wrap_Actor_changePosition(PyObject *SWIGUNUSEDPARM(self), 
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Actor_changePosition" "', argument " "2"" of type '" "float""'");
   } 
   arg2 = static_cast< float >(val2);
-  ecode3 = SWIG_AsVal_bool(obj2, &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Actor_changePosition" "', argument " "3"" of type '" "bool""'");
-  } 
-  arg3 = static_cast< bool >(val3);
-  result = (int)(arg1)->changePosition(arg2,arg3);
+  result = (int)(arg1)->changePosition(arg2);
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -4112,183 +4135,6 @@ SWIGINTERN PyObject *_wrap_Actor_checkActorCollision(PyObject *SWIGUNUSEDPARM(se
   resultobj = SWIG_NewPointerObj((new vector< int >(static_cast< const vector< int >& >(result))), SWIGTYPE_p_vectorT_int_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Actor_getPosition(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Actor *arg1 = (Actor *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  Position result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Actor_getPosition",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_getPosition" "', argument " "1"" of type '" "Actor *""'"); 
-  }
-  arg1 = reinterpret_cast< Actor * >(argp1);
-  result = (arg1)->getPosition();
-  resultobj = SWIG_NewPointerObj((new Position(static_cast< const Position& >(result))), SWIGTYPE_p_Position, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Actor_setPosition__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Actor *arg1 = (Actor *) 0 ;
-  int arg2 ;
-  int arg3 ;
-  int arg4 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  int val4 ;
-  int ecode4 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  PyObject * obj2 = 0 ;
-  PyObject * obj3 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OOOO:Actor_setPosition",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_setPosition" "', argument " "1"" of type '" "Actor *""'"); 
-  }
-  arg1 = reinterpret_cast< Actor * >(argp1);
-  ecode2 = SWIG_AsVal_int(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Actor_setPosition" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_int(obj2, &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Actor_setPosition" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  ecode4 = SWIG_AsVal_int(obj3, &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Actor_setPosition" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
-  (arg1)->setPosition(arg2,arg3,arg4);
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Actor_setPosition__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Actor *arg1 = (Actor *) 0 ;
-  int arg2 ;
-  int arg3 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  PyObject * obj2 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OOO:Actor_setPosition",&obj0,&obj1,&obj2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_setPosition" "', argument " "1"" of type '" "Actor *""'"); 
-  }
-  arg1 = reinterpret_cast< Actor * >(argp1);
-  ecode2 = SWIG_AsVal_int(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Actor_setPosition" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_int(obj2, &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Actor_setPosition" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  (arg1)->setPosition(arg2,arg3);
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Actor_setPosition(PyObject *self, PyObject *args) {
-  int argc;
-  PyObject *argv[5];
-  int ii;
-  
-  if (!PyTuple_Check(args)) SWIG_fail;
-  argc = (int)PyObject_Length(args);
-  for (ii = 0; (ii < argc) && (ii < 4); ii++) {
-    argv[ii] = PyTuple_GET_ITEM(args,ii);
-  }
-  if (argc == 3) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Actor, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        int res = SWIG_AsVal_int(argv[1], NULL);
-        _v = SWIG_CheckState(res);
-      }
-      if (_v) {
-        {
-          int res = SWIG_AsVal_int(argv[2], NULL);
-          _v = SWIG_CheckState(res);
-        }
-        if (_v) {
-          return _wrap_Actor_setPosition__SWIG_1(self, args);
-        }
-      }
-    }
-  }
-  if (argc == 4) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Actor, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        int res = SWIG_AsVal_int(argv[1], NULL);
-        _v = SWIG_CheckState(res);
-      }
-      if (_v) {
-        {
-          int res = SWIG_AsVal_int(argv[2], NULL);
-          _v = SWIG_CheckState(res);
-        }
-        if (_v) {
-          {
-            int res = SWIG_AsVal_int(argv[3], NULL);
-            _v = SWIG_CheckState(res);
-          }
-          if (_v) {
-            return _wrap_Actor_setPosition__SWIG_0(self, args);
-          }
-        }
-      }
-    }
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number of arguments for overloaded function 'Actor_setPosition'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    setPosition(Actor *,int,int,int)\n"
-    "    setPosition(Actor *,int,int)\n");
   return NULL;
 }
 
@@ -4363,78 +4209,59 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Actor_getRotationF(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Actor_getRotation(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Actor *arg1 = (Actor *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  PositionF result;
+  Quaternion result;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:Actor_getRotationF",&obj0)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"O:Actor_getRotation",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_getRotationF" "', argument " "1"" of type '" "Actor *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_getRotation" "', argument " "1"" of type '" "Actor *""'"); 
   }
   arg1 = reinterpret_cast< Actor * >(argp1);
-  result = (arg1)->getRotationF();
-  resultobj = SWIG_NewPointerObj((new PositionF(static_cast< const PositionF& >(result))), SWIGTYPE_p_PositionF, SWIG_POINTER_OWN |  0 );
+  result = (arg1)->getRotation();
+  resultobj = SWIG_NewPointerObj((new Quaternion(static_cast< const Quaternion& >(result))), SWIGTYPE_p_Quaternion, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_Actor_setRotationF__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Actor_setRotation(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Actor *arg1 = (Actor *) 0 ;
-  float arg2 ;
-  float arg3 ;
-  float arg4 ;
-  bool arg5 ;
+  Quaternion arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  float val2 ;
-  int ecode2 = 0 ;
-  float val3 ;
-  int ecode3 = 0 ;
-  float val4 ;
-  int ecode4 = 0 ;
-  bool val5 ;
-  int ecode5 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  PyObject * obj2 = 0 ;
-  PyObject * obj3 = 0 ;
-  PyObject * obj4 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OOOOO:Actor_setRotationF",&obj0,&obj1,&obj2,&obj3,&obj4)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OO:Actor_setRotation",&obj0,&obj1)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_setRotationF" "', argument " "1"" of type '" "Actor *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_setRotation" "', argument " "1"" of type '" "Actor *""'"); 
   }
   arg1 = reinterpret_cast< Actor * >(argp1);
-  ecode2 = SWIG_AsVal_float(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Actor_setRotationF" "', argument " "2"" of type '" "float""'");
-  } 
-  arg2 = static_cast< float >(val2);
-  ecode3 = SWIG_AsVal_float(obj2, &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Actor_setRotationF" "', argument " "3"" of type '" "float""'");
-  } 
-  arg3 = static_cast< float >(val3);
-  ecode4 = SWIG_AsVal_float(obj3, &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Actor_setRotationF" "', argument " "4"" of type '" "float""'");
-  } 
-  arg4 = static_cast< float >(val4);
-  ecode5 = SWIG_AsVal_bool(obj4, &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "Actor_setRotationF" "', argument " "5"" of type '" "bool""'");
-  } 
-  arg5 = static_cast< bool >(val5);
-  (arg1)->setRotationF(arg2,arg3,arg4,arg5);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Quaternion,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Actor_setRotation" "', argument " "2"" of type '" "Quaternion""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Actor_setRotation" "', argument " "2"" of type '" "Quaternion""'");
+    } else {
+      Quaternion * temp = reinterpret_cast< Quaternion * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  (arg1)->setRotation(arg2);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -4442,47 +4269,46 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Actor_setRotationF__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Actor_rotate__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Actor *arg1 = (Actor *) 0 ;
-  float arg2 ;
-  float arg3 ;
-  float arg4 ;
+  Quaternion arg2 ;
+  bool arg3 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  float val2 ;
-  int ecode2 = 0 ;
-  float val3 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  bool val3 ;
   int ecode3 = 0 ;
-  float val4 ;
-  int ecode4 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
-  PyObject * obj3 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OOOO:Actor_setRotationF",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OOO:Actor_rotate",&obj0,&obj1,&obj2)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_setRotationF" "', argument " "1"" of type '" "Actor *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_rotate" "', argument " "1"" of type '" "Actor *""'"); 
   }
   arg1 = reinterpret_cast< Actor * >(argp1);
-  ecode2 = SWIG_AsVal_float(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Actor_setRotationF" "', argument " "2"" of type '" "float""'");
-  } 
-  arg2 = static_cast< float >(val2);
-  ecode3 = SWIG_AsVal_float(obj2, &val3);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Quaternion,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Actor_rotate" "', argument " "2"" of type '" "Quaternion""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Actor_rotate" "', argument " "2"" of type '" "Quaternion""'");
+    } else {
+      Quaternion * temp = reinterpret_cast< Quaternion * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  ecode3 = SWIG_AsVal_bool(obj2, &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Actor_setRotationF" "', argument " "3"" of type '" "float""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Actor_rotate" "', argument " "3"" of type '" "bool""'");
   } 
-  arg3 = static_cast< float >(val3);
-  ecode4 = SWIG_AsVal_float(obj3, &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Actor_setRotationF" "', argument " "4"" of type '" "float""'");
-  } 
-  arg4 = static_cast< float >(val4);
-  (arg1)->setRotationF(arg2,arg3,arg4);
+  arg3 = static_cast< bool >(val3);
+  (arg1)->rotate(arg2,arg3);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -4490,145 +4316,92 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Actor_setRotationF(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_Actor_rotate__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Actor *arg1 = (Actor *) 0 ;
+  Quaternion arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Actor_rotate",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_rotate" "', argument " "1"" of type '" "Actor *""'"); 
+  }
+  arg1 = reinterpret_cast< Actor * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Quaternion,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Actor_rotate" "', argument " "2"" of type '" "Quaternion""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Actor_rotate" "', argument " "2"" of type '" "Quaternion""'");
+    } else {
+      Quaternion * temp = reinterpret_cast< Quaternion * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  (arg1)->rotate(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Actor_rotate(PyObject *self, PyObject *args) {
   int argc;
-  PyObject *argv[6];
+  PyObject *argv[4];
   int ii;
   
   if (!PyTuple_Check(args)) SWIG_fail;
   argc = (int)PyObject_Length(args);
-  for (ii = 0; (ii < argc) && (ii < 5); ii++) {
+  for (ii = 0; (ii < argc) && (ii < 3); ii++) {
     argv[ii] = PyTuple_GET_ITEM(args,ii);
   }
-  if (argc == 4) {
+  if (argc == 2) {
     int _v;
     void *vptr = 0;
     int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Actor, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
-      {
-        int res = SWIG_AsVal_float(argv[1], NULL);
-        _v = SWIG_CheckState(res);
-      }
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_Quaternion, 0);
+      _v = SWIG_CheckState(res);
       if (_v) {
-        {
-          int res = SWIG_AsVal_float(argv[2], NULL);
-          _v = SWIG_CheckState(res);
-        }
-        if (_v) {
-          {
-            int res = SWIG_AsVal_float(argv[3], NULL);
-            _v = SWIG_CheckState(res);
-          }
-          if (_v) {
-            return _wrap_Actor_setRotationF__SWIG_1(self, args);
-          }
-        }
+        return _wrap_Actor_rotate__SWIG_1(self, args);
       }
     }
   }
-  if (argc == 5) {
+  if (argc == 3) {
     int _v;
     void *vptr = 0;
     int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Actor, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
-      {
-        int res = SWIG_AsVal_float(argv[1], NULL);
-        _v = SWIG_CheckState(res);
-      }
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_Quaternion, 0);
+      _v = SWIG_CheckState(res);
       if (_v) {
         {
-          int res = SWIG_AsVal_float(argv[2], NULL);
+          int res = SWIG_AsVal_bool(argv[2], NULL);
           _v = SWIG_CheckState(res);
         }
         if (_v) {
-          {
-            int res = SWIG_AsVal_float(argv[3], NULL);
-            _v = SWIG_CheckState(res);
-          }
-          if (_v) {
-            {
-              int res = SWIG_AsVal_bool(argv[4], NULL);
-              _v = SWIG_CheckState(res);
-            }
-            if (_v) {
-              return _wrap_Actor_setRotationF__SWIG_0(self, args);
-            }
-          }
+          return _wrap_Actor_rotate__SWIG_0(self, args);
         }
       }
     }
   }
   
 fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number of arguments for overloaded function 'Actor_setRotationF'.\n"
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number of arguments for overloaded function 'Actor_rotate'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    setRotationF(Actor *,float,float,float,bool)\n"
-    "    setRotationF(Actor *,float,float,float)\n");
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Actor_getConversation(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Actor *arg1 = (Actor *) 0 ;
-  bool arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  bool val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  std::string result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Actor_getConversation",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_getConversation" "', argument " "1"" of type '" "Actor *""'"); 
-  }
-  arg1 = reinterpret_cast< Actor * >(argp1);
-  ecode2 = SWIG_AsVal_bool(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Actor_getConversation" "', argument " "2"" of type '" "bool""'");
-  } 
-  arg2 = static_cast< bool >(val2);
-  result = (arg1)->getConversation(arg2);
-  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Actor_setConversation(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Actor *arg1 = (Actor *) 0 ;
-  std::string arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Actor_setConversation",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_setConversation" "', argument " "1"" of type '" "Actor *""'"); 
-  }
-  arg1 = reinterpret_cast< Actor * >(argp1);
-  {
-    std::string *ptr = (std::string *)0;
-    int res = SWIG_AsPtr_std_string(obj1, &ptr);
-    if (!SWIG_IsOK(res) || !ptr) {
-      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "Actor_setConversation" "', argument " "2"" of type '" "std::string""'"); 
-    }
-    arg2 = *ptr;
-    if (SWIG_IsNewObj(res)) delete ptr;
-  }
-  (arg1)->setConversation(arg2);
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
+    "    rotate(Actor *,Quaternion,bool)\n"
+    "    rotate(Actor *,Quaternion)\n");
   return NULL;
 }
 
@@ -4847,132 +4620,6 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Actor_getWalking(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Actor *arg1 = (Actor *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  bool result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Actor_getWalking",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_getWalking" "', argument " "1"" of type '" "Actor *""'"); 
-  }
-  arg1 = reinterpret_cast< Actor * >(argp1);
-  result = (bool)(arg1)->getWalking();
-  resultobj = SWIG_From_bool(static_cast< bool >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Actor_setWalking(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Actor *arg1 = (Actor *) 0 ;
-  bool arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  bool val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Actor_setWalking",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_setWalking" "', argument " "1"" of type '" "Actor *""'"); 
-  }
-  arg1 = reinterpret_cast< Actor * >(argp1);
-  ecode2 = SWIG_AsVal_bool(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Actor_setWalking" "', argument " "2"" of type '" "bool""'");
-  } 
-  arg2 = static_cast< bool >(val2);
-  (arg1)->setWalking(arg2);
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Actor_getMobile(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Actor *arg1 = (Actor *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  bool result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Actor_getMobile",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_getMobile" "', argument " "1"" of type '" "Actor *""'"); 
-  }
-  arg1 = reinterpret_cast< Actor * >(argp1);
-  result = (bool)(arg1)->getMobile();
-  resultobj = SWIG_From_bool(static_cast< bool >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Actor_setMobile(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Actor *arg1 = (Actor *) 0 ;
-  bool arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  bool val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Actor_setMobile",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_setMobile" "', argument " "1"" of type '" "Actor *""'"); 
-  }
-  arg1 = reinterpret_cast< Actor * >(argp1);
-  ecode2 = SWIG_AsVal_bool(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Actor_setMobile" "', argument " "2"" of type '" "bool""'");
-  } 
-  arg2 = static_cast< bool >(val2);
-  (arg1)->setMobile(arg2);
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Actor_getDirOffset(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Actor *arg1 = (Actor *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  Position result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Actor_getDirOffset",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Actor_getDirOffset" "', argument " "1"" of type '" "Actor *""'"); 
-  }
-  arg1 = reinterpret_cast< Actor * >(argp1);
-  result = (arg1)->getDirOffset();
-  resultobj = SWIG_NewPointerObj((new Position(static_cast< const Position& >(result))), SWIGTYPE_p_Position, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *Actor_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
@@ -5099,37 +4746,6 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Npc_getConversation(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Npc *arg1 = (Npc *) 0 ;
-  bool arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  bool val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  std::string result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Npc_getConversation",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Npc, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Npc_getConversation" "', argument " "1"" of type '" "Npc *""'"); 
-  }
-  arg1 = reinterpret_cast< Npc * >(argp1);
-  ecode2 = SWIG_AsVal_bool(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Npc_getConversation" "', argument " "2"" of type '" "bool""'");
-  } 
-  arg2 = static_cast< bool >(val2);
-  result = (arg1)->getConversation(arg2);
-  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *Npc_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
@@ -5200,37 +4816,6 @@ SWIGINTERN PyObject *_wrap_delete_NonLiving(PyObject *SWIGUNUSEDPARM(self), PyOb
   arg1 = reinterpret_cast< NonLiving * >(argp1);
   delete arg1;
   resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_NonLiving_getConversation(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  NonLiving *arg1 = (NonLiving *) 0 ;
-  bool arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  bool val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  std::string result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:NonLiving_getConversation",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NonLiving, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NonLiving_getConversation" "', argument " "1"" of type '" "NonLiving *""'"); 
-  }
-  arg1 = reinterpret_cast< NonLiving * >(argp1);
-  ecode2 = SWIG_AsVal_bool(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "NonLiving_getConversation" "', argument " "2"" of type '" "bool""'");
-  } 
-  arg2 = static_cast< bool >(val2);
-  result = (arg1)->getConversation(arg2);
-  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
   return resultobj;
 fail:
   return NULL;
@@ -7934,7 +7519,7 @@ SWIGINTERN PyObject *_wrap_Animation_getRotation(PyObject *SWIGUNUSEDPARM(self),
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  PositionF result;
+  Quaternion result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Animation_getRotation",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Animation, 0 |  0 );
@@ -7943,9 +7528,146 @@ SWIGINTERN PyObject *_wrap_Animation_getRotation(PyObject *SWIGUNUSEDPARM(self),
   }
   arg1 = reinterpret_cast< Animation * >(argp1);
   result = (arg1)->getRotation();
-  resultobj = SWIG_NewPointerObj((new PositionF(static_cast< const PositionF& >(result))), SWIGTYPE_p_PositionF, SWIG_POINTER_OWN |  0 );
+  resultobj = SWIG_NewPointerObj((new Quaternion(static_cast< const Quaternion& >(result))), SWIGTYPE_p_Quaternion, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Animation_rotate__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Animation *arg1 = (Animation *) 0 ;
+  Quaternion arg2 ;
+  bool arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  bool val3 ;
+  int ecode3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:Animation_rotate",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Animation, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Animation_rotate" "', argument " "1"" of type '" "Animation *""'"); 
+  }
+  arg1 = reinterpret_cast< Animation * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Quaternion,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Animation_rotate" "', argument " "2"" of type '" "Quaternion""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Animation_rotate" "', argument " "2"" of type '" "Quaternion""'");
+    } else {
+      Quaternion * temp = reinterpret_cast< Quaternion * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  ecode3 = SWIG_AsVal_bool(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Animation_rotate" "', argument " "3"" of type '" "bool""'");
+  } 
+  arg3 = static_cast< bool >(val3);
+  (arg1)->rotate(arg2,arg3);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Animation_rotate__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Animation *arg1 = (Animation *) 0 ;
+  Quaternion arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Animation_rotate",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Animation, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Animation_rotate" "', argument " "1"" of type '" "Animation *""'"); 
+  }
+  arg1 = reinterpret_cast< Animation * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Quaternion,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Animation_rotate" "', argument " "2"" of type '" "Quaternion""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Animation_rotate" "', argument " "2"" of type '" "Quaternion""'");
+    } else {
+      Quaternion * temp = reinterpret_cast< Quaternion * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  (arg1)->rotate(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Animation_rotate(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[4];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = (int)PyObject_Length(args);
+  for (ii = 0; (ii < argc) && (ii < 3); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Animation, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_Quaternion, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_Animation_rotate__SWIG_1(self, args);
+      }
+    }
+  }
+  if (argc == 3) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Animation, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_Quaternion, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        {
+          int res = SWIG_AsVal_bool(argv[2], NULL);
+          _v = SWIG_CheckState(res);
+        }
+        if (_v) {
+          return _wrap_Animation_rotate__SWIG_0(self, args);
+        }
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number of arguments for overloaded function 'Animation_rotate'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    rotate(Animation *,Quaternion,bool)\n"
+    "    rotate(Animation *,Quaternion)\n");
   return NULL;
 }
 
@@ -7953,44 +7675,34 @@ fail:
 SWIGINTERN PyObject *_wrap_Animation_setRotation(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Animation *arg1 = (Animation *) 0 ;
-  float arg2 ;
-  float arg3 ;
-  float arg4 ;
+  Quaternion arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  float val2 ;
-  int ecode2 = 0 ;
-  float val3 ;
-  int ecode3 = 0 ;
-  float val4 ;
-  int ecode4 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  PyObject * obj2 = 0 ;
-  PyObject * obj3 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OOOO:Animation_setRotation",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OO:Animation_setRotation",&obj0,&obj1)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Animation, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Animation_setRotation" "', argument " "1"" of type '" "Animation *""'"); 
   }
   arg1 = reinterpret_cast< Animation * >(argp1);
-  ecode2 = SWIG_AsVal_float(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Animation_setRotation" "', argument " "2"" of type '" "float""'");
-  } 
-  arg2 = static_cast< float >(val2);
-  ecode3 = SWIG_AsVal_float(obj2, &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Animation_setRotation" "', argument " "3"" of type '" "float""'");
-  } 
-  arg3 = static_cast< float >(val3);
-  ecode4 = SWIG_AsVal_float(obj3, &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Animation_setRotation" "', argument " "4"" of type '" "float""'");
-  } 
-  arg4 = static_cast< float >(val4);
-  (arg1)->setRotation(arg2,arg3,arg4);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Quaternion,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Animation_setRotation" "', argument " "2"" of type '" "Quaternion""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Animation_setRotation" "', argument " "2"" of type '" "Quaternion""'");
+    } else {
+      Quaternion * temp = reinterpret_cast< Quaternion * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  (arg1)->setRotation(arg2);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -8462,44 +8174,34 @@ fail:
 SWIGINTERN PyObject *_wrap_CollisionBox_setRotation(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   CollisionBox *arg1 = (CollisionBox *) 0 ;
-  float arg2 ;
-  float arg3 ;
-  float arg4 ;
+  Quaternion arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  float val2 ;
-  int ecode2 = 0 ;
-  float val3 ;
-  int ecode3 = 0 ;
-  float val4 ;
-  int ecode4 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  PyObject * obj2 = 0 ;
-  PyObject * obj3 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OOOO:CollisionBox_setRotation",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OO:CollisionBox_setRotation",&obj0,&obj1)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CollisionBox, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CollisionBox_setRotation" "', argument " "1"" of type '" "CollisionBox *""'"); 
   }
   arg1 = reinterpret_cast< CollisionBox * >(argp1);
-  ecode2 = SWIG_AsVal_float(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CollisionBox_setRotation" "', argument " "2"" of type '" "float""'");
-  } 
-  arg2 = static_cast< float >(val2);
-  ecode3 = SWIG_AsVal_float(obj2, &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "CollisionBox_setRotation" "', argument " "3"" of type '" "float""'");
-  } 
-  arg3 = static_cast< float >(val3);
-  ecode4 = SWIG_AsVal_float(obj3, &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "CollisionBox_setRotation" "', argument " "4"" of type '" "float""'");
-  } 
-  arg4 = static_cast< float >(val4);
-  (arg1)->setRotation(arg2,arg3,arg4);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Quaternion,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CollisionBox_setRotation" "', argument " "2"" of type '" "Quaternion""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CollisionBox_setRotation" "', argument " "2"" of type '" "Quaternion""'");
+    } else {
+      Quaternion * temp = reinterpret_cast< Quaternion * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  (arg1)->setRotation(arg2);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -8772,7 +8474,7 @@ SWIGINTERN PyObject *_wrap_new_Pulse(PyObject *SWIGUNUSEDPARM(self), PyObject *a
   PyObject *resultobj = 0;
   PositionF arg1 ;
   float arg2 ;
-  PositionF arg3 ;
+  Quaternion arg3 ;
   float arg4 ;
   void *argp1 ;
   int res1 = 0 ;
@@ -8808,14 +8510,14 @@ SWIGINTERN PyObject *_wrap_new_Pulse(PyObject *SWIGUNUSEDPARM(self), PyObject *a
   } 
   arg2 = static_cast< float >(val2);
   {
-    res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_PositionF,  0  | 0);
+    res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_Quaternion,  0  | 0);
     if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_Pulse" "', argument " "3"" of type '" "PositionF""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_Pulse" "', argument " "3"" of type '" "Quaternion""'"); 
     }  
     if (!argp3) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Pulse" "', argument " "3"" of type '" "PositionF""'");
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Pulse" "', argument " "3"" of type '" "Quaternion""'");
     } else {
-      PositionF * temp = reinterpret_cast< PositionF * >(argp3);
+      Quaternion * temp = reinterpret_cast< Quaternion * >(argp3);
       arg3 = *temp;
       if (SWIG_IsNewObj(res3)) delete temp;
     }
@@ -8876,37 +8578,6 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Pulse_getConversation(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Pulse *arg1 = (Pulse *) 0 ;
-  bool arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  bool val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  std::string result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Pulse_getConversation",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Pulse, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Pulse_getConversation" "', argument " "1"" of type '" "Pulse *""'"); 
-  }
-  arg1 = reinterpret_cast< Pulse * >(argp1);
-  ecode2 = SWIG_AsVal_bool(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Pulse_getConversation" "', argument " "2"" of type '" "bool""'");
-  } 
-  arg2 = static_cast< bool >(val2);
-  result = (arg1)->getConversation(arg2);
-  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *Pulse_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
@@ -8922,6 +8593,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"getActorType", _wrap_getActorType, METH_VARARGS, NULL},
 	 { (char *)"deleteCreatedActorList", _wrap_deleteCreatedActorList, METH_VARARGS, NULL},
 	 { (char *)"getActor", _wrap_getActor, METH_VARARGS, NULL},
+	 { (char *)"new_Actor", _wrap_new_Actor, METH_VARARGS, NULL},
 	 { (char *)"delete_Actor", _wrap_delete_Actor, METH_VARARGS, NULL},
 	 { (char *)"Actor_startAction", _wrap_Actor_startAction, METH_VARARGS, NULL},
 	 { (char *)"Actor_endCurrentAction", _wrap_Actor_endCurrentAction, METH_VARARGS, NULL},
@@ -8935,14 +8607,11 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Actor_setProperty", _wrap_Actor_setProperty, METH_VARARGS, NULL},
 	 { (char *)"Actor_changePosition", _wrap_Actor_changePosition, METH_VARARGS, NULL},
 	 { (char *)"Actor_checkActorCollision", _wrap_Actor_checkActorCollision, METH_VARARGS, NULL},
-	 { (char *)"Actor_getPosition", _wrap_Actor_getPosition, METH_VARARGS, NULL},
-	 { (char *)"Actor_setPosition", _wrap_Actor_setPosition, METH_VARARGS, NULL},
 	 { (char *)"Actor_getPositionF", _wrap_Actor_getPositionF, METH_VARARGS, NULL},
 	 { (char *)"Actor_setPositionF", _wrap_Actor_setPositionF, METH_VARARGS, NULL},
-	 { (char *)"Actor_getRotationF", _wrap_Actor_getRotationF, METH_VARARGS, NULL},
-	 { (char *)"Actor_setRotationF", _wrap_Actor_setRotationF, METH_VARARGS, NULL},
-	 { (char *)"Actor_getConversation", _wrap_Actor_getConversation, METH_VARARGS, NULL},
-	 { (char *)"Actor_setConversation", _wrap_Actor_setConversation, METH_VARARGS, NULL},
+	 { (char *)"Actor_getRotation", _wrap_Actor_getRotation, METH_VARARGS, NULL},
+	 { (char *)"Actor_setRotation", _wrap_Actor_setRotation, METH_VARARGS, NULL},
+	 { (char *)"Actor_rotate", _wrap_Actor_rotate, METH_VARARGS, NULL},
 	 { (char *)"Actor_getSpeed", _wrap_Actor_getSpeed, METH_VARARGS, NULL},
 	 { (char *)"Actor_setSpeed", _wrap_Actor_setSpeed, METH_VARARGS, NULL},
 	 { (char *)"Actor_getScriptSource", _wrap_Actor_getScriptSource, METH_VARARGS, NULL},
@@ -8951,19 +8620,12 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Actor_setName", _wrap_Actor_setName, METH_VARARGS, NULL},
 	 { (char *)"Actor_getBaseAction", _wrap_Actor_getBaseAction, METH_VARARGS, NULL},
 	 { (char *)"Actor_setBaseAction", _wrap_Actor_setBaseAction, METH_VARARGS, NULL},
-	 { (char *)"Actor_getWalking", _wrap_Actor_getWalking, METH_VARARGS, NULL},
-	 { (char *)"Actor_setWalking", _wrap_Actor_setWalking, METH_VARARGS, NULL},
-	 { (char *)"Actor_getMobile", _wrap_Actor_getMobile, METH_VARARGS, NULL},
-	 { (char *)"Actor_setMobile", _wrap_Actor_setMobile, METH_VARARGS, NULL},
-	 { (char *)"Actor_getDirOffset", _wrap_Actor_getDirOffset, METH_VARARGS, NULL},
 	 { (char *)"Actor_swigregister", Actor_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_Npc", _wrap_new_Npc, METH_VARARGS, NULL},
 	 { (char *)"delete_Npc", _wrap_delete_Npc, METH_VARARGS, NULL},
-	 { (char *)"Npc_getConversation", _wrap_Npc_getConversation, METH_VARARGS, NULL},
 	 { (char *)"Npc_swigregister", Npc_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_NonLiving", _wrap_new_NonLiving, METH_VARARGS, NULL},
 	 { (char *)"delete_NonLiving", _wrap_delete_NonLiving, METH_VARARGS, NULL},
-	 { (char *)"NonLiving_getConversation", _wrap_NonLiving_getConversation, METH_VARARGS, NULL},
 	 { (char *)"NonLiving_swigregister", NonLiving_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_Inventory", _wrap_new_Inventory, METH_VARARGS, NULL},
 	 { (char *)"Inventory_get", _wrap_Inventory_get, METH_VARARGS, NULL},
@@ -9019,6 +8681,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Animation_getOffset", _wrap_Animation_getOffset, METH_VARARGS, NULL},
 	 { (char *)"Animation_setOffset", _wrap_Animation_setOffset, METH_VARARGS, NULL},
 	 { (char *)"Animation_getRotation", _wrap_Animation_getRotation, METH_VARARGS, NULL},
+	 { (char *)"Animation_rotate", _wrap_Animation_rotate, METH_VARARGS, NULL},
 	 { (char *)"Animation_setRotation", _wrap_Animation_setRotation, METH_VARARGS, NULL},
 	 { (char *)"Animation_getRate", _wrap_Animation_getRate, METH_VARARGS, NULL},
 	 { (char *)"Animation_setRate", _wrap_Animation_setRate, METH_VARARGS, NULL},
@@ -9042,7 +8705,6 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_Pulse", _wrap_new_Pulse, METH_VARARGS, NULL},
 	 { (char *)"delete_Pulse", _wrap_delete_Pulse, METH_VARARGS, NULL},
 	 { (char *)"Pulse_collisionPulse", _wrap_Pulse_collisionPulse, METH_VARARGS, NULL},
-	 { (char *)"Pulse_getConversation", _wrap_Pulse_getConversation, METH_VARARGS, NULL},
 	 { (char *)"Pulse_swigregister", Pulse_swigregister, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
@@ -9072,6 +8734,7 @@ static swig_type_info _swigt__p_Npc = {"_p_Npc", "Npc *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Position = {"_p_Position", "Position *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_PositionF = {"_p_PositionF", "PositionF *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Pulse = {"_p_Pulse", "Pulse *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_Quaternion = {"_p_Quaternion", "Quaternion *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Tile = {"_p_Tile", "Tile *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_vectorT_ActorType_t = {"_p_vectorT_ActorType_t", "vector< ActorType > *", 0, 0, (void*)0, 0};
@@ -9092,6 +8755,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_Position,
   &_swigt__p_PositionF,
   &_swigt__p_Pulse,
+  &_swigt__p_Quaternion,
   &_swigt__p_Tile,
   &_swigt__p_char,
   &_swigt__p_vectorT_ActorType_t,
@@ -9112,6 +8776,7 @@ static swig_cast_info _swigc__p_Npc[] = {  {&_swigt__p_Npc, 0, 0, 0},{0, 0, 0, 0
 static swig_cast_info _swigc__p_Position[] = {  {&_swigt__p_Position, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_PositionF[] = {  {&_swigt__p_PositionF, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Pulse[] = {  {&_swigt__p_Pulse, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Quaternion[] = {  {&_swigt__p_Quaternion, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Tile[] = {  {&_swigt__p_Tile, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_vectorT_ActorType_t[] = {  {&_swigt__p_vectorT_ActorType_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -9132,6 +8797,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_Position,
   _swigc__p_PositionF,
   _swigc__p_Pulse,
+  _swigc__p_Quaternion,
   _swigc__p_Tile,
   _swigc__p_char,
   _swigc__p_vectorT_ActorType_t,

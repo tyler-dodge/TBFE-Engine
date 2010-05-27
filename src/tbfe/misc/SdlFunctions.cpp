@@ -290,8 +290,8 @@ void drawNodes(ModelData * model, aiVector3D position,aiVector3D rotation,aiVect
   glPushMatrix();
   //glTranslatef(position[0],position[1],-position[2]);
   glTranslatef(position[0],position[1],position[2]);
-  Matrix rotMatrix(rotation.x,rotation.y,rotation.z);
-  glMultMatrixf(rotMatrix.dataPointer());
+  Quaternion rotationQuat=getQuaternionXYZ(rotation.x,rotation.y,rotation.z);
+  glMultMatrixf(rotationQuat.toMatrix().dataPointer());
   for (int i=0;i<model->meshes.size();i++)
     {
       glPushMatrix();
@@ -322,7 +322,7 @@ float roundDown(float num,int place)
   newNum/=pow(10,place);
   return newNum;
 };
-PositionF applyRotations(PositionF position,PositionF rotation)
+PositionF applyRotations(PositionF position,Quaternion rotation)
 {
   Matrix rotMatrix(rotation.X,rotation.Y,rotation.Z);
   Matrix idMatrix(1,0,0,0,
@@ -415,4 +415,15 @@ PositionF crossProduct(PositionF v1,PositionF v2)
   final.Y=v1.Z*v2.X-v2.Z*v1.X;
   final.Z=v1.X*v2.Y-v2.X*v1.Y;
   return final;
+};
+Quaternion getQuaternionXYZ(float x,float y,float z)
+{
+  x*=DEG_RAD;
+  y*=DEG_RAD;
+  z*=DEG_RAD;
+  Quaternion quatX(1,0,0,x);
+  Quaternion quatY(0,1,0,y);
+  Quaternion quatZ(0,0,1,z);
+  quatX=quatX*quatY*quatZ;
+  return quatX;
 };

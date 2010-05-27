@@ -1,9 +1,9 @@
 #include "Pulse.h"
-Pulse::Pulse(PositionF position, float size, PositionF angle, float distance):Actor(position.X,position.Z)
+Pulse::Pulse(PositionF position, float size, Quaternion angle, float distance):Actor(position.X,position.Z)
 {
   addCollisionBox(PositionF(0.1f,0.0f,0.0f),PositionF(size,size,size));
-  setPosition(position.X,position.Y,position.Z);
-  setRotationF(angle.X,angle.Y,angle.Z);
+  setPositionF(position.X,position.Y,position.Z);
+  setRotation(angle);
   distance_=distance;
 };
 Pulse::~Pulse()
@@ -61,7 +61,4 @@ int Pulse::collisionPulse()
 	};
     };
   return -1;
-};
-string Pulse::getConversation(bool PlayerCheck)
-{
 };

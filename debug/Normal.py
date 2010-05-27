@@ -50,7 +50,7 @@ while action!=Misc.QUIT:
     mouseCursor.updatePulse()
     pulseRotation=mouseCursor.pulse.getRotationF()
     #pulsePosition=mouseCursor.pulse.getPositionF()
-    uiFrameRate.getElement("lblRate").setProperty("text",Tbfe.GetMainPlayer().getRotationF().dumpString()+pulseRotation.dumpString())
+    uiFrameRate.getElement("lblRate").setProperty("text",Tbfe.getCameraAngle().dumpString()+pulseRotation.dumpString())
     pulseActor.setPositionF(pulsePosition.X,pulsePosition.Y,pulsePosition.Z)
     pulseActor.setRotationF(pulseRotation.X,-pulseRotation.Y,pulseRotation.Z,False)
     #mousePosition=mouseCursor.get3dPointer()

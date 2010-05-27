@@ -10,6 +10,7 @@ public:
   Quaternion(float,float,float,float);
   Matrix toMatrix();
   Quaternion operator*(Quaternion);
+  void operator*=(Quaternion);
   //PositionF operator*(PositionF);
   //Quaternion conj();
   void normalize();

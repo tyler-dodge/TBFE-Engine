@@ -8,6 +8,5 @@ class NonLiving:public Actor
  public:
   NonLiving(int, int,ActorType);
   ~NonLiving();
-  string getConversation(bool);
 };
 #endif

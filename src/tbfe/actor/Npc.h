@@ -14,6 +14,5 @@ class Npc:public Actor
   
   ~Npc();
   //returns conversation
-  string getConversation(bool);
 };
 #endif
