@@ -3,7 +3,8 @@ import math
 import Init
 import Cursor
 def initCamera():
-    Tbfe.setCameraAngle(0,90,0)
+    print("init")
+    #Tbfe.setCameraAngle(Misc.Quaternion(0,1,0,90))
 def mouseCamera(MouseMovement,cursor):
     if Init.getEngine().getShowMouse()!=True:
         cursorPosition=cursor.getScreenPosition()

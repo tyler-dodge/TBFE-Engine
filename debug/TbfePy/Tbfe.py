@@ -150,6 +150,10 @@ def setCameraAngle(*args):
   return _TBFE.setCameraAngle(*args)
 setCameraAngle = _TBFE.setCameraAngle
 
+def rotateCamera(*args):
+  return _TBFE.rotateCamera(*args)
+rotateCamera = _TBFE.rotateCamera
+
 def getCameraFollowOffset():
   return _TBFE.getCameraFollowOffset()
 getCameraFollowOffset = _TBFE.getCameraFollowOffset
@@ -229,8 +233,6 @@ class TBFE_Logic(_object):
     def checkKeyDown(self, *args): return _TBFE.TBFE_Logic_checkKeyDown(self, *args)
     def setKeyDown(self, *args): return _TBFE.TBFE_Logic_setKeyDown(self, *args)
     def playerMovement(self): return _TBFE.TBFE_Logic_playerMovement(self)
-    def contextAction(self): return _TBFE.TBFE_Logic_contextAction(self)
-    def checkTalker(self): return _TBFE.TBFE_Logic_checkTalker(self)
     def textInput(self, *args): return _TBFE.TBFE_Logic_textInput(self, *args)
     def __init__(self): 
         this = _TBFE.new_TBFE_Logic()

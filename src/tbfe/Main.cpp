@@ -361,23 +361,6 @@ Direction TBFE::runEngine()
     {
       logic_.playerMovement();
     };
-  Position currentPosition=TBFE_Base::MainPlayer->getPosition();
-  if (currentPosition.X<0)
-    {
-      return LEFT;
-    }
-  else if (currentPosition.Y<0)
-    {
-      return UP;
-    }
-  else if (currentPosition.X>mapDimensions.X*TBFE_Base::TileSize)
-    {
-      return RIGHT;
-    }
-  else if (currentPosition.Y>mapDimensions.Y*TBFE_Base::TileSize)
-    {
-      return DOWN;
-    };
   renderWindow_.finalRender(true);  
   
   if (frameRate_.GetTicks() > 1000)
@@ -422,7 +405,7 @@ PositionF TBFE::getCameraPosition()
 {
   PositionF cameraOffset=TBFE_Base::getCameraOffset()*20;
   PositionF cameraFollowOffset=TBFE_Base::getCameraFollowOffset()*20;
-  PositionF cameraAngle=TBFE_Base::getCameraAngle();
+  Quaternion cameraAngle=TBFE_Base::getCameraAngle();
   PositionF tempAngle=(applyRotations(cameraFollowOffset,cameraAngle)+cameraOffset);
   tempAngle=TBFE_Base::MainPlayer->getPositionF()-tempAngle;
   return tempAngle*-1;

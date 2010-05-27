@@ -19,7 +19,7 @@ extern SDL_Surface *loadImage(std::string filename,bool UseA=true);
 extern void applyImage(int,int,SDL_Surface*,SDL_Rect*);
 extern Uint32 getPixel( SDL_Surface *, int, int);
 extern ModelData * loadModel(string);
-extern void drawNodes(ModelData *, aiVector3D,aiVector3D,aiVector3D);
+extern void drawNodes(ModelData *, aiVector3D,Quaternion,aiVector3D);
 extern void applyMaterial(const struct aiMaterial *);
 extern GLuint bindImage(SDL_Surface*);
 extern float roundDown(float,int);

@@ -16,8 +16,6 @@ class TBFE_Logic
   bool checkKeyDown(int);
   void setKeyDown(int,bool);
   void playerMovement();
-  int contextAction();
-  int checkTalker();
   char textInput(int,bool);
   //KeyUps
   TBFE_Logic();

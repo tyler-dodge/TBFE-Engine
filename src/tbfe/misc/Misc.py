@@ -583,6 +583,7 @@ class Quaternion(_object):
         try: self.this.append(this)
         except: self.this = this
     def toMatrix(self): return _Misc.Quaternion_toMatrix(self)
+    def __imul__(self, *args): return _Misc.Quaternion___imul__(self, *args)
     def __mul__(self, *args): return _Misc.Quaternion___mul__(self, *args)
     def normalize(self): return _Misc.Quaternion_normalize(self)
     __swig_destroy__ = _Misc.delete_Quaternion

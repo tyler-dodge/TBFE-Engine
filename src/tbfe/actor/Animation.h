@@ -36,7 +36,7 @@ class Animation
   PositionF getOffset();
   void setOffset(float,float,float z=0);
   Quaternion getRotation();
-  void rotate(Quaternion, bool doCollisionTest=true);
+  void rotate(Quaternion);
   void setRotation(Quaternion);
   
   float getRate();

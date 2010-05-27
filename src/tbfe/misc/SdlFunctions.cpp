@@ -285,13 +285,12 @@ void applyMaterial(const struct aiMaterial *mtl)
 		glDisable(GL_TEXTURE_2D);
 	      };
 };
-void drawNodes(ModelData * model, aiVector3D position,aiVector3D rotation,aiVector3D scale)
+void drawNodes(ModelData * model, aiVector3D position,Quaternion rotation,aiVector3D scale)
 { 
   glPushMatrix();
   //glTranslatef(position[0],position[1],-position[2]);
   glTranslatef(position[0],position[1],position[2]);
-  Quaternion rotationQuat=getQuaternionXYZ(rotation.x,rotation.y,rotation.z);
-  glMultMatrixf(rotationQuat.toMatrix().dataPointer());
+  glMultMatrixf(rotation.toMatrix().dataPointer());
   for (int i=0;i<model->meshes.size();i++)
     {
       glPushMatrix();
@@ -324,18 +323,7 @@ float roundDown(float num,int place)
 };
 PositionF applyRotations(PositionF position,Quaternion rotation)
 {
-  Matrix rotMatrix(rotation.X,rotation.Y,rotation.Z);
-  Matrix idMatrix(1,0,0,0,
-		  0,1,0,0,
-		  0,0,1,0,
-		  0,0,0,1);
-  PositionF newPosition;
-  rotMatrix=rotMatrix*idMatrix;
-  newPosition.X=(rotMatrix[0]*position.X+rotMatrix[1]*position.Y+rotMatrix[2]*position.Z);
-
-  newPosition.Y=(rotMatrix[4]*position.X+rotMatrix[5]*position.Y+rotMatrix[6]*position.Z);
-
-  newPosition.Z=(rotMatrix[8]*position.X+rotMatrix[9]*position.Y+rotMatrix[10]*position.Z);
+  PositionF newPosition=rotation*position;
   return newPosition;
 };
 //Radians

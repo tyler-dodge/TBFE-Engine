@@ -10,7 +10,7 @@ def initEngine():
     UI.loadWindows("Data/Types/Window.cfg")
     Actor.loadActors("Data/Types/Actor.cfg")
 
-    Tbfe.GetMainPlayer().setPosition(100,0,1000)
+    Tbfe.GetMainPlayer().setPositionF(100,0,1000)
     engine.changeMap("test.fmm")
     Tbfe.cvar.CurrentMap.generateMap(25,25)
     engine.initMap()

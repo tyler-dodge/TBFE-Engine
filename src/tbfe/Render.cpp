@@ -111,10 +111,9 @@ void TBFE_Render::finalRender(bool doFlip)
   glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
   PositionF cameraOffset=TBFE_Base::getCameraOffset();
   PositionF cameraFollowOffset=TBFE_Base::getCameraFollowOffset();
-  PositionF cameraAngle=TBFE_Base::getCameraAngle();
+  Quaternion cameraAngle=TBFE_Base::getCameraAngle();
   glTranslatef(cameraFollowOffset.X,cameraFollowOffset.Y,cameraFollowOffset.Z);
-  Quaternion cameraRotations=getQuaternionXYZ(cameraAngle.X,cameraAngle.Y,cameraAngle.Z);
-  glMultMatrixf(cameraRotations.toMatrix().dataPointer());
+  glMultMatrixf(cameraAngle.toMatrix().dataPointer());
   glTranslatef(cameraOffset.X,cameraOffset.Y,cameraOffset.Z);
   //glRotatef(-TBFE_Base::MainPlayer->getRotationF().Y,0,1,0);
   glTranslatef(-TBFE_Base::MainPlayer->getPositionF().X/20,0,-TBFE_Base::MainPlayer->getPositionF().Z/20);
@@ -259,8 +258,8 @@ void TBFE_Render::renderActors()
   for (int i=0;i<TBFE_Base::ActorList.size();i++)
     {
       PositionF ActorPosition=TBFE_Base::ActorList.at(i)->getPositionF();
-      PositionF rotation=TBFE_Base::ActorList.at(i)->getRotationF();
-      Position CurrentPosition=TBFE_Base::MainPlayer->getPosition();
+      Quaternion rotation=TBFE_Base::ActorList.at(i)->getRotation();
+      PositionF CurrentPosition=TBFE_Base::MainPlayer->getPositionF();
       Actor * currentActor=TBFE_Base::ActorList.at(i);
       SDL_Rect Frame;
       Action action=currentActor->getCurrentAction();
@@ -270,15 +269,14 @@ void TBFE_Render::renderActors()
 	  Animation * animation=action.getLayer(Layer);
 	  ModelData * model;
 	  PositionF layerOffset=animation->getOffset();
-	  PositionF layerRotation=animation->getRotation();
+	  Quaternion layerRotation=animation->getRotation();
 	  
 	  model=animation->getModel();
 	  if (animation->getModel()!=NULL)
 	    {
 	      aiVector3D tposition(ActorPosition.X/20+layerOffset.X,ActorPosition.Y/20+layerOffset.Y,ActorPosition.Z/20+layerOffset.Z);
-	      aiVector3D trotation(rotation.X+layerRotation.X,rotation.Y+layerRotation.Y,rotation.Z+layerRotation.Z);
 	      aiVector3D tscale(0,0,0);
-	      drawNodes(model,tposition,trotation,tscale);
+	      drawNodes(model,tposition,layerRotation*rotation,tscale);
 	    };
 	  if (TBFE_Base::showCollision)
 	    {
@@ -291,7 +289,8 @@ void TBFE_Render::renderActors()
 		  CollisionBox actorCollision=*currentActor->getCollisionBox(i);
 		  dimensions=actorCollision.getDimensions();
 		  offset=actorCollision.getPosition();
-		  actorCollision.setRotation(rotation.X,-rotation.Y,rotation.Z);   
+		  rotation.w*=-1;
+		  actorCollision.setRotation(rotation);
 		  vector<PositionF> points=actorCollision.generatePoints(actorCollision.getPosition(),actorCollision.getDimensions());
 		  glEnableClientState(GL_VERTEX_ARRAY);
 		  glEnableClientState(GL_NORMAL_ARRAY);
@@ -328,14 +327,6 @@ void TBFE_Render::renderActors()
 		};
 	      glPopMatrix();
 	    };
-	};
-      if (currentActor->getWalking())
-	{
-	  currentActor->setWalking(false);
-	}
-      else if (action.getName()=="Walk")
-	{
-	  currentActor->endCurrentAction();
 	};
     };
 };

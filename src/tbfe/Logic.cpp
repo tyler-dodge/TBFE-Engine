@@ -9,11 +9,6 @@ TBFE_Logic::TBFE_Logic()
 TBFE_Logic::~TBFE_Logic()
 {
 };
-
-int TBFE_Logic::checkTalker()
-{
-  //DEPRECATED
-};
 void TBFE_Logic::playerMovement()
 {
   //PlayerMovement
@@ -24,62 +19,28 @@ void TBFE_Logic::playerMovement()
     {
       if (keysDown_['w'])
 	{
-	  TBFE_Base::MainPlayer->changePosition(TBFE_Base::MainPlayer->getRotationF().Y,false);
+	  TBFE_Base::MainPlayer->changePosition(0);
 	}
       if (keysDown_['s'])
 	{
-	  TBFE_Base::MainPlayer->changePosition(180.0f+TBFE_Base::MainPlayer->getRotationF().Y,false);
+	  TBFE_Base::MainPlayer->changePosition(180.0f);
 	}
       if (keysDown_['d'])
 	{
-	  TBFE_Base::MainPlayer->changePosition(TBFE_Base::MainPlayer->getRotationF().Y+270.0f,false);
+	  TBFE_Base::MainPlayer->changePosition(-90.0f);
 	}
       if (keysDown_['a'])
 	{
-	  TBFE_Base::MainPlayer->changePosition(TBFE_Base::MainPlayer->getRotationF().Y+90.0f,false);
-	;}
+	  TBFE_Base::MainPlayer->changePosition(90.0f);
+	};
       if (keysDown_['q'])
 	{
-	  PositionF rotation=TBFE_Base::MainPlayer->getRotationF();
-	  rotation.Y+=5;
-	  TBFE_Base::MainPlayer->setRotationF(rotation.X,rotation.Y,rotation.Z);
+	  TBFE_Base::MainPlayer->rotate(Quaternion(0,1,0,5));
 	};
       if (keysDown_['e'])
 	{
-	  PositionF rotation=TBFE_Base::MainPlayer->getRotationF();
-	  rotation.Y-=5;
-	  TBFE_Base::MainPlayer->setRotationF(rotation.X,rotation.Y,rotation.Z);
+	  TBFE_Base::MainPlayer->rotate(Quaternion(0,1,0,-5));
 	};
-    };
-};
-int TBFE_Logic::contextAction()
-{
-  int NPC_Exists=checkTalker();
-  Tile HarvestTile;
-  Position playerPosition;
-  playerPosition.X=(TBFE_Base::MainPlayer->getPosition().X+TBFE_Base::TileSize/2)/TBFE_Base::TileSize+TBFE_Base::MainPlayer->getDirOffset().X;
-  playerPosition.Y=(TBFE_Base::MainPlayer->getPosition().Y+TBFE_Base::TileSize/2)/TBFE_Base::TileSize+TBFE_Base::MainPlayer->getDirOffset().Y;
-  
-  if (NPC_Exists!=-1)
-    {
-      TBFE_Base::Talker=TBFE_Base::ActorList[NPC_Exists];
-      if (TBFE_Base::Talker->getMobile())
-	{
-	  PositionF newAngle=TBFE_Base::MainPlayer->getRotationF();
-	  newAngle.Z=360-newAngle.Z;
-	  TBFE_Base::Talker->setRotationF(newAngle.X,newAngle.Y,newAngle.Z);
-	};
-      TBFE_Base::Talker->getConversation(false);
-      stringstream ActorSelf;
-      ActorSelf << "Caller=" << "engine.Logic:GetActor(" << NPC_Exists << ")";
-      TBFE_Base::MainConsole.runLine(ActorSelf.str());
-      //Talk to Actor
-      return 1;
-    }
-  else
-    {
-      //Use Tool
-      return 2;
     };
 };
 
