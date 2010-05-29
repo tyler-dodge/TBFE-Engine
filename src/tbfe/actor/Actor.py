@@ -166,53 +166,6 @@ class NonLiving(Actor):
 NonLiving_swigregister = _Actor.NonLiving_swigregister
 NonLiving_swigregister(NonLiving)
 
-class Inventory(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Inventory, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Inventory, name)
-    __repr__ = _swig_repr
-    def __init__(self, Size = 3): 
-        this = _Actor.new_Inventory(Size)
-        try: self.this.append(this)
-        except: self.this = this
-    def get(self, *args): return _Actor.Inventory_get(self, *args)
-    def getAmount(self, *args): return _Actor.Inventory_getAmount(self, *args)
-    def remove(self, Item = 0, Amount = 1): return _Actor.Inventory_remove(self, Item, Amount)
-    def set(self, *args): return _Actor.Inventory_set(self, *args)
-    def add(self, *args): return _Actor.Inventory_add(self, *args)
-    def getStackable(self): return _Actor.Inventory_getStackable(self)
-    def setStackable(self, *args): return _Actor.Inventory_setStackable(self, *args)
-    __swig_destroy__ = _Actor.delete_Inventory
-    __del__ = lambda self : None;
-Inventory_swigregister = _Actor.Inventory_swigregister
-Inventory_swigregister(Inventory)
-
-class Building(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Building, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Building, name)
-    __repr__ = _swig_repr
-    def __init__(self, *args): 
-        this = _Actor.new_Building(*args)
-        try: self.this.append(this)
-        except: self.this = this
-    __swig_destroy__ = _Actor.delete_Building
-    __del__ = lambda self : None;
-    def getFloorTile(self, *args): return _Actor.Building_getFloorTile(self, *args)
-    def getRoofTile(self, *args): return _Actor.Building_getRoofTile(self, *args)
-    def getPosition(self): return _Actor.Building_getPosition(self)
-    def setPosition(self, *args): return _Actor.Building_setPosition(self, *args)
-    def getFloorDimensions(self): return _Actor.Building_getFloorDimensions(self)
-    def setFloorDimensions(self, *args): return _Actor.Building_setFloorDimensions(self, *args)
-    def getRoofDimensions(self): return _Actor.Building_getRoofDimensions(self)
-    def setRoofDimensions(self, *args): return _Actor.Building_setRoofDimensions(self, *args)
-    def getWall(self, *args): return _Actor.Building_getWall(self, *args)
-    def getNumberOfWalls(self): return _Actor.Building_getNumberOfWalls(self)
-Building_swigregister = _Actor.Building_swigregister
-Building_swigregister(Building)
-
 class Action(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, Action, name, value)

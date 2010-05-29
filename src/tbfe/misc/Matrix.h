@@ -3,6 +3,8 @@ class Matrix;
 #define Matrix_L
 #include <math.h>
 #include "Quaternion.h"
+#include <sstream>
+#include "Enums.h"
 class Matrix
 {
  private:

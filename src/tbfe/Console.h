@@ -2,6 +2,7 @@
 #define Console_L
 #include <iostream>
 #include <sstream>
+#include <Python.h>
 using namespace std;
 class Console
 {

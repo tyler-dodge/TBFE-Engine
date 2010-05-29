@@ -5,7 +5,6 @@
 #include "../misc/SdlFunctions.h"
 #include "../misc/Structs.h"
 #include "Element.h"
-#include "ImageBox.h"
 class Window
 {
  private:

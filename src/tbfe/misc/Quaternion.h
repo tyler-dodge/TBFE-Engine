@@ -1,7 +1,8 @@
-#include<math.h>
-class Quaternion;
+struct Quaternion;
 #ifndef Quaternion_L
 #define Quaternion_L
+#include<math.h>
+#include "PositionF.h"
 struct Quaternion
 {
 public:
