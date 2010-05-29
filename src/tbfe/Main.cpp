@@ -135,40 +135,6 @@ void TBFE::addWindow(Window *NewWindow)
       TBFE_Base::MainConsole.write("   Window is equal to NULL");
     };
 };
-void TBFE::addBuilding(Building newBuilding)
-{
-  for (int i=0;i<newBuilding.getNumberOfWalls();i++)
-    {
-      addActor(newBuilding.getWall(i));
-    };
-  Position floorDimensions=newBuilding.getFloorDimensions();
-  Position roofDimensions=newBuilding.getRoofDimensions();
-  Position buildingPosition=newBuilding.getPosition();
-  for (int y=0;y<floorDimensions.Y;y++)
-    {
-      for (int x=0;x<floorDimensions.X;x++)
-	{
-	  Tile newTile=newBuilding.getFloorTile(x,y);
-	  if (newTile.Type!=-1)
-	    {
-	      TBFE_Base::CurrentMap.changeTile(buildingPosition.X+x,
-					       buildingPosition.Y+y,newTile,0);
-	    }
-	};
-    };
-  for (int y=0;y<roofDimensions.Y;y++)
-    {
-      for (int x=0;x<roofDimensions.X;x++)
-	{
-	  Tile newTile=newBuilding.getRoofTile(x,y);
-	  if (newTile.Type!=-1)
-	    {
-	      TBFE_Base::CurrentMap.changeTile(buildingPosition.X+x,
-					       buildingPosition.Y+y-2,newTile,1);
-	    }
-	};
-    };
-};
 void TBFE::checkEvents()
 {
   int mouseState=SDL_GetMouseState(&mousePosition_.X,&mousePosition_.Y);

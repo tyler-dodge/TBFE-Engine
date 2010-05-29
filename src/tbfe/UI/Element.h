@@ -3,6 +3,7 @@
 #include "../misc/Structs.h"
 #include "../misc/SdlFunctions.h"
 #include "../Base.h"
+
 class Element
 {
  private:

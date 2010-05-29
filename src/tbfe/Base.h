@@ -6,6 +6,7 @@
 #include "Console.h"
 #include "SDL/SDL.h"
 #include "SDL/SDL_ttf.h"
+#include "map/Map.h"
 namespace TBFE_Base
 {
   extern vector<Actor *> ActorList;
@@ -47,5 +48,5 @@ namespace TBFE_Base
 
   extern PositionF getCameraOffset();
   extern void setCameraFollowOffset(float,float,float);
-}
+};
 #endif

@@ -2683,32 +2683,22 @@ SWIG_Python_MustGetPtr(PyObject *obj, swig_type_info *ty, int argnum, int flags)
 /* -------- TYPES TABLE (BEGIN) -------- */
 
 #define SWIGTYPE_p_Actor swig_types[0]
-#define SWIGTYPE_p_Building swig_types[1]
-#define SWIGTYPE_p_Console swig_types[2]
-#define SWIGTYPE_p_Element swig_types[3]
-#define SWIGTYPE_p_EventType swig_types[4]
-#define SWIGTYPE_p_GLuint swig_types[5]
-#define SWIGTYPE_p_Map swig_types[6]
-#define SWIGTYPE_p_ModelData swig_types[7]
-#define SWIGTYPE_p_NonLiving swig_types[8]
-#define SWIGTYPE_p_Npc swig_types[9]
-#define SWIGTYPE_p_Position swig_types[10]
-#define SWIGTYPE_p_PositionF swig_types[11]
-#define SWIGTYPE_p_Pulse swig_types[12]
-#define SWIGTYPE_p_Quaternion swig_types[13]
-#define SWIGTYPE_p_SDL_Event swig_types[14]
-#define SWIGTYPE_p_SDL_Surface swig_types[15]
-#define SWIGTYPE_p_SunVector swig_types[16]
-#define SWIGTYPE_p_TBFE swig_types[17]
-#define SWIGTYPE_p_TBFE_Logic swig_types[18]
-#define SWIGTYPE_p_TBFE_Render swig_types[19]
-#define SWIGTYPE_p_TTF_Font swig_types[20]
-#define SWIGTYPE_p_Window swig_types[21]
-#define SWIGTYPE_p_char swig_types[22]
-#define SWIGTYPE_p_vectorT_Actor_p_t swig_types[23]
-#define SWIGTYPE_p_vectorT_Window_p_t swig_types[24]
-static swig_type_info *swig_types[26];
-static swig_module_info swig_module = {swig_types, 25, 0, 0, 0, 0};
+#define SWIGTYPE_p_Console swig_types[1]
+#define SWIGTYPE_p_Element swig_types[2]
+#define SWIGTYPE_p_EventType swig_types[3]
+#define SWIGTYPE_p_NonLiving swig_types[4]
+#define SWIGTYPE_p_Npc swig_types[5]
+#define SWIGTYPE_p_Position swig_types[6]
+#define SWIGTYPE_p_PositionF swig_types[7]
+#define SWIGTYPE_p_Pulse swig_types[8]
+#define SWIGTYPE_p_SDL_Event swig_types[9]
+#define SWIGTYPE_p_TBFE swig_types[10]
+#define SWIGTYPE_p_TBFE_Logic swig_types[11]
+#define SWIGTYPE_p_TBFE_Render swig_types[12]
+#define SWIGTYPE_p_Window swig_types[13]
+#define SWIGTYPE_p_char swig_types[14]
+static swig_type_info *swig_types[16];
+static swig_module_info swig_module = {swig_types, 15, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -2808,12 +2798,148 @@ namespace swig {
 #include <string>
 
 
-#include "Base.cpp"
-#include "Main.cpp"
-#include "Render.cpp"
-#include "Logic.cpp"
-#include "Console.cpp"
-#include "SunVector.cpp"
+#include "Base.h"
+#include "Main.h"
+#include "Render.h"
+#include "Logic.h"
+#include "Console.h"
+
+
+SWIGINTERN swig_type_info*
+SWIG_pchar_descriptor(void)
+{
+  static int init = 0;
+  static swig_type_info* info = 0;
+  if (!init) {
+    info = SWIG_TypeQuery("_p_char");
+    init = 1;
+  }
+  return info;
+}
+
+
+SWIGINTERN int
+SWIG_AsCharPtrAndSize(PyObject *obj, char** cptr, size_t* psize, int *alloc)
+{
+#if PY_VERSION_HEX>=0x03000000
+  if (PyUnicode_Check(obj))
+#else  
+  if (PyString_Check(obj))
+#endif
+  {
+    char *cstr; Py_ssize_t len;
+#if PY_VERSION_HEX>=0x03000000
+    if (!alloc && cptr) {
+        /* We can't allow converting without allocation, since the internal
+           representation of string in Python 3 is UCS-2/UCS-4 but we require
+           a UTF-8 representation.
+           TODO(bhy) More detailed explanation */
+        return SWIG_RuntimeError;
+    }
+    obj = PyUnicode_AsUTF8String(obj);
+    PyBytes_AsStringAndSize(obj, &cstr, &len);
+    if(alloc) *alloc = SWIG_NEWOBJ;
+#else
+    PyString_AsStringAndSize(obj, &cstr, &len);
+#endif
+    if (cptr) {
+      if (alloc) {
+	/* 
+	   In python the user should not be able to modify the inner
+	   string representation. To warranty that, if you define
+	   SWIG_PYTHON_SAFE_CSTRINGS, a new/copy of the python string
+	   buffer is always returned.
+
+	   The default behavior is just to return the pointer value,
+	   so, be careful.
+	*/ 
+#if defined(SWIG_PYTHON_SAFE_CSTRINGS)
+	if (*alloc != SWIG_OLDOBJ) 
+#else
+	if (*alloc == SWIG_NEWOBJ) 
+#endif
+	  {
+	    *cptr = reinterpret_cast< char* >(memcpy((new char[len + 1]), cstr, sizeof(char)*(len + 1)));
+	    *alloc = SWIG_NEWOBJ;
+	  }
+	else {
+	  *cptr = cstr;
+	  *alloc = SWIG_OLDOBJ;
+	}
+      } else {
+        #if PY_VERSION_HEX>=0x03000000
+        assert(0); /* Should never reach here in Python 3 */
+        #endif
+	*cptr = SWIG_Python_str_AsChar(obj);
+      }
+    }
+    if (psize) *psize = len + 1;
+#if PY_VERSION_HEX>=0x03000000
+    Py_XDECREF(obj);
+#endif
+    return SWIG_OK;
+  } else {
+    swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
+    if (pchar_descriptor) {
+      void* vptr = 0;
+      if (SWIG_ConvertPtr(obj, &vptr, pchar_descriptor, 0) == SWIG_OK) {
+	if (cptr) *cptr = (char *) vptr;
+	if (psize) *psize = vptr ? (strlen((char *)vptr) + 1) : 0;
+	if (alloc) *alloc = SWIG_OLDOBJ;
+	return SWIG_OK;
+      }
+    }
+  }
+  return SWIG_TypeError;
+}
+
+
+SWIGINTERN int
+SWIG_AsPtr_std_string (PyObject * obj, std::string **val) 
+{
+  char* buf = 0 ; size_t size = 0; int alloc = SWIG_OLDOBJ;
+  if (SWIG_IsOK((SWIG_AsCharPtrAndSize(obj, &buf, &size, &alloc)))) {
+    if (buf) {
+      if (val) *val = new std::string(buf, size - 1);
+      if (alloc == SWIG_NEWOBJ) delete[] buf;
+      return SWIG_NEWOBJ;
+    } else {
+      if (val) *val = 0;
+      return SWIG_OLDOBJ;
+    }
+  } else {
+    static int init = 0;
+    static swig_type_info* descriptor = 0;
+    if (!init) {
+      descriptor = SWIG_TypeQuery("std::string" " *");
+      init = 1;
+    }
+    if (descriptor) {
+      std::string *vptr;
+      int res = SWIG_ConvertPtr(obj, (void**)&vptr, descriptor, 0);
+      if (SWIG_IsOK(res) && val) *val = vptr;
+      return res;
+    }
+  }
+  return SWIG_ERROR;
+}
+
+
+SWIGINTERNINLINE PyObject*
+  SWIG_From_bool  (bool value)
+{
+  return PyBool_FromLong(value ? 1 : 0);
+}
+
+
+  #define SWIG_From_long   PyInt_FromLong 
+
+
+SWIGINTERNINLINE PyObject *
+SWIG_From_int  (int value)
+{    
+  return SWIG_From_long  (value);
+}
 
 
 #include <limits.h>
@@ -2961,16 +3087,6 @@ SWIG_AsVal_int (PyObject * obj, int *val)
 }
 
 
-  #define SWIG_From_long   PyInt_FromLong 
-
-
-SWIGINTERNINLINE PyObject *
-SWIG_From_int  (int value)
-{    
-  return SWIG_From_long  (value);
-}
-
-
 SWIGINTERN int
 SWIG_AsVal_bool (PyObject *obj, bool *val)
 {
@@ -2979,13 +3095,6 @@ SWIG_AsVal_bool (PyObject *obj, bool *val)
     return SWIG_ERROR;
   if (val) *val = r ? true : false;
   return SWIG_OK;
-}
-
-
-SWIGINTERNINLINE PyObject*
-  SWIG_From_bool  (bool value)
-{
-  return PyBool_FromLong(value ? 1 : 0);
 }
 
 
@@ -3002,136 +3111,6 @@ SWIG_AsVal_float (PyObject * obj, float *val)
     }
   }  
   return res;
-}
-
-
-  #define SWIG_From_double   PyFloat_FromDouble 
-
-
-SWIGINTERNINLINE PyObject *
-SWIG_From_float  (float value)
-{    
-  return SWIG_From_double  (value);
-}
-
-
-SWIGINTERN swig_type_info*
-SWIG_pchar_descriptor(void)
-{
-  static int init = 0;
-  static swig_type_info* info = 0;
-  if (!init) {
-    info = SWIG_TypeQuery("_p_char");
-    init = 1;
-  }
-  return info;
-}
-
-
-SWIGINTERN int
-SWIG_AsCharPtrAndSize(PyObject *obj, char** cptr, size_t* psize, int *alloc)
-{
-#if PY_VERSION_HEX>=0x03000000
-  if (PyUnicode_Check(obj))
-#else  
-  if (PyString_Check(obj))
-#endif
-  {
-    char *cstr; Py_ssize_t len;
-#if PY_VERSION_HEX>=0x03000000
-    if (!alloc && cptr) {
-        /* We can't allow converting without allocation, since the internal
-           representation of string in Python 3 is UCS-2/UCS-4 but we require
-           a UTF-8 representation.
-           TODO(bhy) More detailed explanation */
-        return SWIG_RuntimeError;
-    }
-    obj = PyUnicode_AsUTF8String(obj);
-    PyBytes_AsStringAndSize(obj, &cstr, &len);
-    if(alloc) *alloc = SWIG_NEWOBJ;
-#else
-    PyString_AsStringAndSize(obj, &cstr, &len);
-#endif
-    if (cptr) {
-      if (alloc) {
-	/* 
-	   In python the user should not be able to modify the inner
-	   string representation. To warranty that, if you define
-	   SWIG_PYTHON_SAFE_CSTRINGS, a new/copy of the python string
-	   buffer is always returned.
-
-	   The default behavior is just to return the pointer value,
-	   so, be careful.
-	*/ 
-#if defined(SWIG_PYTHON_SAFE_CSTRINGS)
-	if (*alloc != SWIG_OLDOBJ) 
-#else
-	if (*alloc == SWIG_NEWOBJ) 
-#endif
-	  {
-	    *cptr = reinterpret_cast< char* >(memcpy((new char[len + 1]), cstr, sizeof(char)*(len + 1)));
-	    *alloc = SWIG_NEWOBJ;
-	  }
-	else {
-	  *cptr = cstr;
-	  *alloc = SWIG_OLDOBJ;
-	}
-      } else {
-        #if PY_VERSION_HEX>=0x03000000
-        assert(0); /* Should never reach here in Python 3 */
-        #endif
-	*cptr = SWIG_Python_str_AsChar(obj);
-      }
-    }
-    if (psize) *psize = len + 1;
-#if PY_VERSION_HEX>=0x03000000
-    Py_XDECREF(obj);
-#endif
-    return SWIG_OK;
-  } else {
-    swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
-    if (pchar_descriptor) {
-      void* vptr = 0;
-      if (SWIG_ConvertPtr(obj, &vptr, pchar_descriptor, 0) == SWIG_OK) {
-	if (cptr) *cptr = (char *) vptr;
-	if (psize) *psize = vptr ? (strlen((char *)vptr) + 1) : 0;
-	if (alloc) *alloc = SWIG_OLDOBJ;
-	return SWIG_OK;
-      }
-    }
-  }
-  return SWIG_TypeError;
-}
-
-
-SWIGINTERN int
-SWIG_AsPtr_std_string (PyObject * obj, std::string **val) 
-{
-  char* buf = 0 ; size_t size = 0; int alloc = SWIG_OLDOBJ;
-  if (SWIG_IsOK((SWIG_AsCharPtrAndSize(obj, &buf, &size, &alloc)))) {
-    if (buf) {
-      if (val) *val = new std::string(buf, size - 1);
-      if (alloc == SWIG_NEWOBJ) delete[] buf;
-      return SWIG_NEWOBJ;
-    } else {
-      if (val) *val = 0;
-      return SWIG_OLDOBJ;
-    }
-  } else {
-    static int init = 0;
-    static swig_type_info* descriptor = 0;
-    if (!init) {
-      descriptor = SWIG_TypeQuery("std::string" " *");
-      init = 1;
-    }
-    if (descriptor) {
-      std::string *vptr;
-      int res = SWIG_ConvertPtr(obj, (void**)&vptr, descriptor, 0);
-      if (SWIG_IsOK(res) && val) *val = vptr;
-      return res;
-    }
-  }
-  return SWIG_ERROR;
 }
 
 
@@ -3157,6 +3136,13 @@ SWIG_FromCharPtrAndSize(const char* carray, size_t size)
 
 
 SWIGINTERNINLINE PyObject *
+SWIG_From_char  (char c) 
+{ 
+  return SWIG_FromCharPtrAndSize(&c,1);
+}
+
+
+SWIGINTERNINLINE PyObject *
 SWIG_From_std_string  (const std::string& s)
 {
   if (s.size()) {
@@ -3166,780 +3152,9 @@ SWIG_From_std_string  (const std::string& s)
   }
 }
 
-
-SWIGINTERNINLINE PyObject *
-SWIG_From_char  (char c) 
-{ 
-  return SWIG_FromCharPtrAndSize(&c,1);
-}
-
 #ifdef __cplusplus
 extern "C" {
 #endif
-SWIGINTERN int Swig_var_ActorList_set(PyObject *_val) {
-  {
-    void *argp = 0;
-    int res = SWIG_ConvertPtr(_val, &argp, SWIGTYPE_p_vectorT_Actor_p_t,  0  | 0);
-    if (!SWIG_IsOK(res)) {
-      SWIG_exception_fail(SWIG_ArgError(res), "in variable '""TBFE_Base::ActorList""' of type '""vector< Actor * >""'");
-    }
-    if (!argp) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in variable '""TBFE_Base::ActorList""' of type '""vector< Actor * >""'");
-    } else {
-      vector< Actor * > * temp;
-      temp  = reinterpret_cast< vector< Actor * > * >(argp);
-      TBFE_Base::ActorList = *temp;
-      if (SWIG_IsNewObj(res)) delete temp;
-    }
-  }
-  return 0;
-fail:
-  return 1;
-}
-
-
-SWIGINTERN PyObject *Swig_var_ActorList_get(void) {
-  PyObject *pyobj = 0;
-  
-  pyobj = SWIG_NewPointerObj(SWIG_as_voidptr(&TBFE_Base::ActorList), SWIGTYPE_p_vectorT_Actor_p_t,  0 );
-  return pyobj;
-}
-
-
-SWIGINTERN int Swig_var_WindowList_set(PyObject *_val) {
-  {
-    void *argp = 0;
-    int res = SWIG_ConvertPtr(_val, &argp, SWIGTYPE_p_vectorT_Window_p_t,  0  | 0);
-    if (!SWIG_IsOK(res)) {
-      SWIG_exception_fail(SWIG_ArgError(res), "in variable '""TBFE_Base::WindowList""' of type '""vector< Window * >""'");
-    }
-    if (!argp) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in variable '""TBFE_Base::WindowList""' of type '""vector< Window * >""'");
-    } else {
-      vector< Window * > * temp;
-      temp  = reinterpret_cast< vector< Window * > * >(argp);
-      TBFE_Base::WindowList = *temp;
-      if (SWIG_IsNewObj(res)) delete temp;
-    }
-  }
-  return 0;
-fail:
-  return 1;
-}
-
-
-SWIGINTERN PyObject *Swig_var_WindowList_get(void) {
-  PyObject *pyobj = 0;
-  
-  pyobj = SWIG_NewPointerObj(SWIG_as_voidptr(&TBFE_Base::WindowList), SWIGTYPE_p_vectorT_Window_p_t,  0 );
-  return pyobj;
-}
-
-
-SWIGINTERN int Swig_var_MainConsole_set(PyObject *_val) {
-  {
-    void *argp = 0;
-    int res = SWIG_ConvertPtr(_val, &argp, SWIGTYPE_p_Console,  0  | 0);
-    if (!SWIG_IsOK(res)) {
-      SWIG_exception_fail(SWIG_ArgError(res), "in variable '""TBFE_Base::MainConsole""' of type '""Console""'");
-    }
-    if (!argp) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in variable '""TBFE_Base::MainConsole""' of type '""Console""'");
-    } else {
-      Console * temp;
-      temp  = reinterpret_cast< Console * >(argp);
-      TBFE_Base::MainConsole = *temp;
-      if (SWIG_IsNewObj(res)) delete temp;
-    }
-  }
-  return 0;
-fail:
-  return 1;
-}
-
-
-SWIGINTERN PyObject *Swig_var_MainConsole_get(void) {
-  PyObject *pyobj = 0;
-  
-  pyobj = SWIG_NewPointerObj(SWIG_as_voidptr(&TBFE_Base::MainConsole), SWIGTYPE_p_Console,  0 );
-  return pyobj;
-}
-
-
-SWIGINTERN int Swig_var_TileSize_set(PyObject *_val) {
-  {
-    int val;
-    int res = SWIG_AsVal_int(_val, &val);
-    if (!SWIG_IsOK(res)) {
-      SWIG_exception_fail(SWIG_ArgError(res), "in variable '""TBFE_Base::TileSize""' of type '""int""'");
-    }
-    TBFE_Base::TileSize = static_cast< int >(val);
-  }
-  return 0;
-fail:
-  return 1;
-}
-
-
-SWIGINTERN PyObject *Swig_var_TileSize_get(void) {
-  PyObject *pyobj = 0;
-  
-  pyobj = SWIG_From_int(static_cast< int >(TBFE_Base::TileSize));
-  return pyobj;
-}
-
-
-SWIGINTERN int Swig_var_NumberOfActors_set(PyObject *_val) {
-  {
-    int val;
-    int res = SWIG_AsVal_int(_val, &val);
-    if (!SWIG_IsOK(res)) {
-      SWIG_exception_fail(SWIG_ArgError(res), "in variable '""TBFE_Base::NumberOfActors""' of type '""int""'");
-    }
-    TBFE_Base::NumberOfActors = static_cast< int >(val);
-  }
-  return 0;
-fail:
-  return 1;
-}
-
-
-SWIGINTERN PyObject *Swig_var_NumberOfActors_get(void) {
-  PyObject *pyobj = 0;
-  
-  pyobj = SWIG_From_int(static_cast< int >(TBFE_Base::NumberOfActors));
-  return pyobj;
-}
-
-
-SWIGINTERN int Swig_var_KeyControl_set(PyObject *_val) {
-  {
-    bool val;
-    int res = SWIG_AsVal_bool(_val, &val);
-    if (!SWIG_IsOK(res)) {
-      SWIG_exception_fail(SWIG_ArgError(res), "in variable '""TBFE_Base::KeyControl""' of type '""bool""'");
-    }
-    TBFE_Base::KeyControl = static_cast< bool >(val);
-  }
-  return 0;
-fail:
-  return 1;
-}
-
-
-SWIGINTERN PyObject *Swig_var_KeyControl_get(void) {
-  PyObject *pyobj = 0;
-  
-  pyobj = SWIG_From_bool(static_cast< bool >(TBFE_Base::KeyControl));
-  return pyobj;
-}
-
-
-SWIGINTERN int Swig_var_CurrentMap_set(PyObject *_val) {
-  {
-    void *argp = 0;
-    int res = SWIG_ConvertPtr(_val, &argp, SWIGTYPE_p_Map,  0  | 0);
-    if (!SWIG_IsOK(res)) {
-      SWIG_exception_fail(SWIG_ArgError(res), "in variable '""TBFE_Base::CurrentMap""' of type '""Map""'");
-    }
-    if (!argp) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in variable '""TBFE_Base::CurrentMap""' of type '""Map""'");
-    } else {
-      Map * temp;
-      temp  = reinterpret_cast< Map * >(argp);
-      TBFE_Base::CurrentMap = *temp;
-      if (SWIG_IsNewObj(res)) delete temp;
-    }
-  }
-  return 0;
-fail:
-  return 1;
-}
-
-
-SWIGINTERN PyObject *Swig_var_CurrentMap_get(void) {
-  PyObject *pyobj = 0;
-  
-  pyobj = SWIG_NewPointerObj(SWIG_as_voidptr(&TBFE_Base::CurrentMap), SWIGTYPE_p_Map,  0 );
-  return pyobj;
-}
-
-
-SWIGINTERN int Swig_var_Time_set(PyObject *_val) {
-  {
-    int val;
-    int res = SWIG_AsVal_int(_val, &val);
-    if (!SWIG_IsOK(res)) {
-      SWIG_exception_fail(SWIG_ArgError(res), "in variable '""TBFE_Base::Time""' of type '""int""'");
-    }
-    TBFE_Base::Time = static_cast< int >(val);
-  }
-  return 0;
-fail:
-  return 1;
-}
-
-
-SWIGINTERN PyObject *Swig_var_Time_get(void) {
-  PyObject *pyobj = 0;
-  
-  pyobj = SWIG_From_int(static_cast< int >(TBFE_Base::Time));
-  return pyobj;
-}
-
-
-SWIGINTERN int Swig_var_GameSpeed_set(PyObject *_val) {
-  {
-    float val;
-    int res = SWIG_AsVal_float(_val, &val);
-    if (!SWIG_IsOK(res)) {
-      SWIG_exception_fail(SWIG_ArgError(res), "in variable '""TBFE_Base::GameSpeed""' of type '""float""'");
-    }
-    TBFE_Base::GameSpeed = static_cast< float >(val);
-  }
-  return 0;
-fail:
-  return 1;
-}
-
-
-SWIGINTERN PyObject *Swig_var_GameSpeed_get(void) {
-  PyObject *pyobj = 0;
-  
-  pyobj = SWIG_From_float(static_cast< float >(TBFE_Base::GameSpeed));
-  return pyobj;
-}
-
-
-SWIGINTERN int Swig_var_ScreenDimensions_set(PyObject *_val) {
-  {
-    void *argp = 0;
-    int res = SWIG_ConvertPtr(_val, &argp, SWIGTYPE_p_Position,  0  | 0);
-    if (!SWIG_IsOK(res)) {
-      SWIG_exception_fail(SWIG_ArgError(res), "in variable '""TBFE_Base::ScreenDimensions""' of type '""Position""'");
-    }
-    if (!argp) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in variable '""TBFE_Base::ScreenDimensions""' of type '""Position""'");
-    } else {
-      Position * temp;
-      temp  = reinterpret_cast< Position * >(argp);
-      TBFE_Base::ScreenDimensions = *temp;
-      if (SWIG_IsNewObj(res)) delete temp;
-    }
-  }
-  return 0;
-fail:
-  return 1;
-}
-
-
-SWIGINTERN PyObject *Swig_var_ScreenDimensions_get(void) {
-  PyObject *pyobj = 0;
-  
-  pyobj = SWIG_NewPointerObj(SWIG_as_voidptr(&TBFE_Base::ScreenDimensions), SWIGTYPE_p_Position,  0 );
-  return pyobj;
-}
-
-
-SWIGINTERN PyObject *_wrap_DeleteAnimationSheets(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  
-  if (!PyArg_ParseTuple(args,(char *)":DeleteAnimationSheets")) SWIG_fail;
-  TBFE_Base::DeleteAnimationSheets();
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_DeleteTempSheets(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  
-  if (!PyArg_ParseTuple(args,(char *)":DeleteTempSheets")) SWIG_fail;
-  TBFE_Base::DeleteTempSheets();
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_GetActorNum(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Actor *arg1 = (Actor *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  int result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:GetActorNum",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GetActorNum" "', argument " "1"" of type '" "Actor *""'"); 
-  }
-  arg1 = reinterpret_cast< Actor * >(argp1);
-  result = (int)TBFE_Base::GetActorNum(arg1);
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_GetActorByNum(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  int arg1 ;
-  int val1 ;
-  int ecode1 = 0 ;
-  PyObject * obj0 = 0 ;
-  Actor *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:GetActorByNum",&obj0)) SWIG_fail;
-  ecode1 = SWIG_AsVal_int(obj0, &val1);
-  if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "GetActorByNum" "', argument " "1"" of type '" "int""'");
-  } 
-  arg1 = static_cast< int >(val1);
-  result = (Actor *)TBFE_Base::GetActorByNum(arg1);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Actor, 0 |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_CheckModels(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::string arg1 ;
-  PyObject * obj0 = 0 ;
-  ModelData *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:CheckModels",&obj0)) SWIG_fail;
-  {
-    std::string *ptr = (std::string *)0;
-    int res = SWIG_AsPtr_std_string(obj0, &ptr);
-    if (!SWIG_IsOK(res) || !ptr) {
-      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "CheckModels" "', argument " "1"" of type '" "std::string""'"); 
-    }
-    arg1 = *ptr;
-    if (SWIG_IsNewObj(res)) delete ptr;
-  }
-  result = (ModelData *)TBFE_Base::CheckModels(arg1);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_ModelData, 0 |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_CheckSheets(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::string arg1 ;
-  PyObject * obj0 = 0 ;
-  SDL_Surface *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:CheckSheets",&obj0)) SWIG_fail;
-  {
-    std::string *ptr = (std::string *)0;
-    int res = SWIG_AsPtr_std_string(obj0, &ptr);
-    if (!SWIG_IsOK(res) || !ptr) {
-      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "CheckSheets" "', argument " "1"" of type '" "std::string""'"); 
-    }
-    arg1 = *ptr;
-    if (SWIG_IsNewObj(res)) delete ptr;
-  }
-  result = (SDL_Surface *)TBFE_Base::CheckSheets(arg1);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_SDL_Surface, 0 |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_GetSheetName(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  SDL_Surface *arg1 = (SDL_Surface *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  std::string result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:GetSheetName",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_SDL_Surface, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GetSheetName" "', argument " "1"" of type '" "SDL_Surface *""'"); 
-  }
-  arg1 = reinterpret_cast< SDL_Surface * >(argp1);
-  result = TBFE_Base::GetSheetName(arg1);
-  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_GetTexture(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  SDL_Surface *arg1 = (SDL_Surface *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  GLuint result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:GetTexture",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_SDL_Surface, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GetTexture" "', argument " "1"" of type '" "SDL_Surface *""'"); 
-  }
-  arg1 = reinterpret_cast< SDL_Surface * >(argp1);
-  result = TBFE_Base::GetTexture(arg1);
-  resultobj = SWIG_NewPointerObj((new GLuint(static_cast< const GLuint& >(result))), SWIGTYPE_p_GLuint, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_GetFont(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  TTF_Font *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)":GetFont")) SWIG_fail;
-  result = (TTF_Font *)TBFE_Base::GetFont();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_TTF_Font, 0 |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_SetFont(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  TTF_Font *arg1 = (TTF_Font *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:SetFont",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TTF_Font, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SetFont" "', argument " "1"" of type '" "TTF_Font *""'"); 
-  }
-  arg1 = reinterpret_cast< TTF_Font * >(argp1);
-  TBFE_Base::SetFont(arg1);
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN int Swig_var_showCollision_set(PyObject *_val) {
-  {
-    bool val;
-    int res = SWIG_AsVal_bool(_val, &val);
-    if (!SWIG_IsOK(res)) {
-      SWIG_exception_fail(SWIG_ArgError(res), "in variable '""TBFE_Base::showCollision""' of type '""bool""'");
-    }
-    TBFE_Base::showCollision = static_cast< bool >(val);
-  }
-  return 0;
-fail:
-  return 1;
-}
-
-
-SWIGINTERN PyObject *Swig_var_showCollision_get(void) {
-  PyObject *pyobj = 0;
-  
-  pyobj = SWIG_From_bool(static_cast< bool >(TBFE_Base::showCollision));
-  return pyobj;
-}
-
-
-SWIGINTERN PyObject *_wrap_GetCollisionTile(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  SDL_Surface *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)":GetCollisionTile")) SWIG_fail;
-  result = (SDL_Surface *)TBFE_Base::GetCollisionTile();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_SDL_Surface, 0 |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_SetCollisionTile(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  SDL_Surface *arg1 = (SDL_Surface *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:SetCollisionTile",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_SDL_Surface, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SetCollisionTile" "', argument " "1"" of type '" "SDL_Surface *""'"); 
-  }
-  arg1 = reinterpret_cast< SDL_Surface * >(argp1);
-  TBFE_Base::SetCollisionTile(arg1);
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_GetMainPlayer(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Actor *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)":GetMainPlayer")) SWIG_fail;
-  result = (Actor *)TBFE_Base::GetMainPlayer();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Actor, 0 |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_SetMainPlayer(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Actor *arg1 = (Actor *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:SetMainPlayer",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Actor, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SetMainPlayer" "', argument " "1"" of type '" "Actor *""'"); 
-  }
-  arg1 = reinterpret_cast< Actor * >(argp1);
-  TBFE_Base::SetMainPlayer(arg1);
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_GetKeyTarget(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Element *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)":GetKeyTarget")) SWIG_fail;
-  result = (Element *)TBFE_Base::GetKeyTarget();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Element, 0 |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_SetKeyTarget(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Element *arg1 = (Element *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:SetKeyTarget",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Element, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SetKeyTarget" "', argument " "1"" of type '" "Element *""'"); 
-  }
-  arg1 = reinterpret_cast< Element * >(argp1);
-  TBFE_Base::SetKeyTarget(arg1);
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_getWindowByNum(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  int arg1 ;
-  int val1 ;
-  int ecode1 = 0 ;
-  PyObject * obj0 = 0 ;
-  Window *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:getWindowByNum",&obj0)) SWIG_fail;
-  ecode1 = SWIG_AsVal_int(obj0, &val1);
-  if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "getWindowByNum" "', argument " "1"" of type '" "int""'");
-  } 
-  arg1 = static_cast< int >(val1);
-  result = (Window *)TBFE_Base::getWindowByNum(arg1);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Window, 0 |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_getWindowNum(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Window *arg1 = (Window *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  int result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:getWindowNum",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Window, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "getWindowNum" "', argument " "1"" of type '" "Window *""'"); 
-  }
-  arg1 = reinterpret_cast< Window * >(argp1);
-  result = (int)TBFE_Base::getWindowNum(arg1);
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_getCameraAngle(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Quaternion result;
-  
-  if (!PyArg_ParseTuple(args,(char *)":getCameraAngle")) SWIG_fail;
-  result = TBFE_Base::getCameraAngle();
-  resultobj = SWIG_NewPointerObj((new Quaternion(static_cast< const Quaternion& >(result))), SWIGTYPE_p_Quaternion, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_setCameraAngle(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Quaternion arg1 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:setCameraAngle",&obj0)) SWIG_fail;
-  {
-    res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_Quaternion,  0  | 0);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "setCameraAngle" "', argument " "1"" of type '" "Quaternion""'"); 
-    }  
-    if (!argp1) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "setCameraAngle" "', argument " "1"" of type '" "Quaternion""'");
-    } else {
-      Quaternion * temp = reinterpret_cast< Quaternion * >(argp1);
-      arg1 = *temp;
-      if (SWIG_IsNewObj(res1)) delete temp;
-    }
-  }
-  TBFE_Base::setCameraAngle(arg1);
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_rotateCamera(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Quaternion arg1 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:rotateCamera",&obj0)) SWIG_fail;
-  {
-    res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_Quaternion,  0  | 0);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "rotateCamera" "', argument " "1"" of type '" "Quaternion""'"); 
-    }  
-    if (!argp1) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "rotateCamera" "', argument " "1"" of type '" "Quaternion""'");
-    } else {
-      Quaternion * temp = reinterpret_cast< Quaternion * >(argp1);
-      arg1 = *temp;
-      if (SWIG_IsNewObj(res1)) delete temp;
-    }
-  }
-  TBFE_Base::rotateCamera(arg1);
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_getCameraFollowOffset(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  PositionF result;
-  
-  if (!PyArg_ParseTuple(args,(char *)":getCameraFollowOffset")) SWIG_fail;
-  result = TBFE_Base::getCameraFollowOffset();
-  resultobj = SWIG_NewPointerObj((new PositionF(static_cast< const PositionF& >(result))), SWIGTYPE_p_PositionF, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_setCameraFollowOffset(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  float arg1 ;
-  float arg2 ;
-  float arg3 ;
-  float val1 ;
-  int ecode1 = 0 ;
-  float val2 ;
-  int ecode2 = 0 ;
-  float val3 ;
-  int ecode3 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  PyObject * obj2 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OOO:setCameraFollowOffset",&obj0,&obj1,&obj2)) SWIG_fail;
-  ecode1 = SWIG_AsVal_float(obj0, &val1);
-  if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "setCameraFollowOffset" "', argument " "1"" of type '" "float""'");
-  } 
-  arg1 = static_cast< float >(val1);
-  ecode2 = SWIG_AsVal_float(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "setCameraFollowOffset" "', argument " "2"" of type '" "float""'");
-  } 
-  arg2 = static_cast< float >(val2);
-  ecode3 = SWIG_AsVal_float(obj2, &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "setCameraFollowOffset" "', argument " "3"" of type '" "float""'");
-  } 
-  arg3 = static_cast< float >(val3);
-  TBFE_Base::setCameraFollowOffset(arg1,arg2,arg3);
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_getCameraOffset(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  PositionF result;
-  
-  if (!PyArg_ParseTuple(args,(char *)":getCameraOffset")) SWIG_fail;
-  result = TBFE_Base::getCameraOffset();
-  resultobj = SWIG_NewPointerObj((new PositionF(static_cast< const PositionF& >(result))), SWIGTYPE_p_PositionF, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_TBFE_createFile(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   TBFE *arg1 = (TBFE *) 0 ;
@@ -4145,44 +3360,6 @@ SWIGINTERN PyObject *_wrap_TBFE_addWindow(PyObject *SWIGUNUSEDPARM(self), PyObje
   }
   arg2 = reinterpret_cast< Window * >(argp2);
   (arg1)->addWindow(arg2);
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_TBFE_addBuilding(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  TBFE *arg1 = (TBFE *) 0 ;
-  SwigValueWrapper< Building > arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:TBFE_addBuilding",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TBFE, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TBFE_addBuilding" "', argument " "1"" of type '" "TBFE *""'"); 
-  }
-  arg1 = reinterpret_cast< TBFE * >(argp1);
-  {
-    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Building,  0  | 0);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TBFE_addBuilding" "', argument " "2"" of type '" "Building""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TBFE_addBuilding" "', argument " "2"" of type '" "Building""'");
-    } else {
-      Building * temp = reinterpret_cast< Building * >(argp2);
-      arg2 = *temp;
-      if (SWIG_IsNewObj(res2)) delete temp;
-    }
-  }
-  (arg1)->addBuilding(arg2);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -5341,396 +4518,8 @@ SWIGINTERN PyObject *Console_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObje
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_SunVector_CurrentPositionX_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  SunVector *arg1 = (SunVector *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  double val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:SunVector_CurrentPositionX_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_SunVector, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SunVector_CurrentPositionX_set" "', argument " "1"" of type '" "SunVector *""'"); 
-  }
-  arg1 = reinterpret_cast< SunVector * >(argp1);
-  ecode2 = SWIG_AsVal_double(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SunVector_CurrentPositionX_set" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
-  if (arg1) (arg1)->CurrentPositionX = arg2;
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_SunVector_CurrentPositionX_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  SunVector *arg1 = (SunVector *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  double result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:SunVector_CurrentPositionX_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_SunVector, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SunVector_CurrentPositionX_get" "', argument " "1"" of type '" "SunVector *""'"); 
-  }
-  arg1 = reinterpret_cast< SunVector * >(argp1);
-  result = (double) ((arg1)->CurrentPositionX);
-  resultobj = SWIG_From_double(static_cast< double >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_SunVector_CurrentPositionY_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  SunVector *arg1 = (SunVector *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  double val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:SunVector_CurrentPositionY_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_SunVector, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SunVector_CurrentPositionY_set" "', argument " "1"" of type '" "SunVector *""'"); 
-  }
-  arg1 = reinterpret_cast< SunVector * >(argp1);
-  ecode2 = SWIG_AsVal_double(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SunVector_CurrentPositionY_set" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
-  if (arg1) (arg1)->CurrentPositionY = arg2;
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_SunVector_CurrentPositionY_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  SunVector *arg1 = (SunVector *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  double result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:SunVector_CurrentPositionY_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_SunVector, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SunVector_CurrentPositionY_get" "', argument " "1"" of type '" "SunVector *""'"); 
-  }
-  arg1 = reinterpret_cast< SunVector * >(argp1);
-  result = (double) ((arg1)->CurrentPositionY);
-  resultobj = SWIG_From_double(static_cast< double >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_SunVector_Angle_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  SunVector *arg1 = (SunVector *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  double val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:SunVector_Angle_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_SunVector, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SunVector_Angle_set" "', argument " "1"" of type '" "SunVector *""'"); 
-  }
-  arg1 = reinterpret_cast< SunVector * >(argp1);
-  ecode2 = SWIG_AsVal_double(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SunVector_Angle_set" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
-  if (arg1) (arg1)->Angle = arg2;
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_SunVector_Angle_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  SunVector *arg1 = (SunVector *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  double result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:SunVector_Angle_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_SunVector, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SunVector_Angle_get" "', argument " "1"" of type '" "SunVector *""'"); 
-  }
-  arg1 = reinterpret_cast< SunVector * >(argp1);
-  result = (double) ((arg1)->Angle);
-  resultobj = SWIG_From_double(static_cast< double >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_SunVector_Speed_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  SunVector *arg1 = (SunVector *) 0 ;
-  int arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:SunVector_Speed_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_SunVector, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SunVector_Speed_set" "', argument " "1"" of type '" "SunVector *""'"); 
-  }
-  arg1 = reinterpret_cast< SunVector * >(argp1);
-  ecode2 = SWIG_AsVal_int(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SunVector_Speed_set" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  if (arg1) (arg1)->Speed = arg2;
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_SunVector_Speed_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  SunVector *arg1 = (SunVector *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  int result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:SunVector_Speed_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_SunVector, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SunVector_Speed_get" "', argument " "1"" of type '" "SunVector *""'"); 
-  }
-  arg1 = reinterpret_cast< SunVector * >(argp1);
-  result = (int) ((arg1)->Speed);
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_SunVector__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  int arg1 ;
-  int arg2 ;
-  int arg3 ;
-  int val1 ;
-  int ecode1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  PyObject * obj2 = 0 ;
-  SunVector *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OOO:new_SunVector",&obj0,&obj1,&obj2)) SWIG_fail;
-  ecode1 = SWIG_AsVal_int(obj0, &val1);
-  if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_SunVector" "', argument " "1"" of type '" "int""'");
-  } 
-  arg1 = static_cast< int >(val1);
-  ecode2 = SWIG_AsVal_int(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_SunVector" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_int(obj2, &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_SunVector" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  result = (SunVector *)new SunVector(arg1,arg2,arg3);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_SunVector, SWIG_POINTER_NEW |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_SunVector__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  SunVector *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)":new_SunVector")) SWIG_fail;
-  result = (SunVector *)new SunVector();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_SunVector, SWIG_POINTER_NEW |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_SunVector(PyObject *self, PyObject *args) {
-  int argc;
-  PyObject *argv[4];
-  int ii;
-  
-  if (!PyTuple_Check(args)) SWIG_fail;
-  argc = (int)PyObject_Length(args);
-  for (ii = 0; (ii < argc) && (ii < 3); ii++) {
-    argv[ii] = PyTuple_GET_ITEM(args,ii);
-  }
-  if (argc == 0) {
-    return _wrap_new_SunVector__SWIG_1(self, args);
-  }
-  if (argc == 3) {
-    int _v;
-    {
-      int res = SWIG_AsVal_int(argv[0], NULL);
-      _v = SWIG_CheckState(res);
-    }
-    if (_v) {
-      {
-        int res = SWIG_AsVal_int(argv[1], NULL);
-        _v = SWIG_CheckState(res);
-      }
-      if (_v) {
-        {
-          int res = SWIG_AsVal_int(argv[2], NULL);
-          _v = SWIG_CheckState(res);
-        }
-        if (_v) {
-          return _wrap_new_SunVector__SWIG_0(self, args);
-        }
-      }
-    }
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number of arguments for overloaded function 'new_SunVector'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    SunVector(int,int,int)\n"
-    "    SunVector()\n");
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_SunVector_Calculate(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  SunVector *arg1 = (SunVector *) 0 ;
-  int arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:SunVector_Calculate",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_SunVector, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SunVector_Calculate" "', argument " "1"" of type '" "SunVector *""'"); 
-  }
-  arg1 = reinterpret_cast< SunVector * >(argp1);
-  ecode2 = SWIG_AsVal_int(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SunVector_Calculate" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  (arg1)->Calculate(arg2);
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_delete_SunVector(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  SunVector *arg1 = (SunVector *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:delete_SunVector",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_SunVector, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_SunVector" "', argument " "1"" of type '" "SunVector *""'"); 
-  }
-  arg1 = reinterpret_cast< SunVector * >(argp1);
-  delete arg1;
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *SunVector_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *obj;
-  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_SunVector, SWIG_NewClientData(obj));
-  return SWIG_Py_Void();
-}
-
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
-	 { (char *)"DeleteAnimationSheets", _wrap_DeleteAnimationSheets, METH_VARARGS, NULL},
-	 { (char *)"DeleteTempSheets", _wrap_DeleteTempSheets, METH_VARARGS, NULL},
-	 { (char *)"GetActorNum", _wrap_GetActorNum, METH_VARARGS, NULL},
-	 { (char *)"GetActorByNum", _wrap_GetActorByNum, METH_VARARGS, NULL},
-	 { (char *)"CheckModels", _wrap_CheckModels, METH_VARARGS, NULL},
-	 { (char *)"CheckSheets", _wrap_CheckSheets, METH_VARARGS, NULL},
-	 { (char *)"GetSheetName", _wrap_GetSheetName, METH_VARARGS, NULL},
-	 { (char *)"GetTexture", _wrap_GetTexture, METH_VARARGS, NULL},
-	 { (char *)"GetFont", _wrap_GetFont, METH_VARARGS, NULL},
-	 { (char *)"SetFont", _wrap_SetFont, METH_VARARGS, NULL},
-	 { (char *)"GetCollisionTile", _wrap_GetCollisionTile, METH_VARARGS, NULL},
-	 { (char *)"SetCollisionTile", _wrap_SetCollisionTile, METH_VARARGS, NULL},
-	 { (char *)"GetMainPlayer", _wrap_GetMainPlayer, METH_VARARGS, NULL},
-	 { (char *)"SetMainPlayer", _wrap_SetMainPlayer, METH_VARARGS, NULL},
-	 { (char *)"GetKeyTarget", _wrap_GetKeyTarget, METH_VARARGS, NULL},
-	 { (char *)"SetKeyTarget", _wrap_SetKeyTarget, METH_VARARGS, NULL},
-	 { (char *)"getWindowByNum", _wrap_getWindowByNum, METH_VARARGS, NULL},
-	 { (char *)"getWindowNum", _wrap_getWindowNum, METH_VARARGS, NULL},
-	 { (char *)"getCameraAngle", _wrap_getCameraAngle, METH_VARARGS, NULL},
-	 { (char *)"setCameraAngle", _wrap_setCameraAngle, METH_VARARGS, NULL},
-	 { (char *)"rotateCamera", _wrap_rotateCamera, METH_VARARGS, NULL},
-	 { (char *)"getCameraFollowOffset", _wrap_getCameraFollowOffset, METH_VARARGS, NULL},
-	 { (char *)"setCameraFollowOffset", _wrap_setCameraFollowOffset, METH_VARARGS, NULL},
-	 { (char *)"getCameraOffset", _wrap_getCameraOffset, METH_VARARGS, NULL},
 	 { (char *)"TBFE_createFile", _wrap_TBFE_createFile, METH_VARARGS, NULL},
 	 { (char *)"new_TBFE", _wrap_new_TBFE, METH_VARARGS, NULL},
 	 { (char *)"TBFE_changeMap", _wrap_TBFE_changeMap, METH_VARARGS, NULL},
@@ -5739,7 +4528,6 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"TBFE_addActor", _wrap_TBFE_addActor, METH_VARARGS, NULL},
 	 { (char *)"TBFE_removeActor", _wrap_TBFE_removeActor, METH_VARARGS, NULL},
 	 { (char *)"TBFE_addWindow", _wrap_TBFE_addWindow, METH_VARARGS, NULL},
-	 { (char *)"TBFE_addBuilding", _wrap_TBFE_addBuilding, METH_VARARGS, NULL},
 	 { (char *)"TBFE_addTileSet", _wrap_TBFE_addTileSet, METH_VARARGS, NULL},
 	 { (char *)"TBFE_addEvent", _wrap_TBFE_addEvent, METH_VARARGS, NULL},
 	 { (char *)"TBFE_getEvent", _wrap_TBFE_getEvent, METH_VARARGS, NULL},
@@ -5783,18 +4571,6 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Console_getNumberOfLines", _wrap_Console_getNumberOfLines, METH_VARARGS, NULL},
 	 { (char *)"Console_setPyInterface", _wrap_Console_setPyInterface, METH_VARARGS, NULL},
 	 { (char *)"Console_swigregister", Console_swigregister, METH_VARARGS, NULL},
-	 { (char *)"SunVector_CurrentPositionX_set", _wrap_SunVector_CurrentPositionX_set, METH_VARARGS, NULL},
-	 { (char *)"SunVector_CurrentPositionX_get", _wrap_SunVector_CurrentPositionX_get, METH_VARARGS, NULL},
-	 { (char *)"SunVector_CurrentPositionY_set", _wrap_SunVector_CurrentPositionY_set, METH_VARARGS, NULL},
-	 { (char *)"SunVector_CurrentPositionY_get", _wrap_SunVector_CurrentPositionY_get, METH_VARARGS, NULL},
-	 { (char *)"SunVector_Angle_set", _wrap_SunVector_Angle_set, METH_VARARGS, NULL},
-	 { (char *)"SunVector_Angle_get", _wrap_SunVector_Angle_get, METH_VARARGS, NULL},
-	 { (char *)"SunVector_Speed_set", _wrap_SunVector_Speed_set, METH_VARARGS, NULL},
-	 { (char *)"SunVector_Speed_get", _wrap_SunVector_Speed_get, METH_VARARGS, NULL},
-	 { (char *)"new_SunVector", _wrap_new_SunVector, METH_VARARGS, NULL},
-	 { (char *)"SunVector_Calculate", _wrap_SunVector_Calculate, METH_VARARGS, NULL},
-	 { (char *)"delete_SunVector", _wrap_delete_SunVector, METH_VARARGS, NULL},
-	 { (char *)"SunVector_swigregister", SunVector_swigregister, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
@@ -5814,108 +4590,68 @@ static swig_type_info _swigt__p_Actor = {"_p_Actor", "Actor *", 0, 0, (void*)0, 
 static swig_type_info _swigt__p_Pulse = {"_p_Pulse", 0, 0, 0, 0, 0};
 static swig_type_info _swigt__p_Npc = {"_p_Npc", 0, 0, 0, 0, 0};
 static swig_type_info _swigt__p_NonLiving = {"_p_NonLiving", 0, 0, 0, 0, 0};
-static swig_type_info _swigt__p_Building = {"_p_Building", "Building *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Console = {"_p_Console", "Console *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Element = {"_p_Element", "Element *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_EventType = {"_p_EventType", "EventType *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_GLuint = {"_p_GLuint", "GLuint *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_Map = {"_p_Map", "Map *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_ModelData = {"_p_ModelData", "ModelData *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Position = {"_p_Position", "Position *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_PositionF = {"_p_PositionF", "PositionF *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_Quaternion = {"_p_Quaternion", "Quaternion *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_SDL_Event = {"_p_SDL_Event", "SDL_Event *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_SDL_Surface = {"_p_SDL_Surface", "SDL_Surface *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_SunVector = {"_p_SunVector", "SunVector *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_TBFE = {"_p_TBFE", "TBFE *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_TBFE_Logic = {"_p_TBFE_Logic", "TBFE_Logic *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_TBFE_Render = {"_p_TBFE_Render", "TBFE_Render *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_TTF_Font = {"_p_TTF_Font", "TTF_Font *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Window = {"_p_Window", "Window *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_vectorT_Actor_p_t = {"_p_vectorT_Actor_p_t", "vector< Actor * > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_vectorT_Window_p_t = {"_p_vectorT_Window_p_t", "vector< Window * > *", 0, 0, (void*)0, 0};
 
 static swig_type_info *swig_type_initial[] = {
   &_swigt__p_Actor,
-  &_swigt__p_Building,
   &_swigt__p_Console,
   &_swigt__p_Element,
   &_swigt__p_EventType,
-  &_swigt__p_GLuint,
-  &_swigt__p_Map,
-  &_swigt__p_ModelData,
   &_swigt__p_NonLiving,
   &_swigt__p_Npc,
   &_swigt__p_Position,
   &_swigt__p_PositionF,
   &_swigt__p_Pulse,
-  &_swigt__p_Quaternion,
   &_swigt__p_SDL_Event,
-  &_swigt__p_SDL_Surface,
-  &_swigt__p_SunVector,
   &_swigt__p_TBFE,
   &_swigt__p_TBFE_Logic,
   &_swigt__p_TBFE_Render,
-  &_swigt__p_TTF_Font,
   &_swigt__p_Window,
   &_swigt__p_char,
-  &_swigt__p_vectorT_Actor_p_t,
-  &_swigt__p_vectorT_Window_p_t,
 };
 
 static swig_cast_info _swigc__p_Pulse[] = {{&_swigt__p_Pulse, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Npc[] = {{&_swigt__p_Npc, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_NonLiving[] = {{&_swigt__p_NonLiving, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Actor[] = {  {&_swigt__p_Actor, 0, 0, 0},  {&_swigt__p_Pulse, _p_PulseTo_p_Actor, 0, 0},  {&_swigt__p_Npc, _p_NpcTo_p_Actor, 0, 0},  {&_swigt__p_NonLiving, _p_NonLivingTo_p_Actor, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_Building[] = {  {&_swigt__p_Building, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Console[] = {  {&_swigt__p_Console, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Element[] = {  {&_swigt__p_Element, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_EventType[] = {  {&_swigt__p_EventType, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GLuint[] = {  {&_swigt__p_GLuint, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_Map[] = {  {&_swigt__p_Map, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_ModelData[] = {  {&_swigt__p_ModelData, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Position[] = {  {&_swigt__p_Position, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_PositionF[] = {  {&_swigt__p_PositionF, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_Quaternion[] = {  {&_swigt__p_Quaternion, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_SDL_Event[] = {  {&_swigt__p_SDL_Event, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_SDL_Surface[] = {  {&_swigt__p_SDL_Surface, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_SunVector[] = {  {&_swigt__p_SunVector, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_TBFE[] = {  {&_swigt__p_TBFE, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_TBFE_Logic[] = {  {&_swigt__p_TBFE_Logic, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_TBFE_Render[] = {  {&_swigt__p_TBFE_Render, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_TTF_Font[] = {  {&_swigt__p_TTF_Font, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Window[] = {  {&_swigt__p_Window, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_vectorT_Actor_p_t[] = {  {&_swigt__p_vectorT_Actor_p_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_vectorT_Window_p_t[] = {  {&_swigt__p_vectorT_Window_p_t, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_Actor,
-  _swigc__p_Building,
   _swigc__p_Console,
   _swigc__p_Element,
   _swigc__p_EventType,
-  _swigc__p_GLuint,
-  _swigc__p_Map,
-  _swigc__p_ModelData,
   _swigc__p_NonLiving,
   _swigc__p_Npc,
   _swigc__p_Position,
   _swigc__p_PositionF,
   _swigc__p_Pulse,
-  _swigc__p_Quaternion,
   _swigc__p_SDL_Event,
-  _swigc__p_SDL_Surface,
-  _swigc__p_SunVector,
   _swigc__p_TBFE,
   _swigc__p_TBFE_Logic,
   _swigc__p_TBFE_Render,
-  _swigc__p_TTF_Font,
   _swigc__p_Window,
   _swigc__p_char,
-  _swigc__p_vectorT_Actor_p_t,
-  _swigc__p_vectorT_Window_p_t,
 };
 
 
@@ -6509,18 +5245,6 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  PyDict_SetItemString(d,(char*)"cvar", SWIG_globals());
-  SWIG_addvarlink(SWIG_globals(),(char*)"ActorList",Swig_var_ActorList_get, Swig_var_ActorList_set);
-  SWIG_addvarlink(SWIG_globals(),(char*)"WindowList",Swig_var_WindowList_get, Swig_var_WindowList_set);
-  SWIG_addvarlink(SWIG_globals(),(char*)"MainConsole",Swig_var_MainConsole_get, Swig_var_MainConsole_set);
-  SWIG_addvarlink(SWIG_globals(),(char*)"TileSize",Swig_var_TileSize_get, Swig_var_TileSize_set);
-  SWIG_addvarlink(SWIG_globals(),(char*)"NumberOfActors",Swig_var_NumberOfActors_get, Swig_var_NumberOfActors_set);
-  SWIG_addvarlink(SWIG_globals(),(char*)"KeyControl",Swig_var_KeyControl_get, Swig_var_KeyControl_set);
-  SWIG_addvarlink(SWIG_globals(),(char*)"CurrentMap",Swig_var_CurrentMap_get, Swig_var_CurrentMap_set);
-  SWIG_addvarlink(SWIG_globals(),(char*)"Time",Swig_var_Time_get, Swig_var_Time_set);
-  SWIG_addvarlink(SWIG_globals(),(char*)"GameSpeed",Swig_var_GameSpeed_get, Swig_var_GameSpeed_set);
-  SWIG_addvarlink(SWIG_globals(),(char*)"ScreenDimensions",Swig_var_ScreenDimensions_get, Swig_var_ScreenDimensions_set);
-  SWIG_addvarlink(SWIG_globals(),(char*)"showCollision",Swig_var_showCollision_get, Swig_var_showCollision_set);
 #if PY_VERSION_HEX >= 0x03000000
   return m;
 #else

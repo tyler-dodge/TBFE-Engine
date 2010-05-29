@@ -11,7 +11,6 @@
 #include <sstream>
 #include "misc/Structs.h"
 #include "misc/StringConversion.h"
-#include "actor/Building.h"
 #include <vector>
 using namespace std;
 
@@ -43,7 +42,6 @@ class TBFE
   void addActor(Actor*);
   bool removeActor(Actor *);
   void addWindow(Window *);
-  void addBuilding(Building);
   bool addTileSet(std::string);
   void addEvent(std::string,Element *, Window *,std::string,Event);
   EventType * getEvent(std::string);

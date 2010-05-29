@@ -69,102 +69,6 @@ except AttributeError:
 import Actor
 import Misc
 import Map
-
-def DeleteAnimationSheets():
-  return _TBFE.DeleteAnimationSheets()
-DeleteAnimationSheets = _TBFE.DeleteAnimationSheets
-
-def DeleteTempSheets():
-  return _TBFE.DeleteTempSheets()
-DeleteTempSheets = _TBFE.DeleteTempSheets
-
-def GetActorNum(*args):
-  return _TBFE.GetActorNum(*args)
-GetActorNum = _TBFE.GetActorNum
-
-def GetActorByNum(*args):
-  return _TBFE.GetActorByNum(*args)
-GetActorByNum = _TBFE.GetActorByNum
-
-def CheckModels(*args):
-  return _TBFE.CheckModels(*args)
-CheckModels = _TBFE.CheckModels
-
-def CheckSheets(*args):
-  return _TBFE.CheckSheets(*args)
-CheckSheets = _TBFE.CheckSheets
-
-def GetSheetName(*args):
-  return _TBFE.GetSheetName(*args)
-GetSheetName = _TBFE.GetSheetName
-
-def GetTexture(*args):
-  return _TBFE.GetTexture(*args)
-GetTexture = _TBFE.GetTexture
-
-def GetFont():
-  return _TBFE.GetFont()
-GetFont = _TBFE.GetFont
-
-def SetFont(*args):
-  return _TBFE.SetFont(*args)
-SetFont = _TBFE.SetFont
-
-def GetCollisionTile():
-  return _TBFE.GetCollisionTile()
-GetCollisionTile = _TBFE.GetCollisionTile
-
-def SetCollisionTile(*args):
-  return _TBFE.SetCollisionTile(*args)
-SetCollisionTile = _TBFE.SetCollisionTile
-
-def GetMainPlayer():
-  return _TBFE.GetMainPlayer()
-GetMainPlayer = _TBFE.GetMainPlayer
-
-def SetMainPlayer(*args):
-  return _TBFE.SetMainPlayer(*args)
-SetMainPlayer = _TBFE.SetMainPlayer
-
-def GetKeyTarget():
-  return _TBFE.GetKeyTarget()
-GetKeyTarget = _TBFE.GetKeyTarget
-
-def SetKeyTarget(*args):
-  return _TBFE.SetKeyTarget(*args)
-SetKeyTarget = _TBFE.SetKeyTarget
-
-def getWindowByNum(*args):
-  return _TBFE.getWindowByNum(*args)
-getWindowByNum = _TBFE.getWindowByNum
-
-def getWindowNum(*args):
-  return _TBFE.getWindowNum(*args)
-getWindowNum = _TBFE.getWindowNum
-
-def getCameraAngle():
-  return _TBFE.getCameraAngle()
-getCameraAngle = _TBFE.getCameraAngle
-
-def setCameraAngle(*args):
-  return _TBFE.setCameraAngle(*args)
-setCameraAngle = _TBFE.setCameraAngle
-
-def rotateCamera(*args):
-  return _TBFE.rotateCamera(*args)
-rotateCamera = _TBFE.rotateCamera
-
-def getCameraFollowOffset():
-  return _TBFE.getCameraFollowOffset()
-getCameraFollowOffset = _TBFE.getCameraFollowOffset
-
-def setCameraFollowOffset(*args):
-  return _TBFE.setCameraFollowOffset(*args)
-setCameraFollowOffset = _TBFE.setCameraFollowOffset
-
-def getCameraOffset():
-  return _TBFE.getCameraOffset()
-getCameraOffset = _TBFE.getCameraOffset
 class TBFE(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, TBFE, name, value)
@@ -182,7 +86,6 @@ class TBFE(_object):
     def addActor(self, *args): return _TBFE.TBFE_addActor(self, *args)
     def removeActor(self, *args): return _TBFE.TBFE_removeActor(self, *args)
     def addWindow(self, *args): return _TBFE.TBFE_addWindow(self, *args)
-    def addBuilding(self, *args): return _TBFE.TBFE_addBuilding(self, *args)
     def addTileSet(self, *args): return _TBFE.TBFE_addTileSet(self, *args)
     def addEvent(self, *args): return _TBFE.TBFE_addEvent(self, *args)
     def getEvent(self, *args): return _TBFE.TBFE_getEvent(self, *args)
@@ -197,7 +100,6 @@ class TBFE(_object):
     __del__ = lambda self : None;
 TBFE_swigregister = _TBFE.TBFE_swigregister
 TBFE_swigregister(TBFE)
-cvar = _TBFE.cvar
 
 class TBFE_Render(_object):
     __swig_setmethods__ = {}
@@ -270,34 +172,6 @@ Console_swigregister(Console)
 def Console_setPyInterface(*args):
   return _TBFE.Console_setPyInterface(*args)
 Console_setPyInterface = _TBFE.Console_setPyInterface
-
-class SunVector(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, SunVector, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, SunVector, name)
-    __repr__ = _swig_repr
-    __swig_setmethods__["CurrentPositionX"] = _TBFE.SunVector_CurrentPositionX_set
-    __swig_getmethods__["CurrentPositionX"] = _TBFE.SunVector_CurrentPositionX_get
-    if _newclass:CurrentPositionX = _swig_property(_TBFE.SunVector_CurrentPositionX_get, _TBFE.SunVector_CurrentPositionX_set)
-    __swig_setmethods__["CurrentPositionY"] = _TBFE.SunVector_CurrentPositionY_set
-    __swig_getmethods__["CurrentPositionY"] = _TBFE.SunVector_CurrentPositionY_get
-    if _newclass:CurrentPositionY = _swig_property(_TBFE.SunVector_CurrentPositionY_get, _TBFE.SunVector_CurrentPositionY_set)
-    __swig_setmethods__["Angle"] = _TBFE.SunVector_Angle_set
-    __swig_getmethods__["Angle"] = _TBFE.SunVector_Angle_get
-    if _newclass:Angle = _swig_property(_TBFE.SunVector_Angle_get, _TBFE.SunVector_Angle_set)
-    __swig_setmethods__["Speed"] = _TBFE.SunVector_Speed_set
-    __swig_getmethods__["Speed"] = _TBFE.SunVector_Speed_get
-    if _newclass:Speed = _swig_property(_TBFE.SunVector_Speed_get, _TBFE.SunVector_Speed_set)
-    def __init__(self, *args): 
-        this = _TBFE.new_SunVector(*args)
-        try: self.this.append(this)
-        except: self.this = this
-    def Calculate(self, *args): return _TBFE.SunVector_Calculate(self, *args)
-    __swig_destroy__ = _TBFE.delete_SunVector
-    __del__ = lambda self : None;
-SunVector_swigregister = _TBFE.SunVector_swigregister
-SunVector_swigregister(SunVector)
 
 
 

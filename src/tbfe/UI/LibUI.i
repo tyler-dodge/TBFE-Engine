@@ -2,13 +2,13 @@
 %module UI
 %import "../misc/LibMisc.i"
 %{
-#include "Window.cpp"
-#include "Element.cpp"
-#include "Label.cpp"
-#include "StatBar.cpp"
-#include "ImageBox.cpp"
-#include "WindowCreate.cpp"
-#include "TextBox.cpp"
+#include "Window.h"
+#include "Element.h"
+#include "Label.h"
+#include "StatBar.h"
+#include "ImageBox.h"
+#include "WindowCreate.h"
+#include "TextBox.h"
 %}
 %include "Window.h"
 %include "Element.h"

@@ -12,7 +12,6 @@ class Actor;
 #include "Action.h"
 #include "Animation.h"
 #include "CollisionBox.h"
-#include "Inventory.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>

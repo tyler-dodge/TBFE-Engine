@@ -1,4 +1,5 @@
 from TbfePy import Tbfe, Misc, UI, Actor
+print(Tbfe.cvar)
 Tbfe.cvar.ScreenDimensions.X=1024
 Tbfe.cvar.ScreenDimensions.Y=600
 def getEngine():
