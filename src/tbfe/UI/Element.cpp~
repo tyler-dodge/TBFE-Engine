@@ -1,9 +1,0 @@
-#include "Element.h"
-Element::Element(int x,int y)
-{
-  setVisibility(true);
-  setPosition(x,y);
-};
-Element::~Element()
-{
-};

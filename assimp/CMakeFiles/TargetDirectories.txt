@@ -1,2 +1,0 @@
-/home/thecitystate/shooter/assimp/code/CMakeFiles/assimp.dir
-/home/thecitystate/shooter/assimp/tools/assimp_cmd/CMakeFiles/assimp_cmd.dir
