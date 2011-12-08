@@ -1,1 +1,0 @@
-/home/thecitystate/shooter/Python-2.6.5/Modules/_ctypes/libffi/src/x86/ffitarget.h
