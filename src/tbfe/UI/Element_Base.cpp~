@@ -1,7 +1,0 @@
-#include "Element_Base.h"
-Element_Base::Element_Base(int x,int y)
-{
-  Visible=true;
-  CurrentPosition.X=x;
-  CurrentPosition.Y=y;
-};
