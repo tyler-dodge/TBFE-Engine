@@ -1,6 +1,0 @@
-%module Interpreter
-%include<std_string.i>
-%{
-#include "InterpreterFuncs.cpp"
-%}
-%include "InterpreterFuncs.h"
