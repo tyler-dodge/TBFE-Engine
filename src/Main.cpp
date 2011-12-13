@@ -1,10 +1,10 @@
-#ifndef LUA_L
-#define LUA_L
-#endif
+#define PROPER_USAGE "Proper Usage: Tbfe LocalDirectory StartUp.py (relative to LocalDirectory) PythonLibs\n"
 #include <Python.h>
 #include <string>
 #include <iostream>
+#include <sstream>
 #include <stdlib.h>
+#include <exception>
 using namespace std;
 extern "C"
 {
@@ -16,15 +16,32 @@ extern "C"
 };
 int main(int argc,char* args[])
 {
-  Py_Initialize();
-  init_PyTbfe();
-  init_PyActor();
-  init_PyMap();
-  init_PyMisc();
-  init_PyUI();
-  FILE * newFile=fopen(args[1],"r");
-  PyRun_SimpleString("import sys;sys.path.append('./')");
-  PyRun_SimpleFile(newFile,args[1]);
-  Py_Finalize();
+  if (argc!=4)
+    {
+      printf(PROPER_USAGE);
+    }
+  else 
+    {
+      string localDirectory(args[1]);
+      if (localDirectory[localDirectory.size()-1]!='/')
+	localDirectory.push_back('/');
+      
+      Py_Initialize();
+      init_PyTbfe();
+      init_PyActor();
+      init_PyMap();
+      init_PyMisc();
+      init_PyUI();
+      stringstream initPython;
+      initPython << "import sys;sys.path.append('" << localDirectory << "');";
+      initPython << "sys.path.append('" << args[3] << "')";
+      PyRun_SimpleString(initPython.str().c_str());
+      initPython.str(string());
+      initPython << localDirectory << args[2];
+      const char * fileName=initPython.str().c_str();
+      FILE * newFile=fopen(fileName,"r");
+      PyRun_SimpleFile(newFile,fileName);
+      Py_Finalize();
+    }
   return 0;
 };

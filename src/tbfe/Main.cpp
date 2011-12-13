@@ -1,6 +1,8 @@
 #include "tbfe/Main.h"
-TBFE::TBFE()
+TBFE::TBFE(int dimensionX,int dimensionY)
 {
+  TBFE_Base::ScreenDimensions.X=dimensionX;
+  TBFE_Base::ScreenDimensions.Y=dimensionY;
   TBFE_Base::ActorList.resize(0);
   frame_=0;
   TBFE_Base::KeyControl=true;

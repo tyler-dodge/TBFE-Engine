@@ -37,7 +37,7 @@ class TBFE
   TBFE_Logic logic_;
  public:
   bool createFile(string);
-  TBFE();
+  TBFE(int dimensionX,int dimensionY);
   void changeMap(std::string);
   void initMap();
   Direction runEngine();

@@ -74,6 +74,7 @@ namespace TBFE_Base
 	  };
       };
     Model newModel;
+    newModel.Data=NULL;
     //newModel.Data=loadModel(source);
     if (newModel.Data==NULL)
       {
