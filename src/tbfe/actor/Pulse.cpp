@@ -1,4 +1,4 @@
-#include "Pulse.h"
+#include "tbfe/actor/Pulse.h"
 Pulse::Pulse(PositionF position, float size, Quaternion angle, float distance):Actor(position.X,position.Z)
 {
   addCollisionBox(PositionF(0.1f,0.0f,0.0f),PositionF(size,size,size));

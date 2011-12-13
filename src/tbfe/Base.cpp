@@ -1,4 +1,4 @@
-#include "Base.h"
+#include "tbfe/Base.h"
 /* Private TBFE_Base
    extern vector<AnimationSheet> AnimationSheets;
    extern Actor * MainPlayer;
@@ -74,7 +74,7 @@ namespace TBFE_Base
 	  };
       };
     Model newModel;
-    newModel.Data=loadModel(source);
+    //newModel.Data=loadModel(source);
     if (newModel.Data==NULL)
       {
 	return NULL;

@@ -1,4 +1,4 @@
-#include "Npc.h"
+#include "tbfe/actor/Npc.h"
 //(PositionX, PositionY, Hair, Facial Hair, Hair Color, Torso, Frame Lengths, Frames,
 //Number of Frames, Number Of Frame Sets)
 Npc::Npc():Actor(0,0)

@@ -1,4 +1,4 @@
-#include "Label.h"
+#include "tbfe/UI/Label.h"
 Label::Label(int x,int y,string text):Element(x,y)
 {
   textColor_.r=255;

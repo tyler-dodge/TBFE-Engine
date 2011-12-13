@@ -8,20 +8,20 @@
 using namespace std;
 extern "C"
 {
-  void init_TBFE(void);
-  void init_Actor(void);
-  void init_Map(void);
-  void init_Misc(void);
-  void init_UI(void);
+  void init_PyTbfe(void);
+  void init_PyActor(void);
+  void init_PyMap(void);
+  void init_PyMisc(void);
+  void init_PyUI(void);
 };
 int main(int argc,char* args[])
 {
   Py_Initialize();
-  init_TBFE();
-  init_Actor();
-  init_Map();
-  init_Misc();
-  init_UI();
+  init_PyTbfe();
+  init_PyActor();
+  init_PyMap();
+  init_PyMisc();
+  init_PyUI();
   FILE * newFile=fopen(args[1],"r");
   PyRun_SimpleString("import sys;sys.path.append('./')");
   PyRun_SimpleFile(newFile,args[1]);

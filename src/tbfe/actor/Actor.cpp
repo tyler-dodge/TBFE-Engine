@@ -1,4 +1,4 @@
-#include "Actor.h"
+#include "tbfe/actor/Actor.h"
 Actor::Actor (int PositionX,int PositionY)
     {
       currentAction_=NULL;
