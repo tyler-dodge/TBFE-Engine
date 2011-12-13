@@ -1,4 +1,4 @@
-#include "CollisionBox.h"
+#include "tbfe/actor/CollisionBox.h"
 CollisionBox::CollisionBox(PositionF offset,PositionF dimensions)
 {
   position_=offset;

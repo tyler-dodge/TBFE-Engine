@@ -1,4 +1,4 @@
-#include "Logic.h"
+#include "tbfe/Logic.h"
 TBFE_Logic::TBFE_Logic()
 {
   for (int i=0;i<311;i++)
@@ -13,33 +13,34 @@ void TBFE_Logic::playerMovement()
 {
   //PlayerMovement
   bool PlayerMoved=true;  
-  int PlayerNumber=TBFE_Base::GetActorNum(TBFE_Base::MainPlayer);
-  if (TBFE_Base::MainPlayer->getCurrentAction().getName()=="Walk" ||
-      TBFE_Base::MainPlayer->getCurrentAction().getName()=="None")
+  Actor * mainPlayer=TBFE_Base::GetMainPlayer();
+  int PlayerNumber=TBFE_Base::GetActorNum(mainPlayer);
+  if (mainPlayer->getCurrentAction().getName()=="Walk" ||
+      mainPlayer->getCurrentAction().getName()=="None")
     {
       if (keysDown_['w'])
 	{
-	  TBFE_Base::MainPlayer->changePosition(0);
+	  mainPlayer->changePosition(0);
 	}
       if (keysDown_['s'])
 	{
-	  TBFE_Base::MainPlayer->changePosition(180.0f);
+	  mainPlayer->changePosition(180.0f);
 	}
       if (keysDown_['d'])
 	{
-	  TBFE_Base::MainPlayer->changePosition(-90.0f);
+	  mainPlayer->changePosition(-90.0f);
 	}
       if (keysDown_['a'])
 	{
-	  TBFE_Base::MainPlayer->changePosition(90.0f);
+	  mainPlayer->changePosition(90.0f);
 	};
       if (keysDown_['q'])
 	{
-	  TBFE_Base::MainPlayer->rotate(Quaternion(0,1,0,5));
+	  mainPlayer->rotate(Quaternion(0,1,0,5));
 	};
       if (keysDown_['e'])
 	{
-	  TBFE_Base::MainPlayer->rotate(Quaternion(0,1,0,-5));
+	  mainPlayer->rotate(Quaternion(0,1,0,-5));
 	};
     };
 };

@@ -1,4 +1,4 @@
-#include "ImageBox.h"
+#include "tbfe/UI/ImageBox.h"
 ImageBox::ImageBox(int x,int y,string Source):Element(x,y)
 {
   intermediary_=NULL;

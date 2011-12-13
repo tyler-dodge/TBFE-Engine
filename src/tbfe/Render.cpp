@@ -1,9 +1,9 @@
-#include "Render.h"
+#include "tbfe/Render.h"
 TBFE_Render::TBFE_Render()
 {
   TTF_Init();
   init();
-  TBFE_Base::font=TTF_OpenFont("Images/UI/font.ttf",12);
+  TBFE_Base::SetFont(TTF_OpenFont("Images/UI/font.ttf",12));
   setLightPosition(0,0,0);
 };
 void TBFE_Render::setLightPosition(float x,float y,float z)
@@ -68,11 +68,11 @@ void TBFE_Render::init()
  };
 TBFE_Render::~TBFE_Render()
 {
-  TTF_CloseFont(TBFE_Base::font);
+  TTF_CloseFont(TBFE_Base::GetFont());
   TTF_Quit();
   SDL_Quit();
 };
-inline void TBFE_Render::initializeTileSets()
+void TBFE_Render::initializeTileSets()
 {
   //Tile Sets
   TBFE_Base::MainConsole.write("TileSets Loaded:");
@@ -116,7 +116,8 @@ void TBFE_Render::finalRender(bool doFlip)
   glMultMatrixf(cameraAngle.toMatrix().dataPointer());
   glTranslatef(cameraOffset.X,cameraOffset.Y,cameraOffset.Z);
   //glRotatef(-TBFE_Base::MainPlayer->getRotationF().Y,0,1,0);
-  glTranslatef(-TBFE_Base::MainPlayer->getPositionF().X/20,0,-TBFE_Base::MainPlayer->getPositionF().Z/20);
+  PositionF position(TBFE_Base::GetMainPlayer()->getPositionF());
+  glTranslatef(-position.X/20,0,-position.Z/20);
   renderActors();
   renderMapLayer(0,0,0);
   renderWindowList();
@@ -161,13 +162,13 @@ void TBFE_Render::refreshMapLayer(int Layer)
 	      map_.normals.push_back(0);
 	    };
 	  //bottom Right
-	  aiVector3D newCoord;
+	  PositionF newCoord;
 	  GLfloat vertex[]={tileSize*mapX,0,tileSize*mapY};
 	  map_.vertices.push_back(vertex[0]);
 	  map_.vertices.push_back(vertex[1]);
 	  map_.vertices.push_back(vertex[2]);
-	  newCoord.x=start.X;
-	  newCoord.y=start.Y;
+	  newCoord.X=start.X;
+	  newCoord.Y=start.Y;
 	  map_.texCoords.push_back(newCoord);
 	  //top right
 	  if (mapY==0)
@@ -184,8 +185,8 @@ void TBFE_Render::refreshMapLayer(int Layer)
 	  map_.vertices.push_back(vertex[0]); 
 	  map_.vertices.push_back(vertex[1]); 
 	  map_.vertices.push_back(vertex[2]);
-	  newCoord.x=start.X+end.X;
-	  newCoord.y=start.Y;
+	  newCoord.X=start.X+end.X;
+	  newCoord.Y=start.Y;
 	  map_.texCoords.push_back(newCoord);
 	  //Top Left
 	  if (mapX==0 || mapY==0)
@@ -202,8 +203,8 @@ void TBFE_Render::refreshMapLayer(int Layer)
 	  map_.vertices.push_back(vertex[0]); 
 	  map_.vertices.push_back(vertex[1]); 
 	  map_.vertices.push_back(vertex[2]);
-	  newCoord.x=start.X+end.X;
-	  newCoord.y=start.Y+end.Y;
+	  newCoord.X=start.X+end.X;
+	  newCoord.Y=start.Y+end.Y;
 	  map_.texCoords.push_back(newCoord);
 	  //Bottom Left
 	  if (mapX==0)
@@ -220,8 +221,8 @@ void TBFE_Render::refreshMapLayer(int Layer)
 	  map_.vertices.push_back(vertex[0]); 
 	  map_.vertices.push_back(vertex[1]); 
 	  map_.vertices.push_back(vertex[2]);
-	  newCoord.x=start.X;
-	  newCoord.y=start.Y+end.Y;
+	  newCoord.X=start.X;
+	  newCoord.Y=start.Y+end.Y;
 	  map_.texCoords.push_back(newCoord);
 	};
     };
@@ -240,7 +241,7 @@ int TBFE_Render::renderMapLayer(int x,int y, int Layer)
   glBindTexture(GL_TEXTURE_2D,tileSet_.at(0).texture);
   glVertexPointer(3,GL_FLOAT,0,&map_.vertices[0]);
   glNormalPointer(GL_FLOAT,0,&map_.normals[0]);
-  glTexCoordPointer(3,GL_FLOAT,sizeof(aiVector3D),&map_.texCoords[0]);
+  glTexCoordPointer(3,GL_FLOAT,sizeof(PositionF),&map_.texCoords[0]);
   GLfloat color[]={1.0f,1.0f,1.0f};
   glMaterialfv(GL_FRONT,GL_AMBIENT_AND_DIFFUSE,color);
   glDrawElements(GL_QUADS,map_.indices.size(),GL_UNSIGNED_INT,&map_.indices[0]);
@@ -259,7 +260,7 @@ void TBFE_Render::renderActors()
     {
       PositionF ActorPosition=TBFE_Base::ActorList.at(i)->getPositionF();
       Quaternion rotation=TBFE_Base::ActorList.at(i)->getRotation();
-      PositionF CurrentPosition=TBFE_Base::MainPlayer->getPositionF();
+      PositionF CurrentPosition=TBFE_Base::GetMainPlayer()->getPositionF();
       Actor * currentActor=TBFE_Base::ActorList.at(i);
       SDL_Rect Frame;
       Action action=currentActor->getCurrentAction();
@@ -274,8 +275,8 @@ void TBFE_Render::renderActors()
 	  model=animation->getModel();
 	  if (animation->getModel()!=NULL)
 	    {
-	      aiVector3D tposition(ActorPosition.X/20+layerOffset.X,ActorPosition.Y/20+layerOffset.Y,ActorPosition.Z/20+layerOffset.Z);
-	      aiVector3D tscale(0,0,0);
+	      PositionF tposition(ActorPosition.X/20+layerOffset.X,ActorPosition.Y/20+layerOffset.Y,ActorPosition.Z/20+layerOffset.Z);
+	      PositionF tscale(0,0,0);
 	      drawNodes(model,tposition,layerRotation*rotation,tscale);
 	    };
 	  if (TBFE_Base::showCollision)

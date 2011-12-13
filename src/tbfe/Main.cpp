@@ -1,4 +1,4 @@
-#include "Main.h"
+#include "tbfe/Main.h"
 TBFE::TBFE()
 {
   TBFE_Base::ActorList.resize(0);
@@ -7,8 +7,8 @@ TBFE::TBFE()
   time_=600;
   frameRate_.Start();
   quit_=false;
-  TBFE_Base::MainPlayer=createActor(1000,1000,"Player","Npc");
-  addActor(TBFE_Base::MainPlayer);
+  TBFE_Base::SetMainPlayer(createActor(1000,1000,"Player","Npc"));
+  addActor(TBFE_Base::GetMainPlayer());
   showMouse_=true;
   SDL_GetMouseState(&mousePosition_.X,&mousePosition_.Y);
   mouseMovement_.X=mousePosition_.X;
@@ -100,7 +100,7 @@ void TBFE::changeMap(std::string MapName)
   TBFE_Base::ActorList.resize(0);
   deleteCreatedActorList(false);
   TBFE_Base::CurrentMap.loadMap(MapName);
-  addActor(TBFE_Base::MainPlayer);
+  addActor(TBFE_Base::GetMainPlayer());
 };
 void TBFE::addActor(Actor *NewActor)
 {
@@ -290,11 +290,11 @@ Direction TBFE::runEngine()
       //Normal KeyBoard Events
       if (currentSdlEvent.type==SDL_KEYDOWN && logic_.isEventNew())
 	{	  
-	  if (TBFE_Base::KeyTarget!=NULL)
+	  if (TBFE_Base::GetKeyTarget()!=NULL)
 	    {
 	      char Letter=logic_.textInput(currentSdlEvent.key.keysym.sym,
 					   logic_.checkKeyDown(SDLK_LSHIFT));
-	      string text=TBFE_Base::KeyTarget->getProperty("text");
+	      string text=TBFE_Base::GetKeyTarget()->getProperty("text");
 	      if (Letter==1)
 		{
 		  int Size=text.size();
@@ -312,8 +312,8 @@ Direction TBFE::runEngine()
 		{
 		  text+=(int)Letter;
 		};
-	      TBFE_Base::KeyTarget->setProperty("text",text);
-	      TBFE_Base::KeyTarget->reload();  
+	      TBFE_Base::GetKeyTarget()->setProperty("text",text);
+	      TBFE_Base::GetKeyTarget()->reload();  
 	    };
 	  if (logic_.checkKeyDown(27))
 	    {
@@ -373,6 +373,6 @@ PositionF TBFE::getCameraPosition()
   PositionF cameraFollowOffset=TBFE_Base::getCameraFollowOffset()*20;
   Quaternion cameraAngle=TBFE_Base::getCameraAngle();
   PositionF tempAngle=(applyRotations(cameraFollowOffset,cameraAngle)+cameraOffset);
-  tempAngle=TBFE_Base::MainPlayer->getPositionF()-tempAngle;
+  tempAngle=TBFE_Base::GetMainPlayer()->getPositionF()-tempAngle;
   return tempAngle*-1;
 };

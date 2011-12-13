@@ -1,4 +1,4 @@
-#include "StatBar.h"
+#include "tbfe/UI/StatBar.h"
 StatBar::StatBar(int x,int y,string newSpecial):Element(x,y)
 {
   intermediary_=NULL;

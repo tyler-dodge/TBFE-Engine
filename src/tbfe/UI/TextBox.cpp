@@ -1,4 +1,4 @@
-#include "TextBox.h"
+#include "tbfe/UI/TextBox.h"
 TextBox::TextBox(int x,int y,string text):Element(x,y)
 {
   setProperty("text",nextSet(&text,'('));

@@ -1,4 +1,4 @@
-#include "ActorCreate.h"
+#include "tbfe/actor/ActorCreate.h"
 vector<ActorType> actorTypeList;
 vector<Actor *> CreatedActorList;
 void loadActors(std::string FileName)

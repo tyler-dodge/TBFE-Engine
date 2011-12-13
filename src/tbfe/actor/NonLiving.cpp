@@ -1,4 +1,4 @@
-#include "NonLiving.h"
+#include "tbfe/actor/NonLiving.h"
 NonLiving::NonLiving(int x, int y, ActorType NewType):Actor(x,y)
 {  
   setScriptSource(NewType.Script);

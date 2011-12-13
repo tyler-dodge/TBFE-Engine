@@ -1,6 +1,0 @@
-#include "Matrix.cpp"
-#include "PositionF.cpp"
-#include "Quaternion.cpp"
-#include "SdlFunctions.cpp"
-#include "StringConversion.cpp"
-#include "Timer.cpp"

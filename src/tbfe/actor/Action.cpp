@@ -1,4 +1,4 @@
-#include "Action.h"
+#include "tbfe/actor/Action.h"
 Action::Action(string name,string endScript)
 {
   setName(name);

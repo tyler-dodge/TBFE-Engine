@@ -1,4 +1,4 @@
-#include "SdlFunctions.h"
+#include "tbfe/misc/SdlFunctions.h"
 SDL_Surface *loadImage(std::string filename,bool UseA)
 {  
   if (SDL_WasInit(SDL_INIT_VIDEO)==0)
@@ -143,48 +143,6 @@ void applyImage(int x,int y,SDL_Surface* source, SDL_Rect* clip)
   glPopMatrix();
   glMatrixMode(GL_MODELVIEW);
 };
-ModelData * loadModel(string model)
-{
-  Assimp::Importer importer;
-  const aiScene * loadScene=importer.ReadFile(model.c_str(),aiProcess_CalcTangentSpace | aiProcess_JoinIdenticalVertices);
-  aiScene * scene=importer.GetOrphanedScene();
-  ModelData * data=new ModelData();
-  if (scene==NULL)
-    {
-      return NULL;
-    };
-  for (int i=0;i<scene->mNumMaterials;i++)
-    {
-      data->materials.push_back(scene->mMaterials[i]);
-    };
-  for (int i=0;i<scene->mNumMeshes;i++)
-    {
-      aiMesh * currentMesh=scene->mMeshes[i];
-      MeshData * newMesh=new MeshData();
-      for (int face=0;face<currentMesh->mNumFaces;face++)
-	{
-	  newMesh->indices.push_back(currentMesh->mFaces[face].mIndices[0]);
-	  newMesh->indices.push_back(currentMesh->mFaces[face].mIndices[1]);
-	  newMesh->indices.push_back(currentMesh->mFaces[face].mIndices[2]);
-	};
-      for (int i=0;i<currentMesh->mNumVertices;i++)
-	{
-	  newMesh->vertices.push_back(currentMesh->mVertices[i].x);
-	  newMesh->vertices.push_back(currentMesh->mVertices[i].y);
-	  newMesh->vertices.push_back(currentMesh->mVertices[i].z);
-	  if (currentMesh->HasTextureCoords(0))
-	    {
-	      newMesh->texCoords.push_back(currentMesh->mTextureCoords[0][i]);
-	    };
-	  newMesh->normals.push_back(currentMesh->mNormals[i].x);
-	  newMesh->normals.push_back(currentMesh->mNormals[i].y);
-	  newMesh->normals.push_back(currentMesh->mNormals[i].z);
-	};
-      newMesh->material=currentMesh->mMaterialIndex;
-      data->meshes.push_back(newMesh);
-    };
-  return data;
-};
 Uint32 getPixel( SDL_Surface *surface, int x, int y )
 {
   if (surface==NULL)
@@ -202,94 +160,11 @@ Uint32 getPixel( SDL_Surface *surface, int x, int y )
     //Get the requested pixel
     return pixels[ ( y * surface->w ) + x ];
 }
-void color4_to_float4(const struct aiColor4D *c, float f[4])
-{
-	f[0] = c->r;
-	f[1] = c->g;
-	f[2] = c->b;
-	f[3] = c->a;
-}
-
-void set_float4(float f[4], float a, float b, float c, float d)
-{
-	f[0] = a;
-	f[1] = b;
-	f[2] = c;
-	f[3] = d;
-}
-
-void applyMaterial(const struct aiMaterial *mtl)
-{
-	float c[4];
-
-	GLenum fill_mode;
-	int ret1, ret2;
-	struct aiColor4D diffuse;
-	struct aiColor4D specular;
-	struct aiColor4D ambient;
-	struct aiColor4D emission;
-	float shininess, strength;
-	int two_sided;
-	int wireframe;
-	int max;
-	set_float4(c, 0.8f, 0.8f, 0.8f, 1.0f);
-	if(AI_SUCCESS == aiGetMaterialColor(mtl, AI_MATKEY_COLOR_DIFFUSE, &diffuse))
-		color4_to_float4(&diffuse, c);
-	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, c);
-
-	set_float4(c, 0.0f, 0.0f, 0.0f, 1.0f);
-	if(AI_SUCCESS == aiGetMaterialColor(mtl, AI_MATKEY_COLOR_SPECULAR, &specular))
-		color4_to_float4(&specular, c);
-	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, c);
-
-	set_float4(c, 0.2f, 0.2f, 0.2f, 1.0f);
-	if(AI_SUCCESS == aiGetMaterialColor(mtl, AI_MATKEY_COLOR_AMBIENT, &ambient))
-		color4_to_float4(&ambient, c);
-	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, c);
-
-	set_float4(c, 0.0f, 0.0f, 0.0f, 1.0f);
-	if(AI_SUCCESS == aiGetMaterialColor(mtl, AI_MATKEY_COLOR_EMISSIVE, &emission))
-		color4_to_float4(&emission, c);
-	glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, c);
-
-	max = 1;
-	ret1 = aiGetMaterialFloatArray(mtl, AI_MATKEY_SHININESS, &shininess, (unsigned int *)&max);
-	max = 1;
-	ret2 = aiGetMaterialFloatArray(mtl, AI_MATKEY_SHININESS_STRENGTH, &strength, (unsigned int *)&max);
-	if((ret1 == AI_SUCCESS) && (ret2 == AI_SUCCESS))
-		glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, shininess * strength);
-	else {
-		glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.0f);
-		set_float4(c, 0.0f, 0.0f, 0.0f, 0.0f);
-		glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, c);
-	}
-
-	max = 1;
-	if(AI_SUCCESS == aiGetMaterialIntegerArray(mtl, AI_MATKEY_ENABLE_WIREFRAME, &wireframe, (unsigned int *)&max))
-		fill_mode = wireframe ? GL_LINE : GL_FILL;
-	else
-		fill_mode = GL_FILL;
-	glPolygonMode(GL_FRONT_AND_BACK, fill_mode);
-
-	max = 1;
-	glEnable(GL_CULL_FACE);
-	if (mtl->GetTextureCount(aiTextureType_DIFFUSE))
-	      {
-		aiString newString;
-		mtl->GetTexture(aiTextureType_DIFFUSE,0,&newString,NULL,NULL,NULL,NULL,NULL);
-		glBindTexture(GL_TEXTURE_2D,TBFE_Base::GetTexture(TBFE_Base::CheckSheets(newString.data)));      
-		glEnable(GL_TEXTURE_2D);
-  	      }
-	    else
-	      {
-		glDisable(GL_TEXTURE_2D);
-	      };
-};
-void drawNodes(ModelData * model, aiVector3D position,Quaternion rotation,aiVector3D scale)
+void drawNodes(ModelData * model, PositionF position,Quaternion rotation,PositionF scale)
 { 
   glPushMatrix();
   //glTranslatef(position[0],position[1],-position[2]);
-  glTranslatef(position[0],position[1],position[2]);
+  glTranslatef(position.X,position.Y,position.Z);
   glMultMatrixf(rotation.toMatrix().dataPointer());
   for (int i=0;i<model->meshes.size();i++)
     {
@@ -300,9 +175,8 @@ void drawNodes(ModelData * model, aiVector3D position,Quaternion rotation,aiVect
       glEnableClientState(GL_TEXTURE_COORD_ARRAY);
       glVertexPointer(3,GL_FLOAT,0,&currentMesh->vertices[0]);
       glNormalPointer(GL_FLOAT,0,&currentMesh->normals[0]);
-      glTexCoordPointer(3,GL_FLOAT,sizeof(aiVector3D),&currentMesh->texCoords[0]);
+      glTexCoordPointer(3,GL_FLOAT,sizeof(PositionF),&currentMesh->texCoords[0]);
       glDisable(GL_TEXTURE_2D);
-      applyMaterial(model->materials[currentMesh->material]);
       glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
       glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
       glDrawElements(GL_TRIANGLES,currentMesh->indices.size(),GL_UNSIGNED_INT,&currentMesh->indices[0]);

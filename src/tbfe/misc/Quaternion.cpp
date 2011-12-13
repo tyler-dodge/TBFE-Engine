@@ -1,4 +1,4 @@
-#include "Quaternion.h"
+#include "tbfe/misc/Quaternion.h"
 Quaternion::Quaternion(float newX,float newY,float newZ,float angle)
 {
   angle*=DEG_RAD;
