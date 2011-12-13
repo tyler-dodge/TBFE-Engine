@@ -1,6 +1,6 @@
 CC=gcc
-di=../debug/
-dirLibs=../libs/
+bin=bin/
+outputName=Tbfe
 fonts=font.ttf
 misc=$(tbfe)misc/
 ui=$(tbfe)UI/
@@ -33,11 +33,8 @@ objSwigFiles=$(subst $(include),$(objs),$(swigFiles:.i=.o))
 SHELL=/bin/sh
 DEFINES=
 .PHONY: clean
-test:$(objFiles) $(swigFiles:.i=.cxx) $(objSwigFiles)
-	echo $(swigFiles)
-	g++ $(objFiles) $(objSwigFiles) $(libDirs) $(libs)  -o test
-
-
+$(bin)$(outputName):$(objFiles) $(swigFiles:.i=.cxx) $(objSwigFiles)
+	g++ $(objFiles) $(objSwigFiles) $(libDirs) $(libs)  -o $@
 $(objs)%.d:$(src)%.cpp
 	$(CC) -MM $(libDirs) $(CPPFLAGS) $< -o $(objs)$*.P;
 	sed -r 's/$(notdir $*.o)/objs\/$(subst /,\/,$*.o)/g' < $(objs)$*.P > $(objs)$*.d;

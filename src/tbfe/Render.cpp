@@ -36,6 +36,7 @@ void TBFE_Render::initGl()
   glLightModelf(GL_LIGHT_MODEL_LOCAL_VIEWER,GL_TRUE);
   glEnable(GL_LIGHT0);
   GLfloat specular[4];
+  specular[3]=0.0f;
   specular[0]=0.3f;
   specular[1]=0.3f;
   specular[2]=0.3f;
@@ -62,7 +63,7 @@ void TBFE_Render::init()
       SDL_Init(SDL_INIT_EVERYTHING);
     };
   SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,8);
-  SDL_SetVideoMode(TBFE_Base::ScreenDimensions.X,TBFE_Base::ScreenDimensions.Y,32,SDL_OPENGL | SDL_FULLSCREEN );
+  SDL_SetVideoMode(TBFE_Base::ScreenDimensions.X,TBFE_Base::ScreenDimensions.Y,32,SDL_OPENGL );
   TBFE_Base::MainConsole.write("SDL initialized");
   initGl();
  };
@@ -233,22 +234,29 @@ void TBFE_Render::refreshMapLayer(int Layer)
 };
 int TBFE_Render::renderMapLayer(int x,int y, int Layer)
 {
-  glEnable(GL_TEXTURE_2D);
-  glEnable(GL_CULL_FACE);
-  glEnableClientState(GL_VERTEX_ARRAY);
-  glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-  glEnableClientState(GL_NORMAL_ARRAY);
-  glBindTexture(GL_TEXTURE_2D,tileSet_.at(0).texture);
-  glVertexPointer(3,GL_FLOAT,0,&map_.vertices[0]);
-  glNormalPointer(GL_FLOAT,0,&map_.normals[0]);
-  glTexCoordPointer(3,GL_FLOAT,sizeof(PositionF),&map_.texCoords[0]);
-  GLfloat color[]={1.0f,1.0f,1.0f};
-  glMaterialfv(GL_FRONT,GL_AMBIENT_AND_DIFFUSE,color);
-  glDrawElements(GL_QUADS,map_.indices.size(),GL_UNSIGNED_INT,&map_.indices[0]);
-  glDisableClientState(GL_VERTEX_ARRAY);
-  glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-  glDisableClientState(GL_NORMAL_ARRAY);
+  if (tileSet_.size()>Layer)
+    {
+      glEnable(GL_TEXTURE_2D);
+      glEnable(GL_CULL_FACE);
+      glEnableClientState(GL_VERTEX_ARRAY);
+      glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+      glEnableClientState(GL_NORMAL_ARRAY);
+      glBindTexture(GL_TEXTURE_2D,tileSet_.at(0).texture);
+      glVertexPointer(3,GL_FLOAT,0,&map_.vertices[0]);
+      glNormalPointer(GL_FLOAT,0,&map_.normals[0]);
+      glTexCoordPointer(3,GL_FLOAT,sizeof(PositionF),&map_.texCoords[0]);
+      GLfloat color[]={1.0f,1.0f,1.0f};
+      glMaterialfv(GL_FRONT,GL_AMBIENT_AND_DIFFUSE,color);
+      glDrawElements(GL_QUADS,map_.indices.size(),GL_UNSIGNED_INT,&map_.indices[0]);
+      glDisableClientState(GL_VERTEX_ARRAY);
+      glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+      glDisableClientState(GL_NORMAL_ARRAY);
   glDisable(GL_TEXTURE_2D);
+    }
+  else
+    {
+      TBFE_Base::MainConsole.write("Tile Set not initialized");
+    }
 };
 void TBFE_Render::renderActors()
 {
