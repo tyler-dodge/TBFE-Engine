@@ -11,7 +11,7 @@ void Map::generateMap(int x,int y)
 {
   tileSetNames_.resize(0);
   layers_.resize(0);
-  tileSetNames_.push_back("FarmTiles.png");
+  tileSetNames_.push_back("BaseTiles.png");
   TileLayer newLayer(x,y);
   Tile newTile;
   newTile.Type=2;

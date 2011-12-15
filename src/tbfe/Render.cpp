@@ -89,6 +89,7 @@ void TBFE_Render::initializeTileSets()
       SDL_Surface * texture=TBFE_Base::CheckSheets(tempString);
       TileSheet newTileSheet;
       newTileSheet.texture=TBFE_Base::GetTexture(texture);
+      cout << tempString << '\n';
       newTileSheet.dimensions.X=texture->w;
       newTileSheet.dimensions.Y=texture->h;
       tileSet_.push_back(newTileSheet);
