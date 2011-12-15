@@ -52,6 +52,7 @@ swigFiles=$(SwigHeaderDir)tbfe/PyTbfe.i $(SwigHeaderDir)tbfe/actor/PyActor.i $(S
 objSwigFiles=$(subst $(include),$(objs),$(swigFiles:.i=.o))
 .PHONY: clean
 $(bin)$(outputName):$(objFiles) $(swigFiles:.i=.cxx) $(objSwigFiles) #Final Linking Stage
+	mkdir -p $(dir $@)
 	g++ $(objFiles) $(objSwigFiles) $(libDirs) $(libs)  -o $@
 
 
@@ -60,6 +61,7 @@ include $(objFiles:.o=.d)
 
 #Dependency generation for source files 
 $(objs)%.d:$(src)%.cpp 
+	mkdir -p $(dir $@)
 	$(CC) -MM $(libDirs) $(CPPFLAGS) $< -o $(objs)$*.P;
 	sed -r 's/$(notdir $*.o)/objs\/$(subst /,\/,$*.o)/g' < $(objs)$*.P > $(objs)$*.d;
 	rm $(objs)$*.P
@@ -69,7 +71,8 @@ $(objs)%.d:$(src)%.cpp
 include $(objSwigFiles:.o=.d)
 
 #Dependency generation for swig files 
-$(objs)%.d:$(include)%.cxx 
+$(objs)%.d:$(include)%.cxx
+	mkdir -p $(dir $@) 
 	$(CC) -MM $(libDirs) $(CPPFLAGS) $< -o $(objs)$*.P;
 	sed -r 's/$(notdir $*.o)/objs\/$(subst /,\/,$*.o)/g' < $(objs)$*.P > $(objs)$*.d;
 	rm $(objs)$*.P
@@ -77,15 +80,19 @@ $(objs)%.d:$(include)%.cxx
 
 #Compile instructions for source files
 $(objs)%.o:$(src)%.cpp 
+	mkdir -p $(dir $@)
 	g++ -g -c $(libDirs) $(DEFINES) $< -o $@
 
 #Compile instructions for swig files
 $(objs)%.o:$(include)%.cxx 
+	mkdir -p $(dir $@)
 	g++ -g -c $(libDirs) $(DEFINES) $< -o $@
 
 #Swig header generation
 $(swigFiles:.i=.cxx):%.cxx:%.i; 
+	mkdir -p $(dir $@)
 	$(Swig) $(SwigArgs) -o $@ -I$(SwigHeaderDir) $<
+	mkdir -p $(tbfePy)
 	mv $(@:.cxx=.py) $(tbfePy)
 clean:
 	rm $(objFiles)
