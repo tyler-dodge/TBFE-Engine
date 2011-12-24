@@ -1,4 +1,3 @@
-SHELL=/bin/sh
 CC=gcc
 bin=bin/
 outputName=Tbfe
@@ -7,6 +6,7 @@ misc=$(tbfe)misc/
 ui=$(tbfe)UI/
 actor=$(tbfe)actor/
 map=$(tbfe)map/
+raster=$(tbfe)raster/
 objs=objs/
 tbfe=$(src)tbfe/
 tbfePy=TbfePy/
@@ -23,23 +23,24 @@ SwigHeaderDir=include/
 srcInterpreter=$(src)Main.cpp
 
 #Tbfe source files
-srcTbfe=$(tbfe)Base.cpp $(tbfe)Console.cpp $(tbfe)Logic.cpp $(tbfe)Main.cpp $(tbfe)Render.cpp
+srcTbfe=$(tbfe)Console.cpp $(tbfe)Logic.cpp $(tbfe)Main.cpp $(tbfe)Render.cpp $(tbfe)Camera.cpp
 
 #Actor source files
-srcActor=$(actor)Actor.cpp $(actor)Action.cpp $(actor)ActorCreate.cpp  $(actor)Animation.cpp \
-	 $(actor)CollisionBox.cpp $(actor)NonLiving.cpp $(actor)Npc.cpp $(actor)Pulse.cpp
+srcActor=$(actor)Actor.cpp $(actor)Action.cpp $(actor)Animation.cpp \
+	 $(actor)CollisionBox.cpp $(actor)NonLiving.cpp $(actor)Npc.cpp
 
 #Map source files 
 srcMap=$(map)Map.cpp $(map)OverMap.cpp $(map)TileLayer.cpp
 
 #Misc source files
-srcMisc=$(misc)Matrix.cpp $(misc)PositionF.cpp $(misc)Quaternion.cpp $(misc)SdlFunctions.cpp $(misc)StringConversion.cpp $(misc)Timer.cpp
+srcMisc=$(misc)Matrix.cpp $(misc)Position.cpp $(misc)Quaternion.cpp $(misc)SdlFunctions.cpp $(misc)StringConversion.cpp $(misc)Timer.cpp
 
 #Ui source files
-srcUi=$(ui)Element.cpp $(ui)ImageBox.cpp $(ui)Label.cpp $(ui)StatBar.cpp $(ui)TextBox.cpp $(ui)Window.cpp $(ui)WindowCreate.cpp
+srcUi=$(ui)Element.cpp $(ui)ImageBox.cpp $(ui)Label.cpp $(ui)StatBar.cpp $(ui)TextBox.cpp $(ui)Window.cpp
 
+srcRaster=$(raster)Model.cpp $(raster)Renderable.cpp $(raster)RenderParameters.cpp $(raster)RenderPipeline.cpp
 #engine source files
-srcFiles=$(srcInterpreter) $(srcTbfe) $(srcActor) $(srcMap) $(srcMisc) $(srcUi)
+srcFiles=$(srcInterpreter) $(srcTbfe) $(srcActor) $(srcMap) $(srcMisc) $(srcUi) $(srcRaster)
 
 #Compiled source files
 objFiles=$(subst $(src),$(objs),$(srcFiles:.cpp=.o))
@@ -57,18 +58,18 @@ $(bin)$(outputName):$(objFiles) $(swigFiles:.i=.cxx) $(objSwigFiles) #Final Link
 
 
 #Uses makefiles created by dependency generation for source files
-include $(objFiles:.o=.d)
+-include $(objFiles:.o=.d)
 
+#used to ignore removed header files in auto dependency generation
+%.h:
+	#Does Nothing if header file does not exist
 #Dependency generation for source files 
-$(objs)%.d:$(src)%.cpp 
+ifneq ($(MAKECMDGOALS),clean)
+$(objs)%.d:$(include)%.h 
 	mkdir -p $(dir $@)
 	$(CC) -MM $(libDirs) $(CPPFLAGS) $< -o $(objs)$*.P;
 	sed -r 's/$(notdir $*.o)/objs\/$(subst /,\/,$*.o)/g' < $(objs)$*.P > $(objs)$*.d;
 	rm $(objs)$*.P
-
-
-#Uses makefiles created by dependency generation for swig files
-include $(objSwigFiles:.o=.d)
 
 #Dependency generation for swig files 
 $(objs)%.d:$(include)%.cxx
@@ -76,6 +77,11 @@ $(objs)%.d:$(include)%.cxx
 	$(CC) -MM $(libDirs) $(CPPFLAGS) $< -o $(objs)$*.P;
 	sed -r 's/$(notdir $*.o)/objs\/$(subst /,\/,$*.o)/g' < $(objs)$*.P > $(objs)$*.d;
 	rm $(objs)$*.P
+-include $(objSwigFiles:.o=.d)
+endif
+
+
+#Uses makefiles created by dependency generation for swig files
 
 
 #Compile instructions for source files
@@ -95,6 +101,7 @@ $(swigFiles:.i=.cxx):%.cxx:%.i;
 	mkdir -p $(tbfePy)
 	mv $(@:.cxx=.py) $(tbfePy)
 clean:
-	rm $(objFiles)
-	rm $(swigFiles:.i=.cxx)
-	rm $(addprefix $(tbfePy),$(notdir $(swigFiles:.i=.py)))
+	rm -f $(objFiles)
+	rm -f $(objFiles:.o=.d)
+	rm -f $(swigFiles:.i=.cxx)
+	rm -f $(addprefix $(tbfePy),$(notdir $(swigFiles:.i=.py)))
