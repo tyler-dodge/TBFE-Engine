@@ -33,7 +33,7 @@ srcActor=$(actor)Actor.cpp $(actor)Action.cpp $(actor)Animation.cpp \
 srcMap=$(map)Map.cpp $(map)OverMap.cpp $(map)TileLayer.cpp
 
 #Misc source files
-srcMisc=$(misc)Matrix.cpp $(misc)Position.cpp $(misc)Quaternion.cpp $(misc)SdlFunctions.cpp $(misc)StringConversion.cpp $(misc)Timer.cpp $(misc)TFont.cpp
+srcMisc=$(misc)Matrix.cpp $(misc)Position.cpp $(misc)Quaternion.cpp $(misc)SdlFunctions.cpp $(misc)StringConversion.cpp $(misc)Timer.cpp $(misc)TFont.cpp $(misc)Texture.cpp
 
 #Ui source files
 srcUi=$(ui)Element.cpp $(ui)ImageBox.cpp $(ui)Label.cpp $(ui)StatBar.cpp $(ui)TextBox.cpp $(ui)Window.cpp

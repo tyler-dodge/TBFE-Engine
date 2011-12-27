@@ -1,15 +1,18 @@
 #ifndef Texture_L
 #define Texture_L
-#include<boost/python.hpp>
+#include "SDL/SDL_opengl.h"
 #include<string>
+#include "tbfe/misc/DirectoryFactory.h"
 class Texture
 {
  private:
   GLuint texture;
+  class TextureFactory;
+  static TextureFactory factory;
+  Texture(std::string name);
+  bool isValid;
  public:
   static DirectoryFactory<Texture> * getFactory();
-  Texture(string name);
-  ~Texture();
   void apply();
   
 };
