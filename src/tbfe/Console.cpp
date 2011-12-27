@@ -7,6 +7,7 @@ Console::~Console()
 {
 };
 int Console::pyInterface_=0;
+Console Console::console;
 void Console::errorMessage(int ErrorNumber,string Item)
 {
   stringstream Message;
@@ -63,3 +64,7 @@ void Console::setPyInterface(int newNum)
 {
   pyInterface_=newNum;
 };
+Console * Console::Instance()
+{
+  return &console;
+}

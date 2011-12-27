@@ -9,12 +9,10 @@ TBFE_Logic::TBFE_Logic()
 TBFE_Logic::~TBFE_Logic()
 {
 };
-void TBFE_Logic::playerMovement()
+void TBFE_Logic::playerMovement(Actor * mainPlayer)
 {
   //PlayerMovement
   bool PlayerMoved=true;  
-  Actor * mainPlayer=TBFE_Base::GetMainPlayer();
-  int PlayerNumber=TBFE_Base::GetActorNum(mainPlayer);
   if (mainPlayer->getCurrentAction().getName()=="Walk" ||
       mainPlayer->getCurrentAction().getName()=="None")
     {
@@ -50,16 +48,16 @@ char TBFE_Logic::textInput(int KeyPress,bool ShiftDown)
   char Letter=0;
   //Text check
   if (
-      (KeyPress>=(char)97 && KeyPress<=(char)122 ||
+      (KeyPress>=(char)'a' && KeyPress<=(char)'z' ||
        KeyPress==SDLK_PERIOD) ||
-      (KeyPress>=(char)40 && KeyPress<=(char)63) ||
+      (KeyPress>=(char)40 && KeyPress<=(char)'?') ||
       KeyPress==32 || KeyPress==39
       )
     {
       if (ShiftDown==true && 
-	  KeyPress>=(char)97 && KeyPress<=(char)122)
+	  KeyPress>='a' && KeyPress<='z')
 	{
-	  Letter=(char)(KeyPress-32);
+	  Letter=(char)(KeyPress-('A'-'a'));
 	}
       else if (ShiftDown==true && 
 	       KeyPress>=(char)39 && KeyPress<=(char)61)
@@ -164,3 +162,12 @@ void TBFE_Logic::setKeyDown(int key,bool newSetting)
     };
   keysDown_[key]=newSetting;
 };
+Element * TBFE_Logic::Get_Key_Target()
+{
+  return KeyTarget_;
+}
+void TBFE_Logic::Update_Key_Target_Text(int letter)
+{
+  Element * target=Get_Key_Target();
+  target->setProperty("text",(const char *)textInput(letter,checkKeyDown(SDLK_LSHIFT)));
+}

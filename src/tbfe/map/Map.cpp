@@ -27,7 +27,7 @@ bool Map::loadMap(string filename)
     {
       return false;
     };
-  Position dimensions;
+  PositionI dimensions;
   dimensions.X=NewMapData.get();
   dimensions.Y=NewMapData.get();
   scriptFile_=loadString(&NewMapData,(char)3);
@@ -51,15 +51,15 @@ bool Map::loadMap(string filename)
       addLayer(newLayer);
       string LayerString=loadString(&NewMapData,'|');
     } while (LayerString!="");
-  TBFE_Base::MainConsole.write("Map Scripts");
-  TBFE_Base::MainConsole.write("===========");
-  TBFE_Base::MainConsole.execute("Maps/"+scriptFile_);
-  TBFE_Base::MainConsole.write("===========");
+  CONSOLE_WRITE("Map Scripts");
+  CONSOLE_WRITE("===========");
+  CONSOLE_RUN_FILE("Maps/"+scriptFile_);
+  CONSOLE_WRITE("===========");
   return true;
 };
 bool Map::dumpMap(string filename)
 {
-  Position dimensions=layers_.at(0).getDimensions();
+  PositionI dimensions=layers_.at(0).getDimensions();
   ofstream NewMapData(filename.c_str(),ofstream::binary);
   NewMapData.put((char)dimensions.X);
   NewMapData.put((char)dimensions.Y);
@@ -134,13 +134,13 @@ void Map::addTileSet(string newTileSet)
 {
   tileSetNames_.push_back(newTileSet);
 };
-Position Map::getDimensions()
+PositionI Map::getDimensions()
 {
   if (layers_.size()>0)
     {
       return layers_.at(0).getDimensions();
     };
-  Position newDimensions;
+  PositionI newDimensions;
   newDimensions.X=0;
   newDimensions.Y=0;
   return newDimensions;

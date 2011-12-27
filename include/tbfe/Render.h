@@ -9,14 +9,12 @@
 #include "tbfe/misc/SdlFunctions.h"
 //#include "SunVector.h"
 #include "tbfe/UI/Window.h"
-#include "tbfe/Base.h"
 #include "tbfe/actor/Actor.h"
-#include "tbfe/Base.h"
 #include <vector>
 class TBFE_Render
 {
  private: 
-  Position offset_;
+  PositionI offset_;
   vector<TileSheet> tileSet_;
   void renderActors();
   void renderWindowList();
@@ -24,11 +22,13 @@ class TBFE_Render
   void renderForeground(int,int,bool);
   GLfloat lightPosition_[4];
   MeshData map_;
+  PositionI dimensions_;
+  TTF_Font * font_;
  public:
   void refreshMapLayer(int);
-  TBFE_Render();
+  TBFE_Render(int,int);
   ~TBFE_Render();
-  void initializeTileSets();
+  void initializeTileSets(Map *);
   bool addTileSet(string);
   void init();
   void initGl();

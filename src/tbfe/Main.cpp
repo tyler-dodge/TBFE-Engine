@@ -1,31 +1,22 @@
 #include "tbfe/Main.h"
-TBFE::TBFE(int dimensionX,int dimensionY)
+TBFE::TBFE(int dimensionX,int dimensionY) :
+  renderWindow_(dimensionX,dimensionY), frame_(0), quit_(false)
 {
-  TBFE_Base::ScreenDimensions.X=dimensionX;
-  TBFE_Base::ScreenDimensions.Y=dimensionY;
-  TBFE_Base::ActorList.resize(0);
   frame_=0;
-  TBFE_Base::KeyControl=true;
   time_=600;
   frameRate_.Start();
   quit_=false;
-  TBFE_Base::SetMainPlayer(createActor(1000,1000,"Player","Npc"));
-  addActor(TBFE_Base::GetMainPlayer());
   showMouse_=true;
   SDL_GetMouseState(&mousePosition_.X,&mousePosition_.Y);
   mouseMovement_.X=mousePosition_.X;
   mouseMovement_.Y=mousePosition_.Y;
-  mouseCenter_.X=TBFE_Base::ScreenDimensions.X/2;
-  mouseCenter_.Y=TBFE_Base::ScreenDimensions.Y/2;
-  return;
+  mouseCenter_.X=dimensionX/2;
+  mouseCenter_.Y=dimensionY/2;
 };
 TBFE::~TBFE()
 {
-  deleteWindowList();
-  deleteCreatedActorList();
-  TBFE_Base::DeleteAnimationSheets();
 };
-Position TBFE::getMouseCenter()
+PositionI TBFE::getMouseCenter()
 {
   return mouseCenter_;
 };
@@ -50,16 +41,17 @@ void TBFE::addEvent(std::string Target,Element * element,Window * Parent,std::st
   NewEvent.Enabled=true;
   if (NewEvent.TargetElement==NULL)
     {
-      TBFE_Base::MainConsole.write("Element does not exist");
-      return;
+      CONSOLE_WRITE("Element does not exist");
     }
   else if (NewEvent.Parent==NULL)
     {
-      TBFE_Base::MainConsole.write("Parent Window does not exist");
-      return;
-    };
-  eventList_.push_back(NewEvent);
-};
+      CONSOLE_WRITE("Parent Window does not exist");
+    }
+  else
+    {
+      eventList_.push_back(NewEvent);
+    }
+}
 void TBFE::addGlobalEvent(std::string Target,Event TargetEvent, int Key,std::string Function)
 {
   EventType NewEvent;
@@ -77,10 +69,10 @@ bool TBFE::addTileSet(std::string Source)
   
   if (renderWindow_.addTileSet("Images/TileSets/"+Source))
     {
-      TBFE_Base::MainConsole.write("    File Does not exist");
+      CONSOLE_WRITE("    File Does not exist");
       return false;
     };
-  TBFE_Base::CurrentMap.addTileSet(Source);  
+  Current_Map->addTileSet(Source);  
 };
 EventType * TBFE::getEvent(std::string Name)
 {
@@ -94,33 +86,51 @@ EventType * TBFE::getEvent(std::string Name)
   return NULL;
 };
 void TBFE::initMap()
-{
-  renderWindow_.initializeTileSets();
+{ 
 };
 void TBFE::changeMap(std::string MapName)
 {
-  TBFE_Base::ActorList.resize(0);
-  deleteCreatedActorList(false);
-  TBFE_Base::CurrentMap.loadMap(MapName);
-  addActor(TBFE_Base::GetMainPlayer());
+  actors.resize(0);
+  Current_Map->loadMap(MapName);
+  addActor(Main_Player);
 };
 void TBFE::addActor(Actor *NewActor)
 {
   if (NewActor!=NULL)
     {
-      TBFE_Base::ActorList.push_back(NewActor);
+      actors.push_back(NewActor);
     }
   else
     {
-      TBFE_Base::MainConsole.write("   Actor is equal to NULL");
+      CONSOLE_WRITE("   Actor is equal to NULL");
     };
 };
+int TBFE::Get_Actor_Num(Actor *actorPtr)
+{
+  vector<Actor *>::iterator it;
+  for (it=actors.begin();it<actors.end();it++)
+    {
+      if (*it==actorPtr) {
+	return it-actors.begin();
+      }
+    }
+}
+int TBFE::Get_Window_Num(Window *window)
+{
+  vector<Window *>::iterator it;
+  for (it=windows.begin();it<windows.end();it++)
+    {
+      if (*it==window) {
+	return it-windows.begin();
+      }
+    }
+}
 bool TBFE::removeActor(Actor *actorPtr)
 {
-  int actor=TBFE_Base::GetActorNum(actorPtr);
-  if (actor!=-1 || TBFE_Base::ActorList.size()>actor)
+  int actor=Get_Actor_Num(actorPtr);
+  if (actor!=-1 || actors.size()>actor)
     {
-      TBFE_Base::ActorList.erase(TBFE_Base::ActorList.begin()+actor);
+      actors.erase(actors.begin()+actor);
       return true;
     };
   return false;
@@ -129,12 +139,12 @@ void TBFE::addWindow(Window *NewWindow)
 {
   if (NewWindow!=NULL)
     {
-      TBFE_Base::MainConsole.write("New Window added");
-      TBFE_Base::WindowList.push_back(NewWindow);
+      CONSOLE_WRITE("New Window added");
+      windows.push_back(NewWindow);
     }
   else
     {
-      TBFE_Base::MainConsole.write("   Window is equal to NULL");
+      CONSOLE_WRITE("   Window is equal to NULL");
     };
 };
 void TBFE::checkEvents()
@@ -146,9 +156,9 @@ void TBFE::checkEvents()
       EventType  * currentEvent=&eventList_.at(i);
       if (currentEvent->Enabled)
 	{
-	  Position eventPosition;
-	  Position screenPosition;
-	  Position elementDimensions;
+	  PositionI eventPosition;
+	  PositionI screenPosition;
+	  PositionI elementDimensions;
 	  if (currentEvent->TargetElement!=NULL)
 	    {
 	      eventPosition=currentEvent->TargetElement->getPosition();
@@ -177,9 +187,9 @@ void TBFE::checkEvents()
 		  )
 		{
 		  stringstream windowString;
-		  windowString << "elementTarget=Tbfe.getWindowByNum(" << TBFE_Base::getWindowNum(currentEvent->Parent) << ")";
-		  TBFE_Base::MainConsole.runLine(windowString.str().c_str());
-		  TBFE_Base::MainConsole.runLine(currentEvent->Function.c_str());
+		  windowString << "elementTarget=Tbfe.getWindowByNum(" << Get_Window_Num(currentEvent->Parent) << ")";
+		  Console::Instance()->runLine(windowString.str().c_str());
+		  Console::Instance()->runLine(currentEvent->Function.c_str());
 		};
 	      break;
 	    case MOUSEHOLD:
@@ -196,9 +206,9 @@ void TBFE::checkEvents()
 		  )
 		{
 		  stringstream windowString;
-		  windowString << "elementTarget=Tbfe.getWindowByNum(" << TBFE_Base::getWindowNum(currentEvent->Parent) << ")";
-		  TBFE_Base::MainConsole.runLine(windowString.str().c_str());
-		  TBFE_Base::MainConsole.runLine(currentEvent->Function.c_str());
+		  windowString << "elementTarget=Tbfe.getWindowByNum(" << Get_Window_Num(currentEvent->Parent) << ")";
+		  Console::Instance()->runLine(windowString.str().c_str());
+		  Console::Instance()->runLine(currentEvent->Function.c_str());
 		};
 	      break;
 	    case MOUSEMOVE:
@@ -210,8 +220,8 @@ void TBFE::checkEvents()
 		      writeMouse << "mouseMovement=Misc.PositionF();mouseMovement.X=";
 		      writeMouse << currentSdlEvent.motion.xrel << ";mouseMovement.Y=";
 		      writeMouse << currentSdlEvent.motion.yrel << ";";
-		      TBFE_Base::MainConsole.runLine(writeMouse.str());
-		      TBFE_Base::MainConsole.runLine(currentEvent->Function.c_str());
+		      Console::Instance()->runLine(writeMouse.str());
+		      Console::Instance()->runLine(currentEvent->Function.c_str());
 		    };
 		  if (currentEvent->Parent!=NULL && currentEvent->TargetElement!=NULL)
 		    {
@@ -231,7 +241,7 @@ void TBFE::checkEvents()
 			  writeMouse << "mouseMovement=Misc.PositionF();mouseMovement.X=";
 			  writeMouse << currentSdlEvent.motion.xrel << ";mouseMovement.Y=";
 			  writeMouse << currentSdlEvent.motion.yrel << ";";
-			  TBFE_Base::MainConsole.runLine(currentEvent->Function.c_str());
+			  Console::Instance()->runLine(currentEvent->Function.c_str());
 			};
 		    };
 		};
@@ -249,7 +259,7 @@ void TBFE::checkEvents()
 		  if (currentSdlEvent.key.keysym.sym==currentEvent->Key && !currentEvent->keyDown)
 		    {
 		      currentEvent->keyDown=true;
-		      TBFE_Base::MainConsole.runLine(currentEvent->Function.c_str());	      
+		      Console::Instance()->runLine(currentEvent->Function.c_str());	      
 		    };
 		};
 	      break;
@@ -292,31 +302,7 @@ Direction TBFE::runEngine()
       //Normal KeyBoard Events
       if (currentSdlEvent.type==SDL_KEYDOWN && logic_.isEventNew())
 	{	  
-	  if (TBFE_Base::GetKeyTarget()!=NULL)
-	    {
-	      char Letter=logic_.textInput(currentSdlEvent.key.keysym.sym,
-					   logic_.checkKeyDown(SDLK_LSHIFT));
-	      string text=TBFE_Base::GetKeyTarget()->getProperty("text");
-	      if (Letter==1)
-		{
-		  int Size=text.size();
-		  if (Size>1)
-		    {
-		      text.erase(Size-1);
-		    }
-		  else
-		    {
-		      text=" ";
-		      text.resize(0);
-		    };
-		}
-	      else if (Letter!=0)
-		{
-		  text+=(int)Letter;
-		};
-	      TBFE_Base::GetKeyTarget()->setProperty("text",text);
-	      TBFE_Base::GetKeyTarget()->reload();  
-	    };
+	  logic_.Update_Key_Target_Text(currentSdlEvent.key.keysym.sym);
 	  if (logic_.checkKeyDown(27))
 	    {
 	      quit_=true;
@@ -324,10 +310,10 @@ Direction TBFE::runEngine()
 	};
       checkOnce=true;
     };
-  Position mapDimensions=TBFE_Base::CurrentMap.getDimensions();
-  if (TBFE_Base::KeyControl==true)
+  PositionI mapDimensions=Current_Map->getDimensions();
+  if (keyControl_==true)
     {
-      logic_.playerMovement();
+      logic_.playerMovement(Main_Player);
     };
   renderWindow_.finalRender(true);  
   
@@ -345,7 +331,7 @@ Direction TBFE::runEngine()
 	  time_=0;
 	};
       frame_=0;
-      if (!showMouse_ && (mousePosition_.X!=TBFE_Base::ScreenDimensions.X/2 || mousePosition_.Y!=TBFE_Base::ScreenDimensions.Y/2))
+      if (!showMouse_ && (mousePosition_.X!=screenDimensions_.X/2 || mousePosition_.Y!=screenDimensions_.Y/2))
 	{
 	  SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
 	  SDL_WarpMouse(mouseCenter_.X,mouseCenter_.Y);
@@ -354,10 +340,10 @@ Direction TBFE::runEngine()
 	};
       return SECOND;
     };
-  TBFE_Base::GameSpeed=60/(frame_*1000/frameRate_.GetTicks());
-  if (TBFE_Base::GameSpeed>3)
+  gameSpeed_=60/(frame_*1000/frameRate_.GetTicks());
+  if (gameSpeed_>3)
     {
-      TBFE_Base::GameSpeed=3;
+      gameSpeed_=3;
     };
   if (quit_==true)
     {
@@ -365,16 +351,17 @@ Direction TBFE::runEngine()
     };
   return NORMAL;
 };
-Position TBFE::getMousePosition()
+PositionI TBFE::getMousePosition()
 {
   return mousePosition_;
 };
 PositionF TBFE::getCameraPosition()
 {
-  PositionF cameraOffset=TBFE_Base::getCameraOffset()*20;
-  PositionF cameraFollowOffset=TBFE_Base::getCameraFollowOffset()*20;
-  Quaternion cameraAngle=TBFE_Base::getCameraAngle();
+  
+  PositionF cameraOffset=camera_.getOffset()*20;
+  PositionF cameraFollowOffset=camera_.getFollowOffset()*20;
+  Quaternion cameraAngle=camera_.getAngle();
   PositionF tempAngle=(applyRotations(cameraFollowOffset,cameraAngle)+cameraOffset);
-  tempAngle=TBFE_Base::GetMainPlayer()->getPositionF()-tempAngle;
+  tempAngle=Main_Player->getPositionF()-tempAngle;
   return tempAngle*-1;
 };

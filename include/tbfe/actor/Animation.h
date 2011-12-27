@@ -4,7 +4,6 @@ class Animation;
 #include <boost/python.hpp>
 #include "tbfe/misc/StringConversion.h"
 #include "tbfe/misc/Structs.h"
-#include "tbfe/Base.h"
 class Animation
 {
  private:

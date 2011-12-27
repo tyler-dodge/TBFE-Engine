@@ -42,7 +42,7 @@ string OverMap::getPoint(int x,int y)
     };
   return MapLocations[x+y*width]; 
 };
-Position OverMap::GetPosition()
+PositionI OverMap::GetPosition()
 {
   return currentPosition;
 };

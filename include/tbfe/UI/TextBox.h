@@ -2,6 +2,9 @@
 #define TextBox_L
 #include <boost/python.hpp>
 #include "tbfe/UI/Element.h"
+#include "tbfe/misc/StringConversion.h"
+#include "tbfe/Console.h"
+#include "tbfe/misc/TFont.h"
 class TextBox:public Element
 {
  private:
@@ -12,9 +15,10 @@ class TextBox:public Element
   void wordWrap();
   int currentScrollY;
   bool isReloaded;
+  TFont * font_;
  public:
   SDL_Surface * renderElement();
-  TextBox(int,int,string);
+  TextBox(int,int,string,TFont *);
   ~TextBox();
   void reload();
 };

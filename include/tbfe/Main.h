@@ -1,15 +1,13 @@
 #ifndef TBFE_L
 #define TBFE_L
 #include <boost/python.hpp>
-#include "tbfe/Base.h"
 #include "tbfe/Render.h"
 #include "tbfe/Logic.h"
+#include "tbfe/Camera.h"
 #include "tbfe/actor/Actor.h"
 #include "tbfe/actor/Npc.h"
 #include "tbfe/actor/NonLiving.h"
 #include "tbfe/UI/Window.h"
-#include "tbfe/UI/WindowCreate.h"
-#include "tbfe/actor/ActorCreate.h"
 #include <sstream>
 #include "tbfe/misc/Structs.h"
 #include "tbfe/misc/StringConversion.h"
@@ -25,13 +23,21 @@ class TBFE
   bool showMouse_;
   bool quit_;
   Timer frameRate_;
-  Position mouseMovement_;
-  Position mousePosition_;
-  Position mouseCenter_;
+  PositionI mouseMovement_;
+  PositionI mousePosition_;
+  PositionI mouseCenter_;
   int time_;
   void checkEvents();
   vector<EventType> eventList_;
   Timer fps_;
+  Map * Current_Map;
+  vector<Actor *> actors;
+  vector<Window *> windows;
+  bool keyControl_;
+  PositionI screenDimensions_;
+  float gameSpeed_;
+  Camera camera_;
+  Actor * Main_Player;
  protected:
   TBFE_Render renderWindow_;
   TBFE_Logic logic_;
@@ -47,13 +53,15 @@ class TBFE
   bool addTileSet(std::string);
   void addEvent(std::string,Element *, Window *,std::string,Event);
   EventType * getEvent(std::string);
-  Position getMousePosition();
-  Position getMouseCenter();
+  PositionI getMousePosition();
+  PositionI getMouseCenter();
   void setMouseCenter(int,int);
   void setShowMouse(bool);
   bool getShowMouse();
   PositionF getCameraPosition();
   void addGlobalEvent(std::string,Event, int,std::string);
+  int Get_Actor_Num(Actor *actorPtr);
+  int Get_Window_Num(Window *window);
   ~TBFE();
 };
 #endif

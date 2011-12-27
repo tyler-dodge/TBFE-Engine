@@ -1,11 +1,10 @@
 #include "tbfe/UI/Label.h"
-Label::Label(int x,int y,string text):Element(x,y)
+Label::Label(int x,int y,string text,TFont * font):Element(x,y), font_(font)
 {
   textColor_.r=255;
   textColor_.g=255;
   textColor_.b=255;
-  setProperty("text",text);
-  text_=TTF_RenderText_Blended(TBFE_Base::GetFont(),getProperty("text").c_str(),textColor_);
+  setProperty(LABEL_TEXT,text);
   intermediary_=NULL;
   if (text_!=NULL)
     {
@@ -22,11 +21,11 @@ Label::~Label()
 };
 void Label::reload()
 {
-  if (currentText_!=getProperty("text"))
+  if (currentText_!=getProperty(LABEL_TEXT))
     {
-      currentText_=getProperty("text");
+      currentText_=getProperty(LABEL_TEXT);
       SDL_FreeSurface(text_);
-      text_=TTF_RenderText_Blended(TBFE_Base::GetFont(),getProperty("text").c_str(),textColor_);
+      text_=font_->render_text(getProperty(LABEL_TEXT));
       if (text_!=NULL)
 	{
 	  setDimensions(text_->w,text_->h);
@@ -35,7 +34,7 @@ void Label::reload()
 	{
 	  setDimensions(0,15);
 	};
-      currentText_=getProperty("text");
+      currentText_=getProperty(LABEL_TEXT);
       if (intermediary_!=NULL)
 	{
 	  SDL_FreeSurface(intermediary_);

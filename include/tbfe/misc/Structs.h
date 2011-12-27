@@ -7,7 +7,7 @@
 #include <vector>
 #include "SDL/SDL.h"
 #include <sstream>
-#include "tbfe/misc/PositionF.h"
+#include "tbfe/misc/Position.h"
 #include "tbfe/misc/Matrix.h"
 using namespace std;
 class Window;
@@ -59,16 +59,10 @@ struct Tile
   int Passability;
   bool isChanged;
 };
-struct Position
-{
-  int X;
-  int Y;
-  int Z;
-};
 struct CollidedTile
 {
   int Passability;
-  Position position;
+  PositionI position;
 };
 struct Property
 {
@@ -87,7 +81,7 @@ struct ElementList
 {
   std::string Name;
   std::string Type;
-  Position ElementPosition;
+  PositionI ElementPosition;
   std::string Special;
 };
 struct WindowType
@@ -111,7 +105,7 @@ struct EventType
 struct TileSheet
 {
   GLuint texture;
-  Position dimensions;
+  PositionI dimensions;
 };
 struct Quad
 {

@@ -9,7 +9,8 @@ ImageBox::ImageBox(int x,int y,string Source):Element(x,y)
       ImageSource=ImageSource.substr(0,ImageSource.find('('));
     };  
   setProperty("imageSource",ImageSource);
-  image_=TBFE_Base::CheckSheets(ImageSource.c_str());
+  //TODO: setup texture generation
+  image_=NULL;//TBFE_Base::CheckSheets(ImageSource.c_str());
 
   if (Special.find('(')<Special.length())
     {
@@ -61,14 +62,15 @@ ImageBox::~ImageBox()
 };
 void ImageBox::reload()
 {
-  image_=TBFE_Base::CheckSheets(getProperty("imageSource").c_str());
+  //TODO: setup texture generation
+  image_=NULL;//=TBFE_Base::CheckSheets(getProperty("imageSource").c_str());
   if (image_==NULL)
     {
       intermediary_=NULL;
       return;
     };
   SDL_Rect Clip;
-  Position dimensions=getDimensions();
+  PositionI dimensions=getDimensions();
   Clip.x=0;
   Clip.y=0;
   Clip.w=dimensions.X;
@@ -95,7 +97,7 @@ void ImageBox::reload()
 	};
       setDimensions(Clip.w,Clip.h);
     };
-  Position CurrentPosition=getPosition();
+  PositionI CurrentPosition=getPosition();
   if (intermediary_!=NULL)
     {
       SDL_FreeSurface(intermediary_);

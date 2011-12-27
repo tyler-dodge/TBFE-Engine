@@ -2,11 +2,11 @@ class Map;
 #ifndef Map_L
 #define Map_L
 #include <boost/python.hpp>
-#include "tbfe/Base.h"
 #include "tbfe/misc/Structs.h"
 #include "tbfe/misc/Enums.h"
 #include "tbfe/misc/StringConversion.h"
 #include "tbfe/map/TileLayer.h"
+#include "tbfe/Console.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -38,7 +38,7 @@ class Map
   bool getLayerVisibility(int);
   void setLayerVisibility(int,bool);
   int getNumberOfLayers();
-  Position getDimensions();
+  PositionI getDimensions();
   bool checkChanged();
   void setChanged(bool);
   void changeTile(int,int,Tile,int);

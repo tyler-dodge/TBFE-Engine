@@ -22,7 +22,7 @@ SDL_Surface *loadImage(std::string filename,bool UseA)
     };
   if (newImage==NULL)
     {
-      TBFE_Base::MainConsole.write("   "+filename+" did not load correctly");
+      CONSOLE_WRITE("   "+filename+" did not load correctly");
     };
   return newImage;
 };
@@ -51,7 +51,7 @@ GLuint bindImage(SDL_Surface * textureSource)
     } 
   else
     {
-      TBFE_Base::MainConsole.write("texture fail");
+      CONSOLE_WRITE("texture fail");
     };
   glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
   glGenTextures(1,&texture);
@@ -77,13 +77,15 @@ void applyImage(int x,int y,SDL_Surface* source, SDL_Rect* clip)
   glPushMatrix();
   {
     glLoadIdentity();
-    glOrtho(0,TBFE_Base::ScreenDimensions.X,TBFE_Base::ScreenDimensions.Y,0,1,10);
+    //TODO:ScreenDimensionsSet
+    PositionI screenDimensions;
+    glOrtho(0,screenDimensions.X,screenDimensions.Y,0,1,10);
     glMatrixMode(GL_MODELVIEW);
     {
       glPushMatrix();
       glLoadIdentity();
       glTranslatef(x,y,-2);
-      Position dimensions;
+      PositionI dimensions;
       PositionF start;
       PositionF end;
       if (clip!=NULL)
@@ -106,7 +108,8 @@ void applyImage(int x,int y,SDL_Surface* source, SDL_Rect* clip)
 	};
       if (source!=NULL)
 	{
-	  GLuint texture=TBFE_Base::GetTexture(source);
+	  //TODO: setup texture generation
+	  GLuint texture=0;//TBFE_Base::GetTexture(source);
 	  glEnable(GL_TEXTURE_2D);
 	  glDepthFunc(GL_ALWAYS);
 	  if (source->format->BytesPerPixel==4)
@@ -147,7 +150,7 @@ Uint32 getPixel( SDL_Surface *surface, int x, int y )
 {
   if (surface==NULL)
     {
-      TBFE_Base::MainConsole.write("surface does not exist");
+      CONSOLE_WRITE("surface does not exist");
       return -1;
     };
   if (x>surface->w || y>surface->h || x<0 || y<0)

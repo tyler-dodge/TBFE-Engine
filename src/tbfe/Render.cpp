@@ -1,9 +1,10 @@
 #include "tbfe/Render.h"
-TBFE_Render::TBFE_Render()
+TBFE_Render::TBFE_Render(int dimensionX,int dimensionY):
+  dimensions_(dimensionX,dimensionY,0)
 {
   TTF_Init();
   init();
-  TBFE_Base::SetFont(TTF_OpenFont("Images/UI/font.ttf",12));
+  font_=TTF_OpenFont("Images/UI/font.ttf",12);;
   setLightPosition(0,0,0);
 };
 void TBFE_Render::setLightPosition(float x,float y,float z)
@@ -19,8 +20,8 @@ void TBFE_Render::initGl()
   glLoadIdentity();
   glFrustum(-1,
 	    1, 
-	    -((double)TBFE_Base::ScreenDimensions.Y/(double)TBFE_Base::ScreenDimensions.X),
-	    ((double)TBFE_Base::ScreenDimensions.Y/(double)TBFE_Base::ScreenDimensions.X), 
+	    -((double)dimensions_.Y/(double)dimensions_.X),
+	    ((double)dimensions_.Y/(double)dimensions_.X), 
 	     1,100);			
   glMatrixMode( GL_MODELVIEW );
   glEnable(GL_NORMALIZE);
@@ -51,10 +52,10 @@ void TBFE_Render::initGl()
   //If there was any errors
   if(Error != GL_NO_ERROR )
     {
-      TBFE_Base::MainConsole.write("OpenGl failed to load");
+      CONSOLE_WRITE("OpenGl failed to load");
       return;    
     }
-  TBFE_Base::MainConsole.write("OpenGl initialized");
+  CONSOLE_WRITE("OpenGl initialized");
 };
 void TBFE_Render::init()
 {
@@ -63,47 +64,47 @@ void TBFE_Render::init()
       SDL_Init(SDL_INIT_EVERYTHING);
     };
   SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,8);
-  SDL_SetVideoMode(TBFE_Base::ScreenDimensions.X,TBFE_Base::ScreenDimensions.Y,32,SDL_OPENGL );
-  TBFE_Base::MainConsole.write("SDL initialized");
+  SDL_SetVideoMode(dimensions_.X,dimensions_.Y,32,SDL_OPENGL );
+  CONSOLE_WRITE("SDL initialized");
   initGl();
  };
 TBFE_Render::~TBFE_Render()
 {
-  TTF_CloseFont(TBFE_Base::GetFont());
+  TTF_CloseFont(font_);
   TTF_Quit();
   SDL_Quit();
 };
-void TBFE_Render::initializeTileSets()
+void TBFE_Render::initializeTileSets(Map * map)
 {
   //Tile Sets
-  TBFE_Base::MainConsole.write("TileSets Loaded:");
+  CONSOLE_WRITE("TileSets Loaded:");
   for(GLuint i=0;i<tileSet_.size();i++)
     {
       glDeleteTextures(1,&i);
     };
   tileSet_.resize(0);
-  for (int i=0;i<TBFE_Base::CurrentMap.getNumberOfTileSets();i++)
+  for (int i=0;i<map->getNumberOfTileSets();i++)
     {
-      string tempString="Images/TileSets/"+TBFE_Base::CurrentMap.getTileSet(i);
-      TBFE_Base::MainConsole.write(tempString);
-      SDL_Surface * texture=TBFE_Base::CheckSheets(tempString);
+      string tempString="Images/TileSets/"+map->getTileSet(i);
+      CONSOLE_WRITE(tempString);
+      //SDL_Surface * texture=TBFE_Base::CheckSheets(tempString);
       TileSheet newTileSheet;
-      newTileSheet.texture=TBFE_Base::GetTexture(texture);
+      //newTileSheet.texture=TBFE_Base::GetTexture(texture);
       cout << tempString << '\n';
-      newTileSheet.dimensions.X=texture->w;
-      newTileSheet.dimensions.Y=texture->h;
-      tileSet_.push_back(newTileSheet);
+      //newTileSheet.dimensions.X=texture->w;
+      //newTileSheet.dimensions.Y=texture->h;
+      //tileSet_.push_back(newTileSheet);
     };
   refreshMapLayer(0);
 };
 void TBFE_Render::finalRender(bool doFlip)
 {  
-  if (TBFE_Base::CurrentMap.checkChanged())
-    {
-      TBFE_Base::CurrentMap.setChanged(false);
-      refreshMapLayer(0);
-    };
-  Position mapDimensions=TBFE_Base::CurrentMap.getDimensions();
+  //if (TBFE_Base::CurrentMap.checkChanged())
+  //  {
+  //    TBFE_Base::CurrentMap.setChanged(false);
+  //    refreshMapLayer(0);
+  //  };
+  //Position mapDimensions=TBFE_Base::CurrentMap.getDimensions();
   lightPosition_[0]=0.0f;
   lightPosition_[1]=1.0f;
   lightPosition_[2]=0.0f;
@@ -111,7 +112,7 @@ void TBFE_Render::finalRender(bool doFlip)
   glLoadIdentity();
   glLightfv(GL_LIGHT0,GL_POSITION,lightPosition_);
   glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-  PositionF cameraOffset=TBFE_Base::getCameraOffset();
+  /*PositionF cameraOffset=TBFE_Base::getCameraOffset();
   PositionF cameraFollowOffset=TBFE_Base::getCameraFollowOffset();
   Quaternion cameraAngle=TBFE_Base::getCameraAngle();
   glTranslatef(cameraFollowOffset.X,cameraFollowOffset.Y,cameraFollowOffset.Z);
@@ -130,12 +131,13 @@ void TBFE_Render::finalRender(bool doFlip)
     {
       stringstream errorString;
       errorString << "OpenGl eror:" << hex << Error << dec;
-      TBFE_Base::MainConsole.write(errorString.str());
-    }
+      CONSOLE_WRITE(errorString.str());
+      }*/
 };
 void TBFE_Render::refreshMapLayer(int Layer)
 {
-  TBFE_Base::MainConsole.write("Map refreshed");
+  CONSOLE_WRITE("Map refreshed");
+  /*
   map_.indices.clear();
   map_.vertices.clear();
   map_.texCoords.clear();
@@ -232,6 +234,7 @@ void TBFE_Render::refreshMapLayer(int Layer)
     {
       map_.indices.push_back(i);
     };  
+  */
 };
 int TBFE_Render::renderMapLayer(int x,int y, int Layer)
 {
@@ -256,11 +259,12 @@ int TBFE_Render::renderMapLayer(int x,int y, int Layer)
     }
   else
     {
-      TBFE_Base::MainConsole.write("Tile Set not initialized");
+      CONSOLE_WRITE("Tile Set not initialized");
     }
 };
 void TBFE_Render::renderActors()
 {
+  /*
   for (int i=0;i<TBFE_Base::ActorList.size();i++)
     {
       TBFE_Base::ActorList.at(i)->runAction();
@@ -339,9 +343,11 @@ void TBFE_Render::renderActors()
 	    };
 	};
     };
+  */
 };
 void TBFE_Render::renderWindowList()
 {
+  /*
   SDL_Rect NewWindow;
   for (int i=0;i<TBFE_Base::WindowList.size();i++)
     {
@@ -356,9 +362,11 @@ void TBFE_Render::renderWindowList()
 	    };
 	};
     };
+  */
 };
 bool TBFE_Render::addTileSet(string source)
 {
+  /*
   SDL_Surface * newTileSet=TBFE_Base::CheckSheets(source);
   if (newTileSet!=NULL)
     {
@@ -369,5 +377,6 @@ bool TBFE_Render::addTileSet(string source)
       tileSet_.push_back(newTileSheet);
       return true;
     };
+  */
   return false;
 };

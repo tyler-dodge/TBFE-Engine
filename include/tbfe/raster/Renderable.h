@@ -1,10 +1,11 @@
 #ifndef Renderable_L
 #define Renderable_L
+#include "tbfe/raster/RenderParameters.h"
 class Renderable
 {
  private:
  public:
-  RenderParameters * getParams()=0;
-  void draw()=0;
+  virtual RenderParameters * getParams()=0;
+  virtual void draw()=0;
 };
 #endif

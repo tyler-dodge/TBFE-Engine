@@ -1,11 +1,13 @@
 #include "tbfe/UI/TextBox.h"
-TextBox::TextBox(int x,int y,string text):Element(x,y)
+TextBox::TextBox(int x,int y,string text,TFont * font):Element(x,y),
+							  font_(font)
 {
   setProperty("text",nextSet(&text,'('));
   setProperty("scrollY","0");
   setProperty("border","1");
   string xValue=nextSet(&text,';');
-  setDimensions(TBFE_Base::MainConsole.evalExpression(xValue),TBFE_Base::MainConsole.evalExpression(nextSet(&text,')')));
+  box_=font->render_text(text);
+  setDimensions(CONSOLE_EVAL(xValue),CONSOLE_EVAL(nextSet(&text,')')));
   textColor_.r=255;
   textColor_.g=255;
   textColor_.b=255;
@@ -26,26 +28,27 @@ void TextBox::wordWrap()
       stringstream textSegment;
       int textSize=0;
       bool endLine=false;
-      while (textSize<width && textPt<getProperty("text").size() && !endLine)
+      std::string text=getProperty("text");
+      while (textSize<width && textPt<text.size() && !endLine)
 	{
 	  int increase=0;
-	  if (TBFE_Base::GetFont()!=NULL)
+	  if (font_!=NULL)
 	    {
-	      TTF_GlyphMetrics(TBFE_Base::GetFont(),getProperty("text")[textPt],NULL,NULL,NULL,NULL,&increase);
+	      increase=font_->get_char_height(text[textPt]);
 	    };
-	  if (getProperty("text")[textPt]==(char)92 && getProperty("text")[textPt+1]=='n')
+	  if (text[textPt]==(char)92 && text[textPt+1]=='n')
 	    {
 	      endLine=true;
 	      textPt++;
 	    }
-	  else if (getProperty("text")[textPt]=='\n')
+	  else if (text[textPt]=='\n')
 	    {
 	      endLine=true;
 	    }
 	  else
 	    {
 	      textSize+=increase;
-	      textSegment << getProperty("text")[textPt];
+	      textSegment << text[textPt];
 	    };
 	  textPt++;
 	};
@@ -75,7 +78,7 @@ void TextBox::wordWrap()
 	};
       if (reloadLine)
 	{
-	  SDL_Surface * text=TTF_RenderText_Blended(TBFE_Base::GetFont(),textSegment.str().c_str(),textColor_);
+	  SDL_Surface * text=font_->render_text(textSegment.str());
 	  text_.at(lineNum)=SDL_DisplayFormatAlpha(text);
 	  SDL_FreeSurface(text);
 	};
@@ -103,7 +106,7 @@ void TextBox::reload()
 };
 SDL_Surface * TextBox::renderElement()
 {
-  Position CurrentPosition=getPosition();
+  PositionI CurrentPosition=getPosition();
   int scrollY=atoi(getProperty("scrollY").c_str());
   if (isReloaded==true || currentScrollY!=scrollY)
     {

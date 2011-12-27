@@ -7,7 +7,7 @@ using namespace std;
 class OverMap
 {
  private:
-  Position currentPosition;
+  PositionI currentPosition;
   int width;
   int height;
  public:
@@ -15,7 +15,7 @@ class OverMap
   string * MapLocations;
   OverMap(int,int);
   ~OverMap();
-  Position GetPosition();
+  PositionI GetPosition();
   void SetPosition(int, int);
   void SetPoint(int,int,std::string);
   int GetWidth();

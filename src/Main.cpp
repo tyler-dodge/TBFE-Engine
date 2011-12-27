@@ -1,10 +1,4 @@
-#define PROPER_USAGE "Proper Usage: Tbfe LocalDirectory StartUp.py (relative to LocalDirectory) PythonLibs\n"
-#include <Python.h>
-#include <string>
-#include <iostream>
-#include <sstream>
-#include <stdlib.h>
-#include <exception>
+#include "Main.h"
 using namespace std;
 extern "C"
 {

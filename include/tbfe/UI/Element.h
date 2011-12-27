@@ -3,14 +3,13 @@
 #include <boost/python.hpp>
 #include "tbfe/misc/Structs.h"
 #include "tbfe/misc/SdlFunctions.h"
-#include "tbfe/Base.h"
 
 class Element
 {
  private:
   SDL_Surface * background_;
-  Position currentPosition_;
-  Position dimensions_;
+  PositionI currentPosition_;
+  PositionI dimensions_;
   std::string name_;
   std::string special_;
   bool isVisible_;
@@ -21,10 +20,10 @@ class Element
   SDL_Surface * getBackground();
   void setBackground(string);
 
-  Position getPosition();
+  PositionI getPosition();
   void setPosition(int,int);
 
-  Position getDimensions();
+  PositionI getDimensions();
   void setDimensions(int,int);
 
   string getName();

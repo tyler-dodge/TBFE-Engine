@@ -45,7 +45,7 @@ int Animation::getFrame()
 bool Animation::currentFramePlus()
 {
   //TODO: Current Frame Lock
-  currentFrame_+=getRate()*TBFE_Base::GameSpeed;
+  currentFrame_+=getRate();//*TBFE_Base::GameSpeed;
   //End Lock
   int currentFrame=getCurrentFrame();
   if (currentFrame>=frames_.size())
@@ -79,7 +79,7 @@ bool Animation::loadModel()
 {
   if (!model_.isLoaded)
     {
-      model_.Data=TBFE_Base::CheckModels(model_.Source);
+      //model_.Data=TBFE_Base::CheckModels(model_.Source);
       model_.isLoaded=true;
     };
   return true;

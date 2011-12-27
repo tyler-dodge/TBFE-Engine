@@ -14,9 +14,10 @@ SDL_Surface * Element::getBackground()
 };
 void Element::setBackground(string newBackground)
 {
-  background_=TBFE_Base::CheckSheets(newBackground);
+  //TODO: Texture generation
+  background_;//=TBFE_Base::CheckSheets(newBackground);
 };
-Position Element::getPosition()
+PositionI Element::getPosition()
 {
   return currentPosition_;
 };
@@ -25,7 +26,7 @@ void Element::setPosition(int x,int y)
   currentPosition_.X=x;
   currentPosition_.Y=y;
 };
-Position Element::getDimensions()
+PositionI Element::getDimensions()
 {
   return dimensions_;
 };

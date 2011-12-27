@@ -9,9 +9,9 @@
 class Window
 {
  private:
-  Position dimensions_;
+  PositionI dimensions_;
   vector<Element *> elements_;
-  Position screenPosition_;
+  PositionI screenPosition_;
   bool showBackground_;
   bool isVisible_;
   SDL_Surface * background_;
@@ -23,10 +23,10 @@ class Window
   SDL_Surface * renderElements();
   void addElement(Element *);
   Element * getElement(std::string);
-  Position getDimensions();
+  PositionI getDimensions();
   void setDimensions(int,int);
   
-  Position getScreenPosition();
+  PositionI getScreenPosition();
   void setScreenPosition(int,int);
 
   bool getVisibility();

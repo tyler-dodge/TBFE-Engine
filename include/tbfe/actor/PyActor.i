@@ -15,3 +15,4 @@
 %include "tbfe/actor/Action.h"
 %include "tbfe/actor/Animation.h"
 %include "tbfe/actor/CollisionBox.h"
+ 

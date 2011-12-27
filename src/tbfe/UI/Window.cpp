@@ -82,7 +82,7 @@ SDL_Surface * Window::renderElements()
 	{
 	  if (elements_.at(i)!=NULL)
 	    {
-	      Position elementPosition=elements_.at(i)->getPosition();
+	      PositionI elementPosition=elements_.at(i)->getPosition();
 	      SDL_Rect rect;
 	      rect.x=elementPosition.X;
 	      rect.y=elementPosition.Y;
@@ -112,7 +112,7 @@ void Window::setVisibility(bool newVisibility)
 {
   isVisible_=newVisibility;
 };
-Position Window::getDimensions()
+PositionI Window::getDimensions()
 {
   return dimensions_;
 }
@@ -121,7 +121,7 @@ void Window::setDimensions(int width,int height)
   dimensions_.X=width;
   dimensions_.Y=height;
 };
-Position Window::getScreenPosition()
+PositionI Window::getScreenPosition()
 {
   return screenPosition_;
 };

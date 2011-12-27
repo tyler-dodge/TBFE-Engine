@@ -1,16 +1,16 @@
+#ifndef SdlFunctions_L
+#define SdlFunctions_L
 #include <boost/python.hpp>
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
-#include "tbfe/Base.h"
 #include "tbfe/misc/Enums.h"
 #include "tbfe/misc/Structs.h"
 #include <string>
 #include <sstream>
 #include "tbfe/misc/Matrix.h"
 #include "SDL/SDL_opengl.h"
+#include "tbfe/Console.h"
 #include <math.h>
-#ifndef SdlFunctions_L
-#define SdlFunctions_L
 using namespace std;
 extern SDL_Surface *loadImage(std::string filename,bool UseA=true);
 extern void applyImage(int,int,SDL_Surface*,SDL_Rect*);
