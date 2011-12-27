@@ -8,13 +8,13 @@ class TileLayer
 {
  private:
   vector<Tile> data_;
-  Position dimensions_;
+  PositionI dimensions_;
   bool isVisible_;
  public:
   TileLayer(int,int);
   TileLayer();
   void generateMap(int,int,Tile);
-  Position getDimensions();
+  PositionI getDimensions();
   Tile getTile(int,int);
   void changeTile(int,int,Tile);
   bool getVisibility();

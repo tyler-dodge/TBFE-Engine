@@ -1,6 +1,7 @@
 #ifndef StatBar_L
 #define StatBar_L
 #include <boost/python.hpp>
+#include "tbfe/misc/StringConversion.h"
 #include "tbfe/UI/Element.h"
 class StatBar:public Element
 {

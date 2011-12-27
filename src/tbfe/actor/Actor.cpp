@@ -28,10 +28,10 @@ CollisionBox * Actor::getCollisionBox(int num)
 {
   if (num>=collisionMaps_.size() || num<0)
     {
-      TBFE_Base::MainConsole.write("collision number goes past array size");
+      CONSOLE_WRITE("collision number goes past array size");
       if (num==0)
 	{
-	  TBFE_Base::MainConsole.write("new collision box created at 0");
+	  CONSOLE_WRITE("new collision box created at 0");
 	  PositionF collPos;
 	  collPos.X=0;
 	  collPos.Y=0;
@@ -56,8 +56,8 @@ void Actor::rotate(Quaternion rotations,bool doCollisionTest)
   rotation_*=rotations;
   if (doCollisionTest)
     {
-      vector<CollidedTile> collisionTest=TBFE_Base::CurrentMap.collisionTest((int)position_.X,
-									     (int)position_.Y);
+      vector<CollidedTile> collisionTest;//=TBFE_Base::CurrentMap.collisionTest((int)position_.X,
+      //				     (int)position_.Y);
       if (collisionTest.size()>0)
 	{
 	  for (int i=0;i<collisionTest.size();i++)
@@ -172,10 +172,10 @@ bool Actor::endCurrentAction()
       if (currentAction_->getScript()!="")
 	{
 	  stringstream endScriptParams;
-	  endScriptParams << "Caller=TBFE.GetActorByNum(" << TBFE_Base::GetActorNum(this) << ")";
-	  TBFE_Base::MainConsole.runLine("Caller=nil");
-	  TBFE_Base::MainConsole.runLine(endScriptParams.str());
-	  TBFE_Base::MainConsole.runLine(currentAction_->getScript().c_str());
+	  //endScriptParams << "Caller=TBFE.GetActorByNum(" << TBFE_Base::GetActorNum(this) << ")";
+	  CONSOLE_EVAL("Caller=nil");
+	  CONSOLE_EVAL(endScriptParams.str());
+	  CONSOLE_EVAL(currentAction_->getScript().c_str());
 	};
       currentAction_=NULL;
     };
@@ -205,8 +205,8 @@ int Actor::changePosition(float newAngle)
   //position.X+=(float)getSpeed()*TBFE_Base::GameSpeed*cos(newAngle*PI/180);
   //position.Z-=(float)getSpeed()*TBFE_Base::GameSpeed*sin(newAngle*PI/180);
   setPositionF(position.X,position.Y,position.Z);
-  vector<CollidedTile> collisionTest=TBFE_Base::CurrentMap.collisionTest((int)position_.X,
-									 (int)position_.Y);
+  vector<CollidedTile> collisionTest;//=TBFE_Base::CurrentMap.collisionTest((int)position_.X,
+  //(int)position_.Y);
   if (collisionTest.size()>0)
     {
       for (int i=0;i<collisionTest.size();i++)
@@ -249,9 +249,10 @@ void Actor::setPositionF(float x,float y,float z)
 vector<int> Actor::checkActorCollision(float offsetX,float offsetY,float offsetZ)
 {
   vector<int> collisions;
-  for (int i=0;i<TBFE_Base::ActorList.size();i++)
+  vector<Actor *> actors;
+  for (int i=0;i<actors.size();i++)
     {
-      Actor * targetActor=TBFE_Base::ActorList.at(i);
+      Actor * targetActor=actors.at(i);
       for (int targetA=0;targetA<targetActor->getNumCollisionBox();targetA++)
 	{
 	  CollisionBox targetCollision=*targetActor->getCollisionBox(targetA);
@@ -312,7 +313,7 @@ void Actor::setBaseAction(string newBaseAction)
 {
   if (getAction(newBaseAction)==NULL)
     {
-      TBFE_Base::MainConsole.write(newBaseAction+" does not exist.");
+      CONSOLE_WRITE(newBaseAction+" does not exist.");
       return;
     };
   baseAction_=newBaseAction;

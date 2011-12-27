@@ -11,13 +11,13 @@ TileLayer::TileLayer(int width, int height)
   dimensions_.Y=height;
   data_.resize(width*height);
 };
-Position TileLayer::getDimensions()
+PositionI TileLayer::getDimensions()
 {
   return dimensions_;
 };
 Tile TileLayer::getTile(int x,int y)
 {
-  Position Dimensions;
+  PositionI Dimensions;
   Dimensions=getDimensions();
   if (x < 0 || y < 0 || x >= Dimensions.X || y >= Dimensions.Y)
     {
@@ -32,7 +32,7 @@ Tile TileLayer::getTile(int x,int y)
 };
 void TileLayer::changeTile(int x,int y,Tile newTile)
 {
-  Position Dimensions;
+  PositionI Dimensions;
   Dimensions=getDimensions();
   if (x>Dimensions.X || y > Dimensions.Y || x < 0 || y < 0)
     {

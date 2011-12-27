@@ -2,9 +2,10 @@
 RenderPipeline::RenderPipeline()
 {
 }
-void RenderPipeline::add(Renderable renderable)
+void RenderPipeline::add(Renderable * renderable)
 {
 }
 void RenderPipeline::run()
 {
+  
 }

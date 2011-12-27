@@ -4,7 +4,6 @@ typedef Position<float> PositionF;
 typedef Position<int> PositionI;
 #ifndef PositionF_L
 #define PositionF_L
-#include <boost/python.hpp>
 #include <string>
 #include<sstream>
 #include "Matrix.h"
@@ -27,6 +26,6 @@ class Position
   Position<T> operator*(T num);
   Position<T> operator/(T num);
   string dumpString();
-  PositionF operator*(Matrix matrix);
+  Position<T> operator*(Matrix matrix);
 };
 #endif

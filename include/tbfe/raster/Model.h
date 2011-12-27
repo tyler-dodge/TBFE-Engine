@@ -3,9 +3,9 @@
 #include "tbfe/raster/Renderable.h"
 class Model
 {
- public:
-  
-  RenderParameters * getParams()=0;
-  void draw()=0;
+ private:
+ public:  
+  RenderParameters * getParams();
+  void draw();
 };
 #endif

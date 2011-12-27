@@ -1,7 +1,6 @@
 class Matrix;
 #ifndef Matrix_L
 #define Matrix_L
-#include <boost/python.hpp>
 #include <math.h>
 #include "tbfe/misc/Quaternion.h"
 #include <sstream>

@@ -9,7 +9,6 @@ class Actor;
 #include "tbfe/misc/Enums.h"
 #include "tbfe/misc/StringConversion.h"
 #include "tbfe/map/Map.h"
-#include "tbfe/Base.h"
 #include "tbfe/actor/Action.h"
 #include "tbfe/actor/CollisionBox.h"
 #include <stdio.h>

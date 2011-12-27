@@ -2,8 +2,9 @@
 StatBar::StatBar(int x,int y,string newSpecial):Element(x,y)
 {
   intermediary_=NULL;
-  statBarSurface_=TBFE_Base::CheckSheets("Images/UI/StatBar.png");
-  statBarBack_=TBFE_Base::CheckSheets("Images/UI/StatBarBack.png");
+  //TODO: setup texture generation
+  statBarSurface_=NULL;//TBFE_Base::CheckSheets("Images/UI/StatBar.png");
+  statBarBack_=NULL;//TBFE_Base::CheckSheets("Images/UI/StatBarBack.png");
   if (statBarSurface_!=NULL)
     {
       setDimensions(statBarSurface_->w,statBarSurface_->h);
@@ -22,7 +23,7 @@ StatBar::StatBar(int x,int y,string newSpecial):Element(x,y)
 	};
     };
   setProperty("percentage","100");
-  Position Dimensions=getDimensions();
+  PositionI Dimensions=getDimensions();
   barDimensions_.x=0;
   barDimensions_.y=0;
   barDimensions_.w=Dimensions.X;
