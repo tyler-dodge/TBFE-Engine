@@ -1,9 +1,10 @@
 #ifndef DirectoryFactory_L
 #define DirectoryFactory_L
-#include<D
-class DirectoryFactory<T>
+#include<string>
+template<class T>
+class DirectoryFactory
 {
  public:
-  virtual T FromFileName(string fileName)=0;
+  virtual T FromFileName(std::string fileName)=0;
 };
 #endif
