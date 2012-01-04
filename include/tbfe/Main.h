@@ -4,11 +4,7 @@
 #include "tbfe/Logic.h"
 #include "tbfe/Camera.h"
 #include "tbfe/actor/Actor.h"
-#include "tbfe/actor/Npc.h"
-#include "tbfe/actor/NonLiving.h"
 #include <sstream>
-#include "tbfe/misc/Structs.h"
-#include "tbfe/misc/StringConversion.h"
 #include <vector>
 using namespace std;
 

@@ -1,13 +1,9 @@
 class Map;
 #ifndef Map_L
 #define Map_L
-#include "tbfe/misc/Structs.h"
-#include "tbfe/misc/Enums.h"
-#include "tbfe/misc/StringConversion.h"
 #include "tbfe/map/TileLayer.h"
 #include "tbfe/Console.h"
-#include <iostream>
-#include <fstream>
+#include "tbfe/misc/CollidedTile.h"
 #include <string>
 #include <vector>
 using namespace std;

@@ -1,4 +1,7 @@
 #include "tbfe/actor/Actor.h"
+#include "tbfe/misc/StringConversion.h"
+#include "tbfe/Console.h"
+
 Actor::Actor (int PositionX,int PositionY)
     {
       currentAction_=NULL;

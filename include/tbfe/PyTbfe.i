@@ -1,6 +1,5 @@
 %include <std_string.i>
 %module PyTbfe
-%import "tbfe/actor/PyActor.i"
 %import "tbfe/misc/PyMisc.i"
 %import "tbfe/map/PyMap.i"
 %{

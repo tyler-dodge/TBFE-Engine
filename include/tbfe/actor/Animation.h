@@ -3,6 +3,7 @@ class Animation;
 #define Animation_L
 #include "tbfe/misc/StringConversion.h"
 #include "tbfe/misc/Structs.h"
+#include "tbfe/raster/Model.h"
 class Animation
 {
  private:
@@ -22,7 +23,7 @@ class Animation
   bool currentFramePlus();
   bool loadModel();
   void setModelSource(string);
-  ModelData * getModel();
+  Model getModel();
   void reset();
   float getCurrentFrame();
   void setCurrentFrame(float);

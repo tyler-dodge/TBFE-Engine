@@ -1,8 +1,30 @@
 #ifndef TileLayer_L
 #define TileLayer_L
 #include<vector>
-#include"tbfe/misc/Structs.h"
+#include "tbfe/misc/CollidedTile.h"
 using namespace std;
+
+struct Tile
+{
+  Tile(int type, int tileSet,int passability)
+  {
+    Type=type;
+    TileSet=tileSet;
+    Passability=passability;
+    isChanged=false;
+  };
+  Tile()
+  {
+    Type=0;
+    TileSet=0;
+    Passability=0;
+    isChanged=false;
+  };
+  int Type;
+  int TileSet;
+  int Passability;
+  bool isChanged;
+};
 class TileLayer
 {
  private:

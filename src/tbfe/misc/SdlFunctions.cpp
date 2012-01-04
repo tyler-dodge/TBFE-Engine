@@ -1,4 +1,10 @@
 #include "tbfe/misc/SdlFunctions.h"
+#include "tbfe/Console.h"
+#include "SDL/SDL.h"
+#include "SDL/SDL_image.h"
+#include <math.h>
+#include <sstream>
+
 SDL_Surface *loadImage(std::string filename,bool UseA)
 {  
   if (SDL_WasInit(SDL_INIT_VIDEO)==0)
@@ -163,7 +169,7 @@ Uint32 getPixel( SDL_Surface *surface, int x, int y )
     //Get the requested pixel
     return pixels[ ( y * surface->w ) + x ];
 }
-void drawNodes(ModelData * model, PositionF position,Quaternion rotation,PositionF scale)
+/*void drawNodes(ModelData * model, PositionF position,Quaternion rotation,PositionF scale)
 { 
   glPushMatrix();
   //glTranslatef(position[0],position[1],-position[2]);
@@ -189,8 +195,8 @@ void drawNodes(ModelData * model, PositionF position,Quaternion rotation,Positio
       glDisable(GL_TEXTURE_2D);
       glPopMatrix();
     };
-  glPopMatrix();
-};
+    glPopMatrix(); 
+    };*/
 
 float roundDown(float num,int place)
 {

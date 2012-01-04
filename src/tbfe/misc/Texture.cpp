@@ -2,6 +2,7 @@
 #include<vector>
 #include<map>
 #include "tbfe/misc/SdlFunctions.h"
+#include<SDL/SDL.h>
 DirectoryFactory<Texture> Texture::factory(Create,Destroy);
 Texture::Texture(std::string name)
 {

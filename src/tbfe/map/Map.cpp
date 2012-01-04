@@ -1,4 +1,8 @@
 #include "tbfe/map/Map.h"
+#include <iostream>
+#include <fstream>
+#include "tbfe/misc/StringConversion.h"
+
 Map::Map()
 {
   layers_.resize(0);

@@ -9,8 +9,6 @@
 #define CONSOLE_RUN_FILE(fileName) \
   Console::Instance()->execute((fileName))
 #include <boost/python.hpp>
-#include <iostream>
-#include <sstream>
 #include <vector>
 using namespace std;
 class Console

@@ -1,4 +1,5 @@
 #include "tbfe/actor/Animation.h"
+#include <stdlib.h>
 Animation::Animation()
 {
   setCurrentFrame(0);
@@ -64,24 +65,22 @@ bool Animation::currentFramePlus()
     };
   return true;
 };
-ModelData * Animation::getModel()
+Model Animation::getModel()
 {
   loadModel();
-  return model_.Data;
+  return model_;
 };
 void Animation::setModelSource(string newSource)
 {
-  model_.Source=newSource;
-  model_.Data=NULL;
-  model_.isLoaded=false;
+  //TODO:
+  //Add in get model by source name again
+  //model_.Source
 };
 bool Animation::loadModel()
 {
-  if (!model_.isLoaded)
-    {
-      //model_.Data=TBFE_Base::CheckModels(model_.Source);
-      model_.isLoaded=true;
-    };
+  //TODO:
+  //Add in get model by source name again
+  //model_.Data=TBFE_Base::CheckModels(model_.Source);
   return true;
 };
 PositionF Animation::getOffset()

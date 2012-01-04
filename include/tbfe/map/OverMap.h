@@ -1,7 +1,6 @@
 #ifndef OverMap_L
 #define OverMap_L
-#include "tbfe/misc/Structs.h"
-#include "tbfe/misc/Enums.h"
+#include "tbfe/misc/Position.h"
 using namespace std;
 class OverMap
 {

@@ -1,20 +1,16 @@
 #ifndef SdlFunctions_L
 #define SdlFunctions_L
-#include "SDL/SDL.h"
-#include "SDL/SDL_image.h"
+class SDL_Surface;
+class SDL_Rect;
 #include "tbfe/misc/Enums.h"
-#include "tbfe/misc/Structs.h"
+#include "tbfe/misc/Position.h"
 #include <string>
-#include <sstream>
-#include "tbfe/misc/Matrix.h"
-#include "SDL/SDL_opengl.h"
-#include "tbfe/Console.h"
-#include <math.h>
+#include "tbfe/misc/Structs.h"
 using namespace std;
 extern SDL_Surface *loadImage(std::string filename,bool UseA=true);
 extern void applyImage(int,int,SDL_Surface*,SDL_Rect*);
-extern Uint32 getPixel( SDL_Surface *, int, int);
-extern void drawNodes(ModelData *, PositionF,Quaternion,PositionF);
+extern unsigned int getPixel( SDL_Surface *, int, int);
+//extern void drawNodes(ModelData *, PositionF,Quaternion,PositionF);
 extern GLuint bindImage(SDL_Surface*);
 extern float roundDown(float,int);
 extern PositionF applyRotations(PositionF,Quaternion);

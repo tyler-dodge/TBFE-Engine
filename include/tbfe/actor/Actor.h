@@ -3,18 +3,9 @@ class Actor;
 #define Actor_L
 #include "SDL/SDL.h"
 #include "tbfe/misc/PropContainer.h"
-#include "tbfe/Console.h"
-#include "tbfe/misc/Structs.h"
-#include "tbfe/misc/SdlFunctions.h"
-#include "tbfe/misc/Enums.h"
-#include "tbfe/misc/StringConversion.h"
-#include "tbfe/map/Map.h"
 #include "tbfe/actor/Action.h"
 #include "tbfe/actor/CollisionBox.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <time.h>
+#include "tbfe/misc/CollidedTile.h"
 using namespace std;
 class Actor : public PropContainer
 {

@@ -2,9 +2,7 @@
 TBFE_Render::TBFE_Render(int dimensionX,int dimensionY):
   dimensions_(dimensionX,dimensionY,0)
 {
-  TTF_Init();
   init();
-  font_=TTF_OpenFont("Images/UI/font.ttf",12);;
   setLightPosition(0,0,0);
 };
 void TBFE_Render::setLightPosition(float x,float y,float z)
@@ -70,12 +68,11 @@ void TBFE_Render::init()
  };
 TBFE_Render::~TBFE_Render()
 {
-  TTF_CloseFont(font_);
-  TTF_Quit();
   SDL_Quit();
 };
 void TBFE_Render::initializeTileSets(Map * map)
 {
+  /*
   //Tile Sets
   CONSOLE_WRITE("TileSets Loaded:");
   for(GLuint i=0;i<tileSet_.size();i++)
@@ -96,6 +93,7 @@ void TBFE_Render::initializeTileSets(Map * map)
       //tileSet_.push_back(newTileSheet);
     };
   refreshMapLayer(0);
+  */
 };
 void TBFE_Render::finalRender(bool doFlip)
 {  
@@ -238,6 +236,7 @@ void TBFE_Render::refreshMapLayer(int Layer)
 };
 int TBFE_Render::renderMapLayer(int x,int y, int Layer)
 {
+  /*
   if (tileSet_.size()>Layer)
     {
       glEnable(GL_TEXTURE_2D);
@@ -260,7 +259,8 @@ int TBFE_Render::renderMapLayer(int x,int y, int Layer)
   else
     {
       CONSOLE_WRITE("Tile Set not initialized");
-    }
+      }
+  */
 };
 void TBFE_Render::renderActors()
 {
