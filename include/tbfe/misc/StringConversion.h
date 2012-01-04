@@ -1,6 +1,5 @@
 #ifndef StringConv_L
 #define StringConv_L
-#include <boost/python.hpp>
 #include <sstream>
 #include <fstream>
 #include <string>

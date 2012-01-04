@@ -1,7 +1,6 @@
 class CollisionBox;
 #ifndef CollisionBox_L
 #define CollisionBox_L
-#include <boost/python.hpp>
 #include "tbfe/misc/Structs.h"
 #include "tbfe/misc/SdlFunctions.h"
 #include <math.h>

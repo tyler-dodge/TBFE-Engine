@@ -1,7 +1,6 @@
 class Map;
 #ifndef Map_L
 #define Map_L
-#include <boost/python.hpp>
 #include "tbfe/misc/Structs.h"
 #include "tbfe/misc/Enums.h"
 #include "tbfe/misc/StringConversion.h"

@@ -1,7 +1,6 @@
 class Actor; 
 #ifndef Actor_L
 #define Actor_L
-#include <boost/python.hpp>
 #include "SDL/SDL.h"
 #include "tbfe/misc/PropContainer.h"
 #include "tbfe/Console.h"

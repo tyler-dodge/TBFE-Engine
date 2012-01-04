@@ -1,6 +1,5 @@
 #ifndef TileLayer_L
 #define TileLayer_L
-#include <boost/python.hpp>
 #include<vector>
 #include"tbfe/misc/Structs.h"
 using namespace std;

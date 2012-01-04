@@ -1,4 +1,3 @@
-
 #ifndef Console_L
 #define Console_L
 #define CONSOLE_WRITE(line) \
@@ -12,7 +11,6 @@
 #include <boost/python.hpp>
 #include <iostream>
 #include <sstream>
-#include <Python.h>
 #include <vector>
 using namespace std;
 class Console

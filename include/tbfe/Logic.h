@@ -1,6 +1,5 @@
 #ifndef TBFE_Logic_L
 #define TBFE_Logic_L
-#include <boost/python.hpp>
 #include "SDL/SDL.h"
 #include "tbfe/actor/Actor.h"
 class TBFE_Logic

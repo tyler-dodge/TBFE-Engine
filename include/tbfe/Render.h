@@ -1,7 +1,5 @@
 #ifndef TBFE_Render_L
 #define TBFE_Render_L
-
-#include <boost/python.hpp>
 #include "SDL/SDL.h"
 #include "SDL/SDL_ttf.h"
 #include "SDL/SDL_opengl.h"

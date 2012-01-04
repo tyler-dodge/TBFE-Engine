@@ -1,6 +1,5 @@
 #ifndef Structs_L
 #define Structs_L
-#include <boost/python.hpp>
 #include <SDL/SDL_opengl.h>
 #include "tbfe/misc/Enums.h"
 #include <string>

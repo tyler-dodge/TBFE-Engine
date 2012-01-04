@@ -1,4 +1,5 @@
 #include "tbfe/Console.h"
+#include <Python.h>
 Console::Console()
 {
   lines_.resize(0);

@@ -1,7 +1,6 @@
 class Animation;
 #ifndef Animation_L
 #define Animation_L
-#include <boost/python.hpp>
 #include "tbfe/misc/StringConversion.h"
 #include "tbfe/misc/Structs.h"
 class Animation

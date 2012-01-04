@@ -1,6 +1,5 @@
 #ifndef SdlFunctions_L
 #define SdlFunctions_L
-#include <boost/python.hpp>
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
 #include "tbfe/misc/Enums.h"

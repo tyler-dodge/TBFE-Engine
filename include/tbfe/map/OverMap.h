@@ -1,6 +1,5 @@
 #ifndef OverMap_L
 #define OverMap_L
-#include <boost/python.hpp>
 #include "tbfe/misc/Structs.h"
 #include "tbfe/misc/Enums.h"
 using namespace std;

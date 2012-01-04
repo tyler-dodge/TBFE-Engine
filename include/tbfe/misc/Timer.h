@@ -1,6 +1,5 @@
 #ifndef Timer_L
 #define Timer_L
-#include <boost/python.hpp>
 #include "SDL/SDL.h"
 //I did not write this
 class Timer

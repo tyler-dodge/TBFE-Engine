@@ -1,6 +1,5 @@
 #ifndef TBFE_L
 #define TBFE_L
-#include <boost/python.hpp>
 #include "tbfe/Render.h"
 #include "tbfe/Logic.h"
 #include "tbfe/Camera.h"

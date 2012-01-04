@@ -1,7 +1,6 @@
 class Action;
 #ifndef Action_L
 #define Action_L
-#include <boost/python.hpp>
 #include "tbfe/actor/Animation.h"
 class Action
 {
