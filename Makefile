@@ -33,21 +33,20 @@ srcActor=$(actor)Actor.cpp $(actor)Action.cpp $(actor)Animation.cpp \
 srcMap=$(map)Map.cpp $(map)OverMap.cpp $(map)TileLayer.cpp
 
 #Misc source files
-srcMisc=$(misc)Matrix.cpp $(misc)Position.cpp $(misc)Quaternion.cpp $(misc)SdlFunctions.cpp $(misc)StringConversion.cpp $(misc)Timer.cpp $(misc)TFont.cpp $(misc)Texture.cpp
-
-#Ui source files
-srcUi=$(ui)Element.cpp $(ui)ImageBox.cpp $(ui)Label.cpp $(ui)StatBar.cpp $(ui)TextBox.cpp $(ui)Window.cpp
+srcMisc=$(misc)Matrix.cpp $(misc)Position.cpp $(misc)Quaternion.cpp \
+	$(misc)SdlFunctions.cpp $(misc)StringConversion.cpp $(misc)Timer.cpp $(misc)TFont.cpp $(misc)Texture.cpp \
+	$(misc)PropContainer.cpp
 
 srcRaster=$(raster)Model.cpp $(raster)Renderable.cpp $(raster)RenderParameters.cpp $(raster)RenderPipeline.cpp
 #engine source files
-srcFiles=$(srcInterpreter) $(srcTbfe) $(srcActor) $(srcMap) $(srcMisc) $(srcUi) $(srcRaster)
+srcFiles=$(srcInterpreter) $(srcTbfe) $(srcActor) $(srcMap) $(srcMisc) $(srcRaster)
 
 #Compiled source files
 objFiles=$(subst $(src),$(objs),$(srcFiles:.cpp=.o))
 
 #Header files used by swig to generate wrappers
 swigFiles=$(SwigHeaderDir)tbfe/PyTbfe.i $(SwigHeaderDir)tbfe/actor/PyActor.i $(SwigHeaderDir)tbfe/map/PyMap.i \
-	  $(SwigHeaderDir)tbfe/misc/PyMisc.i $(SwigHeaderDir)tbfe/UI/PyUI.i
+	  $(SwigHeaderDir)tbfe/misc/PyMisc.i
 
 #Compiled swig wrappers
 objSwigFiles=$(subst $(include),$(objs),$(swigFiles:.i=.o))
