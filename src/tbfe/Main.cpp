@@ -30,28 +30,6 @@ bool TBFE::createFile(string name)
   ofstream NewFile(name.c_str(),ofstream::binary);
   return true;
 };
-void TBFE::addEvent(std::string Target,Element * element,Window * Parent,std::string Function,Event TargetEvent)
-{
-  EventType NewEvent;
-  NewEvent.TargetName=Target;
-  NewEvent.TargetElement=element;
-  NewEvent.Parent=Parent;
-  NewEvent.TargetEvent=TargetEvent;
-  NewEvent.Function=Function;
-  NewEvent.Enabled=true;
-  if (NewEvent.TargetElement==NULL)
-    {
-      CONSOLE_WRITE("Element does not exist");
-    }
-  else if (NewEvent.Parent==NULL)
-    {
-      CONSOLE_WRITE("Parent Window does not exist");
-    }
-  else
-    {
-      eventList_.push_back(NewEvent);
-    }
-}
 void TBFE::addGlobalEvent(std::string Target,Event TargetEvent, int Key,std::string Function)
 {
   EventType NewEvent;
@@ -115,16 +93,6 @@ int TBFE::Get_Actor_Num(Actor *actorPtr)
       }
     }
 }
-int TBFE::Get_Window_Num(Window *window)
-{
-  vector<Window *>::iterator it;
-  for (it=windows.begin();it<windows.end();it++)
-    {
-      if (*it==window) {
-	return it-windows.begin();
-      }
-    }
-}
 bool TBFE::removeActor(Actor *actorPtr)
 {
   int actor=Get_Actor_Num(actorPtr);
@@ -134,19 +102,7 @@ bool TBFE::removeActor(Actor *actorPtr)
       return true;
     };
   return false;
-};
-void TBFE::addWindow(Window *NewWindow)
-{
-  if (NewWindow!=NULL)
-    {
-      CONSOLE_WRITE("New Window added");
-      windows.push_back(NewWindow);
-    }
-  else
-    {
-      CONSOLE_WRITE("   Window is equal to NULL");
-    };
-};
+}
 void TBFE::checkEvents()
 {
   int mouseState=SDL_GetMouseState(&mousePosition_.X,&mousePosition_.Y);
@@ -159,93 +115,8 @@ void TBFE::checkEvents()
 	  PositionI eventPosition;
 	  PositionI screenPosition;
 	  PositionI elementDimensions;
-	  if (currentEvent->TargetElement!=NULL)
-	    {
-	      eventPosition=currentEvent->TargetElement->getPosition();
-	    };
-	  if (currentEvent->Parent!=NULL)
-	    {
-	      screenPosition=currentEvent->Parent->getScreenPosition();
-	    };
-	  if (currentEvent->TargetElement!=NULL)
-	    {
-	      elementDimensions=currentEvent->TargetElement->getDimensions();
-	    };
 	  switch(currentEvent->TargetEvent)
 	    {
-	    case CLICK:
-	      if (mousePosition_.X>eventPosition.X+screenPosition.X && logic_.isEventNew()
-		  && mousePosition_.Y>eventPosition.Y+
-		  screenPosition.Y
-		  && mousePosition_.X<elementDimensions.X+
-		  eventPosition.X+screenPosition.X
-		  && mousePosition_.Y<elementDimensions.Y+
-		  eventPosition.Y+screenPosition.Y
-		  && currentEvent->Enabled 
-		  && currentEvent->Parent->getVisibility()
-		  && mouseState==1 && mouseDown_==false
-		  )
-		{
-		  stringstream windowString;
-		  windowString << "elementTarget=Tbfe.getWindowByNum(" << Get_Window_Num(currentEvent->Parent) << ")";
-		  Console::Instance()->runLine(windowString.str().c_str());
-		  Console::Instance()->runLine(currentEvent->Function.c_str());
-		};
-	      break;
-	    case MOUSEHOLD:
-	      if (mousePosition_.X>eventPosition.X+screenPosition.X 
-		  && mousePosition_.Y>eventPosition.Y+
-		  screenPosition.Y
-		  && mousePosition_.X<elementDimensions.X+
-		  eventPosition.X+screenPosition.X
-		  && mousePosition_.Y<elementDimensions.Y+
-		  eventPosition.Y+screenPosition.Y
-		  && currentEvent->Enabled 
-		  && currentEvent->Parent->getVisibility()
-		  && mouseState==1
-		  )
-		{
-		  stringstream windowString;
-		  windowString << "elementTarget=Tbfe.getWindowByNum(" << Get_Window_Num(currentEvent->Parent) << ")";
-		  Console::Instance()->runLine(windowString.str().c_str());
-		  Console::Instance()->runLine(currentEvent->Function.c_str());
-		};
-	      break;
-	    case MOUSEMOVE:
-	      if ( currentSdlEvent.type==SDL_MOUSEMOTION && logic_.isEventNew())
-		{
-		  if (currentEvent->Enabled==true && currentEvent->Parent==NULL && currentEvent->TargetElement==NULL)
-		    {
-		      stringstream writeMouse;
-		      writeMouse << "mouseMovement=Misc.PositionF();mouseMovement.X=";
-		      writeMouse << currentSdlEvent.motion.xrel << ";mouseMovement.Y=";
-		      writeMouse << currentSdlEvent.motion.yrel << ";";
-		      Console::Instance()->runLine(writeMouse.str());
-		      Console::Instance()->runLine(currentEvent->Function.c_str());
-		    };
-		  if (currentEvent->Parent!=NULL && currentEvent->TargetElement!=NULL)
-		    {
-		      if (
-			  (mousePosition_.X>eventPosition.X+screenPosition.X 
-			   && mousePosition_.Y>eventPosition.Y+
-			   screenPosition.Y
-			   && mousePosition_.X<elementDimensions.X+
-			   eventPosition.X+screenPosition.X
-			   && mousePosition_.Y<elementDimensions.Y+
-			   eventPosition.Y+screenPosition.Y
-			   && currentEvent->Enabled 
-			   && currentEvent->Parent->getVisibility())
-			  )
-			{
-			  stringstream writeMouse;
-			  writeMouse << "mouseMovement=Misc.PositionF();mouseMovement.X=";
-			  writeMouse << currentSdlEvent.motion.xrel << ";mouseMovement.Y=";
-			  writeMouse << currentSdlEvent.motion.yrel << ";";
-			  Console::Instance()->runLine(currentEvent->Function.c_str());
-			};
-		    };
-		};
-	      break;
 	    case KEYPRESS:
 	      if (currentSdlEvent.type==SDL_KEYUP && logic_.isEventNew())
 		{
@@ -302,7 +173,6 @@ Direction TBFE::runEngine()
       //Normal KeyBoard Events
       if (currentSdlEvent.type==SDL_KEYDOWN && logic_.isEventNew())
 	{	  
-	  logic_.Update_Key_Target_Text(currentSdlEvent.key.keysym.sym);
 	  if (logic_.checkKeyDown(27))
 	    {
 	      quit_=true;

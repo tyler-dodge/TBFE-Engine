@@ -3,6 +3,7 @@ class Actor;
 #define Actor_L
 #include <boost/python.hpp>
 #include "SDL/SDL.h"
+#include "tbfe/misc/PropContainer.h"
 #include "tbfe/Console.h"
 #include "tbfe/misc/Structs.h"
 #include "tbfe/misc/SdlFunctions.h"
@@ -16,11 +17,10 @@ class Actor;
 #include <math.h>
 #include <time.h>
 using namespace std;
-class Actor
+class Actor : public PropContainer
 {
  protected:
   vector<Action> actionList_;
-  vector<Property> propertyList_;
   Action * getAction(string);
  private:
   PositionF position_;
@@ -44,8 +44,6 @@ class Actor
   CollisionBox * getCollisionBox(int);
   int getNumCollisionBox();
   //Changes actorPosition relatively using direction
-  string getProperty(string);
-  void setProperty(string,string);
   int changePosition(float);
   vector<int> checkActorCollision(float,float,float);
 

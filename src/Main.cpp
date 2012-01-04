@@ -6,7 +6,6 @@ extern "C"
   void init_PyActor(void);
   void init_PyMap(void);
   void init_PyMisc(void);
-  void init_PyUI(void);
 };
 int main(int argc,char* args[])
 {
@@ -25,7 +24,6 @@ int main(int argc,char* args[])
       init_PyActor();
       init_PyMap();
       init_PyMisc();
-      init_PyUI();
       stringstream initPython;
       initPython << "import sys;sys.path.append('" << localDirectory << "');";
       initPython << "sys.path.append('" << args[3] << "')";

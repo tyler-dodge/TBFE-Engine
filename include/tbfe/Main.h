@@ -7,7 +7,6 @@
 #include "tbfe/actor/Actor.h"
 #include "tbfe/actor/Npc.h"
 #include "tbfe/actor/NonLiving.h"
-#include "tbfe/UI/Window.h"
 #include <sstream>
 #include "tbfe/misc/Structs.h"
 #include "tbfe/misc/StringConversion.h"
@@ -32,7 +31,6 @@ class TBFE
   Timer fps_;
   Map * Current_Map;
   vector<Actor *> actors;
-  vector<Window *> windows;
   bool keyControl_;
   PositionI screenDimensions_;
   float gameSpeed_;
@@ -49,9 +47,7 @@ class TBFE
   Direction runEngine();
   void addActor(Actor*);
   bool removeActor(Actor *);
-  void addWindow(Window *);
   bool addTileSet(std::string);
-  void addEvent(std::string,Element *, Window *,std::string,Event);
   EventType * getEvent(std::string);
   PositionI getMousePosition();
   PositionI getMouseCenter();
@@ -61,7 +57,6 @@ class TBFE
   PositionF getCameraPosition();
   void addGlobalEvent(std::string,Event, int,std::string);
   int Get_Actor_Num(Actor *actorPtr);
-  int Get_Window_Num(Window *window);
   ~TBFE();
 };
 #endif

@@ -162,12 +162,3 @@ void TBFE_Logic::setKeyDown(int key,bool newSetting)
     };
   keysDown_[key]=newSetting;
 };
-Element * TBFE_Logic::Get_Key_Target()
-{
-  return KeyTarget_;
-}
-void TBFE_Logic::Update_Key_Target_Text(int letter)
-{
-  Element * target=Get_Key_Target();
-  target->setProperty("text",(const char *)textInput(letter,checkKeyDown(SDLK_LSHIFT)));
-}

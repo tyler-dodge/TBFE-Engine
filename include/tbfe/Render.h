@@ -8,7 +8,6 @@
 #include "tbfe/misc/Timer.h"
 #include "tbfe/misc/SdlFunctions.h"
 //#include "SunVector.h"
-#include "tbfe/UI/Window.h"
 #include "tbfe/actor/Actor.h"
 #include <vector>
 class TBFE_Render
