@@ -1,5 +1,6 @@
 #include "tbfe/Console.h"
 #include <Python.h>
+#include <stdio.h>
 Console::Console()
 {
   lines_.resize(0);
@@ -36,6 +37,7 @@ int Console::evalExpression(string expression)
 int Console::write(string text)
 {
   lines_.push_back(text);
+  std::cout << text << std::endl;
 };
 void Console::runLine(string Line)
 {

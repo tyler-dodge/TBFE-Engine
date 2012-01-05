@@ -28,7 +28,7 @@ private:
   T FromFileName(std::string fileName)
   {
     mIt it=Ts.find(fileName);
-    T t;
+    T t=it->second;
     if (it==Ts.end())
       {
 	t=FactoryConstructor(fileName);

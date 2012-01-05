@@ -3,6 +3,7 @@
 #include<map>
 #include "tbfe/misc/SdlFunctions.h"
 #include<SDL/SDL.h>
+#include "tbfe/Console.h"
 DirectoryFactory<Texture> Texture::factory(Create,Destroy);
 Texture::Texture(std::string name)
 {

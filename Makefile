@@ -37,7 +37,8 @@ srcMisc=$(misc)Matrix.cpp $(misc)Position.cpp $(misc)Quaternion.cpp \
 	$(misc)SdlFunctions.cpp $(misc)StringConversion.cpp $(misc)Timer.cpp $(misc)TFont.cpp $(misc)Texture.cpp \
 	$(misc)PropContainer.cpp
 
-srcRaster=$(raster)Model.cpp $(raster)Renderable.cpp $(raster)RenderParameters.cpp $(raster)RenderPipeline.cpp
+srcRaster=$(raster)Model.cpp $(raster)Renderable.cpp $(raster)RenderParameters.cpp $(raster)RenderPipeline.cpp \
+	$(raster)ScreenImage.cpp $(raster)ScreenImageRenderParams.cpp
 #engine source files
 srcFiles=$(srcInterpreter) $(srcTbfe) $(srcActor) $(srcMap) $(srcMisc) $(srcRaster)
 
@@ -92,6 +93,7 @@ $(objs)%.o:$(src)%.cpp
 $(objs)%.o:$(include)%.cxx 
 	mkdir -p $(dir $@)
 	g++ -g -c $(libDirs) $(DEFINES) $< -o $@
+
 
 #Swig header generation
 $(swigFiles:.i=.cxx):%.cxx:%.i; 

@@ -4,7 +4,8 @@
 #include "tbfe/misc/Position.h"
 #include "tbfe/map/Map.h"
 #include <SDL/SDL_opengl.h>
-
+#include "tbfe/raster/ScreenImage.h"
+#include "tbfe/raster/RenderPipeline.h"
 #include <vector>
 class TBFE_Render
 {

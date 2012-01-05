@@ -1,5 +1,5 @@
 #include "tbfe/Logic.h"
-TBFE_Logic::TBFE_Logic()
+TBFE_Logic::TBFE_Logic() : newEvent_(false), keyControl_(false)
 {
   for (int i=0;i<311;i++)
     {

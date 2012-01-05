@@ -1,6 +1,6 @@
 #include "tbfe/Main.h"
 TBFE::TBFE(int dimensionX,int dimensionY) :
-  renderWindow_(dimensionX,dimensionY), frame_(0), quit_(false)
+  renderWindow_(dimensionX,dimensionY), frame_(0), quit_(false), keyControl_(false)
 {
   frame_=0;
   time_=600;
@@ -50,7 +50,7 @@ bool TBFE::addTileSet(std::string Source)
       CONSOLE_WRITE("    File Does not exist");
       return false;
     };
-  Current_Map->addTileSet(Source);  
+  Current_Map.addTileSet(Source);  
 };
 EventType * TBFE::getEvent(std::string Name)
 {
@@ -69,7 +69,7 @@ void TBFE::initMap()
 void TBFE::changeMap(std::string MapName)
 {
   actors.resize(0);
-  Current_Map->loadMap(MapName);
+  Current_Map.loadMap(MapName);
   addActor(Main_Player);
 };
 void TBFE::addActor(Actor *NewActor)
@@ -180,7 +180,7 @@ Direction TBFE::runEngine()
 	};
       checkOnce=true;
     };
-  PositionI mapDimensions=Current_Map->getDimensions();
+  PositionI mapDimensions=Current_Map.getDimensions();
   if (keyControl_==true)
     {
       logic_.playerMovement(Main_Player);

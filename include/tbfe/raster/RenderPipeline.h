@@ -12,11 +12,12 @@ class ParamsComparator
 class RenderPipeline
 {
  private:
-  typedef std::map<RenderParameters *, std::vector<Renderable *>, ParamsComparator > RenderMap;
+  typedef std::vector<Renderable *> rList;
+  typedef std::map<RenderParameters *, rList, ParamsComparator > RenderMap;
   RenderMap data;
  public:
   RenderPipeline();
   void add(Renderable *);
-  void run();
+  void run(int screenX, int screenY);
 };
 #endif

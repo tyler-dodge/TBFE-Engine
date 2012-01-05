@@ -24,7 +24,7 @@ class TBFE
   void checkEvents();
   vector<EventType> eventList_;
   Timer fps_;
-  Map * Current_Map;
+  Map  Current_Map;
   vector<Actor *> actors;
   bool keyControl_;
   PositionI screenDimensions_;

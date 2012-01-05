@@ -1,4 +1,6 @@
 #include "tbfe/Render.h"
+#include "SDL/SDL_opengl.h"
+#include "SDL/SDL.h"
 TBFE_Render::TBFE_Render(int dimensionX,int dimensionY):
   dimensions_(dimensionX,dimensionY,0)
 {
@@ -110,6 +112,16 @@ void TBFE_Render::finalRender(bool doFlip)
   glLoadIdentity();
   glLightfv(GL_LIGHT0,GL_POSITION,lightPosition_);
   glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+  ScreenImage image=GET_SCREEN_IMAGE("test.png");
+  static int x=0;
+  static int y=0;
+  image.setPosition(x,y);
+  x++;
+  y++;
+  RenderPipeline pipeline;
+  pipeline.add(&image);
+  pipeline.run(dimensions_.X,dimensions_.Y);
+  SDL_GL_SwapBuffers();
   /*PositionF cameraOffset=TBFE_Base::getCameraOffset();
   PositionF cameraFollowOffset=TBFE_Base::getCameraFollowOffset();
   Quaternion cameraAngle=TBFE_Base::getCameraAngle();

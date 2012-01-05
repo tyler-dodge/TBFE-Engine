@@ -4,8 +4,8 @@ class RenderParameters
 {
  private:
  public:
-  virtual void setUp()=0;
-  virtual int hashCode();
+  virtual void setUp(int screenX, int screenY)=0;
+  virtual int hashCode()=0;
   virtual void setUpInstance()=0;
   virtual void tearDownInstance()=0;
   virtual void tearDown()=0;
