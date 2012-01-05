@@ -2,9 +2,27 @@
 RenderPipeline::RenderPipeline()
 {
 }
-void RenderPipeline::add(Renderable * renderable)
+void RenderPipeline::add(Identifier * id,Renderable * renderable)
 {
-  data[renderable->getParams()].push_back(renderable);
+  rList * l = &(data[renderable->getParams()]);
+  IdMap::iterator it=ids.find(id);
+  if (it==ids.end())
+    {
+      l->push_back(renderable);
+      ids[id]=(Id_Item(l,--l->end()));
+    }
+  else
+    {
+      *(it->second.second)=renderable;
+    }
+}
+void RenderPipeline::remove(Identifier * id)
+{
+  IdMap::iterator it=ids.find(id);
+  if (it!=ids.end())
+    {
+      it->second.first->erase(it->second.second);
+    }
 }
 void RenderPipeline::run(int screenX, int screenY)
 {

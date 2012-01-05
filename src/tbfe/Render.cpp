@@ -118,9 +118,6 @@ void TBFE_Render::finalRender(bool doFlip)
   image.setPosition(x,y);
   x++;
   y++;
-  RenderPipeline pipeline;
-  pipeline.add(&image);
-  pipeline.run(dimensions_.X,dimensions_.Y);
   SDL_GL_SwapBuffers();
   /*PositionF cameraOffset=TBFE_Base::getCameraOffset();
   PositionF cameraFollowOffset=TBFE_Base::getCameraFollowOffset();

@@ -2,7 +2,8 @@
 #define PropContainer_L
 #include<string>
 #include<map>
-class PropContainer : private std::map<std::string,std::string>
+#include"tbfe/misc/Identifier.h"
+class PropContainer : public Identifier, private std::map<std::string,std::string>
 {
  public:
   std::string getProperty(std::string);

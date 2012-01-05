@@ -35,7 +35,7 @@ srcMap=$(map)Map.cpp $(map)OverMap.cpp $(map)TileLayer.cpp
 #Misc source files
 srcMisc=$(misc)Matrix.cpp $(misc)Position.cpp $(misc)Quaternion.cpp \
 	$(misc)SdlFunctions.cpp $(misc)StringConversion.cpp $(misc)Timer.cpp $(misc)TFont.cpp $(misc)Texture.cpp \
-	$(misc)PropContainer.cpp
+	$(misc)PropContainer.cpp $(misc)Identifier.cpp
 
 srcRaster=$(raster)Model.cpp $(raster)Renderable.cpp $(raster)RenderParameters.cpp $(raster)RenderPipeline.cpp \
 	$(raster)ScreenImage.cpp $(raster)ScreenImageRenderParams.cpp
