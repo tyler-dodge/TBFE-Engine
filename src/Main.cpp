@@ -1,4 +1,5 @@
 #include "Main.h"
+#include <GLUT/glut.h>
 using namespace std;
 extern "C"
 {
@@ -15,6 +16,7 @@ int main(int argc,char* args[])
     }
   else 
     {
+      glutInit(&argc,args);
       string localDirectory(args[1]);
       if (localDirectory[localDirectory.size()-1]!='/')
 	localDirectory.push_back('/');
