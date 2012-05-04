@@ -1,4 +1,4 @@
-CC=gcc
+CC=gcc -g
 bin=bin/
 outputName=Tbfe
 src=src/
@@ -11,7 +11,9 @@ objs=objs/
 tbfe=$(src)tbfe/
 tbfePy=TbfePy/
 python=python2.7
-libs=-lSDL -lSDL_image -lSDL_ttf -l$(python) -lGL -lGLU
+appleGL=-framework Carbon -framework OpenGL -framework GLUT 
+linuxGL= -lGL -lGLU
+libs=-lSDL -lSDL_image -lSDL_ttf -l$(python) $(appleGL)
 libDirs=-I/usr/include/$(python) -Iinclude/
 include=include/
 Swig=swig
@@ -68,14 +70,14 @@ ifneq ($(MAKECMDGOALS),clean)
 $(objs)%.d:$(include)%.h 
 	mkdir -p $(dir $@)
 	$(CC) -MM $(libDirs) $(CPPFLAGS) $< -o $(objs)$*.P;
-	sed -r 's/$(notdir $*.o)/objs\/$(subst /,\/,$*.o)/g' < $(objs)$*.P > $(objs)$*.d;
+	sed 's/$(notdir $*.o)/objs\/$(subst /,\/,$*.o)/g' < $(objs)$*.P > $(objs)$*.d;
 	rm $(objs)$*.P
 
 #Dependency generation for swig files 
 $(objs)%.d:$(include)%.cxx
 	mkdir -p $(dir $@) 
 	$(CC) -MM $(libDirs) $(CPPFLAGS) $< -o $(objs)$*.P;
-	sed -r 's/$(notdir $*.o)/objs\/$(subst /,\/,$*.o)/g' < $(objs)$*.P > $(objs)$*.d;
+	sed 's/$(notdir $*.o)/objs\/$(subst /,\/,$*.o)/g' < $(objs)$*.P > $(objs)$*.d;
 	rm $(objs)$*.P
 -include $(objSwigFiles:.o=.d)
 endif

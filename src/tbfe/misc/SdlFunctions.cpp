@@ -200,8 +200,8 @@ Uint32 getPixel( SDL_Surface *surface, int x, int y )
 
 float roundDown(float num,int place)
 {
-  float newNum=floor(num*pow(10,place));
-  newNum/=pow(10,place);
+  float newNum=floor(num*pow(10.0f,(float)place));
+  newNum/=pow(10.0f,(float)place);
   return newNum;
 };
 PositionF applyRotations(PositionF position,Quaternion rotation)
