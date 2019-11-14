@@ -3,6 +3,8 @@ Tbfe Engine
 
 A 3D game engine with Python embedded in it.
 
+Created while I was in high school, terrible code.
+
 Dependencies
 ------------
 
